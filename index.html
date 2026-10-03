@@ -3,8 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#24102f">
-<title>DOHOY 0.5 Beta</title>
+<meta name="theme-color" content="#0B3D91">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="DOHOY">
+<title>DOHOY 0.6 Beta</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20128%20128%22%3E%3Crect%20width%3D%22128%22%20height%3D%22128%22%20rx%3D%2228%22%20fill%3D%22%23071B3B%22%2F%3E%3Cpath%20d%3D%22M15%2031C45%2020%2082%2020%20103%2034c15%2010%2020%2025%2016%2042-7-17-22-27-42-33-22-7-43-10-62-12Z%22%20fill%3D%22%23FF7A00%22%2F%3E%3Cpath%20d%3D%22M31%2049c18-1%2037%200%2051%207%2016%208%2024%2019%2023%2031-1%2013-10%2022-24%2024H18c17-12%2032-24%2043-35%208-8%207-14-1-19-7-4-18-7-29-8Z%22%20fill%3D%22%230066FF%22%2F%3E%3Cpath%20d%3D%22M57%2076c8-8%207-14-1-19%208%200%2016%202%2022%206%209%205%2013%2011%2012%2018-1%208-7%2015-19%2023h14c10-2%2016-8%2017-17%201-10-7-19-20-25%209%204%2016%2011%2018%2019%203%2012-4%2023-17%2028H42c7-7%2012-13%2015-18%205-7%206-11%200-15Z%22%20fill%3D%22%230B3D91%22%2F%3E%3C%2Fsvg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20128%20128%22%3E%3Crect%20width%3D%22128%22%20height%3D%22128%22%20rx%3D%2228%22%20fill%3D%22%23071B3B%22%2F%3E%3Cpath%20d%3D%22M15%2031C45%2020%2082%2020%20103%2034c15%2010%2020%2025%2016%2042-7-17-22-27-42-33-22-7-43-10-62-12Z%22%20fill%3D%22%23FF7A00%22%2F%3E%3Cpath%20d%3D%22M31%2049c18-1%2037%200%2051%207%2016%208%2024%2019%2023%2031-1%2013-10%2022-24%2024H18c17-12%2032-24%2043-35%208-8%207-14-1-19-7-4-18-7-29-8Z%22%20fill%3D%22%230066FF%22%2F%3E%3Cpath%20d%3D%22M57%2076c8-8%207-14-1-19%208%200%2016%202%2022%206%209%205%2013%2011%2012%2018-1%208-7%2015-19%2023h14c10-2%2016-8%2017-17%201-10-7-19-20-25%209%204%2016%2011%2018%2019%203%2012-4%2023-17%2028H42c7-7%2012-13%2015-18%205-7%206-11%200-15Z%22%20fill%3D%22%230B3D91%22%2F%3E%3C%2Fsvg%3E">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 :root{
@@ -43,6 +48,51 @@ h1{font-size:32px;line-height:1.04;letter-spacing:-1.1px;margin:14px 0 9px}h2{ma
 .small{font-size:11px;color:var(--mut)}.center{text-align:center}.spinner{padding:55px 0;text-align:center;color:var(--mut)}
 .beta-note{font-size:10px;color:#a297a7;text-align:center;margin:13px 0}.auth-card{background:#fff;border:1px solid #ede5f0;border-radius:27px;padding:18px;box-shadow:var(--shadow);margin-top:18px}
 @media(min-width:700px){body{padding:24px 0}.app{border-radius:34px;min-height:900px}.screen,.hero{min-height:900px}.nav{bottom:34px}.chatbar{bottom:109px}}
+
+/* DOHOY 0.6 · identidad azul + naranja */
+:root{
+  --p:#0B3D91;--p2:#0066FF;--p3:#071B3B;--o:#FF7A00;--o2:#FFB347;
+  --bg:#F4F7FB;--surface:#FFFFFF;--ink:#0D1B2A;--mut:#6D7B8A;--line:#E4EAF2;
+  --shadow:0 18px 45px rgba(7,27,59,.10);--soft:0 8px 24px rgba(7,27,59,.07)
+}
+html,body{background:#E9EFF7}
+.app{background:linear-gradient(180deg,#FCFDFF 0%,var(--bg) 100%);box-shadow:0 18px 60px rgba(7,27,59,.18)}
+.screen{background:radial-gradient(circle at 100% 0,#0066FF0b,transparent 27%),linear-gradient(180deg,#FCFDFF 0%,#F4F7FB 100%)}
+.hero{background:linear-gradient(150deg,#06162F 0%,#0B3D91 58%,#0066FF 130%)}
+.hero:before{background:radial-gradient(circle,#FF7A0060,transparent 68%)}
+.hero:after{background:radial-gradient(circle,#0066FF55,transparent 68%)}
+.hero p{color:#E7EEF9}.proof span{color:#D6E4F7}.tag{color:#D8E6F8}
+.brand-lockup{display:inline-flex;align-items:center;gap:10px;line-height:1;max-width:100%}
+.brand-mark{width:66px;height:48px;display:block;flex:0 0 auto;filter:drop-shadow(0 5px 10px rgba(7,27,59,.14))}
+.brand-word{font-size:42px;font-weight:1000;letter-spacing:-2.7px;color:var(--p3);white-space:nowrap}
+.brand-word .accent{color:var(--o)}
+.brand-lockup.sm{gap:7px}.brand-lockup.sm .brand-mark{width:38px;height:29px;filter:none}.brand-lockup.sm .brand-word{font-size:25px;letter-spacing:-1.6px}
+.hero .brand-word{color:#fff}.hero .brand-mark{width:72px;height:54px}.hero .brand-lockup{gap:12px}
+.hero-badge:before{background:var(--o);box-shadow:0 0 0 4px #FF7A0029}
+.primary{background:linear-gradient(135deg,#0B3D91,#0066FF);box-shadow:0 10px 24px #0B3D9128}
+.orange{background:linear-gradient(135deg,#FF7A00,#FF9A34);box-shadow:0 10px 22px #FF7A002b}
+.light{color:#071B3B;box-shadow:0 10px 30px #071B3B2b}.ghost{background:#EAF1FB;color:#0B3D91}
+.icon{border-color:#DCE6F3;color:#0B3D91}.pill{background:#EAF2FF;color:#0B3D91;border-color:#D6E5FA}
+.mode:after{background:#EAF2FF;color:#0B3D91}.mode .emoji{background:linear-gradient(145deg,#EDF4FF,#fff);box-shadow:inset 0 0 0 1px #DDEAF9}
+.mode:last-child{background:linear-gradient(145deg,#fff 0%,#F0F6FF 100%)}
+.vehicle-custom{border-color:#DDE7F3;background:linear-gradient(145deg,#F7FAFF,#fff)}
+.vehicle-preview{background:#EEF4FB;border-color:#DDE6F2}.vehicle-style-card{border-color:#DFE7F0}
+.vehicle-choice input:checked+.vehicle-style-card{border-color:#3E73C8;box-shadow:0 0 0 3px #0066FF12;background:#F5F9FF}
+.color-choice input:checked+.color-dot{box-shadow:0 0 0 3px #0066FF,0 5px 12px #0B3D9118}
+.category-preview{background:#F3F7FC;border-color:#E1E8F1}.field label{color:#33475F}
+.input,textarea,select{border-color:#DDE5EE}input:focus,textarea:focus,select:focus{border-color:#4B8DFF;box-shadow:0 0 0 4px #0066FF12}
+.form-card,.card,.auth-card{border-color:#E4EAF2}
+.nav{border-color:#DDE5EE;box-shadow:0 16px 44px rgba(7,27,59,.16)}.nav button{color:#7A8798}.nav button.active{color:#0B3D91;background:#EAF2FF}.nav button.active b{background:#DCEAFF;color:#0B3D91}
+.home-hero{background:linear-gradient(145deg,#071B3B 0%,#0B3D91 62%,#0066FF 125%);box-shadow:0 18px 34px #0B3D9128}.home-hero:after{background:#FF7A0038}.home-hero .small{color:#CFE0F6}.home-hero p{color:#E7EEF8}.home-hero .btn{color:#0B3D91}
+.thumb{background:linear-gradient(145deg,#EAF2FF,#FAFCFF);border-color:#DBE6F3}.status-mini{background:#EDF3FA;color:#617084}.task-arrow{color:#9DAABD}
+.empty{border-color:#D8E1EC}.empty:before{color:#9CB6D8}.avatar{background:linear-gradient(135deg,#FFE5D0,#DCEBFF);border-color:#DFE8F2}
+.detail-hero{background:linear-gradient(145deg,#fff 0%,#F7FAFF 100%);border-color:#E1E8F1}.detail-icon{background:linear-gradient(145deg,#EAF2FF,#fff);border-color:#DDE7F3;box-shadow:inset 0 0 20px #0066FF0a}.location-chip{background:#EFF4FA}
+.status div{background:#EEF3F9}
+.profile-hero{background:linear-gradient(145deg,#071B3B,#0B3D91 70%,#0066FF);box-shadow:0 18px 36px #0B3D912b}.profile-hero .sub{color:#D6E3F5}.profile-stat span{color:#D3E1F4}
+.bubble{box-shadow:0 5px 15px #0B3D910a}.bubble.me{background:linear-gradient(145deg,#0B3D91,#0066FF)}.bubble.other{border-color:#DEE6F0}.chatbar{border-color:#DCE4EE;box-shadow:0 12px 35px #071B3B1c}.chatbar button{background:linear-gradient(145deg,#0B3D91,#0066FF);box-shadow:0 8px 18px #0B3D912b}
+.unread{background:linear-gradient(145deg,#FF7A00,#FF9D3A);box-shadow:0 5px 12px #FF7A002b}
+.beta-note{color:#8996A6}
+
 </style>
 </head>
 <body><div id="root"></div>
@@ -93,7 +143,8 @@ function taskIcon(task){const m=taskMeta(typeof task==="string"?task:task?.categ
 function locationMarkup(text){return `${iconSvg("location",{})}<span>${escapeHtml(text||"Sin ubicación")}</span>`}
 function encodeCategory(base,variant,colorKey){return base==="Vehículo"?`${base}|${variant||"sedan"}|${colorKey||"graphite"}`:base}
 
-function logo(sm=false){return `<div class="logo ${sm?"sm":""}">DO<b>HOY</b></div>`}
+function brandSymbol(){return `<svg class="brand-mark" viewBox="0 0 128 96" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 18C48 8 86 10 105 28c11 10 15 24 11 40-7-17-23-26-44-32-22-6-42-11-60-18Z" fill="#FF7A00"/><path d="M29 39c18-1 37 0 51 6 16 7 24 18 23 29-1 12-10 20-23 22H14c17-12 32-24 43-35 8-8 7-14-1-18-7-3-17-4-27-4Z" fill="#0066FF"/><path d="M57 61c8-8 7-14-1-18 8 0 16 2 22 6 9 5 13 11 12 18-1 8-7 15-19 23h14c10-2 16-8 17-17 1-10-7-19-20-25 9 4 16 11 18 19 3 12-4 23-17 28H42c7-7 12-13 15-18 5-7 6-11 0-16Z" fill="#0B3D91"/></svg>`}
+function logo(sm=false){return `<div class="brand-lockup ${sm?"sm":""}">${brandSymbol()}<div class="brand-word">DOH<span class="accent">O</span>Y</div></div>`}
 function shell(content,nav=false){return `<main class="app">${content}${nav?navBar():""}</main>`}
 function navBar(){const home=state.mode==="client"?"clientHome":"workerHome";const second=state.mode==="client"?"createTask":"workerHome";return `<nav class="nav">
 <button class="${state.route===home?"active":""}" onclick="go('${home}')"><b>${iconSvg("home")}</b><br>Inicio</button>
@@ -113,7 +164,7 @@ function authMsg(){return `${state.error?`<div class="error">${state.error}</div
 function welcome(){
 return shell(`<section class="hero">
 <div>${logo()}<div class="tag">Lo necesitas. Alguien lo hace.</div></div>
-<div class="hero-copy"><span class="hero-badge">BETA PRIVADA · DOHOY 0.5</span><h1>Resuelve lo de hoy, hoy.</h1><p>Publica una tarea, recibe ofertas y coordina todo desde un solo lugar.</p>
+<div class="hero-copy"><span class="hero-badge">BETA PRIVADA · DOHOY 0.6</span><h1>Resuelve lo de hoy, hoy.</h1><p>Publica una tarea, recibe ofertas y coordina todo desde un solo lugar.</p>
 <div class="hero-proof"><div class="proof"><b>${iconSvg("plus")}</b><span>Publica rápido</span></div><div class="proof"><b>${iconSvg("chat")}</b><span>Chat por tarea</span></div><div class="proof"><b>✓✓</b><span>Estados de lectura</span></div></div></div>
 <div><button class="btn light" onclick="go('signup')">Crear cuenta</button><button class="btn outline" onclick="go('login')">Ya tengo cuenta</button></div>
 </section>`)
