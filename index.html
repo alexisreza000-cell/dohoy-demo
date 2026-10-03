@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#2f0a4b">
-<title>DOHOY 0.2 Beta</title>
+<title>DOHOY 0.2.1 Beta</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 :root{--p:#3d0d5d;--p2:#5a1b82;--o:#ff6818;--bg:#fffaf3;--ink:#21172b;--mut:#756d7d;--line:#e9e1ed;--card:#fff;--green:#159957;--red:#b42318}
@@ -60,7 +60,7 @@ function authMsg(){return `${state.error?`<div class="error">${state.error}</div
 function welcome(){
 return shell(`<section class="hero">
 <div>${logo()}<div class="tag">Lo necesitas. Alguien lo hace.</div></div>
-<div><div class="kicker">DOHOY 0.2 BETA</div><h1>Dos personas ya pueden usar DOHOY de verdad.</h1><p style="color:#ffffffc9">Cuentas reales, tareas reales y ofertas conectadas a nuestra base de datos.</p></div>
+<div><div class="kicker">DOHOY 0.2.1 BETA</div><h1>Dos personas ya pueden usar DOHOY de verdad.</h1><p style="color:#ffffffc9">Cuentas reales, tareas reales y ofertas conectadas a nuestra base de datos.</p></div>
 <div><button class="btn light" onclick="go('signup')">Crear cuenta</button><button class="btn outline" onclick="go('login')">Iniciar sesión</button></div>
 </section>`)
 }
@@ -183,11 +183,13 @@ return shell(`<section class="screen"><div class="top"><button class="icon" oncl
 function render(){
 if(state.route==="loading"){root.innerHTML=shell(`<section class="screen spinner">Cargando DOHOY…</section>`);return}
 if(!state.session&&!["welcome","signup","login"].includes(state.route)){state.route="welcome"}
-const sync={welcome,signup,login,mode:chooseMode,createTask,taskDetail,chat:chatScreen,profile};
 if(state.route==="clientHome"){clientHome();return}
 if(state.route==="workerHome"){workerHome();return}
-const fn=sync[state.route]||welcome;root.innerHTML=fn()
-bindForms()
+if(state.route==="createTask"){createTask();bindForms();return}
+if(state.route==="taskDetail"){taskDetail().then(bindForms);return}
+if(state.route==="profile"){profile().then(bindForms);return}
+const sync={welcome,signup,login,mode:chooseMode,chat:chatScreen};
+const fn=sync[state.route]||welcome;root.innerHTML=fn();bindForms()
 }
 function bindForms(){
 const s=document.getElementById("signupForm");if(s)s.onsubmit=signUp;
