@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#2f0a4b">
-<title>DOHOY 0.3.1 Beta</title>
+<title>DOHOY 0.3.2 Beta</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 :root{--p:#3d0d5d;--p2:#5a1b82;--o:#ff6818;--bg:#fffaf3;--ink:#21172b;--mut:#756d7d;--line:#e9e1ed;--card:#fff;--green:#159957;--red:#b42318}
@@ -22,7 +22,7 @@ h1{font-size:31px;line-height:1.06;letter-spacing:-.8px;margin:14px 0 9px}h2{mar
 .task{display:grid;grid-template-columns:52px 1fr auto;gap:10px;align-items:center;width:100%;text-align:left}.thumb{width:52px;height:52px;border-radius:15px;background:#f0e8f4;display:grid;place-items:center;font-size:25px}.task h3{font-size:15px;margin:0 0 5px}.meta{font-size:12px;color:var(--mut)}.price{font-size:20px;font-weight:900;color:var(--green)}
 .row{display:flex;gap:10px}.row>*{flex:1}.section{display:flex;justify-content:space-between;align-items:end;margin:22px 0 11px}.section h2{margin:0}.empty{text-align:center;color:var(--mut);padding:34px 12px}
 .avatar{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#f2d7c9,#d8c1ef);display:grid;place-items:center;font-size:25px}.offer{display:grid;grid-template-columns:52px 1fr auto;gap:10px;align-items:center}.stars{color:#ef8c00;font-weight:850;font-size:12px}
-.chat{display:grid;gap:10px}.bubble{max-width:80%;padding:11px 13px 8px;border-radius:16px;font-size:14px;line-height:1.4}.bubble.me{margin-left:auto;background:var(--p);color:#fff}.bubble.other{background:#fff;border:1px solid var(--line)}.bubble-meta{display:flex;justify-content:flex-end;gap:5px;align-items:center;margin-top:4px;font-size:10px;opacity:.8}.receipt{font-weight:950;letter-spacing:-2px}.receipt.read{color:var(--o);opacity:1}.chatbar{position:fixed;left:50%;bottom:74px;transform:translateX(-50%);width:min(424px,calc(100% - 36px));display:flex;gap:8px}.chatbar input{flex:1;border:1px solid var(--line);border-radius:14px;padding:13px;box-shadow:0 8px 25px #2f0a4b14}.chatbar button{width:48px;border:0;border-radius:14px;background:var(--p);color:#fff}.chat-list{display:grid;gap:10px}.chat-item{width:100%;display:grid;grid-template-columns:48px 1fr auto;gap:11px;align-items:center;text-align:left}.chat-item .thumb{width:48px;height:48px}.chat-title{font-weight:900;margin-bottom:4px}.chat-preview{font-size:12px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:245px}.unread{min-width:22px;height:22px;padding:0 7px;border-radius:99px;background:var(--o);color:#fff;display:grid;place-items:center;font-size:11px;font-weight:900}
+.chat{display:grid;gap:10px}.bubble{max-width:80%;padding:11px 13px 8px;border-radius:16px;font-size:14px;line-height:1.4}.bubble.me{margin-left:auto;background:var(--p);color:#fff}.bubble.other{background:#fff;border:1px solid var(--line)}.bubble-meta{display:flex;justify-content:flex-end;gap:5px;align-items:center;margin-top:4px;font-size:10px;opacity:.8}.receipt{font-weight:950;letter-spacing:-2px;color:#d8d3dd;opacity:1}.receipt.read{color:var(--o);opacity:1}.chatbar{position:fixed;left:50%;bottom:74px;transform:translateX(-50%);width:min(424px,calc(100% - 36px));display:flex;gap:8px}.chatbar input{flex:1;border:1px solid var(--line);border-radius:14px;padding:13px;box-shadow:0 8px 25px #2f0a4b14}.chatbar button{width:48px;border:0;border-radius:14px;background:var(--p);color:#fff}.chat-list{display:grid;gap:10px}.chat-item{width:100%;display:grid;grid-template-columns:48px 1fr auto;gap:11px;align-items:center;text-align:left}.chat-item .thumb{width:48px;height:48px}.chat-title{font-weight:900;margin-bottom:4px}.chat-preview{font-size:12px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:245px}.unread{min-width:22px;height:22px;padding:0 7px;border-radius:99px;background:var(--o);color:#fff;display:grid;place-items:center;font-size:11px;font-weight:900}
 .status{display:grid;gap:9px}.status div{padding:12px;border-radius:13px;background:#f3edf7}.status .active{background:#eaf7f0;color:#12693f;font-weight:800}
 .small{font-size:12px;color:var(--mut)}.center{text-align:center}.spinner{padding:55px 0;text-align:center;color:var(--mut)}
 @media(min-width:700px){body{padding:26px 0}.app{border-radius:32px;overflow:hidden;min-height:900px}.screen,.hero{min-height:900px}.nav{bottom:26px;border-radius:0 0 32px 32px}.chatbar{bottom:100px}}
@@ -65,7 +65,7 @@ function authMsg(){return `${state.error?`<div class="error">${state.error}</div
 function welcome(){
 return shell(`<section class="hero">
 <div>${logo()}<div class="tag">Lo necesitas. Alguien lo hace.</div></div>
-<div><div class="kicker">DOHOY 0.3.1 BETA</div><h1>Dos personas ya pueden usar DOHOY de verdad.</h1><p style="color:#ffffffc9">Cuentas, tareas, ofertas y chat conectados en tiempo real.</p></div>
+<div><div class="kicker">DOHOY 0.3.2 BETA</div><h1>Dos personas ya pueden usar DOHOY de verdad.</h1><p style="color:#ffffffc9">Cuentas, tareas, ofertas y chat conectados en tiempo real.</p></div>
 <div><button class="btn light" onclick="go('signup')">Crear cuenta</button><button class="btn outline" onclick="go('login')">Iniciar sesión</button></div>
 </section>`)
 }
@@ -213,7 +213,7 @@ return shell(`<section class="screen"><div class="top"><button class="icon" oncl
 async function openChat(id,backRoute="taskDetail"){
 clearPoll();const {data:t,error}=await sb.from("tasks").select("*").eq("id",id).single();if(error)return setMsg("error",error.message);
 state.selectedTask=t;state.chatBack=backRoute;state.route="chat";state.chatDraft="";await loadMessages(id);await markChatRead(id);await loadMessages(id);render();scrollChatToBottom();
-subscribeToChat(id)
+subscribeToChat(id);poller=setInterval(refreshChatMessages,1500)
 }
 async function markChatRead(taskId){
 const now=new Date().toISOString();
