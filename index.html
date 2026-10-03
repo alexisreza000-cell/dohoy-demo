@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#24102f">
-<title>DOHOY 0.4 Beta</title>
+<title>DOHOY 0.5 Beta</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 :root{
@@ -28,7 +28,7 @@ h1{font-size:32px;line-height:1.04;letter-spacing:-1.1px;margin:14px 0 9px}h2{ma
 .btn{border:0;border-radius:17px;padding:15px 18px;width:100%;font-weight:900;margin-top:10px;min-height:52px;transition:transform .12s ease,box-shadow .15s ease}.btn:active{transform:scale(.985)}.primary{background:linear-gradient(135deg,var(--p),#5e187e);color:#fff;box-shadow:0 10px 24px #3d0d5d2a}.orange{background:linear-gradient(135deg,var(--o),#ff8140);color:#fff;box-shadow:0 10px 22px #ff68182b}.light{background:#fff;color:var(--p3);box-shadow:0 10px 30px #12051a2b}.ghost{background:#f0e9f4;color:var(--p)}.outline{background:#ffffff0b;border:1px solid #ffffff4a;color:#fff}.hero .btn{min-height:54px}.hero .outline{margin-top:10px}
 .top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px}.top>div:first-child{min-width:0}.icon{border:1px solid #e8deed;background:#fff;color:var(--p);width:44px;height:44px;border-radius:15px;font-size:19px;display:grid;place-items:center;box-shadow:var(--soft)}.icon:active{transform:scale(.96)}.pill{display:inline-flex;align-items:center;background:#efe6f4;color:var(--p);border:1px solid #e3d4eb;border-radius:999px;padding:7px 10px;font-size:11px;font-weight:900}
 .card{background:#fff;border:1px solid #eee7f1;border-radius:22px;padding:17px;box-shadow:var(--soft)}.cards{display:grid;gap:12px}.card:active{transform:scale(.994)}
-.mode{min-height:168px;text-align:left;position:relative;overflow:hidden;padding:19px}.mode:after{content:"→";position:absolute;right:18px;bottom:18px;width:34px;height:34px;border-radius:12px;display:grid;place-items:center;background:#f1e9f5;color:var(--p);font-weight:950}.mode .emoji{width:54px;height:54px;border-radius:18px;display:grid;place-items:center;font-size:30px;background:linear-gradient(145deg,#f5edf8,#fff);box-shadow:inset 0 0 0 1px #eadff0}.mode h3{font-size:22px;margin:14px 0 5px}.mode p{margin:0;color:var(--mut);max-width:260px;font-size:14px}.mode:first-child{background:linear-gradient(145deg,#fff 0%,#fff8f2 100%)}.mode:last-child{background:linear-gradient(145deg,#fff 0%,#f7f0fb 100%)}
+.mode{min-height:168px;text-align:left;position:relative;overflow:hidden;padding:19px}.mode:after{content:"→";position:absolute;right:18px;bottom:18px;width:34px;height:34px;border-radius:12px;display:grid;place-items:center;background:#f1e9f5;color:var(--p);font-weight:950}.mode .emoji{width:54px;height:54px;border-radius:18px;display:grid;place-items:center;font-size:30px;background:linear-gradient(145deg,#f5edf8,#fff);box-shadow:inset 0 0 0 1px #eadff0}.mode h3{font-size:22px;margin:14px 0 5px}.mode p{margin:0;color:var(--mut);max-width:260px;font-size:14px}.mode:first-child{background:linear-gradient(145deg,#fff 0%,#fff8f2 100%)}.mode:last-child{background:linear-gradient(145deg,#fff 0%,#f7f0fb 100%)}.mode .emoji .svg-icon{width:28px;height:28px}.svg-icon{width:24px;height:24px;display:block;flex:0 0 auto}.inline-icon{width:14px;height:14px;display:inline-block;vertical-align:-2px;margin-right:4px}.nav .svg-icon{width:20px;height:20px}.thumb .svg-icon{width:30px;height:30px}.detail-icon .svg-icon{width:50px;height:50px}.vehicle-custom{margin:15px 0;padding:16px;border:1px solid #e9dfee;background:linear-gradient(145deg,#fbf8fd,#fff);border-radius:20px}.vehicle-custom-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}.vehicle-custom-head b{font-size:13px}.vehicle-preview{width:62px;height:46px;border-radius:14px;display:grid;place-items:center;background:#f4eef7;border:1px solid #e6daeb}.vehicle-preview .svg-icon{width:40px;height:40px}.vehicle-style-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:8px 0 14px}.vehicle-choice input,.color-choice input{position:absolute;opacity:0;pointer-events:none}.vehicle-style-card{display:flex;align-items:center;gap:9px;padding:11px 12px;border-radius:15px;border:1.5px solid #e8e0ec;background:#fff;cursor:pointer}.vehicle-choice input:checked+.vehicle-style-card{border-color:#8c55aa;box-shadow:0 0 0 3px #6f32a00d;background:#faf5fc}.vehicle-style-card .svg-icon{width:34px;height:34px}.vehicle-style-card b{font-size:12px}.color-row{display:flex;gap:10px;flex-wrap:wrap}.color-dot{width:34px;height:34px;border-radius:50%;display:block;border:3px solid #fff;box-shadow:0 0 0 1px #ded4e3,0 4px 10px #3d0d5d12;cursor:pointer}.color-choice input:checked+.color-dot{box-shadow:0 0 0 3px #8c55aa,0 5px 12px #3d0d5d18}.category-preview{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:15px;background:#f7f3f9;border:1px solid #ece4ef;margin-top:8px}.category-preview .svg-icon{width:25px;height:25px}.category-preview span{font-size:12px;color:var(--mut);font-weight:800}
 .field{display:grid;gap:7px;margin:14px 0}.field label{font-size:12px;font-weight:900;color:#4b3d52}.input,textarea,select{width:100%;border:1.5px solid #e7dfea;border-radius:16px;padding:14px 14px;background:#fff;color:var(--ink);outline:none;transition:border .15s ease,box-shadow .15s ease}input:focus,textarea:focus,select:focus{border-color:#9b6db6;box-shadow:0 0 0 4px #6f32a010}textarea{min-height:104px;resize:vertical}.form-card{background:#fff;border:1px solid #eee7f1;border-radius:24px;padding:4px 16px 17px;box-shadow:var(--soft)}
 .error{background:#fff0ef;color:var(--red);border:1px solid #f4c7c3;border-radius:14px;padding:11px 12px;margin:10px 0;font-size:13px}.ok{background:#eaf8f1;color:#12643f;border:1px solid #c6ead8;border-radius:14px;padding:12px 13px;margin:10px 0;font-size:13px}
 .nav{position:fixed;bottom:10px;left:50%;transform:translateX(-50%);width:min(430px,calc(100% - 24px));display:grid;grid-template-columns:repeat(4,1fr);background:#ffffffed;backdrop-filter:blur(20px);border:1px solid #e9e1ed;border-radius:22px;padding:7px 6px max(7px,env(safe-area-inset-bottom));z-index:30;box-shadow:0 16px 44px rgba(38,13,51,.17)}.nav button{border:0;background:transparent;color:#908694;font-size:10px;font-weight:800;padding:6px 2px;border-radius:14px;min-height:50px}.nav button b{display:inline-grid;place-items:center;width:27px;height:25px;border-radius:9px;color:inherit;font-size:17px;margin-bottom:1px}.nav button.active{color:var(--p);background:#f4eef7}.nav button.active b{background:#eadff0;color:var(--p)}
@@ -60,15 +60,46 @@ let state={
 let poller=null;
 let deliveryPoller=null;
 let chatChannel=null;
-const icons={Vehículo:"🚗",Mandados:"🛒",Paquetería:"📦",Hogar:"🏠",Mascotas:"🐾",Trámites:"📄",Otro:"✨"};
+const categories=["Vehículo","Mandados","Paquetería","Hogar","Mascotas","Trámites","Otro"];
+const vehicleColors={graphite:"#2B2B30",white:"#F4F4F2",red:"#D84B4B",blue:"#3E73C8",green:"#4F8A63",orange:"#F28B3C"};
 const money=n=>new Intl.NumberFormat("es-MX",{style:"currency",currency:"MXN",maximumFractionDigits:0}).format(Number(n||0));
+function svgWrap(body,viewBox="0 0 24 24",cls="svg-icon"){return `<svg class="${cls}" viewBox="${viewBox}" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">${body}</svg>`}
+function baseCategory(raw){return String(raw||"Otro").split("|")[0]||"Otro"}
+function taskMeta(raw){const p=String(raw||"Otro").split("|");const base=p[0]||"Otro";const variant=p[1]||"sedan";const colorKey=vehicleColors[p[2]]?p[2]:"graphite";return {base,variant,colorKey,color:vehicleColors[colorKey]}}
+function vehicleSvg(variant="sedan",color=vehicleColors.graphite){
+ const stroke=color==="#F4F4F2"?"#6F6973":"#231D27";
+ if(variant==="suv")return svgWrap(`<path d="M4.1 10.2 5.7 6.9c.35-.72 1.08-1.18 1.88-1.18h8.56c.88 0 1.67.55 1.97 1.38l1.08 3.1 1.08.75c.47.33.75.87.75 1.44v3.05H3v-3.22c0-.62.3-1.2.82-1.55l.28-.19Z" fill="${color}" stroke="${stroke}" stroke-width="1.25"/><path d="M7.25 6.25 6.2 10.2h11.7l-1.25-3.95H7.25Z" fill="#FFFFFF" fill-opacity=".78" stroke="${stroke}" stroke-width="1"/><circle cx="7" cy="15.7" r="1.55" fill="#fff" stroke="${stroke}" stroke-width="1.2"/><circle cx="17" cy="15.7" r="1.55" fill="#fff" stroke="${stroke}" stroke-width="1.2"/><path d="M4.5 12.4h2.1M17.5 12.4h2" stroke="${stroke}" stroke-width="1.2" stroke-linecap="round"/>`);
+ return svgWrap(`<path d="M4.05 11.3 6.3 7.45c.42-.72 1.2-1.17 2.04-1.17h6.18c.78 0 1.5.38 1.94 1.03l2.55 3.72 1.05.55c.58.3.94.9.94 1.56v2.17H3v-2.36c0-.7.4-1.34 1.05-1.65Z" fill="${color}" stroke="${stroke}" stroke-width="1.25"/><path d="M8.02 6.95 6.7 10.55h10.8l-2.3-3.6H8.02Z" fill="#FFFFFF" fill-opacity=".8" stroke="${stroke}" stroke-width="1"/><circle cx="7" cy="15.5" r="1.55" fill="#fff" stroke="${stroke}" stroke-width="1.2"/><circle cx="17" cy="15.5" r="1.55" fill="#fff" stroke="${stroke}" stroke-width="1.2"/><path d="M4.4 12.65h2M17.65 12.65h1.95" stroke="${stroke}" stroke-width="1.2" stroke-linecap="round"/>`)
+}
+function iconSvg(name,opts={}){
+ const s='stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"';
+ if(name==="Vehículo")return vehicleSvg(opts.variant||"sedan",opts.color||vehicleColors.graphite);
+ if(name==="Mandados")return svgWrap(`<path ${s} d="M6.5 8.2h11l-.65 10.2H7.15L6.5 8.2Z"/><path ${s} d="M9 8.2V6.9a3 3 0 0 1 6 0v1.3"/>`);
+ if(name==="Paquetería")return svgWrap(`<path ${s} d="m4.5 7.2 7.5-3.7 7.5 3.7v9.5L12 20.5l-7.5-3.8V7.2Z"/><path ${s} d="m4.5 7.2 7.5 3.9 7.5-3.9M12 11.1v9.4"/>`);
+ if(name==="Hogar")return svgWrap(`<path ${s} d="m4 10.6 8-6.3 8 6.3v8.1h-5.3v-5.1H9.3v5.1H4v-8.1Z"/>`);
+ if(name==="Mascotas")return svgWrap(`<path ${s} d="M8.2 10.1c1.15 0 2.05-.95 2.05-2.12S9.35 5.8 8.2 5.8s-2.05.98-2.05 2.18.9 2.12 2.05 2.12Zm7.6 0c1.15 0 2.05-.95 2.05-2.12S16.95 5.8 15.8 5.8s-2.05.98-2.05 2.18.9 2.12 2.05 2.12ZM12 18.8c2.45 0 4.45-1.45 4.45-3.35 0-1.78-1.73-3.15-4.45-3.15s-4.45 1.37-4.45 3.15c0 1.9 2 3.35 4.45 3.35Z"/><path ${s} d="M5.5 13.2c.9.1 1.65-.55 1.75-1.48.1-.9-.5-1.72-1.4-1.82-.9-.1-1.68.58-1.78 1.5-.1.9.53 1.7 1.43 1.8Zm13 0c-.9.1-1.65-.55-1.75-1.48-.1-.9.5-1.72 1.4-1.82.9-.1 1.68.58 1.78 1.5.1.9-.53 1.7-1.43 1.8Z"/>`);
+ if(name==="Trámites")return svgWrap(`<path ${s} d="M7 3.8h7l3 3v13.4H7V3.8Z"/><path ${s} d="M14 3.8v3.4h3M9.5 11h5M9.5 14h5M9.5 17h3.2"/>`);
+ if(name==="location")return svgWrap(`<path ${s} d="M12 21s6-5.1 6-11a6 6 0 1 0-12 0c0 5.9 6 11 6 11Z"/><circle ${s} cx="12" cy="10" r="2"/>`);
+ if(name==="home")return svgWrap(`<path ${s} d="m4 10.4 8-6.2 8 6.2v9H4v-9Z"/><path ${s} d="M9.3 19.4v-5.5h5.4v5.5"/>`);
+ if(name==="plus")return svgWrap(`<circle ${s} cx="12" cy="12" r="8.5"/><path ${s} d="M12 8.3v7.4M8.3 12h7.4"/>`);
+ if(name==="tasks")return svgWrap(`<path ${s} d="M8 6.5h11M8 12h11M8 17.5h11"/><path ${s} d="m4.2 6.4.8.8 1.5-1.7M4.2 11.9l.8.8 1.5-1.7M4.2 17.4l.8.8 1.5-1.7"/>`);
+ if(name==="chat")return svgWrap(`<path ${s} d="M5 5.2h14v10.2H9.5L5 19v-3.6V5.2Z"/><path ${s} d="M8.5 9.1h7M8.5 12h4.7"/>`);
+ if(name==="user")return svgWrap(`<circle ${s} cx="12" cy="8" r="3.1"/><path ${s} d="M5.8 19.2c.7-3.4 3-5.3 6.2-5.3s5.5 1.9 6.2 5.3"/>`);
+ if(name==="briefcase")return svgWrap(`<rect ${s} x="4" y="7" width="16" height="11" rx="2"/><path ${s} d="M9 7V5.2h6V7M4 11.7h16M10 11.7v1.8h4v-1.8"/>`);
+ if(name==="help")return svgWrap(`<circle ${s} cx="12" cy="12" r="8.5"/><path ${s} d="M9.8 9.4a2.3 2.3 0 0 1 4.4.9c0 1.9-2.2 2-2.2 3.5M12 17.2h.01"/>`);
+ return svgWrap(`<path ${s} d="m12 3 1.6 5.1L19 10l-5.4 1.9L12 17l-1.6-5.1L5 10l5.4-1.9L12 3Z"/>`)
+}
+function taskIcon(task){const m=taskMeta(typeof task==="string"?task:task?.category);return iconSvg(m.base,m)}
+function locationMarkup(text){return `${iconSvg("location",{})}<span>${escapeHtml(text||"Sin ubicación")}</span>`}
+function encodeCategory(base,variant,colorKey){return base==="Vehículo"?`${base}|${variant||"sedan"}|${colorKey||"graphite"}`:base}
+
 function logo(sm=false){return `<div class="logo ${sm?"sm":""}">DO<b>HOY</b></div>`}
 function shell(content,nav=false){return `<main class="app">${content}${nav?navBar():""}</main>`}
 function navBar(){const home=state.mode==="client"?"clientHome":"workerHome";const second=state.mode==="client"?"createTask":"workerHome";return `<nav class="nav">
-<button class="${state.route===home?"active":""}" onclick="go('${home}')"><b>⌂</b><br>Inicio</button>
-<button class="${state.route===second?"active":""}" onclick="go('${second}')"><b>${state.mode==="client"?"＋":"☷"}</b><br>${state.mode==="client"?"Publicar":"Tareas"}</button>
-<button class="${["messagesHome","chat"].includes(state.route)?"active":""}" onclick="openMessagesHome()"><b>💬</b><br>Mensajes</button>
-<button class="${state.route==="profile"?"active":""}" onclick="go('profile')"><b>●</b><br>Perfil</button>
+<button class="${state.route===home?"active":""}" onclick="go('${home}')"><b>${iconSvg("home")}</b><br>Inicio</button>
+<button class="${state.route===second?"active":""}" onclick="go('${second}')"><b>${iconSvg(state.mode==="client"?"plus":"tasks")}</b><br>${state.mode==="client"?"Publicar":"Tareas"}</button>
+<button class="${["messagesHome","chat"].includes(state.route)?"active":""}" onclick="openMessagesHome()"><b>${iconSvg("chat")}</b><br>Mensajes</button>
+<button class="${state.route==="profile"?"active":""}" onclick="go('profile')"><b>${iconSvg("user")}</b><br>Perfil</button>
 </nav>`}
 function clearPoll(){
 if(poller){clearInterval(poller);poller=null}
@@ -82,8 +113,8 @@ function authMsg(){return `${state.error?`<div class="error">${state.error}</div
 function welcome(){
 return shell(`<section class="hero">
 <div>${logo()}<div class="tag">Lo necesitas. Alguien lo hace.</div></div>
-<div class="hero-copy"><span class="hero-badge">BETA PRIVADA · DOHOY 0.4</span><h1>Resuelve lo de hoy, hoy.</h1><p>Publica una tarea, recibe ofertas y coordina todo desde un solo lugar.</p>
-<div class="hero-proof"><div class="proof"><b>⚡</b><span>Publica rápido</span></div><div class="proof"><b>💬</b><span>Chat por tarea</span></div><div class="proof"><b>✓✓</b><span>Estados de lectura</span></div></div></div>
+<div class="hero-copy"><span class="hero-badge">BETA PRIVADA · DOHOY 0.5</span><h1>Resuelve lo de hoy, hoy.</h1><p>Publica una tarea, recibe ofertas y coordina todo desde un solo lugar.</p>
+<div class="hero-proof"><div class="proof"><b>${iconSvg("plus")}</b><span>Publica rápido</span></div><div class="proof"><b>${iconSvg("chat")}</b><span>Chat por tarea</span></div><div class="proof"><b>✓✓</b><span>Estados de lectura</span></div></div></div>
 <div><button class="btn light" onclick="go('signup')">Crear cuenta</button><button class="btn outline" onclick="go('login')">Ya tengo cuenta</button></div>
 </section>`)
 }
@@ -113,13 +144,13 @@ function chooseMode(){
 return shell(`<section class="screen"><div class="top">${logo(true)}<button class="icon" onclick="signOut()">↪</button></div>
 <div class="kicker">Tu DOHOY</div><h1>¿Cómo quieres usar DOHOY?</h1><p class="sub">Puedes cambiar de modo cuando quieras con la misma cuenta.</p>
 <div class="cards">
-<button class="card mode" onclick="mode('client')"><div class="emoji">🙋🏻</div><h3>Necesito ayuda</h3><p>Publica lo que necesitas y elige quién lo hace.</p></button>
-<button class="card mode" onclick="mode('worker')"><div class="emoji">💼</div><h3>Quiero trabajar</h3><p>Encuentra tareas cercanas y envía tu propuesta.</p></button>
+<button class="card mode" onclick="mode('client')"><div class="emoji">${iconSvg("help")}</div><h3>Necesito ayuda</h3><p>Publica lo que necesitas y elige quién lo hace.</p></button>
+<button class="card mode" onclick="mode('worker')"><div class="emoji">${iconSvg("briefcase")}</div><h3>Quiero trabajar</h3><p>Encuentra tareas cercanas y envía tu propuesta.</p></button>
 </div></section>`)
 }
 function taskCard(t,client=false){
 return `<button class="card task" onclick="openTask('${t.id}')">
-<div class="thumb">${icons[t.category]||"✨"}</div><div><h3>${escapeHtml(t.title)}</h3><div class="meta">📍 ${escapeHtml(t.location_label||"Sin ubicación")}</div><span class="status-mini">${statusText(t.status)}</span></div><div class="task-price"><div class="price">${money(t.offered_price)}</div><span class="task-arrow">›</span></div>
+<div class="thumb">${taskIcon(t)}</div><div><h3>${escapeHtml(t.title)}</h3><div class="meta" style="display:flex;align-items:center;gap:3px">${locationMarkup(t.location_label||"Sin ubicación")}</div><span class="status-mini">${statusText(t.status)}</span></div><div class="task-price"><div class="price">${money(t.offered_price)}</div><span class="task-arrow">›</span></div>
 </button>`
 }
 function statusText(s){return ({open:"Abierta",assigned:"Asignada",in_progress:"En curso",completed:"Terminada",cancelled:"Cancelada"})[s]||s}
@@ -144,13 +175,25 @@ root.innerHTML=shell(`<section class="screen"><div class="top"><button class="ic
 <div class="form-card"><form id="taskForm">
 <div class="field"><label>Título</label><input class="input" name="title" required placeholder="Ej. Llevar mi carro al autolavado"></div>
 <div class="field"><label>Descripción</label><textarea name="description" required placeholder="Explica exactamente qué debe hacer la persona"></textarea></div>
-<div class="field"><label>Categoría</label><select name="category">${Object.keys(icons).map(x=>`<option>${x}</option>`).join("")}</select></div>
+<div class="field"><label>Categoría</label><select id="taskCategory" name="category" onchange="toggleVehicleOptions(this.value);updateCategoryPreview(this.value)">${categories.map(x=>`<option>${x}</option>`).join("")}</select><div id="categoryPreview" class="category-preview">${iconSvg("Vehículo",{variant:"sedan",color:vehicleColors.graphite})}<span>Vehículo</span></div></div>
+<div id="vehicleOptions" class="vehicle-custom">
+<div class="vehicle-custom-head"><div><b>Personaliza el vehículo</b><div class="small">Elige estilo y color del icono</div></div><div id="vehiclePreview" class="vehicle-preview">${vehicleSvg("sedan",vehicleColors.graphite)}</div></div>
+<div class="vehicle-style-grid">
+<label class="vehicle-choice"><input type="radio" name="vehicle_variant" value="sedan" checked onchange="updateVehiclePreview()"><span class="vehicle-style-card">${vehicleSvg("sedan",vehicleColors.graphite)}<b>Auto</b></span></label>
+<label class="vehicle-choice"><input type="radio" name="vehicle_variant" value="suv" onchange="updateVehiclePreview()"><span class="vehicle-style-card">${vehicleSvg("suv",vehicleColors.graphite)}<b>SUV</b></span></label>
+</div>
+<div class="field" style="margin-bottom:2px"><label>Color del vehículo</label><div class="color-row">
+${Object.entries(vehicleColors).map(([k,v],i)=>`<label class="color-choice"><input type="radio" name="vehicle_color" value="${k}" ${i===0?"checked":""} onchange="updateVehiclePreview()"><span class="color-dot" style="background:${v}"></span></label>`).join("")}
+</div></div></div>
 <div class="field"><label>Ubicación general</label><input class="input" name="location" required placeholder="Ej. Torreón, Coahuila"></div>
 <div class="field"><label>Pago ofrecido</label><input class="input" name="price" type="number" min="1" step="1" required></div>
 <label class="card" style="display:flex;gap:10px;align-items:center"><input name="license" type="checkbox"> Requiere licencia de conducir</label>
 <button class="btn primary">Publicar tarea</button></form></div>
-</section>`,true)
+</section>`,true);toggleVehicleOptions(document.getElementById("taskCategory")?.value||"Vehículo")
 }
+function toggleVehicleOptions(category){const el=document.getElementById("vehicleOptions");if(el)el.style.display=category==="Vehículo"?"block":"none"}
+function updateCategoryPreview(category){const el=document.getElementById("categoryPreview");if(!el)return;el.innerHTML=`${iconSvg(category)}<span>${escapeHtml(category)}</span>`}
+function updateVehiclePreview(){const variant=document.querySelector('input[name="vehicle_variant"]:checked')?.value||"sedan";const colorKey=document.querySelector('input[name="vehicle_color"]:checked')?.value||"graphite";const el=document.getElementById("vehiclePreview");if(el)el.innerHTML=vehicleSvg(variant,vehicleColors[colorKey]||vehicleColors.graphite);const cp=document.getElementById("categoryPreview");if(cp)cp.innerHTML=`${vehicleSvg(variant,vehicleColors[colorKey]||vehicleColors.graphite)}<span>Vehículo · ${variant==="suv"?"SUV":"Auto"}</span>`}
 async function taskDetail(){
 const t=state.selectedTask;if(!t)return go(state.mode==="client"?"clientHome":"workerHome");
 const isOwner=t.client_id===state.user.id;
@@ -166,10 +209,10 @@ const my=state.offers[0];
 body=t.status==="open"?`<h2>Haz una oferta</h2>${my?`<div class="ok">Ya ofreciste ${money(my.amount)}. Estado: ${my.status}.</div>`:`<form id="offerForm"><div class="field"><label>Tu precio</label><input class="input" name="amount" type="number" min="1" value="${Number(t.offered_price)}" required></div><div class="field"><label>Mensaje</label><textarea name="message" placeholder="Ej. Puedo hacerlo hoy por la tarde"></textarea></div><button class="btn primary">Enviar oferta</button></form>`}`:
 t.worker_id===state.user.id?`<div class="ok">Esta tarea está asignada a ti.</div>${taskProgressButtons(t)}`:`<div class="sub">Esta tarea ya no está disponible.</div>`;
 }
-root.innerHTML=shell(`<section class="screen"><div class="top"><button class="icon" onclick="go('${isOwner?"clientHome":"workerHome"}')">←</button><span class="pill">${escapeHtml(t.category)}</span><span></span></div>
-<div class="detail-hero"><div class="detail-icon">${icons[t.category]||"✨"}</div><div class="detail-price">${money(t.offered_price)}</div><h1>${escapeHtml(t.title)}</h1><p>${escapeHtml(t.description)}</p><span class="location-chip">📍 ${escapeHtml(t.location_label||"")}</span></div>
+root.innerHTML=shell(`<section class="screen"><div class="top"><button class="icon" onclick="go('${isOwner?"clientHome":"workerHome"}')">←</button><span class="pill">${escapeHtml(baseCategory(t.category))}</span><span></span></div>
+<div class="detail-hero"><div class="detail-icon">${taskIcon(t)}</div><div class="detail-price">${money(t.offered_price)}</div><h1>${escapeHtml(t.title)}</h1><p>${escapeHtml(t.description)}</p><span class="location-chip">${locationMarkup(t.location_label||"")}</span></div>
 <div class="status"><div class="active">● ${statusText(t.status)}</div></div>
-${(t.client_id===state.user.id||t.worker_id===state.user.id)&&t.worker_id?`<button class="btn ghost" onclick="openChat('${t.id}')">💬 Abrir chat</button>`:""}
+${(t.client_id===state.user.id||t.worker_id===state.user.id)&&t.worker_id?`<button class="btn ghost" onclick="openChat('${t.id}')">${iconSvg("chat")} Abrir chat</button>`:""}
 ${body}</section>`,true)
 }
 function taskProgressButtons(t){
@@ -217,7 +260,7 @@ poller=setInterval(async()=>{if(state.route!=="messagesHome")return;await loadCo
 function conversationListHtml(){
 if(!state.conversations.length)return `<div class="empty">Aún no tienes conversaciones.</div>`;
 return state.conversations.map(t=>`<button class="card chat-item" onclick="openChat('${t.id}','messagesHome')">
-<div class="thumb">${icons[t.category]||"💬"}</div>
+<div class="thumb">${taskIcon(t)}</div>
 <div><div class="chat-title">${escapeHtml(t.title)}</div><div class="chat-preview">${t.last_message?`${t.last_message.sender_id===state.user.id?"Tú: ":""}${escapeHtml(t.last_message.body)}`:"Todavía no hay mensajes"}</div></div>
 <div>${t.unread?`<span class="unread">${t.unread}</span>`:`<span class="small">${statusText(t.status)}</span>`}</div>
 </button>`).join("")
@@ -324,7 +367,7 @@ e.preventDefault();const f=new FormData(e.target);const {error}=await sb.from("p
 if(error)return setMsg("error",error.message);await loadProfile();state.notice="Perfil guardado.";render()
 }
 async function publishTask(e){
-e.preventDefault();const f=new FormData(e.target);const payload={client_id:state.user.id,title:f.get("title"),description:f.get("description"),category:f.get("category"),location_label:f.get("location"),offered_price:Number(f.get("price")),requires_driver_license:f.get("license")==="on"};
+e.preventDefault();const f=new FormData(e.target);const base=f.get("category");const category=encodeCategory(base,f.get("vehicle_variant"),f.get("vehicle_color"));const payload={client_id:state.user.id,title:f.get("title"),description:f.get("description"),category,location_label:f.get("location"),offered_price:Number(f.get("price")),requires_driver_license:f.get("license")==="on"};
 const {data,error}=await sb.from("tasks").insert(payload).select().single();if(error)return setMsg("error",error.message);state.selectedTask=data;go("taskDetail")
 }
 async function loadMyTasks(){const {data,error}=await sb.from("tasks").select("*").eq("client_id",state.user.id).order("created_at",{ascending:false});state.tasks=error?[]:data}
@@ -369,6 +412,6 @@ const {data}=await sb.auth.getSession();state.session=data.session;state.user=da
 state.route=state.session?"mode":"welcome";render();
 sb.auth.onAuthStateChange(async(_event,session)=>{state.session=session;state.user=session?.user||null;if(state.user)await loadProfile();if(!session&&!["welcome","signup","login"].includes(state.route))go("welcome")})
 }
-window.state=state;window.go=go;window.mode=mode;window.signOut=signOut;window.openTask=openTask;window.acceptOffer=acceptOffer;window.setTaskStatus=setTaskStatus;window.openChat=openChat;window.openMessagesHome=openMessagesHome;window.sendMessage=sendMessage;window.backFromChat=backFromChat;
+window.state=state;window.go=go;window.mode=mode;window.signOut=signOut;window.openTask=openTask;window.acceptOffer=acceptOffer;window.setTaskStatus=setTaskStatus;window.openChat=openChat;window.openMessagesHome=openMessagesHome;window.sendMessage=sendMessage;window.backFromChat=backFromChat;window.toggleVehicleOptions=toggleVehicleOptions;window.updateVehiclePreview=updateVehiclePreview;window.updateCategoryPreview=updateCategoryPreview;
 init();
 </script></body></html>
