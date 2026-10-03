@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#2f0a4b">
-<title>DOHOY 0.3 Beta</title>
+<title>DOHOY 0.3.1 Beta</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 :root{--p:#3d0d5d;--p2:#5a1b82;--o:#ff6818;--bg:#fffaf3;--ink:#21172b;--mut:#756d7d;--line:#e9e1ed;--card:#fff;--green:#159957;--red:#b42318}
@@ -38,10 +38,11 @@ const root=document.getElementById("root");
 
 let state={
   route:"loading", mode:localStorage.getItem("dohoy_mode")||"client",
-  session:null,user:null,profile:null,tasks:[],selectedTask:null,offers:[],messages:[],conversations:[],chatBack:"taskDetail",notice:"",error:""
+  session:null,user:null,profile:null,tasks:[],selectedTask:null,offers:[],messages:[],conversations:[],chatBack:"taskDetail",chatDraft:"",notice:"",error:""
 };
 let poller=null;
 let deliveryPoller=null;
+let chatChannel=null;
 const icons={Vehículo:"🚗",Mandados:"🛒",Paquetería:"📦",Hogar:"🏠",Mascotas:"🐾",Trámites:"📄",Otro:"✨"};
 const money=n=>new Intl.NumberFormat("es-MX",{style:"currency",currency:"MXN",maximumFractionDigits:0}).format(Number(n||0));
 function logo(sm=false){return `<div class="logo ${sm?"sm":""}">DO<b>HOY</b></div>`}
@@ -52,7 +53,10 @@ function navBar(){return `<nav class="nav">
 <button onclick="openMessagesHome()">💬<br>Mensajes</button>
 <button onclick="go('profile')">●<br>Perfil</button>
 </nav>`}
-function clearPoll(){if(poller){clearInterval(poller);poller=null}}
+function clearPoll(){
+if(poller){clearInterval(poller);poller=null}
+if(chatChannel){sb.removeChannel(chatChannel);chatChannel=null}
+}
 function setMsg(type,msg){state.error=type==="error"?msg:"";state.notice=type==="ok"?msg:"";render()}
 function go(r){clearPoll();state.route=r;state.error="";state.notice="";render();window.scrollTo(0,0)}
 function mode(m){state.mode=m;localStorage.setItem("dohoy_mode",m);go(m==="client"?"clientHome":"workerHome")}
@@ -61,7 +65,7 @@ function authMsg(){return `${state.error?`<div class="error">${state.error}</div
 function welcome(){
 return shell(`<section class="hero">
 <div>${logo()}<div class="tag">Lo necesitas. Alguien lo hace.</div></div>
-<div><div class="kicker">DOHOY 0.3 BETA</div><h1>Dos personas ya pueden usar DOHOY de verdad.</h1><p style="color:#ffffffc9">Cuentas, tareas, ofertas y chat conectados en tiempo real.</p></div>
+<div><div class="kicker">DOHOY 0.3.1 BETA</div><h1>Dos personas ya pueden usar DOHOY de verdad.</h1><p style="color:#ffffffc9">Cuentas, tareas, ofertas y chat conectados en tiempo real.</p></div>
 <div><button class="btn light" onclick="go('signup')">Crear cuenta</button><button class="btn outline" onclick="go('login')">Iniciar sesión</button></div>
 </section>`)
 }
@@ -208,8 +212,8 @@ return shell(`<section class="screen"><div class="top"><button class="icon" oncl
 }
 async function openChat(id,backRoute="taskDetail"){
 clearPoll();const {data:t,error}=await sb.from("tasks").select("*").eq("id",id).single();if(error)return setMsg("error",error.message);
-state.selectedTask=t;state.chatBack=backRoute;state.route="chat";await loadMessages(id);await markChatRead(id);await loadMessages(id);render();scrollChatToBottom();
-poller=setInterval(refreshChatMessages,2000)
+state.selectedTask=t;state.chatBack=backRoute;state.route="chat";state.chatDraft="";await loadMessages(id);await markChatRead(id);await loadMessages(id);render();scrollChatToBottom();
+subscribeToChat(id)
 }
 async function markChatRead(taskId){
 const now=new Date().toISOString();
@@ -233,16 +237,37 @@ function chatScreen(){
 const t=state.selectedTask;
 return shell(`<section class="screen"><div class="top"><button class="icon" onclick="backFromChat()">←</button><div><b>Chat de la tarea</b><div class="small">${escapeHtml(t.title)}</div></div><span></span></div>
 <div id="chatMessages" class="chat">${messagesHtml()}</div><div style="height:90px"></div>
-<div class="chatbar"><input id="chatInput" autocomplete="off" placeholder="Escribe un mensaje…"><button onclick="sendMessage()">➤</button></div></section>`,true)
+<div class="chatbar"><input id="chatInput" autocomplete="off" value="${escapeAttr(state.chatDraft||"")}" oninput="state.chatDraft=this.value" placeholder="Escribe un mensaje…"><button onclick="sendMessage()">➤</button></div></section>`,true)
 }
 function backFromChat(){if(state.chatBack==="messagesHome")openMessagesHome();else go("taskDetail")}
 function scrollChatToBottom(){if(state.route==="chat")window.scrollTo(0,document.body.scrollHeight)}
+function refreshChatDom(shouldScroll=false){
+const el=document.getElementById("chatMessages");if(!el)return;
+el.innerHTML=messagesHtml();if(shouldScroll)scrollChatToBottom()
+}
+function upsertRealtimeMessage(msg){
+const i=state.messages.findIndex(m=>m.id===msg.id);
+if(i>=0)state.messages[i]={...state.messages[i],...msg};else state.messages.push(msg);
+state.messages.sort((a,b)=>new Date(a.created_at)-new Date(b.created_at))
+}
+function subscribeToChat(taskId){
+if(chatChannel){sb.removeChannel(chatChannel);chatChannel=null}
+chatChannel=sb.channel(`dohoy-chat-${taskId}`)
+.on('postgres_changes',{event:'INSERT',schema:'public',table:'messages',filter:`task_id=eq.${taskId}`},async payload=>{
+  const incoming=payload.new;const isNew=!state.messages.some(m=>m.id===incoming.id);upsertRealtimeMessage(incoming);
+  if(incoming.sender_id!==state.user.id){await markChatRead(taskId);await loadMessages(taskId)}
+  refreshChatDom(isNew)
+})
+.on('postgres_changes',{event:'UPDATE',schema:'public',table:'messages',filter:`task_id=eq.${taskId}`},payload=>{
+  upsertRealtimeMessage(payload.new);refreshChatDom(false)
+})
+.subscribe()
+}
 async function refreshChatMessages(){
 if(state.route!=="chat"||!state.selectedTask)return;
-const oldSig=messageSignature();const oldCount=state.messages.length;
+const draft=document.getElementById("chatInput")?.value??state.chatDraft;
 await loadMessages(state.selectedTask.id);await markChatRead(state.selectedTask.id);await loadMessages(state.selectedTask.id);
-const newSig=messageSignature();const el=document.getElementById("chatMessages");if(!el||oldSig===newSig)return;
-el.innerHTML=messagesHtml();if(state.messages.length>oldCount)scrollChatToBottom()
+state.chatDraft=draft;refreshChatDom(false)
 }
 function render(){
 if(state.route==="loading"){root.innerHTML=shell(`<section class="screen spinner">Cargando DOHOY…</section>`);return}
@@ -316,9 +341,10 @@ async function loadMessages(taskId){
 const {data,error}=await sb.from("messages").select("*").eq("task_id",taskId).order("created_at",{ascending:true});if(!error)state.messages=data
 }
 async function sendMessage(){
-const inp=document.getElementById("chatInput");const body=inp?.value.trim();if(!body)return;
-const {error}=await sb.from("messages").insert({task_id:state.selectedTask.id,sender_id:state.user.id,body});if(error)return setMsg("error",error.message);
-inp.value="";await loadMessages(state.selectedTask.id);const el=document.getElementById("chatMessages");if(el)el.innerHTML=messagesHtml();scrollChatToBottom();inp.focus()
+const inp=document.getElementById("chatInput");const body=(inp?.value??state.chatDraft).trim();if(!body)return;
+const taskId=state.selectedTask.id;const {data,error}=await sb.from("messages").insert({task_id:taskId,sender_id:state.user.id,body}).select().single();
+if(error)return setMsg("error",error.message);
+state.chatDraft="";if(inp)inp.value="";if(data)upsertRealtimeMessage(data);refreshChatDom(true);if(inp)inp.focus()
 }
 function escapeHtml(v){return String(v??"").replace(/[&<>"']/g,s=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[s]))}
 function escapeAttr(v){return escapeHtml(v).replace(/`/g,"&#96;")}
@@ -327,6 +353,6 @@ const {data}=await sb.auth.getSession();state.session=data.session;state.user=da
 state.route=state.session?"mode":"welcome";render();
 sb.auth.onAuthStateChange(async(_event,session)=>{state.session=session;state.user=session?.user||null;if(state.user)await loadProfile();if(!session&&!["welcome","signup","login"].includes(state.route))go("welcome")})
 }
-window.go=go;window.mode=mode;window.signOut=signOut;window.openTask=openTask;window.acceptOffer=acceptOffer;window.setTaskStatus=setTaskStatus;window.openChat=openChat;window.openMessagesHome=openMessagesHome;window.sendMessage=sendMessage;window.backFromChat=backFromChat;
+window.state=state;window.go=go;window.mode=mode;window.signOut=signOut;window.openTask=openTask;window.acceptOffer=acceptOffer;window.setTaskStatus=setTaskStatus;window.openChat=openChat;window.openMessagesHome=openMessagesHome;window.sendMessage=sendMessage;window.backFromChat=backFromChat;
 init();
 </script></body></html>
