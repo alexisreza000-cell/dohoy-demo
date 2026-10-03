@@ -1,341 +1,265 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#2f0a4b" />
-  <title>DOHOY 0.1</title>
-  <style>
-:root {
-  --purple: #3d0d5d;
-  --purple-2: #5a1b82;
-  --orange: #ff6818;
-  --cream: #fffaf3;
-  --ink: #1f1730;
-  --muted: #756d7d;
-  --line: #e9e1ed;
-  --card: #ffffff;
-  --green: #22a45d;
-  --shadow: 0 12px 35px rgba(35, 13, 51, .12);
-}
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  min-height: 100vh;
-  background: linear-gradient(180deg,#f7efe9 0%,#f3edf7 100%);
-  color: var(--ink);
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-}
-button, input, textarea, select { font: inherit; }
-button { cursor: pointer; }
-#app { min-height: 100vh; }
-.shell { max-width: 460px; min-height: 100vh; margin: 0 auto; background: var(--cream); box-shadow: var(--shadow); position: relative; overflow: hidden; }
-.screen { padding: 22px 18px 92px; min-height: 100vh; }
-.hero {
-  min-height: 100vh;
-  padding: 54px 26px 36px;
-  display: flex; flex-direction: column; justify-content: space-between;
-  background:
-    radial-gradient(circle at 84% 14%, rgba(255,104,24,.36), transparent 28%),
-    radial-gradient(circle at 10% 65%, rgba(108,54,143,.42), transparent 35%),
-    linear-gradient(160deg,#2f0a4b 0%,#171022 72%);
-  color: white;
-}
-.logo { font-weight: 900; letter-spacing: -2px; font-size: 46px; line-height: 1; }
-.logo .do { color: white; }
-.logo .hoy { color: var(--orange); }
-.logo.small { font-size: 28px; }
-.tagline { margin-top: 10px; color: rgba(255,255,255,.86); font-size: 16px; }
-.hero-copy { margin-top: auto; margin-bottom: 34px; }
-.hero-copy h1 { font-size: 38px; line-height: 1.03; margin: 0 0 12px; letter-spacing: -1.7px; }
-.hero-copy h1 span { color: var(--orange); }
-.hero-copy p { color: rgba(255,255,255,.78); line-height: 1.5; }
-.stack { display: grid; gap: 12px; }
-.btn { border: 0; border-radius: 16px; padding: 15px 18px; font-weight: 800; width: 100%; transition: transform .12s, opacity .12s; }
-.btn:active { transform: scale(.985); }
-.btn.primary { background: var(--purple); color: white; }
-.btn.orange { background: var(--orange); color: white; }
-.btn.light { background: white; color: var(--ink); }
-.btn.outline { background: transparent; border: 1.5px solid currentColor; color: inherit; }
-.btn.ghost { background: #f3edf7; color: var(--purple); }
-.topbar { display:flex; align-items:center; justify-content:space-between; gap: 12px; margin-bottom: 22px; }
-.icon-btn { border:0; background:#f1eaf4; color:var(--purple); width:42px; height:42px; border-radius:14px; font-size:19px; }
-.title { font-size: 29px; line-height: 1.08; margin: 8px 0; letter-spacing: -.7px; }
-.sub { color: var(--muted); margin: 0 0 20px; line-height: 1.45; }
-.mode-grid { display:grid; gap:16px; margin-top:28px; }
-.mode-card { border:0; text-align:left; border-radius:24px; padding:20px; min-height:155px; box-shadow:0 8px 22px rgba(51,20,70,.08); position:relative; overflow:hidden; }
-.mode-card.help { background:linear-gradient(135deg,#efe5ff,#fbf8ff); }
-.mode-card.work { background:linear-gradient(135deg,#ffe7d7,#fff8f2); }
-.mode-card .emoji { font-size:48px; position:absolute; right:18px; bottom:12px; }
-.mode-card h3 { margin:0 0 8px; font-size:23px; }
-.mode-card p { color:var(--muted); width:72%; line-height:1.4; }
-.pill { display:inline-flex; align-items:center; gap:6px; padding:7px 10px; border-radius:999px; background:#f3edf7; color:var(--purple); font-size:12px; font-weight:800; }
-.search { display:flex; align-items:center; gap:10px; background:white; border:1px solid var(--line); border-radius:16px; padding:12px 14px; box-shadow:0 8px 22px rgba(48,18,66,.06); }
-.search input { border:0; outline:0; width:100%; background:transparent; color:var(--ink); }
-.section-head { display:flex; justify-content:space-between; align-items:end; margin:24px 0 12px; }
-.section-head h3 { margin:0; font-size:18px; }
-.link { border:0; background:transparent; color:var(--purple-2); font-weight:800; padding:0; }
-.categories { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
-.cat { border:1px solid var(--line); background:white; border-radius:18px; padding:15px 8px; min-height:92px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; color:var(--ink); }
-.cat .ico { font-size:27px; }
-.cat span:last-child { font-size:12px; font-weight:750; }
-.card { background:white; border:1px solid var(--line); border-radius:20px; padding:15px; box-shadow:0 7px 20px rgba(37,16,49,.05); }
-.task-list { display:grid; gap:12px; }
-.task { display:grid; grid-template-columns:58px 1fr auto; gap:12px; align-items:center; }
-.task-thumb { width:58px; height:58px; border-radius:15px; display:grid; place-items:center; background:#f0e9f5; font-size:28px; }
-.task h4 { margin:0 0 5px; font-size:15px; }
-.meta { color:var(--muted); font-size:12px; display:flex; flex-wrap:wrap; gap:7px; }
-.price { font-size:21px; font-weight:900; color:var(--green); white-space:nowrap; }
-.fab { position:fixed; bottom:78px; left:50%; transform:translateX(-50%); width:min(424px,calc(100% - 36px)); max-width:424px; z-index:10; }
-.nav { position:fixed; bottom:0; left:50%; transform:translateX(-50%); width:min(460px,100%); background:rgba(255,255,255,.96); backdrop-filter:blur(12px); border-top:1px solid var(--line); padding:10px 14px max(10px,env(safe-area-inset-bottom)); display:grid; grid-template-columns:repeat(4,1fr); z-index:20; }
-.nav button { border:0; background:transparent; color:#8a8290; font-size:11px; display:grid; gap:4px; place-items:center; }
-.nav button.active { color:var(--purple); font-weight:900; }
-.nav .nicon { font-size:19px; }
-.field { display:grid; gap:7px; margin-bottom:16px; }
-.field label { font-weight:800; font-size:13px; }
-.input, textarea, select { width:100%; border:1px solid var(--line); background:white; color:var(--ink); border-radius:14px; padding:13px 14px; outline:none; }
-textarea { min-height:95px; resize:vertical; }
-.input:focus, textarea:focus, select:focus { border-color:#a27ab7; box-shadow:0 0 0 3px rgba(92,32,126,.08); }
-.row { display:flex; gap:10px; }
-.row > * { flex:1; }
-.switch-row { display:flex; justify-content:space-between; align-items:center; border:1px solid var(--line); background:white; border-radius:14px; padding:13px 14px; margin-bottom:16px; }
-.switch { width:50px; height:28px; background:#d7cfdb; border-radius:999px; padding:3px; border:0; }
-.switch::after { content:""; display:block; width:22px; height:22px; background:white; border-radius:50%; box-shadow:0 2px 6px rgba(0,0,0,.18); transition:.18s; }
-.switch.on { background:var(--purple); }
-.switch.on::after { transform:translateX(22px); }
-.worker-card { display:grid; grid-template-columns:54px 1fr auto; gap:12px; align-items:center; }
-.avatar { width:54px; height:54px; border-radius:50%; display:grid; place-items:center; background:linear-gradient(135deg,#f2d7c9,#d8c1ef); font-size:26px; }
-.rating { color:#ef8c00; font-weight:900; font-size:13px; }
-.actions { display:flex; gap:8px; margin-top:12px; }
-.actions .btn { padding:11px 12px; border-radius:12px; }
-.chat { display:grid; gap:10px; margin-top:16px; }
-.bubble { max-width:80%; padding:11px 13px; border-radius:16px; line-height:1.4; font-size:14px; }
-.bubble.in { background:white; border:1px solid var(--line); }
-.bubble.out { background:var(--purple); color:white; margin-left:auto; }
-.chatbox { position:fixed; bottom:74px; left:50%; transform:translateX(-50%); width:min(424px,calc(100% - 36px)); display:flex; gap:8px; z-index:11; }
-.chatbox input { flex:1; border:1px solid var(--line); background:white; border-radius:15px; padding:13px 14px; box-shadow:var(--shadow); }
-.chatbox button { width:48px; border:0; border-radius:15px; background:var(--purple); color:white; font-size:18px; }
-.timeline { display:grid; gap:0; margin:22px 0; }
-.step { display:grid; grid-template-columns:32px 1fr; gap:12px; min-height:68px; }
-.dot { width:28px; height:28px; border-radius:50%; display:grid; place-items:center; font-weight:900; background:#eee7f2; color:#8d8295; position:relative; }
-.step:not(:last-child) .dot::after { content:""; position:absolute; top:28px; width:2px; height:40px; background:#ddd1e3; }
-.step.done .dot { background:#daf4e5; color:var(--green); }
-.step.current .dot { background:var(--purple); color:white; }
-.step h4 { margin:3px 0 3px; }
-.step p { margin:0; color:var(--muted); font-size:12px; }
-.stars { display:flex; justify-content:center; gap:8px; font-size:36px; margin:22px 0; }
-.star { border:0; background:transparent; filter:grayscale(1); opacity:.45; }
-.star.on { filter:none; opacity:1; }
-.toast { position:fixed; left:50%; top:18px; transform:translateX(-50%); background:#171022; color:white; padding:10px 14px; border-radius:999px; font-size:13px; z-index:100; box-shadow:var(--shadow); }
-.empty { text-align:center; padding:36px 18px; color:var(--muted); }
-.kicker { color:var(--orange); font-size:12px; font-weight:900; text-transform:uppercase; letter-spacing:1.2px; }
-hr.sep { border:0; border-top:1px solid var(--line); margin:18px 0; }
-.badge { display:inline-flex; gap:5px; align-items:center; font-size:11px; background:#f8f3fb; color:var(--purple); border-radius:999px; padding:5px 8px; font-weight:800; }
-@media (min-width: 700px) {
-  body { padding:28px 0; }
-  .shell { min-height:900px; border-radius:34px; }
-  .screen, .hero { min-height:900px; }
-  .nav { width:460px; bottom:28px; border-radius:0 0 34px 34px; }
-  .fab,.chatbox { bottom:106px; }
-}
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#2f0a4b">
+<title>DOHOY 0.2 Beta</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{--p:#3d0d5d;--p2:#5a1b82;--o:#ff6818;--bg:#fffaf3;--ink:#21172b;--mut:#756d7d;--line:#e9e1ed;--card:#fff;--green:#159957;--red:#b42318}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#eee7f2;color:var(--ink)}
+button,input,textarea,select{font:inherit}button{cursor:pointer}.app{max-width:460px;min-height:100vh;margin:auto;background:var(--bg);position:relative;box-shadow:0 10px 40px #2f0a4b18}
+.screen{min-height:100vh;padding:22px 18px 92px}.hero{min-height:100vh;padding:50px 26px 38px;display:flex;flex-direction:column;justify-content:space-between;color:#fff;background:radial-gradient(circle at 85% 15%,#ff68184d,transparent 30%),radial-gradient(circle at 12% 65%,#74429a66,transparent 38%),linear-gradient(160deg,#2f0a4b,#171022 72%)}
+.logo{font-size:43px;font-weight:950;letter-spacing:-2px;line-height:1}.logo b{color:var(--o)}.logo.sm{font-size:27px}.tag{margin-top:9px;color:#ffffffd9}
+h1{font-size:31px;line-height:1.06;letter-spacing:-.8px;margin:14px 0 9px}h2{margin:20px 0 10px;font-size:20px}p{line-height:1.45}.sub{color:var(--mut)}.kicker{color:var(--o);font-size:12px;font-weight:900;letter-spacing:1.1px;text-transform:uppercase}
+.btn{border:0;border-radius:16px;padding:15px 17px;width:100%;font-weight:850;margin-top:9px}.primary{background:var(--p);color:#fff}.orange{background:var(--o);color:#fff}.light{background:#fff;color:var(--ink)}.ghost{background:#f1e9f5;color:var(--p)}.outline{background:transparent;border:1.5px solid currentColor;color:inherit}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px}.icon{border:0;background:#f1e9f5;color:var(--p);width:42px;height:42px;border-radius:14px;font-size:19px}.pill{display:inline-flex;background:#f1e9f5;color:var(--p);border-radius:99px;padding:7px 10px;font-size:12px;font-weight:800}
+.card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:16px;box-shadow:0 6px 22px #2f0a4b0d}.cards{display:grid;gap:12px}.mode{min-height:150px;text-align:left}.mode .emoji{font-size:42px}.mode h3{font-size:22px;margin:10px 0 5px}.mode p{margin:0;color:var(--mut)}
+.field{display:grid;gap:7px;margin:13px 0}.field label{font-size:13px;font-weight:800}.input,textarea,select{width:100%;border:1px solid var(--line);border-radius:14px;padding:13px;background:#fff;color:var(--ink);outline:none}textarea{min-height:90px;resize:vertical}
+.error{background:#fff0ef;color:var(--red);border:1px solid #f4c7c3;border-radius:13px;padding:11px 12px;margin:10px 0;font-size:13px}.ok{background:#ecf8f1;color:#146c43;border:1px solid #b9e5cb;border-radius:13px;padding:11px 12px;margin:10px 0;font-size:13px}
+.nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(460px,100%);display:grid;grid-template-columns:repeat(4,1fr);background:#fffffff2;backdrop-filter:blur(12px);border-top:1px solid var(--line);padding:9px 8px max(9px,env(safe-area-inset-bottom));z-index:30}.nav button{border:0;background:transparent;color:#817889;font-size:11px}.nav b{color:var(--p)}
+.task{display:grid;grid-template-columns:52px 1fr auto;gap:10px;align-items:center;width:100%;text-align:left}.thumb{width:52px;height:52px;border-radius:15px;background:#f0e8f4;display:grid;place-items:center;font-size:25px}.task h3{font-size:15px;margin:0 0 5px}.meta{font-size:12px;color:var(--mut)}.price{font-size:20px;font-weight:900;color:var(--green)}
+.row{display:flex;gap:10px}.row>*{flex:1}.section{display:flex;justify-content:space-between;align-items:end;margin:22px 0 11px}.section h2{margin:0}.empty{text-align:center;color:var(--mut);padding:34px 12px}
+.avatar{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#f2d7c9,#d8c1ef);display:grid;place-items:center;font-size:25px}.offer{display:grid;grid-template-columns:52px 1fr auto;gap:10px;align-items:center}.stars{color:#ef8c00;font-weight:850;font-size:12px}
+.chat{display:grid;gap:10px}.bubble{max-width:80%;padding:11px 13px;border-radius:16px;font-size:14px;line-height:1.4}.bubble.me{margin-left:auto;background:var(--p);color:#fff}.bubble.other{background:#fff;border:1px solid var(--line)}.chatbar{position:fixed;left:50%;bottom:74px;transform:translateX(-50%);width:min(424px,calc(100% - 36px));display:flex;gap:8px}.chatbar input{flex:1;border:1px solid var(--line);border-radius:14px;padding:13px;box-shadow:0 8px 25px #2f0a4b14}.chatbar button{width:48px;border:0;border-radius:14px;background:var(--p);color:#fff}
+.status{display:grid;gap:9px}.status div{padding:12px;border-radius:13px;background:#f3edf7}.status .active{background:#eaf7f0;color:#12693f;font-weight:800}
+.small{font-size:12px;color:var(--mut)}.center{text-align:center}.spinner{padding:55px 0;text-align:center;color:var(--mut)}
+@media(min-width:700px){body{padding:26px 0}.app{border-radius:32px;overflow:hidden;min-height:900px}.screen,.hero{min-height:900px}.nav{bottom:26px;border-radius:0 0 32px 32px}.chatbar{bottom:100px}}
 </style>
 </head>
-<body>
-  <div id="app"></div>
-  <script>
-const $ = (s) => document.querySelector(s);
-const app = document.getElementById('app');
+<body><div id="root"></div>
+<script>
+const SUPABASE_URL="https://qakhqnuigpjbeeahuyct.supabase.co";
+const SUPABASE_KEY="sb_publishable_g6FMgju9Lv2mtJCn2heXCw_YhRjweyL";
+const REDIRECT_URL="https://alexisreza000-cell.github.io/dohoy-demo/";
+const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+const root=document.getElementById("root");
 
-const seedTasks = [
-  {id:'seed1', title:'Llevar carro al autolavado', desc:'Necesito que lleven mi carro al autolavado y me lo regresen.', price:180, category:'Vehículo', icon:'🚗', location:'Torreón, Coahuila', distance:'1.3 km', time:'Hoy', license:true, owner:'Gerardo'},
-  {id:'seed2', title:'Hacer compra de supermercado', desc:'Comprar una lista corta de productos y entregar ticket.', price:130, category:'Mandados', icon:'🛒', location:'Torreón, Coahuila', distance:'2.1 km', time:'Hoy', license:false, owner:'María'},
-  {id:'seed3', title:'Recoger un paquete', desc:'Recoger un paquete y entregarlo en domicilio.', price:100, category:'Paquetería', icon:'📦', location:'Torreón, Coahuila', distance:'800 m', time:'Hoy', license:false, owner:'Luis'}
-];
-
-const workers = [
-  {name:'Carlos R.', score:'5.0', jobs:123, eta:'8 min', offer:180, avatar:'🧢'},
-  {name:'Andrea M.', score:'4.8', jobs:98, eta:'12 min', offer:200, avatar:'👩🏻'},
-  {name:'Luis G.', score:'4.9', jobs:210, eta:'15 min', offer:190, avatar:'👨🏽'}
-];
-
-const state = {
-  route: localStorage.getItem('dohoy_seen') ? 'mode' : 'welcome',
-  mode: localStorage.getItem('dohoy_mode') || 'client',
-  selectedTask: null,
-  selectedWorker: workers[0],
-  license: false,
-  rating: 5,
-  chat: [
-    {side:'in', text:'¡Hola! Ya voy en camino. Te aviso cuando llegue.'},
-    {side:'out', text:'Perfecto, gracias 🙌'}
-  ],
-  progress: 0
+let state={
+  route:"loading", mode:localStorage.getItem("dohoy_mode")||"client",
+  session:null,user:null,profile:null,tasks:[],selectedTask:null,offers:[],messages:[],notice:"",error:""
 };
-
-function saveTasks(tasks){ localStorage.setItem('dohoy_tasks', JSON.stringify(tasks)); }
-function ownTasks(){ try{return JSON.parse(localStorage.getItem('dohoy_tasks')||'[]')}catch{return []} }
-function allTasks(){ return [...ownTasks(), ...seedTasks]; }
-function money(n){ return new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN',maximumFractionDigits:0}).format(n); }
-function toast(msg){ const t=document.createElement('div'); t.className='toast'; t.textContent=msg; document.body.appendChild(t); setTimeout(()=>t.remove(),1800); }
-function go(route){ state.route=route; render(); window.scrollTo(0,0); }
-function setMode(mode){ state.mode=mode; localStorage.setItem('dohoy_mode',mode); go(mode==='client'?'clientHome':'workerHome'); }
-
-function shell(content, nav=false){
-  return `<main class="shell">${content}${nav?navBar():''}</main>`;
-}
-function logo(small=false){ return `<div class="logo ${small?'small':''}"><span class="do">DO</span><span class="hoy">HOY</span></div>`; }
-function navBar(){
-  const isClient=state.mode==='client';
-  const active = state.route;
-  return `<nav class="nav">
-    <button class="${['clientHome','workerHome'].includes(active)?'active':''}" onclick="go('${isClient?'clientHome':'workerHome'}')"><span class="nicon">⌂</span>Inicio</button>
-    <button class="${['createTask','workerTasks'].includes(active)?'active':''}" onclick="go('${isClient?'createTask':'workerHome'}')"><span class="nicon">${isClient?'＋':'☷'}</span>${isClient?'Publicar':'Tareas'}</button>
-    <button class="${active==='chat'?'active':''}" onclick="go('chat')"><span class="nicon">💬</span>Mensajes</button>
-    <button class="${active==='profile'?'active':''}" onclick="go('profile')"><span class="nicon">●</span>Perfil</button>
-  </nav>`;
-}
+let poller=null;
+const icons={Vehículo:"🚗",Mandados:"🛒",Paquetería:"📦",Hogar:"🏠",Mascotas:"🐾",Trámites:"📄",Otro:"✨"};
+const money=n=>new Intl.NumberFormat("es-MX",{style:"currency",currency:"MXN",maximumFractionDigits:0}).format(Number(n||0));
+function logo(sm=false){return `<div class="logo ${sm?"sm":""}">DO<b>HOY</b></div>`}
+function shell(content,nav=false){return `<main class="app">${content}${nav?navBar():""}</main>`}
+function navBar(){return `<nav class="nav">
+<button onclick="go('${state.mode==="client"?"clientHome":"workerHome"}')"><b>⌂</b><br>Inicio</button>
+<button onclick="go('${state.mode==="client"?"createTask":"workerHome"}')">${state.mode==="client"?"＋":"☷"}<br>${state.mode==="client"?"Publicar":"Tareas"}</button>
+<button onclick="openMessagesHome()">💬<br>Mensajes</button>
+<button onclick="go('profile')">●<br>Perfil</button>
+</nav>`}
+function clearPoll(){if(poller){clearInterval(poller);poller=null}}
+function setMsg(type,msg){state.error=type==="error"?msg:"";state.notice=type==="ok"?msg:"";render()}
+function go(r){clearPoll();state.route=r;state.error="";state.notice="";render();window.scrollTo(0,0)}
+function mode(m){state.mode=m;localStorage.setItem("dohoy_mode",m);go(m==="client"?"clientHome":"workerHome")}
+function authMsg(){return `${state.error?`<div class="error">${state.error}</div>`:""}${state.notice?`<div class="ok">${state.notice}</div>`:""}`}
 
 function welcome(){
-  return shell(`<section class="hero">
-    <div>${logo()}<div class="tagline">Lo necesitas. Alguien lo hace.</div></div>
-    <div class="hero-copy"><div class="kicker">DOHOY 0.1</div><h1>Más tiempo para lo que <span>realmente importa.</span></h1><p>Publica una tarea o encuentra una cerca de ti. Esta versión es una demo funcional para probar el flujo.</p></div>
-    <div class="stack"><button class="btn light" onclick="localStorage.setItem('dohoy_seen','1');go('mode')">Crear cuenta</button><button class="btn outline" onclick="localStorage.setItem('dohoy_seen','1');go('mode')">Iniciar sesión</button></div>
-  </section>`);
+return shell(`<section class="hero">
+<div>${logo()}<div class="tag">Lo necesitas. Alguien lo hace.</div></div>
+<div><div class="kicker">DOHOY 0.2 BETA</div><h1>Dos personas ya pueden usar DOHOY de verdad.</h1><p style="color:#ffffffc9">Cuentas reales, tareas reales y ofertas conectadas a nuestra base de datos.</p></div>
+<div><button class="btn light" onclick="go('signup')">Crear cuenta</button><button class="btn outline" onclick="go('login')">Iniciar sesión</button></div>
+</section>`)
 }
-
-function mode(){
-  return shell(`<section class="screen">
-    <div class="topbar"><button class="icon-btn" onclick="go('welcome')">←</button>${logo(true)}<span></span></div>
-    <div class="kicker">Elige cómo entrar</div><h1 class="title">¿Cómo quieres usar DOHOY?</h1><p class="sub">Puedes cambiar de modo cuando quieras.</p>
-    <div class="mode-grid">
-      <button class="mode-card help" onclick="setMode('client')"><h3>Necesito ayuda →</h3><p>Publica tareas y recibe propuestas de personas cercanas.</p><span class="emoji">🙋🏻</span></button>
-      <button class="mode-card work" onclick="setMode('worker')"><h3>Quiero trabajar →</h3><p>Encuentra tareas cerca de ti y genera ingresos.</p><span class="emoji">🧢</span></button>
-    </div>
-  </section>`);
+function signup(){
+return shell(`<section class="screen">
+<div class="top"><button class="icon" onclick="go('welcome')">←</button>${logo(true)}<span></span></div>
+<div class="kicker">Crear cuenta</div><h1>Bienvenido a DOHOY</h1><p class="sub">Usaremos tu correo para iniciar sesión.</p>${authMsg()}
+<form id="signupForm">
+<div class="field"><label>Nombre</label><input class="input" name="name" required autocomplete="name"></div>
+<div class="field"><label>Correo</label><input class="input" name="email" type="email" required autocomplete="email"></div>
+<div class="field"><label>Contraseña</label><input class="input" name="password" type="password" minlength="8" required autocomplete="new-password"></div>
+<button class="btn primary">Crear mi cuenta</button></form>
+<p class="small center">Al registrarte recibirás un correo de confirmación durante esta beta.</p>
+</section>`)
 }
-
-function clientHome(){
-  const mine=ownTasks()[0];
-  return shell(`<section class="screen">
-    <div class="topbar"><div>${logo(true)}<div style="font-size:11px;color:var(--muted);margin-top:4px">📍 Torreón, Coahuila</div></div><button class="icon-btn" onclick="go('mode')">⇄</button></div>
-    <button class="search" style="width:100%;text-align:left" onclick="go('createTask')"><span>⌕</span><span style="color:#8b8490">¿Qué necesitas hoy?</span></button>
-    <div class="section-head"><h3>Categorías</h3><button class="link" onclick="go('createTask')">Ver todas</button></div>
-    <div class="categories">
-      ${[['🛒','Mandados'],['📦','Paquetería'],['🏠','Hogar'],['🚗','Vehículo'],['🐾','Mascotas'],['📄','Trámites']].map(c=>`<button class="cat" onclick="go('createTask')"><span class="ico">${c[0]}</span><span>${c[1]}</span></button>`).join('')}
-    </div>
-    <div class="section-head"><h3>${mine?'Tu publicación reciente':'¿Probamos una tarea?'}</h3></div>
-    ${mine?taskCard(mine,true):`<div class="card"><b>Ejemplo</b><p class="sub" style="margin:7px 0 13px">“Necesito que lleven mi carro a lavar y me lo regresen.”</p><button class="btn primary" onclick="go('createTask')">Publicar una tarea</button></div>`}
-  </section>`, true);
+function login(){
+return shell(`<section class="screen">
+<div class="top"><button class="icon" onclick="go('welcome')">←</button>${logo(true)}<span></span></div>
+<div class="kicker">Iniciar sesión</div><h1>Qué bueno verte.</h1>${authMsg()}
+<form id="loginForm">
+<div class="field"><label>Correo</label><input class="input" name="email" type="email" required autocomplete="email"></div>
+<div class="field"><label>Contraseña</label><input class="input" name="password" type="password" required autocomplete="current-password"></div>
+<button class="btn primary">Entrar</button></form>
+</section>`)
 }
-
+function chooseMode(){
+return shell(`<section class="screen"><div class="top">${logo(true)}<button class="icon" onclick="signOut()">↪</button></div>
+<div class="kicker">Elige un modo</div><h1>¿Qué quieres hacer hoy?</h1><p class="sub">La misma cuenta puede contratar y también trabajar.</p>
+<div class="cards">
+<button class="card mode" onclick="mode('client')"><div class="emoji">🙋🏻</div><h3>Necesito ayuda</h3><p>Publica una tarea y recibe ofertas.</p></button>
+<button class="card mode" onclick="mode('worker')"><div class="emoji">💼</div><h3>Quiero trabajar</h3><p>Encuentra tareas abiertas y haz una oferta.</p></button>
+</div></section>`)
+}
+function taskCard(t,client=false){
+return `<button class="card task" onclick="openTask('${t.id}')">
+<div class="thumb">${icons[t.category]||"✨"}</div><div><h3>${escapeHtml(t.title)}</h3><div class="meta">📍 ${escapeHtml(t.location_label||"Sin ubicación")} · ${statusText(t.status)}</div></div><div class="price">${money(t.offered_price)}</div>
+</button>`
+}
+function statusText(s){return ({open:"Abierta",assigned:"Asignada",in_progress:"En curso",completed:"Terminada",cancelled:"Cancelada"})[s]||s}
+async function clientHome(){
+await loadMyTasks();
+root.innerHTML=shell(`<section class="screen"><div class="top"><div>${logo(true)}<div class="small">${escapeHtml(state.profile?.full_name||state.user?.email||"Usuario")}</div></div><button class="icon" onclick="go('mode')">⇄</button></div>
+<div class="kicker">Modo cliente</div><h1>¿Qué necesitas hoy?</h1>
+<button class="btn orange" onclick="go('createTask')">＋ Publicar una tarea</button>
+<div class="section"><h2>Mis tareas</h2><button class="pill" onclick="loadMyTasks().then(render)">Actualizar</button></div>
+<div class="cards">${state.tasks.length?state.tasks.map(t=>taskCard(t,true)).join(""):`<div class="empty">Todavía no has publicado ninguna tarea.</div>`}</div>
+</section>`,true)
+}
+async function workerHome(){
+await loadOpenTasks();
+root.innerHTML=shell(`<section class="screen"><div class="top"><div>${logo(true)}<div class="small">Trabajos disponibles</div></div><button class="icon" onclick="go('mode')">⇄</button></div>
+<div class="kicker">Modo trabajador</div><h1>Tareas abiertas</h1><p class="sub">Estas publicaciones vienen de usuarios reales.</p>
+<div class="cards">${state.tasks.length?state.tasks.map(t=>taskCard(t)).join(""):`<div class="empty">No hay tareas abiertas por ahora.</div>`}</div>
+</section>`,true)
+}
 function createTask(){
-  return shell(`<section class="screen">
-    <div class="topbar"><button class="icon-btn" onclick="go('clientHome')">←</button><b>Publica tu tarea</b><span></span></div>
-    <div class="kicker">Paso 1</div><h1 class="title">Cuéntanos qué necesitas.</h1>
-    <form id="taskForm">
-      <div class="field"><label>Título</label><input class="input" name="title" required value="Llevar vehículo al autolavado" /></div>
-      <div class="field"><label>Descripción</label><textarea name="desc" required>Necesito que lleven mi carro al autolavado y me lo regresen. Entrego llaves y tarjeta de circulación.</textarea></div>
-      <div class="field"><label>Categoría</label><select name="category"><option>Vehículo</option><option>Mandados</option><option>Paquetería</option><option>Hogar</option><option>Mascotas</option><option>Trámites</option><option>Otro</option></select></div>
-      <div class="field"><label>Ubicación</label><input class="input" name="location" value="Torreón, Coahuila" /></div>
-      <div class="row"><div class="field"><label>Cuándo</label><select name="time"><option>Hoy</option><option>Mañana</option><option>Programar</option></select></div><div class="field"><label>Pago ofrecido</label><input class="input" name="price" type="number" min="50" value="180" /></div></div>
-      <div class="switch-row"><div><b>Requiere licencia</b><div style="font-size:12px;color:var(--muted)">Para manejar un vehículo</div></div><button type="button" id="licSwitch" class="switch ${state.license?'on':''}" onclick="state.license=!state.license;this.classList.toggle('on')"></button></div>
-      <button class="btn primary" type="submit">Publicar tarea</button>
-    </form>
-  </section>`, true);
+root.innerHTML=shell(`<section class="screen"><div class="top"><button class="icon" onclick="go('clientHome')">←</button><b>Nueva tarea</b><span></span></div>
+<div class="kicker">Publicar</div><h1>Cuéntanos qué necesitas.</h1>${authMsg()}
+<form id="taskForm">
+<div class="field"><label>Título</label><input class="input" name="title" required placeholder="Ej. Llevar mi carro al autolavado"></div>
+<div class="field"><label>Descripción</label><textarea name="description" required placeholder="Explica exactamente qué debe hacer la persona"></textarea></div>
+<div class="field"><label>Categoría</label><select name="category">${Object.keys(icons).map(x=>`<option>${x}</option>`).join("")}</select></div>
+<div class="field"><label>Ubicación general</label><input class="input" name="location" required placeholder="Ej. Torreón, Coahuila"></div>
+<div class="field"><label>Pago ofrecido</label><input class="input" name="price" type="number" min="1" step="1" required></div>
+<label class="card" style="display:flex;gap:10px;align-items:center"><input name="license" type="checkbox"> Requiere licencia de conducir</label>
+<button class="btn primary">Publicar tarea</button></form>
+</section>`,true)
 }
-
-function taskCard(t, client=false){
-  return `<button class="card task" style="width:100%;text-align:left;border:1px solid var(--line)" onclick="state.selectedTask=${JSON.stringify(t).replace(/"/g,'&quot;')};go('${client?'interested':'taskDetail'}')">
-    <div class="task-thumb">${t.icon||'✨'}</div><div><h4>${t.title}</h4><div class="meta"><span>📍 ${t.distance||'Publicado ahora'}</span><span>· ${t.time||'Hoy'}</span></div>${t.license?'<span class="badge">🚘 Licencia requerida</span>':''}</div><div class="price">${money(t.price)}</div>
-  </button>`;
+async function taskDetail(){
+const t=state.selectedTask;if(!t)return go(state.mode==="client"?"clientHome":"workerHome");
+const isOwner=t.client_id===state.user.id;
+if(isOwner) await loadOffers(t.id);
+else await loadMyOffer(t.id);
+let body="";
+if(isOwner){
+body=`<h2>Ofertas recibidas</h2><div class="cards">${state.offers.length?state.offers.map(o=>{
+const p=o.profiles||{};return `<div class="card"><div class="offer"><div class="avatar">👤</div><div><b>${escapeHtml(p.full_name||"Trabajador")}</b><div class="stars">★ ${p.rating??5}</div><div class="small">${escapeHtml(o.message||"Sin mensaje")}</div></div><div class="price">${money(o.amount)}</div></div>
+${t.status==="open"?`<button class="btn primary" onclick="acceptOffer('${o.id}','${o.worker_id}')">Elegir trabajador</button>`:`<div class="pill">${o.status}</div>`}</div>`}).join(""):`<div class="empty">Aún no hay ofertas.</div>`}</div>`;
+}else{
+const my=state.offers[0];
+body=t.status==="open"?`<h2>Haz una oferta</h2>${my?`<div class="ok">Ya ofreciste ${money(my.amount)}. Estado: ${my.status}.</div>`:`<form id="offerForm"><div class="field"><label>Tu precio</label><input class="input" name="amount" type="number" min="1" value="${Number(t.offered_price)}" required></div><div class="field"><label>Mensaje</label><textarea name="message" placeholder="Ej. Puedo hacerlo hoy por la tarde"></textarea></div><button class="btn primary">Enviar oferta</button></form>`}`:
+t.worker_id===state.user.id?`<div class="ok">Esta tarea está asignada a ti.</div>${taskProgressButtons(t)}`:`<div class="sub">Esta tarea ya no está disponible.</div>`;
 }
-
-function interested(){
-  const t=state.selectedTask || ownTasks()[0] || seedTasks[0];
-  return shell(`<section class="screen">
-    <div class="topbar"><button class="icon-btn" onclick="go('clientHome')">←</button><b>Personas interesadas</b><span></span></div>
-    <p class="sub">3 personas quieren realizar: <b>${t.title}</b></p>
-    <div class="task-list">${workers.map((w,i)=>`<div class="card"><div class="worker-card"><div class="avatar">${w.avatar}</div><div><b>${w.name}</b><div class="rating">★ ${w.score} <span style="color:var(--muted);font-weight:500">(${w.jobs})</span></div><div class="meta">📍 A ${w.eta} de ti</div></div><div style="font-weight:900;font-size:20px">${money(w.offer)}</div></div><div class="actions"><button class="btn primary" onclick="state.selectedWorker=workers[${i}];go('chat')">Seleccionar</button><button class="btn ghost" onclick="toast('Perfil verificado · demo')">Ver perfil</button></div></div>`).join('')}</div>
-  </section>`, true);
+root.innerHTML=shell(`<section class="screen"><div class="top"><button class="icon" onclick="go('${isOwner?"clientHome":"workerHome"}')">←</button><span class="pill">${escapeHtml(t.category)}</span><span></span></div>
+<div class="center" style="font-size:70px">${icons[t.category]||"✨"}</div><div class="price">${money(t.offered_price)}</div><h1>${escapeHtml(t.title)}</h1>
+<p>${escapeHtml(t.description)}</p><p class="sub">📍 ${escapeHtml(t.location_label||"")}</p>
+<div class="status"><div class="active">Estado: ${statusText(t.status)}</div></div>
+${(t.client_id===state.user.id||t.worker_id===state.user.id)&&t.worker_id?`<button class="btn ghost" onclick="openChat('${t.id}')">💬 Abrir chat</button>`:""}
+${body}</section>`,true)
 }
-
-function workerHome(){
-  return shell(`<section class="screen">
-    <div class="topbar"><div>${logo(true)}<div style="font-size:11px;color:var(--muted);margin-top:4px">📍 Torreón, Coahuila</div></div><button class="icon-btn" onclick="go('mode')">⇄</button></div>
-    <div class="kicker">Modo trabajador</div><h1 class="title">Trabajos cerca de ti</h1><div style="display:flex;gap:8px;margin:12px 0 18px"><span class="pill">Todos</span><span class="pill">Cercanos</span><span class="pill">Mejor pagados</span></div>
-    <div class="task-list">${allTasks().map(t=>taskCard(t,false)).join('')}</div>
-  </section>`, true);
+function taskProgressButtons(t){
+if(t.status==="assigned")return `<button class="btn orange" onclick="setTaskStatus('${t.id}','in_progress')">Comenzar tarea</button>`;
+if(t.status==="in_progress")return `<button class="btn orange" onclick="setTaskStatus('${t.id}','completed')">Marcar como completada</button>`;
+return `<div class="ok">Trabajo ${statusText(t.status).toLowerCase()}.</div>`
 }
-
-function taskDetail(){
-  const t=state.selectedTask || seedTasks[0];
-  return shell(`<section class="screen">
-    <div class="topbar"><button class="icon-btn" onclick="go('workerHome')">←</button><span class="pill">${t.category}</span><button class="icon-btn">♡</button></div>
-    <div style="height:170px;border-radius:24px;background:linear-gradient(135deg,#ece5f2,#ffd9c1);display:grid;place-items:center;font-size:78px;margin-bottom:18px">${t.icon||'✨'}</div>
-    <div class="price" style="font-size:28px">${money(t.price)}</div><h1 class="title" style="font-size:26px">${t.title}</h1>
-    <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px"><span class="badge">📍 ${t.distance||'Cerca de ti'}</span><span class="badge">🕒 ${t.time||'Hoy'}</span>${t.license?'<span class="badge">🚘 Licencia requerida</span>':''}</div>
-    <h3>Descripción</h3><p class="sub">${t.desc}</p><h3>Ubicación</h3><p class="sub">${t.location}</p><hr class="sep"/>
-    <button class="btn primary" onclick="state.progress=0;go('progress')">Lo hago por ${money(t.price)}</button><button class="btn ghost" style="margin-top:10px" onclick="toast('Oferta enviada: '+money(t.price+20))">Ofrecer otro precio</button>
-  </section>`, true);
+async function profile(){
+await loadProfile();
+root.innerHTML=shell(`<section class="screen"><div class="top">${logo(true)}<button class="icon" onclick="signOut()">↪</button></div>
+<div class="center"><div class="avatar" style="margin:auto;width:82px;height:82px;font-size:36px">🧑🏻</div><h1>${escapeHtml(state.profile?.full_name||"Usuario DOHOY")}</h1><p class="sub">${escapeHtml(state.user.email||"")}</p></div>${authMsg()}
+<form id="profileForm"><div class="field"><label>Nombre</label><input class="input" name="name" value="${escapeAttr(state.profile?.full_name||"")}"></div><div class="field"><label>Bio</label><textarea name="bio">${escapeHtml(state.profile?.bio||"")}</textarea></div><button class="btn primary">Guardar perfil</button></form>
+<div class="card" style="margin-top:15px">⭐ ${state.profile?.rating??5} · ${state.profile?.completed_tasks??0} tareas completadas<br><br>${state.profile?.identity_verified?"✅":"○"} Identidad verificada<br>${state.profile?.driver_license_verified?"✅":"○"} Licencia verificada</div>
+<button class="btn ghost" onclick="go('mode')">Cambiar modo</button></section>`,true)
 }
-
-function chat(){
-  const w=state.selectedWorker||workers[0];
-  return shell(`<section class="screen">
-    <div class="topbar"><button class="icon-btn" onclick="go(state.mode==='client'?'interested':'workerHome')">←</button><div style="text-align:center"><b>${w.name}</b><div style="font-size:11px;color:var(--green)">● En línea</div></div><button class="icon-btn">☎</button></div>
-    <div class="chat" id="chat">${state.chat.map(m=>`<div class="bubble ${m.side}">${m.text}</div>`).join('')}</div>
-    <div style="height:90px"></div>
-    <div class="chatbox"><input id="chatInput" placeholder="Escribe un mensaje…"/><button onclick="sendChat()">➤</button></div>
-  </section>`, true);
+async function openMessagesHome(){
+const {data,error}=await sb.from("tasks").select("*").or(`client_id.eq.${state.user.id},worker_id.eq.${state.user.id}`).not("worker_id","is",null).order("updated_at",{ascending:false});
+if(error)return setMsg("error",error.message);
+if(!data.length){state.notice="Aún no tienes tareas con chat disponible.";return go(state.mode==="client"?"clientHome":"workerHome")}
+state.selectedTask=data[0];openChat(data[0].id)
 }
-function sendChat(){ const inp=$('#chatInput'); if(!inp||!inp.value.trim())return; state.chat.push({side:'out',text:inp.value.trim()}); render(); setTimeout(()=>{state.chat.push({side:'in',text:'Perfecto, recibido 👍'});render();},650); }
-
-function progress(){
-  const labels=['Trabajador asignado','En camino','Realizando tarea','Trabajo completado'];
-  return shell(`<section class="screen">
-    <div class="topbar"><button class="icon-btn" onclick="go(state.mode==='worker'?'taskDetail':'chat')">←</button><b>Tarea en curso</b><span></span></div>
-    <div class="timeline">${labels.map((l,i)=>`<div class="step ${i<state.progress?'done':i===state.progress?'current':''}"><div class="dot">${i<state.progress?'✓':i+1}</div><div><h4>${l}</h4><p>${i<state.progress?'Completado':i===state.progress?'Estado actual':'Pendiente'}</p></div></div>`).join('')}</div>
-    ${state.progress<3?`<button class="btn primary" onclick="state.progress++;render()">${state.progress===0?'Marcar en camino':state.progress===1?'Iniciar tarea':'Marcar como completada'}</button>`:`<button class="btn orange" onclick="go('rating')">Confirmar finalización</button>`}
-    <button class="btn ghost" style="margin-top:10px" onclick="go('chat')">Abrir chat</button>
-  </section>`, true);
+async function openChat(id){
+clearPoll();const {data:t,error}=await sb.from("tasks").select("*").eq("id",id).single();if(error)return setMsg("error",error.message);
+state.selectedTask=t;await loadMessages(id);state.route="chat";render();poller=setInterval(()=>loadMessages(id).then(()=>{if(state.route==="chat")render()}),3000)
 }
-
-function rating(){
-  return shell(`<section class="screen">
-    <div style="text-align:center;padding-top:55px"><div style="width:86px;height:86px;border-radius:50%;background:#efe6f5;display:grid;place-items:center;margin:0 auto 20px;font-size:46px;color:var(--purple)">✓</div><div class="kicker">DOHOY</div><h1 class="title">¡Trabajo completado!</h1><p class="sub">Califica tu experiencia. En la versión real aquí también se liberará el pago.</p></div>
-    <div class="stars">${[1,2,3,4,5].map(n=>`<button class="star ${n<=state.rating?'on':''}" onclick="state.rating=${n};render()">⭐</button>`).join('')}</div>
-    <div class="field"><label>Comentario</label><textarea placeholder="¿Cómo fue el servicio?">Excelente servicio, muy puntual y todo perfecto.</textarea></div>
-    <button class="btn primary" onclick="toast('Calificación guardada');setTimeout(()=>go(state.mode==='client'?'clientHome':'workerHome'),700)">Guardar calificación</button>
-  </section>`, true);
+function chatScreen(){
+const t=state.selectedTask;
+return shell(`<section class="screen"><div class="top"><button class="icon" onclick="go('taskDetail')">←</button><div><b>Chat de la tarea</b><div class="small">${escapeHtml(t.title)}</div></div><span></span></div>
+<div class="chat">${state.messages.length?state.messages.map(m=>`<div class="bubble ${m.sender_id===state.user.id?"me":"other"}">${escapeHtml(m.body)}</div>`).join(""):`<div class="empty">Escribe el primer mensaje.</div>`}</div><div style="height:90px"></div>
+<div class="chatbar"><input id="chatInput" placeholder="Escribe un mensaje…"><button onclick="sendMessage()">➤</button></div></section>`,true)
 }
-
-function profile(){
-  return shell(`<section class="screen">
-    <div class="topbar">${logo(true)}<button class="icon-btn" onclick="resetDemo()">⚙</button></div>
-    <div style="text-align:center;margin:20px 0"><div class="avatar" style="width:92px;height:92px;font-size:42px;margin:0 auto 10px">🧑🏻</div><h2 style="margin:0">Usuario DOHOY</h2><div class="rating">★ 5.0 <span style="color:var(--muted);font-weight:500">(demo)</span></div></div>
-    <div class="card"><div class="stack"><div>✅ Identidad verificada <span style="color:var(--muted);font-size:12px">(simulada)</span></div><div>✅ Teléfono verificado <span style="color:var(--muted);font-size:12px">(simulado)</span></div><div>🚘 Licencia de conducir <span style="color:var(--muted);font-size:12px">(pendiente)</span></div></div></div>
-    <div class="stack" style="margin-top:14px"><button class="btn ghost" onclick="go('mode')">Cambiar modo</button><button class="btn ghost" onclick="resetDemo()">Reiniciar demo</button></div>
-  </section>`, true);
-}
-
-function resetDemo(){ localStorage.removeItem('dohoy_tasks'); localStorage.removeItem('dohoy_mode'); state.mode='client'; state.progress=0; state.chat=state.chat.slice(0,2); toast('Demo reiniciada'); setTimeout(()=>go('mode'),500); }
-
 function render(){
-  const routes={welcome,mode,clientHome,createTask,interested,workerHome,taskDetail,chat,progress,rating,profile};
-  app.innerHTML=(routes[state.route]||welcome)();
-  const form=$('#taskForm');
-  if(form){ form.addEventListener('submit', e=>{
-    e.preventDefault(); const d=new FormData(form); const cat=d.get('category');
-    const icons={Vehículo:'🚗',Mandados:'🛒',Paquetería:'📦',Hogar:'🏠',Mascotas:'🐾',Trámites:'📄',Otro:'✨'};
-    const task={id:'t'+Date.now(),title:d.get('title'),desc:d.get('desc'),category:cat,icon:icons[cat]||'✨',location:d.get('location'),price:Number(d.get('price')),time:d.get('time'),license:state.license,distance:'Publicado ahora',owner:'Tú'};
-    const arr=ownTasks(); arr.unshift(task); saveTasks(arr); state.selectedTask=task; toast('¡Tarea publicada!'); setTimeout(()=>go('interested'),450);
-  }); }
+if(state.route==="loading"){root.innerHTML=shell(`<section class="screen spinner">Cargando DOHOY…</section>`);return}
+if(!state.session&&!["welcome","signup","login"].includes(state.route)){state.route="welcome"}
+const sync={welcome,signup,login,mode:chooseMode,createTask,taskDetail,chat:chatScreen,profile};
+if(state.route==="clientHome"){clientHome();return}
+if(state.route==="workerHome"){workerHome();return}
+const fn=sync[state.route]||welcome;root.innerHTML=fn()
+bindForms()
 }
-
-window.go=go; window.setMode=setMode; window.sendChat=sendChat; window.resetDemo=resetDemo; window.state=state; window.workers=workers;
-render();
-
-</script>
-</body>
-</html>
+function bindForms(){
+const s=document.getElementById("signupForm");if(s)s.onsubmit=signUp;
+const l=document.getElementById("loginForm");if(l)l.onsubmit=signIn;
+const t=document.getElementById("taskForm");if(t)t.onsubmit=publishTask;
+const o=document.getElementById("offerForm");if(o)o.onsubmit=sendOffer;
+const p=document.getElementById("profileForm");if(p)p.onsubmit=saveProfile;
+}
+async function signUp(e){
+e.preventDefault();const f=new FormData(e.target);
+const {data,error}=await sb.auth.signUp({email:f.get("email"),password:f.get("password"),options:{data:{full_name:f.get("name")},emailRedirectTo:REDIRECT_URL}});
+if(error)return setMsg("error",error.message);
+if(data.session){state.session=data.session;state.user=data.user;await loadProfile();go("mode")}
+else{state.notice="Cuenta creada. Revisa tu correo y confirma tu cuenta; después vuelve a DOHOY e inicia sesión.";state.error="";render()}
+}
+async function signIn(e){
+e.preventDefault();const f=new FormData(e.target);const {data,error}=await sb.auth.signInWithPassword({email:f.get("email"),password:f.get("password")});
+if(error)return setMsg("error",error.message);state.session=data.session;state.user=data.user;await loadProfile();go("mode")
+}
+async function signOut(){await sb.auth.signOut();state.session=null;state.user=null;state.profile=null;state.tasks=[];go("welcome")}
+async function loadProfile(){
+if(!state.user)return;const {data,error}=await sb.from("profiles").select("id,full_name,avatar_url,bio,rating,completed_tasks,identity_verified,phone_verified,driver_license_verified,created_at").eq("id",state.user.id).single();
+if(!error)state.profile=data
+}
+async function saveProfile(e){
+e.preventDefault();const f=new FormData(e.target);const {error}=await sb.from("profiles").update({full_name:f.get("name"),bio:f.get("bio")}).eq("id",state.user.id);
+if(error)return setMsg("error",error.message);await loadProfile();state.notice="Perfil guardado.";render()
+}
+async function publishTask(e){
+e.preventDefault();const f=new FormData(e.target);const payload={client_id:state.user.id,title:f.get("title"),description:f.get("description"),category:f.get("category"),location_label:f.get("location"),offered_price:Number(f.get("price")),requires_driver_license:f.get("license")==="on"};
+const {data,error}=await sb.from("tasks").insert(payload).select().single();if(error)return setMsg("error",error.message);state.selectedTask=data;go("taskDetail")
+}
+async function loadMyTasks(){const {data,error}=await sb.from("tasks").select("*").eq("client_id",state.user.id).order("created_at",{ascending:false});state.tasks=error?[]:data}
+async function loadOpenTasks(){const {data,error}=await sb.from("tasks").select("*").eq("status","open").neq("client_id",state.user.id).order("created_at",{ascending:false});state.tasks=error?[]:data}
+async function openTask(id){
+const {data,error}=await sb.from("tasks").select("*").eq("id",id).single();if(error)return setMsg("error",error.message);state.selectedTask=data;go("taskDetail")
+}
+async function loadOffers(taskId){
+const {data,error}=await sb.from("task_offers").select("id,task_id,worker_id,amount,message,status,created_at,profiles!task_offers_worker_id_fkey(full_name,rating,completed_tasks,identity_verified,driver_license_verified)").eq("task_id",taskId).order("created_at",{ascending:true});
+state.offers=error?[]:data
+}
+async function loadMyOffer(taskId){
+const {data,error}=await sb.from("task_offers").select("*").eq("task_id",taskId).eq("worker_id",state.user.id).limit(1);state.offers=error?[]:data
+}
+async function sendOffer(e){
+e.preventDefault();const f=new FormData(e.target);const {error}=await sb.from("task_offers").insert({task_id:state.selectedTask.id,worker_id:state.user.id,amount:Number(f.get("amount")),message:f.get("message")});
+if(error)return setMsg("error",error.message);await loadMyOffer(state.selectedTask.id);state.notice="Oferta enviada.";render()
+}
+async function acceptOffer(offerId,workerId){
+const tid=state.selectedTask.id;
+let r=await sb.from("task_offers").update({status:"accepted"}).eq("id",offerId);if(r.error)return setMsg("error",r.error.message);
+await sb.from("task_offers").update({status:"rejected"}).eq("task_id",tid).neq("id",offerId);
+r=await sb.from("tasks").update({worker_id:workerId,status:"assigned"}).eq("id",tid).eq("client_id",state.user.id).select().single();
+if(r.error)return setMsg("error",r.error.message);state.selectedTask=r.data;state.notice="Trabajador seleccionado.";await loadOffers(tid);render()
+}
+async function setTaskStatus(id,status){
+const {data,error}=await sb.from("tasks").update({status}).eq("id",id).select().single();if(error)return setMsg("error",error.message);state.selectedTask=data;render()
+}
+async function loadMessages(taskId){
+const {data,error}=await sb.from("messages").select("*").eq("task_id",taskId).order("created_at",{ascending:true});if(!error)state.messages=data
+}
+async function sendMessage(){
+const inp=document.getElementById("chatInput");const body=inp?.value.trim();if(!body)return;
+const {error}=await sb.from("messages").insert({task_id:state.selectedTask.id,sender_id:state.user.id,body});if(error)return setMsg("error",error.message);inp.value="";await loadMessages(state.selectedTask.id);render()
+}
+function escapeHtml(v){return String(v??"").replace(/[&<>"']/g,s=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[s]))}
+function escapeAttr(v){return escapeHtml(v).replace(/`/g,"&#96;")}
+async function init(){
+const {data}=await sb.auth.getSession();state.session=data.session;state.user=data.session?.user||null;if(state.user)await loadProfile();
+state.route=state.session?"mode":"welcome";render();
+sb.auth.onAuthStateChange(async(_event,session)=>{state.session=session;state.user=session?.user||null;if(state.user)await loadProfile();if(!session&&!["welcome","signup","login"].includes(state.route))go("welcome")})
+}
+window.go=go;window.mode=mode;window.signOut=signOut;window.openTask=openTask;window.acceptOffer=acceptOffer;window.setTaskStatus=setTaskStatus;window.openChat=openChat;window.openMessagesHome=openMessagesHome;window.sendMessage=sendMessage;
+init();
+</script></body></html>
