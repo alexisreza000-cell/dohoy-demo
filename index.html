@@ -173,6 +173,8 @@ html,body{background:#E9EFF7}
 .help-faq summary{font-weight:800;color:#101828;cursor:pointer}
 .help-faq p{color:#667085;line-height:1.5}
 
+
+.jobs-screen{background:#fbfaf7;padding:20px 16px 112px;min-height:100vh}.jobs-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:18px}.jobs-head h1{margin:2px 0 5px;font-size:30px;color:#0b1936}.jobs-head p{margin:0;color:#748196;font-size:14px;max-width:280px;line-height:1.4}.jobs-summary{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px}.jobs-summary>div{background:#fff;border:1px solid #e8edf4;border-radius:20px;padding:16px;box-shadow:0 8px 22px rgba(7,27,59,.05)}.jobs-summary b{display:block;font-size:28px;color:#0b3d91}.jobs-summary span{font-size:12px;color:#7b8796;font-weight:800}.jobs-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;background:#edf2f8;border-radius:17px;padding:5px;margin-bottom:16px}.jobs-tab{border:0;background:transparent;border-radius:13px;padding:12px 8px;font-size:13px;font-weight:900;color:#748196}.jobs-tab.active{background:#fff;color:#0b3d91;box-shadow:0 4px 12px rgba(7,27,59,.08)}.worker-jobs-list{display:grid;gap:11px}.worker-job-card{width:100%;display:grid;grid-template-columns:58px 1fr 26px;gap:12px;align-items:center;text-align:left;border:1px solid #e8edf4;background:#fff;border-radius:20px;padding:12px;box-shadow:0 8px 22px rgba(7,27,59,.05)}.worker-job-icon{width:58px;height:58px;border-radius:16px;display:grid;place-items:center;background:#edf4ff;color:#0b3d91}.worker-job-icon .svg-icon{width:31px;height:31px}.worker-job-copy{min-width:0}.worker-job-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}.worker-job-top h3{margin:0;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px}.job-status{font-size:10px;font-weight:900;padding:5px 7px;border-radius:999px;white-space:nowrap}.job-status.pending{background:#fff2df;color:#b85f00}.job-status.done{background:#e9f8ef;color:#15844f}.worker-job-meta{margin:4px 0;color:#7f8998;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.worker-job-meta .location-line{font-size:11px}.worker-job-bottom{display:flex;align-items:center;gap:9px}.worker-job-bottom span{font-weight:950;color:#0a9a61}.worker-job-bottom small{color:#7f8998}.worker-job-arrow{font-size:25px;color:#8b95a4}.jobs-empty{background:#fff;border:1px solid #e8edf4;border-radius:22px;padding:34px 22px;text-align:center;color:#7b8796}.jobs-empty .svg-icon{width:38px;height:38px;margin:0 auto 10px;color:#9bacbd}.jobs-empty h3{color:#0b1936;margin:0 0 7px}.jobs-empty p{margin:0;font-size:13px;line-height:1.45}
 </style>
 </head>
 <body><div id="root"></div>
@@ -186,7 +188,7 @@ const root=document.getElementById("root");
 let state={
   route:"loading", mode:localStorage.getItem("dohoy_mode")||"client",
   session:null,user:null,profile:null,tasks:[],selectedTask:null,offers:[],messages:[],conversations:[],chatBack:"taskDetail",chatDraft:"",notice:"",error:"",
-  workerLocation:null, workerLocationError:"", workerAddress:"", workerCategory:""
+  workerLocation:null, workerLocationError:"", workerAddress:"", workerCategory:"", workerTaskTab:"pending", taskBackRoute:""
 };
 let poller=null;
 let deliveryPoller=null;
@@ -338,7 +340,7 @@ function logo(sm=false){return `<div class="brand-lockup ${sm?"sm":""}">${brandS
 function avatarMarkup(profile,extra=""){const url=profile?.avatar_display_url||(/^https?:/i.test(profile?.avatar_url||"")?profile.avatar_url:"");return `<div class="avatar ${extra}">${url?`<img src="${escapeAttr(url)}" alt="Foto de ${escapeAttr(profile?.full_name||"usuario")}" referrerpolicy="no-referrer">`:`<div class="avatar-fallback">${iconSvg("user")}</div>`}</div>`}
 async function resolveAvatar(profile){if(!profile?.avatar_url)return profile;if(/^https?:/i.test(profile.avatar_url)){profile.avatar_display_url=profile.avatar_url;return profile}const {data,error}=await sb.storage.from("avatars").createSignedUrl(profile.avatar_url,3600);if(!error&&data?.signedUrl)profile.avatar_display_url=data.signedUrl;return profile}
 function shell(content,nav=false){return `<main class="app">${content}${nav?navBar():""}</main>`}
-function navBar(){const home=state.mode==="client"?"clientHome":"workerHome";const second=state.mode==="client"?"createTask":"workerHome";return `<nav class="nav">
+function navBar(){const home=state.mode==="client"?"clientHome":"workerHome";const second=state.mode==="client"?"createTask":"workerJobs";return `<nav class="nav">
 <button class="${state.route===home?"active":""}" onclick="go('${home}')"><b>${iconSvg("home")}</b><br>Inicio</button>
 <button class="${state.route===second?"active":""}" onclick="go('${second}')"><b>${iconSvg(state.mode==="client"?"plus":"tasks")}</b><br>${state.mode==="client"?"Publicar":"Tareas"}</button>
 <button class="${["messagesHome","chat"].includes(state.route)?"active":""}" onclick="openMessagesHome()"><b>${iconSvg("chat")}</b><br>Mensajes</button>
@@ -356,7 +358,7 @@ function authMsg(){return `${state.error?`<div class="error">${state.error}</div
 function welcome(){
 return shell(`<section class="hero">
 <div>${logo()}<div class="tag">Lo necesitas. Alguien lo hace.</div></div>
-<div class="hero-copy"><span class="hero-badge">BETA PRIVADA · DOHOY 1.0</span><h1>Resuelve lo de hoy, hoy.</h1><p>Publica una tarea, recibe ofertas y coordina todo desde un solo lugar.</p>
+<div class="hero-copy"><span class="hero-badge">BETA PRIVADA · DOHOY 1.0.1</span><h1>Resuelve lo de hoy, hoy.</h1><p>Publica una tarea, recibe ofertas y coordina todo desde un solo lugar.</p>
 <div class="hero-proof"><div class="proof"><b>${iconSvg("plus")}</b><span>Publica rápido</span></div><div class="proof"><b>${iconSvg("chat")}</b><span>Chat por tarea</span></div><div class="proof"><b>✓✓</b><span>Estados de lectura</span></div></div></div>
 <div><button class="btn light" onclick="go('signup')">Crear cuenta</button><button class="btn outline" onclick="go('login')">Ya tengo cuenta</button></div>
 </section>`)
@@ -426,6 +428,47 @@ ${state.workerLocationError?`<div class="geo-note" style="text-align:center;colo
 <div id="workerTaskList" class="worker-list">${state.tasks.length?sortTasksByDistance(state.tasks).map(workerTaskCard).join(""):`<div class="empty">No hay tareas abiertas por ahora.</div>`}</div>
 </section>`,true)
 }
+async function loadWorkerJobs(){
+ const {data,error}=await sb.from("tasks").select("*").eq("worker_id",state.user.id).order("updated_at",{ascending:false});
+ state.tasks=error?[]:(data||[]);
+}
+function workerJobCard(t){
+ const cls=t.status==="completed"?"done":"pending";
+ return `<button class="worker-job-card ${cls}" onclick="openTask('${t.id}')">
+   <div class="worker-job-icon">${taskIcon(t)}</div>
+   <div class="worker-job-copy"><div class="worker-job-top"><h3>${escapeHtml(t.title)}</h3><span class="job-status ${cls}">${t.status==="completed"?"Realizada":"Pendiente"}</span></div>
+   <div class="worker-job-meta">${locationMarkup(t.location_label||"Sin ubicación")}</div>
+   <div class="worker-job-bottom"><span>${money(t.offered_price)}</span><small>${statusText(t.status)}</small></div></div>
+   <span class="worker-job-arrow">›</span>
+ </button>`
+}
+function renderWorkerJobsTab(){
+ const pending=state.tasks.filter(t=>["assigned","in_progress"].includes(t.status));
+ const done=state.tasks.filter(t=>t.status==="completed");
+ const tab=state.workerTaskTab||"pending";
+ const list=tab==="completed"?done:pending;
+ const host=document.getElementById("workerJobsList");
+ if(host)host.innerHTML=list.length?list.map(workerJobCard).join(""):`<div class="jobs-empty">${iconSvg("tasks")}<h3>${tab==="completed"?"Aún no tienes tareas realizadas":"No tienes tareas pendientes"}</h3><p>${tab==="completed"?"Cuando completes un trabajo aparecerá aquí.":"Cuando acepten una de tus propuestas, la tarea aparecerá aquí."}</p></div>`;
+ const p=document.getElementById("pendingCount"),d=document.getElementById("doneCount");
+ if(p)p.textContent=pending.length;if(d)d.textContent=done.length;
+ document.querySelectorAll(".jobs-tab").forEach(x=>x.classList.toggle("active",x.dataset.tab===tab));
+}
+function setWorkerTaskTab(tab){state.workerTaskTab=tab;renderWorkerJobsTab()}
+async function workerJobs(){
+ await loadWorkerJobs();
+ const pending=state.tasks.filter(t=>["assigned","in_progress"].includes(t.status));
+ const done=state.tasks.filter(t=>t.status==="completed");
+ root.innerHTML=shell(`<section class="jobs-screen">
+   <div class="jobs-head"><div><div class="kicker">Modo trabajador</div><h1>Mis tareas</h1><p>Organiza los trabajos que tienes pendientes y los que ya terminaste.</p></div>${logo(true)}</div>
+   <div class="jobs-summary"><div><b id="pendingCount">${pending.length}</b><span>Pendientes</span></div><div><b id="doneCount">${done.length}</b><span>Realizadas</span></div></div>
+   <div class="jobs-tabs">
+     <button class="jobs-tab ${state.workerTaskTab!=="completed"?"active":""}" data-tab="pending" onclick="setWorkerTaskTab('pending')">Tareas pendientes</button>
+     <button class="jobs-tab ${state.workerTaskTab==="completed"?"active":""}" data-tab="completed" onclick="setWorkerTaskTab('completed')">Tareas realizadas</button>
+   </div>
+   <div id="workerJobsList" class="worker-jobs-list"></div>
+ </section>`,true);
+ renderWorkerJobsTab()
+}
 function selectPublishCategory(cat,btn){document.getElementById("taskCategoryHidden").value=cat;document.querySelectorAll(".publish-category").forEach(x=>x.classList.remove("selected"));if(btn)btn.classList.add("selected");toggleVehicleOptions(cat)}
 function createTask(){
 const defaultCat="Vehículo";
@@ -461,7 +504,7 @@ const my=state.offers[0];
 body=t.status==="open"?`<h2>Haz una oferta</h2>${my?`<div class="ok">Ya ofreciste ${money(my.amount)}. Estado: ${my.status}.</div>`:`<form id="offerForm"><div class="field"><label>Tu precio</label><input class="input" name="amount" type="number" min="1" value="${Number(t.offered_price)}" required></div><div class="field"><label>Mensaje</label><textarea name="message" placeholder="Ej. Puedo hacerlo hoy por la tarde"></textarea></div><button class="btn primary">Enviar oferta</button></form>`}`:
 t.worker_id===state.user.id?`<div class="ok">Esta tarea está asignada a ti.</div>${taskProgressButtons(t)}`:`<div class="sub">Esta tarea ya no está disponible.</div>`;
 }
-root.innerHTML=shell(`<section class="screen"><div class="top"><button class="icon" onclick="go('${isOwner?"clientHome":"workerHome"}')">←</button><span class="pill">${escapeHtml(baseCategory(t.category))}</span><span></span></div>
+root.innerHTML=shell(`<section class="screen"><div class="top"><button class="icon" onclick="go('${state.taskBackRoute|| (isOwner?"clientHome":"workerHome")}')">←</button><span class="pill">${escapeHtml(baseCategory(t.category))}</span><span></span></div>
 <div class="detail-hero"><div class="detail-icon">${taskIcon(t)}</div><div class="detail-price">${money(t.offered_price)}</div><h1>${escapeHtml(t.title)}</h1><p>${escapeHtml(t.description)}</p><span class="location-chip">${locationMarkup(t.location_label||"")}${!isOwner&&taskDistanceKm(t)!=null?` · ${distanceLabel(taskDistanceKm(t))} de ti`:""}</span></div>
 <div class="status"><div class="active">● ${statusText(t.status)}</div></div>
 ${(t.client_id===state.user.id||t.worker_id===state.user.id)&&t.worker_id?`<button class="btn ghost" onclick="openChat('${t.id}')">${iconSvg("chat")} Abrir chat</button>`:""}
@@ -481,7 +524,7 @@ async function profile(){
  <div class="account-profile-card"><div class="profile-photo-wrap">${avatarMarkup(state.profile)}</div><div class="account-profile-copy"><h2>${escapeHtml(first)}</h2><button onclick="go('editProfile')">Editar perfil <span>›</span></button></div></div>
  <div class="account-mode-card"><div class="mode-label">Tu modo actual</div><h3>${modeText}</h3><p>${state.mode==="client"?"Publica tareas y encuentra a alguien que te ayude.":"Encuentra solicitudes cercanas y gana realizando tareas."}</p></div>
  <div class="account-quick">
-   <button onclick="go('${state.mode==="client"?"clientHome":"workerHome"}')"><span class="qico">${iconSvg("tasks")}</span><span>${state.mode==="client"?"Mis tareas":"Trabajos"}</span></button>
+   <button onclick="go('${state.mode==="client"?"clientHome":"workerJobs"}')"><span class="qico">${iconSvg("tasks")}</span><span>${state.mode==="client"?"Mis tareas":"Trabajos"}</span></button>
    <button onclick="go('help')"><span class="qico">${iconSvg("help")}</span><span>Ayuda</span></button>
    <button onclick="go('payments')"><span class="qico">${iconSvg("payment")}</span><span>Métodos de pago</span></button>
  </div>
@@ -713,6 +756,7 @@ if(state.route==="loading"){root.innerHTML=shell(`<section class="screen spinner
 if(!state.session&&!["welcome","signup","login"].includes(state.route)){state.route="welcome"}
 if(state.route==="clientHome"){clientHome();return}
 if(state.route==="workerHome"){workerHome();return}
+if(state.route==="workerJobs"){workerJobs();return}
 if(state.route==="workerCategory"){workerCategory();return}
 if(state.route==="createTask"){createTask();bindForms();return}
 if(state.route==="taskDetail"){taskDetail().then(bindForms);return}
@@ -764,7 +808,8 @@ const {data,error}=await sb.from("tasks").insert(payload).select().single();if(e
 async function loadMyTasks(){const {data,error}=await sb.from("tasks").select("*").eq("client_id",state.user.id).order("created_at",{ascending:false});state.tasks=error?[]:data}
 async function loadOpenTasks(){const {data,error}=await sb.from("tasks").select("*").eq("status","open").neq("client_id",state.user.id).order("created_at",{ascending:false});state.tasks=error?[]:data}
 async function openTask(id){
-const {data,error}=await sb.from("tasks").select("*").eq("id",id).single();if(error)return setMsg("error",error.message);state.selectedTask=data;go("taskDetail")
+const back=state.route;
+const {data,error}=await sb.from("tasks").select("*").eq("id",id).single();if(error)return setMsg("error",error.message);state.selectedTask=data;state.taskBackRoute=back;go("taskDetail")
 }
 async function loadOffers(taskId){
 const {data,error}=await sb.from("task_offers").select("id,task_id,worker_id,amount,message,status,created_at,profiles!task_offers_worker_id_fkey(full_name,avatar_url,rating,completed_tasks,identity_verified,driver_license_verified)").eq("task_id",taskId).order("created_at",{ascending:true});
