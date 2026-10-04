@@ -871,6 +871,55 @@ html[data-theme="dark"] .mode-role-icon{
   box-shadow:inset 0 0 0 1px rgba(255,255,255,.9),0 9px 22px rgba(0,0,0,.10)!important;
 }
 
+
+/* DOHOY 4.1 — Worker Home: más limpio, más útil y categorías navegables */
+.marketplace-v3{padding:18px 16px 118px;background:linear-gradient(180deg,#f8fbff 0,#fff 32%,#fbfcfe 100%)}
+.worker-home-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.worker-home-place{min-width:0}.worker-home-place>small{display:block;font-size:8px;letter-spacing:.12em;font-weight:950;color:#8a96a8;margin:0 0 3px 3px}
+.worker-place-button{border:0;background:transparent;display:flex;align-items:center;gap:5px;padding:0;color:#13213a;font-weight:950;font-size:17px;max-width:245px}
+.worker-place-button .svg-icon{width:18px;color:#ff7417}.worker-place-button span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.worker-place-button b{color:#8390a3}
+.worker-home-actions{display:flex;align-items:center;gap:8px}.worker-home-actions>.icon{width:43px;height:43px;border-radius:15px;background:#fff;border:1px solid #e5ecf5;box-shadow:0 7px 18px rgba(34,62,105,.07)}
+.worker-search-v3{display:grid;grid-template-columns:24px 1fr auto;gap:9px;align-items:center;height:58px;padding:0 8px 0 15px;border:1px solid #e1e9f3;background:#fff;border-radius:20px;box-shadow:0 10px 28px rgba(32,61,103,.08);margin-bottom:11px}
+.worker-search-v3>.svg-icon{width:21px;color:#607089}.worker-search-v3 input{border:0!important;background:transparent!important;outline:0;width:100%;min-width:0;font-size:14px;color:#172033}
+.filter-trigger-v3{height:42px;border:0;border-radius:14px;background:#edf4ff;color:#1467e8;padding:0 11px;display:flex;align-items:center;gap:5px;font-size:9px;font-weight:950}.filter-trigger-v3 .svg-icon{width:17px}
+.worker-status-row{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(115px,.75fr);gap:9px;margin:11px 0 14px}
+.worker-status-row .availability-card{margin:0;min-height:66px;border-radius:20px;box-shadow:0 7px 20px rgba(33,61,103,.05)}
+.worker-status-row .availability-card select,.worker-status-row .availability-card button{max-width:84px}
+.worker-mini-level{border:1px solid #e2eaf5;background:#fff;border-radius:20px;padding:9px;display:grid;grid-template-columns:37px 1fr auto;gap:7px;align-items:center;text-align:left;box-shadow:0 7px 20px rgba(33,61,103,.05)}
+.worker-mini-level>span:first-child{width:37px;height:37px;border-radius:13px;background:#edf4ff;color:#1467e8;display:grid;place-items:center}.worker-mini-level .svg-icon{width:19px}.worker-mini-level small{display:block;font-size:6.5px;letter-spacing:.09em;color:#8c98aa;font-weight:950}.worker-mini-level b{display:block;font-size:10px;color:#172033}.worker-mini-level em{font-style:normal;font-size:8px;color:#1467e8;font-weight:950}
+.worker-hero-v3{position:relative;overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr) 105px;align-items:center;min-height:190px;padding:21px;border-radius:28px;background:linear-gradient(132deg,#0a3f99 0%,#096cf0 63%,#2d82f4 100%);color:#fff;box-shadow:0 18px 38px rgba(16,91,202,.22);margin:13px 0}
+.worker-hero-v3:before{content:"";position:absolute;width:170px;height:170px;border-radius:50%;right:-60px;top:-75px;background:rgba(255,255,255,.12)}.worker-hero-v3:after{content:"";position:absolute;width:120px;height:120px;border-radius:50%;right:35px;bottom:-85px;background:rgba(255,122,26,.22)}
+.worker-hero-copy{position:relative;z-index:2}.worker-hero-kicker{display:inline-flex;padding:5px 8px;border-radius:999px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.16);font-size:7.5px;letter-spacing:.12em;font-weight:950}
+.worker-hero-v3 h1{font-size:24px;line-height:1.02;letter-spacing:-.6px;margin:9px 0 7px;color:#fff}.worker-hero-v3 h1 strong{color:#fff}.worker-hero-v3 p{font-size:10px;line-height:1.4;color:#e4efff;margin:0 0 13px;max-width:240px}
+.worker-hero-buttons{display:flex;gap:7px}.worker-hero-buttons button{border:0;border-radius:13px;padding:9px 11px;font-size:9px;font-weight:950;display:flex;align-items:center;gap:4px}.worker-hero-buttons .primary{background:#fff;color:#0e5bc6}.worker-hero-buttons .secondary{background:rgba(255,255,255,.13);color:#fff;border:1px solid rgba(255,255,255,.18)}.worker-hero-buttons .svg-icon{width:14px}
+.worker-hero-art{position:relative;height:120px;z-index:2}.hero-briefcase{position:absolute;right:2px;bottom:9px;width:86px;height:86px;border-radius:27px;background:linear-gradient(145deg,#ff8c2f,#ff6818);color:#fff;display:grid;place-items:center;transform:rotate(5deg);box-shadow:0 15px 25px rgba(61,35,12,.23);border:1px solid rgba(255,255,255,.3)}.hero-briefcase .svg-icon{width:44px}.hero-money{position:absolute;left:1px;top:8px;width:34px;height:34px;border-radius:50%;background:#fff5df;color:#ed8a00;display:grid;place-items:center;font-weight:1000;box-shadow:0 7px 16px rgba(0,0,0,.12)}.hero-spark{position:absolute;width:8px;height:27px;border-radius:99px;background:#fff;opacity:.75}.hero-spark.s1{right:13px;top:0;transform:rotate(25deg)}.hero-spark.s2{right:42px;top:-4px;transform:rotate(-18deg)}
+.worker-quick-v3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0 22px}.worker-quick-v3 button{border:1px solid #e4ebf4;background:#fff;border-radius:20px;padding:11px 8px;text-align:left;min-height:104px;box-shadow:0 7px 20px rgba(33,61,103,.055)}.worker-quick-v3 button>span{width:39px;height:39px;border-radius:14px;display:grid;place-items:center;margin-bottom:9px}.worker-quick-v3 button>span.orange{background:#fff0e4;color:#ff7417}.worker-quick-v3 button>span.green{background:#e6f8f2;color:#0a9d78}.worker-quick-v3 button>span.blue{background:#eaf3ff;color:#1467e8}.worker-quick-v3 .svg-icon{width:20px}.worker-quick-v3 b{display:block;font-size:11px;color:#172033}.worker-quick-v3 small{display:block;font-size:7.5px;line-height:1.25;color:#8491a4;margin-top:2px}
+.worker-section-title{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin-bottom:11px}.worker-section-title>div{min-width:0}.worker-section-title small{display:block;font-size:8px;letter-spacing:.12em;color:#8b97a8;font-weight:950}.worker-section-title h2{font-size:23px;line-height:1.05;margin:2px 0;color:#111827;letter-spacing:-.55px}.worker-section-title p{font-size:8.5px;color:#8a96a8;margin:3px 0 0}.worker-section-title>button,.worker-section-actions button{border:0;background:transparent;color:#0f61d2;font-size:9px;font-weight:950;padding:5px;display:flex;align-items:center;gap:3px}.worker-section-actions{display:flex;gap:4px}.worker-section-actions .svg-icon{width:13px}
+.worker-category-grid-v3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:23px}.worker-cat-v3{position:relative;border:1px solid #e4ebf4;background:#fff;border-radius:19px;min-height:86px;padding:9px 8px;display:grid;grid-template-columns:38px 1fr 8px;gap:7px;align-items:center;text-align:left;box-shadow:0 6px 17px rgba(33,61,103,.045);transition:.18s ease}.worker-cat-v3:active{transform:scale(.97)}.worker-cat-v3>span{width:38px;height:38px;border-radius:13px;background:#eaf3ff;color:#1467e8;display:grid;place-items:center}.worker-cat-v3.cat-1>span{background:#fff0e4;color:#ff7417}.worker-cat-v3.cat-2>span{background:#f1ebff;color:#6b4be3}.worker-cat-v3.cat-3>span{background:#e6f8f2;color:#0aa17c}.worker-cat-v3.cat-4>span{background:#fff0f3;color:#e65778}.worker-cat-v3 .svg-icon{width:20px}.worker-cat-v3 b{font-size:9px;line-height:1.1;color:#172033}.worker-cat-v3 em{font-style:normal;color:#a4afbd}.worker-cat-v3.active{border-color:#7eaff5;background:#f6faff;box-shadow:0 0 0 2px #e5f1ff}
+.worker-opportunities-v3{scroll-margin-top:14px}.worker-list-v3{display:grid;gap:9px}.worker-list-v3 .worker-task{border-radius:21px!important;padding:10px!important;grid-template-columns:66px 1fr 17px!important;box-shadow:0 7px 20px rgba(33,61,103,.055)!important;border:1px solid #e5ecf5!important}.worker-list-v3 .worker-task .task-visual{width:66px;height:66px;border-radius:18px}.worker-list-v3 .worker-task h3{font-size:13px}.worker-list-v3 .worker-task .price{font-size:17px}.worker-list-v3 .worker-meta{font-size:8px}
+.worker-empty-v3{text-align:center;border:1px dashed #d8e3ef;background:linear-gradient(145deg,#fbfdff,#f7faff);border-radius:25px;padding:25px 17px;margin:4px 0 17px}.worker-empty-v3>span{width:57px;height:57px;border-radius:19px;background:#eaf3ff;color:#1467e8;display:grid;place-items:center;margin:0 auto 11px}.worker-empty-v3>span .svg-icon{width:28px}.worker-empty-v3 h3{font-size:16px;margin:0 0 5px}.worker-empty-v3 p{font-size:9px;line-height:1.45;color:#8592a5;max-width:300px;margin:0 auto 13px}.worker-empty-v3>div{display:flex;justify-content:center;gap:7px}.worker-empty-v3 button{border:0;background:#1467e8;color:#fff;border-radius:13px;padding:9px 11px;font-size:8.5px;font-weight:950}.worker-empty-v3 button.ghost{background:#edf3fa;color:#58708c}
+.worker-tools-v3{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:22px 0 12px}.worker-tools-v3 button{border:1px solid #e4ebf4;background:#fff;border-radius:20px;padding:11px;display:grid;grid-template-columns:38px 1fr 10px;gap:8px;align-items:center;text-align:left}.worker-tools-v3 button>span{width:38px;height:38px;border-radius:13px;background:#fff0e4;color:#ff7417;display:grid;place-items:center}.worker-tools-v3 button:nth-child(2)>span{background:#eaf3ff;color:#1467e8}.worker-tools-v3 .svg-icon{width:19px}.worker-tools-v3 b{display:block;font-size:10px}.worker-tools-v3 small{display:block;font-size:7.5px;color:#8995a7;margin-top:2px}.worker-tools-v3 em{font-style:normal;color:#9ba7b6}
+.first-job-v3{margin-top:10px}
+
+/* Dedicated worker category/results screen */
+.worker-results-screen{padding:17px 16px 112px;background:linear-gradient(180deg,#f8fbff,#fff 30%,#fbfcfe)}
+.worker-results-head{display:grid;grid-template-columns:43px 1fr 43px;gap:10px;align-items:center;margin-bottom:14px}.worker-results-head>.icon{width:43px;height:43px;border-radius:15px;background:#fff;border:1px solid #e3eaf4}.worker-results-head>div small{font-size:7.5px;letter-spacing:.12em;color:#8b97a8;font-weight:950}.worker-results-head h1{font-size:22px;margin:1px 0;color:#111827}
+.worker-results-hero{display:grid;grid-template-columns:58px 1fr;gap:12px;align-items:center;border-radius:24px;padding:14px;background:linear-gradient(125deg,#eaf3ff,#fff);border:1px solid #dce8f7;margin-bottom:12px}.worker-results-hero>span{width:58px;height:58px;border-radius:19px;background:#1467e8;color:#fff;display:grid;place-items:center;box-shadow:0 9px 20px rgba(20,103,232,.18)}.worker-results-hero>span .svg-icon{width:30px}.worker-results-hero b{display:block;font-size:15px}.worker-results-hero p{font-size:9px;color:#8190a4;margin:3px 0 0}.worker-results-hero.all>span{background:linear-gradient(145deg,#1467e8,#ff7417)}
+.worker-results-search{height:53px;display:grid;grid-template-columns:20px 1fr 40px;gap:8px;align-items:center;border:1px solid #e2eaf4;background:#fff;border-radius:18px;padding:0 7px 0 13px;box-shadow:0 7px 20px rgba(33,61,103,.055);margin-bottom:10px}.worker-results-search>.svg-icon{width:19px;color:#64758d}.worker-results-search input{border:0!important;background:transparent!important;outline:0;min-width:0}.worker-results-search button{width:40px;height:40px;border:0;border-radius:13px;background:#edf4ff;color:#1467e8}.worker-results-search button .svg-icon{width:18px}
+.category-switcher{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;margin:0 -16px 10px;padding:2px 16px 7px}.category-switcher::-webkit-scrollbar{display:none}.category-switcher button{flex:0 0 auto;border:1px solid #e3eaf4;background:#fff;border-radius:999px;padding:7px 10px;display:flex;align-items:center;gap:5px;color:#607089;font-size:8px;font-weight:900}.category-switcher button.active{background:#1467e8;color:#fff;border-color:#1467e8}.category-switcher .svg-icon{width:14px}
+.results-summary{display:flex;align-items:center;gap:5px;margin:10px 2px}.results-summary b{font-size:15px}.results-summary span{font-size:9px;color:#8a96a8}.results-summary button{margin-left:auto;border:0;background:#edf4ff;color:#1467e8;border-radius:12px;padding:7px 9px;display:flex;align-items:center;gap:4px;font-size:8px;font-weight:950}.results-summary button .svg-icon{width:14px}.worker-results-filters{display:none;margin-bottom:10px}.worker-results-filters.open{display:block}.worker-results-filters .discovery-filters{background:#fff;border-radius:20px}.worker-results-filters .discovery-filters>summary{display:none}
+
+html[data-theme="dark"] .marketplace-v3,html[data-theme="dark"] .worker-results-screen{background:linear-gradient(180deg,#0b1422,#0d1929 38%,#0b1422)!important}
+html[data-theme="dark"] .worker-search-v3,html[data-theme="dark"] .worker-mini-level,html[data-theme="dark"] .worker-quick-v3 button,html[data-theme="dark"] .worker-cat-v3,html[data-theme="dark"] .worker-tools-v3 button,html[data-theme="dark"] .worker-results-head>.icon,html[data-theme="dark"] .worker-results-search,html[data-theme="dark"] .category-switcher button{background:#111f32!important;border-color:#24364e!important}
+html[data-theme="dark"] .worker-place-button,html[data-theme="dark"] .worker-mini-level b,html[data-theme="dark"] .worker-quick-v3 b,html[data-theme="dark"] .worker-cat-v3 b,html[data-theme="dark"] .worker-section-title h2,html[data-theme="dark"] .worker-results-head h1{color:#f3f7fd!important}
+html[data-theme="dark"] .worker-empty-v3{background:#111f32;border-color:#30435d}
+html[data-theme="dark"] .worker-results-hero{background:linear-gradient(125deg,#132b48,#111f32);border-color:#29425f}
+html[data-theme="dark"] .category-switcher button.active{background:#1467e8!important;color:#fff!important}
+@media(max-width:390px){
+ .marketplace-v3{padding-left:13px;padding-right:13px}.worker-hero-v3{grid-template-columns:minmax(0,1fr) 82px;padding:18px}.worker-hero-v3 h1{font-size:21px}.hero-briefcase{width:74px;height:74px}.hero-briefcase .svg-icon{width:38px}
+ .worker-category-grid-v3{grid-template-columns:repeat(2,1fr)}.worker-status-row{grid-template-columns:1fr}.worker-mini-level{display:none}.worker-quick-v3{gap:6px}.worker-quick-v3 button{padding:9px 7px}
+}
+
 </style>
 <link rel="manifest" href="./manifest.webmanifest?v=1.9.4"><link rel="apple-touch-icon" href="./icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default">
 </head>
@@ -1329,107 +1378,109 @@ function workerTaskCard(t){
 }
 
 async function workerHome(){
-await Promise.all([loadOpenTasks(),loadNotificationSummary(),loadSearchPreferences(),loadFeatureStatus(),loadWorkerAvailability(),loadWorkerInvitations(),loadBanners()]);
-const first=(state.profile?.full_name||"").trim().split(" ")[0]||"";
-const visible=filteredWorkerTasks();
-const nearby=visible.filter(t=>{const d=taskDistanceKm(t);return d!=null&&d<=10}).length;
-root.innerHTML=shell(`<section class="market-screen marketplace-v2">
-  <div class="market-v2-top">
-    <div class="market-v2-location">
-      <span class="eyebrow">Trabajos en</span>
-      <button id="workerLocationButton" type="button" class="market-location-v2 ${state.workerLocation?"active":""}" onclick="toggleWorkerLocation()">
-        ${iconSvg("location")}<span>${state.workerLocation?(state.workerAddress||"Tu zona"):"Torreón"}</span><b>⌄</b>
+ await Promise.all([loadOpenTasks(),loadNotificationSummary(),loadSearchPreferences(),loadFeatureStatus(),loadWorkerAvailability(),loadWorkerInvitations(),loadBanners()]);
+ const first=(state.profile?.full_name||"").trim().split(" ")[0]||"";
+ const visible=filteredWorkerTasks(),allOpen=state.tasks||[];
+ const nearby=visible.filter(t=>{const d=taskDistanceKm(t);return d!=null&&d<=10}).length;
+ const urgent=allOpen.filter(t=>t.is_urgent||taskUrgency(t)).length;
+ const level=workerLevel();
+ root.innerHTML=shell(`<section class="market-screen marketplace-v3">
+  <header class="worker-home-head">
+    <div class="worker-home-place">
+      <small>TRABAJAR EN</small>
+      <button id="workerLocationButton" type="button" class="worker-place-button ${state.workerLocation?"active":""}" onclick="toggleWorkerLocation()">
+        ${iconSvg("location")}<span>${state.workerLocation?(state.workerAddress||"Tu zona"):"Activar ubicación"}</span><b>⌄</b>
       </button>
     </div>
-    <div class="market-v2-actions">
-      <button class="market-avatar" onclick="go('profile')" aria-label="Abrir perfil">${avatarMarkup(state.profile)}</button>
+    <div class="worker-home-actions">
       ${notificationBell()}
+      <button class="market-avatar" onclick="go('profile')" aria-label="Abrir perfil">${avatarMarkup(state.profile)}</button>
     </div>
-  </div>
+  </header>
   ${state.workerLocationError?`<div class="geo-note market-v2-error">${escapeHtml(state.workerLocationError)}</div>`:""}
 
-  <div class="market-v2-search">
+  <div class="worker-search-v3">
     ${iconSvg("search")}
-    <input id="workerSearch" oninput="filterWorkerTasks()" onkeydown="workerSearchKey(event)" value="${escapeAttr(workerFilterState().query)}" placeholder="Busca un trabajo, mandado o servicio">
-    <button type="button" class="filter-trigger" onclick="toggleWorkerFilters()" aria-label="Abrir filtros">${iconSvg("mode")}</button>
+    <input id="workerSearch" oninput="filterWorkerTasks()" onkeydown="workerSearchKey(event)" value="${escapeAttr(workerFilterState().query)}" placeholder="¿Qué trabajo quieres encontrar?">
+    <button type="button" class="filter-trigger-v3" onclick="toggleWorkerFilters()" aria-label="Abrir filtros">${iconSvg("mode")}<span>Filtros</span></button>
   </div>
   ${state.recentSearches?.length?`<div class="recent-search-strip"><span>Recientes</span>${state.recentSearches.slice(0,4).map(q=>`<button onclick="useRecentWorkerSearch('${escapeAttr(q)}')">${iconSvg("clock")} ${escapeHtml(q)}</button>`).join("")}</div>`:""}
-
   <div id="workerFiltersPanel" class="worker-filters-panel">${workerFilterControls()}</div>
   ${authMsg()}
-  ${bannerCarouselHtml()}
-  ${availabilityCard()}
-  ${invitationsHtml()}
 
-  <section class="worker-promo">
-    <div class="worker-promo-copy">
-      <span class="promo-pill">DOHOY · GANA HOY</span>
-      <h1>${first?`Hola, ${escapeHtml(first)}.`:""} Encuentra una tarea y empieza a ganar.</h1>
-      <p>Elige trabajos cercanos, manda tu propuesta y organiza tu tiempo.</p>
-      <button type="button" onclick="scrollToWorkerJobs()">Ver oportunidades</button>
+  <div class="worker-status-row">
+    ${availabilityCard()}
+    <button class="worker-mini-level" onclick="go('profile')">
+      <span>${iconSvg(level.icon)}</span>
+      <span><small>NIVEL</small><b>${escapeHtml(level.name)}</b></span>
+      <em>${Math.round(level.pct)}%</em>
+    </button>
+  </div>
+
+  ${invitationsHtml()}
+  ${bannerCarouselHtml()}
+
+  <section class="worker-hero-v3">
+    <div class="worker-hero-copy">
+      <span class="worker-hero-kicker">DOHOY · GANA HOY</span>
+      <h1>${first?`Hola, ${escapeHtml(first)}.`:""}<br><strong>Encuentra tu próximo trabajo.</strong></h1>
+      <p>Explora oportunidades, compara el pago y envía tu propuesta.</p>
+      <div class="worker-hero-buttons">
+        <button class="primary" onclick="openAllWorkerOpportunities()">Ver trabajos</button>
+        <button class="secondary" onclick="openWorkerMap()">${iconSvg("map")} Mapa</button>
+      </div>
     </div>
-    <div class="promo-art" aria-hidden="true">
-      <span class="promo-coin coin-a">$</span><span class="promo-coin coin-b">✓</span>
-      <div class="promo-bag">${iconSvg("briefcase")}</div>
+    <div class="worker-hero-art" aria-hidden="true">
+      <span class="hero-spark s1"></span><span class="hero-spark s2"></span>
+      <div class="hero-briefcase">${iconSvg("briefcase")}</div>
+      <span class="hero-money">$</span>
     </div>
   </section>
 
-  <div class="worker-smart-strip">
-    <button onclick="openAgenda()"><span>${iconSvg("calendar")}</span><div><b>Mi agenda</b><small>Organiza tus próximos trabajos</small></div><em>›</em></button>
-    <button onclick="go('notifications')"><span>${iconSvg("bell")}</span><div><b>Alertas inteligentes</b><small>Elige qué oportunidades recibir</small></div><em>›</em></button>
-  </div>
-  <div class="quick-opportunity-grid">
-    <button class="quick-opportunity today" onclick="quickWorkerToday()">
-      <span class="quick-opportunity-icon">${iconSvg("clock")}</span>
-      <span><b>Para hoy</b><small>Tareas que puedes hacer hoy</small></span>
-      <em>›</em>
-    </button>
-    <button class="quick-opportunity near" onclick="quickWorkerNearby()">
-      <span class="quick-opportunity-icon">${iconSvg("location")}</span>
-      <span><b>Cerca de ti</b><small>${state.workerLocation?(nearby?`${nearby} oportunidades a ≤10 km`:"Explora tu zona"):"Activa tu ubicación"}</small></span>
-      <em>›</em>
-    </button>
+  <div class="worker-quick-v3">
+    <button onclick="quickWorkerToday()"><span class="orange">${iconSvg("clock")}</span><b>Para hoy</b><small>${urgent?`${urgent} urgentes o próximas`:"Ver tareas de hoy"}</small></button>
+    <button onclick="quickWorkerNearby()"><span class="green">${iconSvg("location")}</span><b>Cerca de ti</b><small>${state.workerLocation?(nearby?`${nearby} a ≤10 km`:"Explorar tu zona"):"Activar ubicación"}</small></button>
+    <button onclick="openAgenda()"><span class="blue">${iconSvg("calendar")}</span><b>Mi agenda</b><small>Próximos trabajos</small></button>
   </div>
 
-  ${visible.length?`<div class="market-v2-section-head featured-head"><div><span>Destacadas</span><h2>Mejor pagadas</h2></div><button onclick="scrollToWorkerJobs()">Ver todas</button></div>
-  <div class="worker-featured-scroll">${[...visible].sort((a,b)=>Number(b.offered_price||0)-Number(a.offered_price||0)).slice(0,4).map(t=>`<button class="worker-featured-card" onclick="openTask('${t.id}')"><span class="wf-icon">${taskIcon(t)}</span><span class="wf-cat">${escapeHtml(baseCategory(t.category))}</span><b>${escapeHtml(t.title)}</b><strong>${money(t.offered_price)}</strong><small>${taskDistanceKm(t)!=null?distanceLabel(taskDistanceKm(t))+" · ":""}${t.scheduled_for?timeText(t.scheduled_for):"Flexible"}</small></button>`).join("")}</div>`:""}
+  <section class="worker-discover-v3">
+    <div class="worker-section-title">
+      <div><small>EXPLORA</small><h2>¿Qué quieres hacer?</h2></div>
+      <button onclick="openAllWorkerOpportunities()">Ver todos</button>
+    </div>
+    <div class="worker-category-grid-v3">
+      ${categories.map((cat,i)=>`<button class="worker-cat-v3 cat-${i%5} ${workerFilterState().category===cat?"active":""}" onclick="openWorkerCategory('${escapeAttr(cat)}')">
+        <span>${iconSvg(cat)}</span><b>${escapeHtml(cat)}</b><em>›</em>
+      </button>`).join("")}
+    </div>
+  </section>
 
-  <div class="market-v2-section-head">
-    <div><span>Explora</span><h2>¿Qué quieres hacer?</h2></div>
-    <button onclick="resetWorkerFilters()">Ver todo</button>
-  </div>
-  <div class="market-category-scroll">
-    ${categories.map((cat,i)=>`<button class="market-category-pill cat-${i%5}" data-cat="${escapeAttr(cat)}" onclick="openWorkerCategory('${escapeAttr(cat)}')">
-      <span class="market-category-icon">${iconSvg(cat)}</span><b>${escapeHtml(cat)}</b>
-    </button>`).join("")}
-  </div>
+  <section id="workerOpportunities" class="worker-opportunities-v3">
+    <div class="worker-section-title">
+      <div><small>PARA TI</small><h2>Oportunidades</h2><p>${workerFilterState().category?`Mostrando ${escapeHtml(workerFilterState().category)}`:"Ordenadas para que encuentres trabajo más rápido."}</p></div>
+      <div class="worker-section-actions"><button onclick="openWorkerMap()">${iconSvg("map")} Mapa</button><button onclick="openAllWorkerOpportunities()">Ver todas</button></div>
+    </div>
+    <div id="workerTaskList" class="worker-list worker-list-v3">
+      ${visible.length?visible.slice(0,6).map(workerTaskCard).join(""):`<div class="worker-empty-v3"><span>${iconSvg("search")}</span><h3>No encontramos trabajos con esos filtros</h3><p>Prueba otra categoría o quita los filtros para ver todas las oportunidades disponibles.</p><div><button onclick="clearWorkerFiltersInPlace()">Ver todos los trabajos</button><button class="ghost" onclick="toggleWorkerFilters()">Ajustar filtros</button></div></div>`}
+    </div>
+  </section>
 
-  <div class="worker-earn-card">
-    <div class="earn-icon">${iconSvg("star")}</div>
-    <div><span>Más opciones, más oportunidades</span><b>Guarda tus filtros favoritos</b><small>Te ayudamos a encontrar tareas que encajen contigo.</small></div>
-    <button onclick="toggleWorkerFilters()">Configurar</button>
-  </div>
+  <section class="worker-tools-v3">
+    <button onclick="toggleWorkerFilters()"><span>${iconSvg("star")}</span><div><b>Filtros favoritos</b><small>Guarda lo que buscas</small></div><em>›</em></button>
+    <button onclick="go('notifications')"><span>${iconSvg("bell")}</span><div><b>Alertas</b><small>Configura tus avisos</small></div><em>›</em></button>
+  </section>
 
-  ${Number(state.profile?.completed_tasks||0)===0?`<section class="first-job-card"><span>${iconSvg("bolt")}</span><div><small>PRIMER TRABAJO</small><h3>Empieza con buen pie</h3><p>Completa tu perfil, activa tu disponibilidad y envía tu primera propuesta.</p><div class="first-job-steps"><i class="done">Perfil</i><i class="${state.workerAvailability?"done":""}">Disponible</i><i>Propuesta</i></div></div></section>`:""}
-  <section class="worker-level-card"><span>${iconSvg(workerLevel().icon)}</span><div><small>NIVEL DEL TRABAJADOR</small><b>${workerLevel().name}</b><p>Siguiente: ${workerLevel().next}</p><i><em style="width:${workerLevel().pct}%"></em></i></div></section>
-  <div id="workerOpportunities" class="market-v2-section-head jobs-head">
-    <div><span>Seleccionadas para ti</span><h2>Oportunidades recientes</h2></div>
-    <div class="jobs-head-actions"><button onclick="openWorkerMap()">${iconSvg("map")} Mapa</button><button onclick="resetWorkerFilters()">Ver todas</button></div>
-  </div>
-  <div id="workerTaskList" class="worker-list worker-list-v2">
-    ${visible.length?visible.map(workerTaskCard).join(""):`${emptyState("search","No hay oportunidades por ahora","Prueba ampliar la distancia, cambiar de categoría o vuelve un poco más tarde.","resetWorkerFilters();scrollToWorkerJobs()","Quitar filtros")}`}
-  </div>
-</section>`,true)
+  ${Number(state.profile?.completed_tasks||0)===0?`<section class="first-job-card first-job-v3"><span>${iconSvg("bolt")}</span><div><small>PRIMER TRABAJO</small><h3>Tu primera oportunidad empieza aquí</h3><p>Completa tu perfil, activa tu disponibilidad y envía una propuesta cuando encuentres una tarea que te convenga.</p><div class="first-job-steps"><i class="done">Perfil</i><i class="${state.workerAvailability?"done":""}">Disponible</i><i>Propuesta</i></div></div></section>`:""}
+ </section>`,true)
 }
-
 
 function saveRecentWorkerSearch(q){
  q=String(q||"").trim();if(q.length<2)return;
  state.recentSearches=[q,...(state.recentSearches||[]).filter(x=>x.toLowerCase()!==q.toLowerCase())].slice(0,6);
  localStorage.setItem("dohoy_recent_searches",JSON.stringify(state.recentSearches))
 }
-function workerSearchKey(e){if(e.key==="Enter"){e.preventDefault();saveRecentWorkerSearch(e.currentTarget.value);filterWorkerTasks();render()}}
-function useRecentWorkerSearch(q){workerFilterState().query=q;saveRecentWorkerSearch(q);render()}
+function workerSearchKey(e){if(e.key==="Enter"){e.preventDefault();saveRecentWorkerSearch(e.currentTarget.value);filterWorkerTasks();scrollToWorkerJobs();e.currentTarget.blur()}}
+function useRecentWorkerSearch(q){workerFilterState().query=q;saveRecentWorkerSearch(q);const inp=document.getElementById("workerSearch");if(inp)inp.value=q;filterWorkerTasks();scrollToWorkerJobs()}
 
 function toggleWorkerFilters(){
  const panel=document.getElementById("workerFiltersPanel");
@@ -1439,11 +1490,11 @@ function toggleWorkerFilters(){
 }
 function scrollToWorkerJobs(){document.getElementById("workerOpportunities")?.scrollIntoView({behavior:"smooth",block:"start"})}
 function quickWorkerToday(){
- const f=workerFilterState();f.todayOnly=true;f.category="";filterWorkerTasks();scrollToWorkerJobs()
+ const f=workerFilterState();f.todayOnly=true;f.category="";state.workerCategory="";go("workerCategory")
 }
 function quickWorkerNearby(){
  if(!state.workerLocation){toggleWorkerLocation();return}
- const f=workerFilterState();f.maxDistance=10;f.category="";filterWorkerTasks();scrollToWorkerJobs()
+ const f=workerFilterState();f.maxDistance=10;f.category="";state.workerCategory="";go("workerCategory")
 }
 
 
@@ -1935,7 +1986,7 @@ async function profile(){
    ${settingsRow("Política de privacidad","privacy","document","Cómo protegemos tus datos")}
  </div>
  <div class="account-actions"><button class="logout-btn" onclick="signOutCurrent()">${iconSvg("logout")} Cerrar sesión</button></div>
- <div class="version-note">DOHOY · Versión 4.0.1 · BETA READY</div>
+ <div class="version-note">DOHOY · Versión 4.1.0 · WORKER HOME</div>
  </section>`,true)
 }
 function settingsRow(title,route,icon,sub=""){
@@ -2547,7 +2598,7 @@ const remaining=Math.max(0,1850-(Date.now()-splashStarted));setTimeout(finishSpl
 sb.auth.onAuthStateChange(async(_event,session)=>{state.session=session;state.user=session?.user||null;if(state.user){await loadProfile();await loadNotificationSummary();subscribeNotifications()}if(!session&&!['welcome','signup','login','onboarding','mode'].includes(state.route))go(onboardingDone()?'welcome':'onboarding')})
 }
 const DOHOY_VAPID_PUBLIC="BIqp0MxIqy8rJPGj8mCRF-P_FwaMWgRMKSR_x6AazRKylHNhyT3NEPjNODKzvsSyIpt6OE3BUQXEz8-OkV-k14E";
-// DOHOY 4.0.1 — corrección de contraste y legibilidad del modo oscuro.
+// DOHOY 4.1.0 — rediseño del inicio trabajador y navegación real por categorías.
 const DEFAULT_FILTERS={query:'',category:'',minPrice:0,maxDistance:null,todayOnly:false,vehicleOnly:false,notifyMatching:true};
 function workerFilterState(){if(!state.workerFilters)state.workerFilters={...DEFAULT_FILTERS};return state.workerFilters}
 function searchStorageKey(){return 'dohoy_search_'+(state.user?.id||'guest')}
@@ -2574,10 +2625,68 @@ function filteredWorkerTasks(tasks=state.tasks,filters=workerFilterState()){
 }
 function workerFilterControls(){const f=workerFilterState();return `<details class="discovery-filters"><summary>${iconSvg('search')} Filtros y búsquedas guardadas</summary><div class="filter-grid"><label>Precio mínimo ($)<input id="filterMin" type="number" min="0" value="${Number(f.minPrice)||0}" onchange="setWorkerFilter('minPrice',this.value)"></label><label>Distancia máxima (km)<input id="filterDistance" type="number" min="0.1" max="1000" step="0.1" value="${f.maxDistance??''}" placeholder="Sin límite" onchange="setWorkerFilter('maxDistance',this.value)"></label><label class="full">Categoría<select onchange="setWorkerFilter('category',this.value)"><option value="">Todas</option>${categories.map(c=>`<option ${f.category===c?'selected':''}>${escapeHtml(c)}</option>`).join('')}</select></label><label class="filter-check"><input type="checkbox" ${f.todayOnly?'checked':''} onchange="setWorkerFilter('todayOnly',this.checked)"> Para hoy</label><label class="filter-check"><input type="checkbox" ${f.vehicleOnly?'checked':''} onchange="setWorkerFilter('vehicleOnly',this.checked)"> Requiere vehículo</label><label class="filter-check full"><input type="checkbox" ${f.notifyMatching?'checked':''} onchange="setWorkerFilter('notifyMatching',this.checked)"> Avisarme de nuevas tareas que coincidan</label></div><div class="filter-actions"><button type="button" class="btn orange" onclick="saveSearchPreferences()">Guardar búsqueda</button><button type="button" class="btn ghost" onclick="resetWorkerFilters()">Limpiar filtros</button></div><p id="filterLocationNote" class="small"></p><p id="searchSaveNote" class="small" role="status"></p></details>`}
 function setWorkerFilter(key,value){const f=workerFilterState();if(key==='minPrice')value=Math.max(0,Number(value)||0);if(key==='maxDistance')value=value===''?null:Math.max(.1,Math.min(1000,Number(value)||1));f[key]=value;filterWorkerTasks()}
-function filterWorkerTasks(){const inp=document.getElementById('workerSearch');if(inp)workerFilterState().query=inp.value;const host=document.getElementById('workerTaskList');if(!host)return;const list=filteredWorkerTasks();host.innerHTML=list.length?list.map(workerTaskCard).join(''):`<div class="empty">No hay tareas con estos filtros. Prueba ampliar la distancia o bajar el precio mínimo.</div>`;const note=document.getElementById('filterLocationNote');if(note)note.textContent=workerFilterState().maxDistance!=null&&!state.workerLocation&&!state.savedSearchOrigin?'Activa tu ubicación para filtrar por distancia.':state.savedSearchOrigin&&!state.workerLocation?'Distancias desde la ubicación que guardaste.':''}
+function filterWorkerTasks(){
+ const inp=document.getElementById("workerSearch");if(inp)workerFilterState().query=inp.value;
+ const host=document.getElementById("workerTaskList"),list=filteredWorkerTasks();
+ if(host)host.innerHTML=list.length?list.slice(0,6).map(workerTaskCard).join(""):`<div class="worker-empty-v3"><span>${iconSvg("search")}</span><h3>No encontramos trabajos con esos filtros</h3><p>Prueba otra categoría o quita los filtros.</p><div><button onclick="clearWorkerFiltersInPlace()">Ver todos los trabajos</button><button class="ghost" onclick="toggleWorkerFilters()">Ajustar filtros</button></div></div>`;
+ const note=document.getElementById("filterLocationNote");if(note)note.textContent=workerFilterState().maxDistance!=null&&!state.workerLocation&&!state.savedSearchOrigin?"Activa tu ubicación para filtrar por distancia.":state.savedSearchOrigin&&!state.workerLocation?"Distancias desde la ubicación que guardaste.":"";
+ if(state.route==="workerCategory")filterWorkerCategoryResults(document.getElementById("categoryWorkerSearch")?.value??workerFilterState().query)
+}
+function clearWorkerFiltersInPlace(){
+ state.workerFilters={...DEFAULT_FILTERS};
+ const input=document.getElementById("workerSearch");if(input)input.value="";
+ filterWorkerTasks();
+ document.querySelectorAll(".worker-cat-v3").forEach(x=>x.classList.remove("active"));
+ const subtitle=document.querySelector(".worker-opportunities-v3 .worker-section-title p");if(subtitle)subtitle.textContent="Ordenadas para que encuentres trabajo más rápido.";
+ scrollToWorkerJobs();haptic()
+}
 function resetWorkerFilters(){state.workerFilters={...DEFAULT_FILTERS};go('workerHome')}
-function openWorkerCategory(category){workerFilterState().category=category;go('workerHome')}
-async function workerCategory(){return workerHome()}
+function openAllWorkerOpportunities(){
+ workerFilterState().category="";
+ state.workerCategory="";
+ go("workerCategory")
+}
+function openWorkerCategory(category){
+ state.workerCategory=category;
+ workerFilterState().category=category;
+ go("workerCategory")
+}
+async function workerCategory(){
+ await loadOpenTasks();
+ const category=state.workerCategory||workerFilterState().category||"";
+ const all=filteredWorkerTasks(state.tasks,{...workerFilterState(),category});
+ const title=category||"Todos los trabajos";
+ root.innerHTML=shell(`<section class="worker-results-screen">
+   <header class="worker-results-head">
+     <button class="icon" onclick="go('workerHome')">←</button>
+     <div><small>${category?"CATEGORÍA":"OPORTUNIDADES"}</small><h1>${escapeHtml(title)}</h1></div>
+     <button class="icon" onclick="openWorkerMap()">${iconSvg("map")}</button>
+   </header>
+   <div class="worker-results-hero ${category?"":"all"}">
+     <span>${category?iconSvg(category):iconSvg("briefcase")}</span>
+     <div><b>${category?`Trabajos de ${escapeHtml(category)}`:"Todo lo disponible"}</b><p>${all.length?`${all.length} oportunidad${all.length===1?"":"es"} encontrada${all.length===1?"":"s"}.`:"Todavía no hay coincidencias con estos filtros."}</p></div>
+   </div>
+   <div class="worker-results-search">
+     ${iconSvg("search")}<input id="categoryWorkerSearch" value="${escapeAttr(workerFilterState().query)}" placeholder="Buscar dentro de ${escapeAttr(category||"oportunidades")}" oninput="filterWorkerCategoryResults(this.value)">
+     <button onclick="openWorkerMap()">${iconSvg("map")}</button>
+   </div>
+   ${category?`<div class="category-switcher">${categories.map((cat,i)=>`<button class="${cat===category?"active":""}" onclick="openWorkerCategory('${escapeAttr(cat)}')">${iconSvg(cat)}<span>${escapeHtml(cat)}</span></button>`).join("")}</div>`:""}
+   <div class="results-summary"><b id="workerResultsCount">${all.length}</b><span>resultados</span><button onclick="toggleResultsFilters()">${iconSvg("mode")} Filtros</button></div>
+   <div id="workerResultsFilters" class="worker-results-filters">${workerFilterControls()}</div>
+   <div id="workerCategoryResults" class="worker-list worker-list-v3">
+     ${all.length?all.map(workerTaskCard).join(""):`<div class="worker-empty-v3"><span>${iconSvg(category||"search")}</span><h3>${category?`No hay trabajos de ${escapeHtml(category)} por ahora`:"No hay oportunidades por ahora"}</h3><p>Cuando alguien publique una tarea que coincida, aparecerá aquí.</p><div><button onclick="state.workerFilters={...DEFAULT_FILTERS};openAllWorkerOpportunities()">Ver otras categorías</button><button class="ghost" onclick="go('workerHome')">Volver al inicio</button></div></div>`}
+   </div>
+ </section>`,true)
+}
+function filterWorkerCategoryResults(q){
+ workerFilterState().query=q;
+ const category=state.workerCategory||workerFilterState().category||"";
+ const list=filteredWorkerTasks(state.tasks,{...workerFilterState(),category});
+ const host=document.getElementById("workerCategoryResults"),count=document.getElementById("workerResultsCount");
+ if(count)count.textContent=list.length;
+ if(host)host.innerHTML=list.length?list.map(workerTaskCard).join(""):`<div class="worker-empty-v3"><span>${iconSvg("search")}</span><h3>Sin coincidencias</h3><p>Prueba con otras palabras o cambia de categoría.</p><div><button onclick="document.getElementById('categoryWorkerSearch').value='';filterWorkerCategoryResults('')">Limpiar búsqueda</button></div></div>`
+}
+function toggleResultsFilters(){document.getElementById("workerResultsFilters")?.classList.toggle("open")}
 async function saveSearchPreferences(){
  const f=workerFilterState(),origin=state.workerLocation||state.savedSearchOrigin;
  const note=document.getElementById('searchSaveNote');if(f.maxDistance!=null&&!origin){if(note)note.textContent='Activa tu ubicación antes de guardar una distancia máxima.';return}
