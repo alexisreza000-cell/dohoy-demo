@@ -383,8 +383,8 @@ label{color:#263A59!important;font-weight:850!important}
 .new-pill{display:inline-flex;align-items:center;margin-left:7px;padding:3px 7px;border-radius:999px;background:#ff7a00;color:#fff;font-size:8px;font-style:normal;font-weight:950;letter-spacing:.08em;vertical-align:middle}
 @media(max-width:430px){.account-quick-four{grid-template-columns:repeat(2,1fr)!important}.account-quick-four button{min-height:92px}}
 
-/* DOHOY 1.9.4 — splash de bienvenida */
-.dohoy-splash{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(155deg,#071a3a 0%,#0b3d91 44%,#0967f4 78%,#ff7a00 150%);color:#fff;padding:max(28px,env(safe-area-inset-top)) 24px max(28px,env(safe-area-inset-bottom));animation:splashFadeOut .42s ease 1.48s both}
+/* DOHOY 1.9.5 — splash de bienvenida */
+.dohoy-splash{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(155deg,#071a3a 0%,#0b3d91 44%,#0967f4 78%,#ff7a00 150%);color:#fff;padding:max(28px,env(safe-area-inset-top)) 24px max(28px,env(safe-area-inset-bottom));animation:splashFadeOut .42s ease 2.38s both}
 .dohoy-splash:before,.dohoy-splash:after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.08);filter:blur(.2px)}
 .dohoy-splash:before{width:320px;height:320px;right:-155px;top:-95px}.dohoy-splash:after{width:250px;height:250px;left:-145px;bottom:-75px}
 .splash-inner{position:relative;z-index:2;text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px;animation:splashRise .7s cubic-bezier(.2,.75,.25,1) both}
@@ -1550,11 +1550,11 @@ const splashStarted=Date.now();render();
 const {data}=await sb.auth.getSession();state.session=data.session;state.user=data.session?.user||null;if(state.user){await loadProfile();await markAllIncomingDelivered();await loadNotificationSummary();startDeliveryPoll();subscribeNotifications();await loadFeatureStatus();await refreshPushStatus()}
 state.route=state.session?(onboardingDone()?'mode':'onboarding'):(onboardingDone()?'welcome':'onboarding');
 const finishSplash=()=>{state.splash=false;render();consumePushTask()};
-const remaining=Math.max(0,1850-(Date.now()-splashStarted));setTimeout(finishSplash,remaining);
+const remaining=Math.max(0,2800-(Date.now()-splashStarted));setTimeout(finishSplash,remaining);
 sb.auth.onAuthStateChange(async(_event,session)=>{state.session=session;state.user=session?.user||null;if(state.user){await loadProfile();await loadNotificationSummary();subscribeNotifications()}if(!session&&!['welcome','signup','login','onboarding','mode'].includes(state.route))go(onboardingDone()?'welcome':'onboarding')})
 }
 const DOHOY_VAPID_PUBLIC="BIqp0MxIqy8rJPGj8mCRF-P_FwaMWgRMKSR_x6AazRKylHNhyT3NEPjNODKzvsSyIpt6OE3BUQXEz8-OkV-k14E";
-// DOHOY 1.9.4 — splash de bienvenida, pagos, ofertas seguras y refinamiento visual.
+// DOHOY 1.9.5 — splash de bienvenida, pagos, ofertas seguras y refinamiento visual.
 const DEFAULT_FILTERS={query:'',category:'',minPrice:0,maxDistance:null,todayOnly:false,vehicleOnly:false,notifyMatching:true};
 function workerFilterState(){if(!state.workerFilters)state.workerFilters={...DEFAULT_FILTERS};return state.workerFilters}
 function searchStorageKey(){return 'dohoy_search_'+(state.user?.id||'guest')}
