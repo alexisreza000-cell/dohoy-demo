@@ -642,6 +642,55 @@ body{background:#edf3fb}
  .worker-earn-card{grid-template-columns:44px 1fr}.worker-earn-card button{grid-column:2;justify-self:start}
 }
 
+
+/* DOHOY 3.0.0 — Client marketplace + earnings + journey */
+
+/* CLIENT HOME */
+.client-market-home{min-height:100vh;padding:22px 18px 122px;background:linear-gradient(180deg,#fff9f1 0,#fff 22%,#f7fbff 62%,#fff 100%)}
+.client-market-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.client-hello{display:block;font-size:12px;color:#8a94a5;font-weight:800;margin-bottom:2px}
+.client-location{display:flex;align-items:center;gap:5px;border:0;background:transparent;padding:0;font-size:19px;font-weight:950;color:#111827}
+.client-location .svg-icon{width:18px;height:18px;color:#ff7417}.client-location b{color:#7c8798}
+.client-top-actions{display:flex;gap:8px;align-items:center}.client-top-actions .icon{width:45px;height:45px;border-radius:50%;background:#fff;border:1px solid #e9eef6}
+.client-search-launch{width:100%;height:63px;border:1px solid #e4eaf2;background:#fff;border-radius:25px;box-shadow:0 12px 30px rgba(34,62,105,.09);display:grid;grid-template-columns:26px 1fr 42px;align-items:center;gap:10px;padding:0 10px 0 18px;text-align:left;color:#99a3b3;margin-bottom:17px}
+.client-search-launch>.svg-icon{width:24px;height:24px;color:#111827}.client-search-launch>span{font-size:16px}.client-search-launch em{width:42px;height:42px;border-radius:15px;background:#edf4ff;color:#1467e8;display:grid;place-items:center}.client-search-launch em .svg-icon{width:22px}
+.client-main-banner{min-height:224px;border-radius:31px;padding:25px;display:grid;grid-template-columns:minmax(0,1fr) 105px;align-items:center;overflow:hidden;position:relative;color:#fff;background:linear-gradient(125deg,#ff7b1b 0%,#ff9148 43%,#1467e8 145%);box-shadow:0 20px 42px rgba(255,116,23,.18)}
+.client-main-banner:before{content:"";position:absolute;width:210px;height:210px;border-radius:50%;right:-85px;top:-95px;background:rgba(255,255,255,.16)}
+.client-banner-copy{position:relative;z-index:2}.client-banner-copy h1{font-size:30px;line-height:.98;margin:12px 0 9px;letter-spacing:-1px}.client-banner-copy p{font-size:12px;line-height:1.45;color:#fff7f1;max-width:260px;margin:0 0 16px}.client-banner-copy button{border:0;border-radius:15px;background:#fff;color:#e75d00;padding:11px 15px;font-weight:950}
+.client-banner-art{height:145px;position:relative;z-index:2}.client-banner-art>div{position:absolute;right:-2px;bottom:9px;width:94px;height:94px;border-radius:31px;background:linear-gradient(145deg,#dcecff,#fff);color:#1467e8;display:grid;place-items:center;transform:rotate(6deg);box-shadow:0 17px 30px rgba(94,43,7,.18)}.client-banner-art .svg-icon{width:49px;height:49px}
+.cb-orb{position:absolute;border-radius:50%;background:#fff7df;box-shadow:0 7px 18px rgba(79,38,7,.14)}.cb-orb.one{width:34px;height:34px;right:69px;top:8px}.cb-orb.two{width:22px;height:22px;right:5px;top:28px;background:#dff5ef}
+.client-mini-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:14px 0 28px}.client-mini-stats button{border:1px solid #e8edf5;background:rgba(255,255,255,.95);border-radius:19px;padding:12px 7px;box-shadow:0 7px 20px rgba(38,66,106,.05)}.client-mini-stats b{display:block;font-size:20px;color:#14213a}.client-mini-stats span{font-size:10px;color:#8793a5;font-weight:800}
+.client-section-head{display:flex;align-items:end;justify-content:space-between;margin:0 2px 13px}.client-section-head span{display:block;font-size:10px;font-weight:900;letter-spacing:.1em;color:#929daf;text-transform:uppercase}.client-section-head h2{font-size:23px;line-height:1.05;margin:3px 0 0;color:#111827;letter-spacing:-.55px}.client-section-head button{border:0;background:transparent;color:#0e5fcf;font-weight:900}
+.client-category-scroll{display:flex;gap:11px;overflow:auto;margin:0 -18px 23px;padding:2px 18px 14px;scrollbar-width:none}.client-category-scroll::-webkit-scrollbar{display:none}.client-category{flex:0 0 103px;min-height:116px;border:1px solid #e7ecf3;background:#fff;border-radius:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;box-shadow:0 8px 20px rgba(39,69,111,.05)}.client-category>span{width:59px;height:59px;border-radius:21px;background:#eaf3ff;color:#1467e8;display:grid;place-items:center}.client-category>span .svg-icon{width:30px;height:30px}.client-category b{font-size:12px;color:#172033}.client-category.cat-1>span{background:#fff0e4;color:#ff7417}.client-category.cat-2>span{background:#f1ebff;color:#6b4be3}.client-category.cat-3>span{background:#e6f8f2;color:#0aa17c}.client-category.cat-4>span{background:#fff0f3;color:#e65778}
+.client-trust-strip{display:grid;grid-template-columns:48px 1fr 18px;gap:11px;align-items:center;padding:14px;border-radius:23px;background:linear-gradient(120deg,#eef6ff,#fff 55%,#fff4e9);border:1px solid #e1ebf8;margin-bottom:29px}.trust-icon{width:48px;height:48px;border-radius:17px;background:#dcecff;color:#1467e8;display:grid;place-items:center}.trust-icon .svg-icon{width:25px}.client-trust-strip b{display:block;font-size:14px;color:#14213a}.client-trust-strip small{display:block;font-size:10px;color:#7e8a9d;margin-top:3px;line-height:1.3}
+.client-task-list{display:grid;gap:11px;margin-bottom:17px}.client-task-card{width:100%;border:1px solid #e6edf6;background:#fff;border-radius:24px;padding:12px;display:grid;grid-template-columns:70px 1fr 18px;gap:12px;align-items:center;text-align:left;box-shadow:0 9px 24px rgba(37,67,111,.06)}.client-task-icon{width:70px;height:70px;border-radius:21px;background:#eaf3ff;color:#1467e8;display:grid;place-items:center}.client-task-icon .svg-icon{width:34px;height:34px}.tone-progress .client-task-icon{background:#e6f8f2;color:#0aa17c}.tone-assigned .client-task-icon{background:#fff0e4;color:#ff7417}.tone-done .client-task-icon{background:#f1ebff;color:#6b4be3}.tone-cancelled .client-task-icon{background:#fff0f3;color:#d84d69}.client-task-main{min-width:0}.client-task-top{display:flex;justify-content:space-between;gap:8px;align-items:start}.client-task-top b{font-size:15px;color:#152238;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.client-task-top em{font-style:normal;font-size:15px;font-weight:950;color:#0c8a62}.client-task-meta{display:flex;align-items:center;gap:4px;font-size:10px;color:#7f8b9d;margin:5px 0}.client-task-meta .svg-icon{width:13px;height:13px}.client-task-bottom{display:flex;align-items:center;gap:7px}.client-task-bottom i{font-style:normal;font-size:9px;font-weight:900;background:#eef4ff;color:#1265df;border-radius:999px;padding:5px 7px}.client-task-bottom small{font-size:9px;color:#ff7417;font-weight:900}.client-task-arrow{font-size:24px;color:#9aa5b5}
+.client-empty{padding:28px 20px;border:1px dashed #dce6f3;border-radius:25px;background:#fbfdff;text-align:center}.client-empty>span{width:58px;height:58px;border-radius:19px;background:#eaf3ff;color:#1467e8;display:grid;place-items:center;margin:0 auto 11px}.client-empty>span .svg-icon{width:29px}.client-empty h3{margin:0 0 5px}.client-empty p{font-size:12px;color:#7e899b}.client-empty button{border:0;background:#1467e8;color:#fff;border-radius:14px;padding:10px 14px;font-weight:900}
+.client-big-publish{width:100%;display:grid;grid-template-columns:48px 1fr 20px;align-items:center;gap:11px;text-align:left;border:0;border-radius:23px;padding:14px;background:linear-gradient(115deg,#eaf3ff,#fff 56%,#fff0e4)}.client-big-publish>span:first-child{width:48px;height:48px;border-radius:17px;background:#1467e8;color:#fff;display:grid;place-items:center}.client-big-publish b{display:block;font-size:14px;color:#14213a}.client-big-publish small{font-size:10px;color:#7f8b9d}
+
+/* WORKER FEATURED */
+.featured-head{margin-top:3px}.worker-featured-scroll{display:flex;gap:11px;overflow:auto;margin:0 -18px 25px;padding:2px 18px 14px;scrollbar-width:none}.worker-featured-scroll::-webkit-scrollbar{display:none}.worker-featured-card{flex:0 0 158px;min-height:182px;border:1px solid #e5ebf4;background:#fff;border-radius:25px;padding:14px;text-align:left;display:flex;flex-direction:column;box-shadow:0 9px 24px rgba(37,67,111,.06)}.wf-icon{width:52px;height:52px;border-radius:18px;background:#eaf3ff;color:#1467e8;display:grid;place-items:center;margin-bottom:9px}.wf-icon .svg-icon{width:27px}.worker-featured-card:nth-child(2n) .wf-icon{background:#fff0e4;color:#ff7417}.worker-featured-card:nth-child(3n) .wf-icon{background:#e6f8f2;color:#0aa17c}.wf-cat{font-size:9px;color:#8d98a9;font-weight:900;text-transform:uppercase;letter-spacing:.06em}.worker-featured-card>b{font-size:13px;color:#172033;margin:3px 0 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.worker-featured-card strong{font-size:21px;color:#0b8e63}.worker-featured-card small{font-size:9px;color:#818d9f;margin-top:auto}
+
+/* TASK JOURNEY */
+.journey-card{margin:14px 0;border:1px solid #dfe9f7;border-radius:24px;background:linear-gradient(130deg,#f7fbff,#fff 60%,#fff8f1);padding:16px;box-shadow:0 9px 24px rgba(37,67,111,.06)}.journey-head{display:grid;grid-template-columns:47px 1fr;gap:11px;align-items:start}.journey-head>span{width:47px;height:47px;border-radius:16px;background:#e3efff;color:#1467e8;display:grid;place-items:center}.journey-head>span .svg-icon{width:24px}.journey-head small{font-size:9px;font-weight:950;color:#ff7417;letter-spacing:.1em}.journey-head h3{font-size:17px;margin:2px 0;color:#14213a}.journey-head p{font-size:11px;color:#7d899c;margin:0;line-height:1.35}.journey-track{height:7px;border-radius:99px;background:#e8edf4;overflow:hidden;margin:15px 0 7px}.journey-track i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#1467e8,#ff7417)}.journey-labels{display:grid;grid-template-columns:repeat(6,1fr);gap:2px}.journey-labels span{font-size:7px;text-align:center;color:#9aa4b4;font-weight:800}
+
+/* EARNINGS */
+.earnings-page{min-height:100vh;padding:18px 18px 120px;background:linear-gradient(180deg,#f4f9ff 0,#fff 35%,#fff9f3 100%)}.earnings-head{display:grid;grid-template-columns:48px 1fr 48px;align-items:center;gap:10px;margin-bottom:17px}.earnings-head>div span{font-size:9px;color:#8b97aa;font-weight:950;letter-spacing:.1em}.earnings-head h1{font-size:24px;margin:1px 0}.earnings-help{width:44px;height:44px;border:1px solid #e3ebf6;background:#fff;border-radius:16px;color:#1467e8;display:grid;place-items:center}.earnings-help .svg-icon{width:22px}
+.earnings-hero{border-radius:30px;padding:24px;background:linear-gradient(125deg,#0b4aa8,#1467e8 58%,#3d86ed);color:#fff;box-shadow:0 19px 40px rgba(20,103,232,.2);position:relative;overflow:hidden}.earnings-hero:after{content:"";position:absolute;width:180px;height:180px;border-radius:50%;right:-85px;top:-80px;background:rgba(255,255,255,.11)}.earnings-kicker{font-size:10px;font-weight:900;color:#dceaff;letter-spacing:.08em}.earnings-hero h2{font-size:42px;margin:7px 0 2px;letter-spacing:-1.5px}.earnings-hero p{font-size:11px;color:#dceaff;margin:0}.earnings-month{margin-top:19px;padding-top:14px;border-top:1px solid rgba(255,255,255,.2);display:flex;justify-content:space-between;font-size:12px}.earnings-month b{font-size:16px}
+.earnings-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:14px 0 23px}.earnings-metrics>div{min-height:106px;border:1px solid #e6edf6;background:#fff;border-radius:21px;padding:12px;box-shadow:0 8px 22px rgba(37,67,111,.05)}.earnings-metrics span{width:35px;height:35px;border-radius:13px;background:#eaf3ff;color:#1467e8;display:grid;place-items:center;margin-bottom:8px}.earnings-metrics span .svg-icon{width:19px}.earnings-metrics small{display:block;font-size:8px;color:#8c97a8;line-height:1.15}.earnings-metrics b{display:block;font-size:14px;color:#152238;margin-top:3px}
+.payout-setup-card{display:grid;grid-template-columns:50px 1fr;gap:11px;border:1px solid #f2ddca;background:linear-gradient(125deg,#fff9f3,#fff 60%,#edf5ff);border-radius:24px;padding:15px;margin-bottom:28px}.payout-icon{width:50px;height:50px;border-radius:17px;background:#ffe6d1;color:#ff7417;display:grid;place-items:center}.payout-icon .svg-icon{width:25px}.payout-setup-card b{font-size:14px;color:#14213a}.payout-setup-card p{font-size:10px;color:#7f8b9d;line-height:1.35;margin:4px 0 0}.payout-setup-card button{grid-column:2;justify-self:start;border:0;border-radius:13px;background:#ff7417;color:#fff;padding:9px 11px;font-size:10px;font-weight:950}
+.earnings-section-head span{font-size:9px;color:#8d98aa;font-weight:950;letter-spacing:.1em}.earnings-section-head h2{font-size:23px;margin:3px 0 12px}.earnings-list{display:grid;gap:10px}.earning-row{display:grid;grid-template-columns:50px 1fr auto;gap:11px;align-items:center;border:1px solid #e6edf6;background:#fff;border-radius:21px;padding:12px}.earning-row-icon{width:50px;height:50px;border-radius:17px;background:#e8f8f3;color:#0aa17c;display:grid;place-items:center}.earning-row-icon .svg-icon{width:25px}.earning-row b{display:block;font-size:13px;color:#172033}.earning-row small{font-size:9px;color:#8994a6}.earning-row strong{font-size:15px;color:#0b8e63}.earnings-info-example{border:1px solid #e5ebf4;border-radius:18px;overflow:hidden;margin:12px 0}.earnings-info-example>span{display:block;padding:10px 12px;background:#f6f9fd;font-size:10px;font-weight:900;color:#7f8b9c}.earnings-info-example>div{display:flex;justify-content:space-between;padding:11px 12px;border-top:1px solid #edf1f6;font-size:12px}.earnings-info-example .net{background:#eefaf6;color:#087c5b}
+
+/* profile earnings identity */
+.account-screen .setting-earnings{background:linear-gradient(145deg,#fff,#e8f8f3)!important}.account-screen .setting-earnings .row-ico{background:#d8f2e9!important;color:#0aa17c!important}
+
+/* mobile tuning */
+@media(max-width:390px){
+ .client-market-home{padding-left:14px;padding-right:14px}.client-category-scroll,.worker-featured-scroll{margin-left:-14px;margin-right:-14px;padding-left:14px;padding-right:14px}
+ .client-main-banner{padding:21px;grid-template-columns:minmax(0,1fr) 88px}.client-banner-copy h1{font-size:27px}.client-banner-art>div{width:82px;height:82px;border-radius:27px}
+ .client-task-card{grid-template-columns:62px 1fr 15px}.client-task-icon{width:62px;height:62px}
+ .earnings-metrics{gap:7px}.earnings-metrics>div{padding:10px}.earnings-metrics b{font-size:12px}
+}
+
 </style>
 <link rel="manifest" href="./manifest.webmanifest?v=1.9.4"><link rel="apple-touch-icon" href="./icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default">
 </head>
@@ -656,7 +705,7 @@ const root=document.getElementById("root");
 let state={
   route:"loading", mode:localStorage.getItem("dohoy_mode")||"client",
   session:null,user:null,profile:null,privateProfile:null,tasks:[],selectedTask:null,offers:[],messages:[],conversations:[],chatBack:"taskDetail",chatDraft:"",notice:"",error:"",
-  workerLocation:null, workerLocationError:"", workerAddress:"", workerCategory:"", workerTaskTab:"pending", taskBackRoute:"", showContactDetails:false, workerProfile:null, workerProfileBack:"taskDetail", swipeConversationId:null, currentTaskRating:0, currentTaskReview:"", taskMedia:[], pendingTaskFiles:[], pendingCompletionFiles:[], currentClientRating:0, currentClientReview:"", clientProfile:null, clientReviews:[], workerCategories:[], blockedUsers:[], myReports:[], notifications:[], unreadNotifications:0, unreadMessages:0, workerReviews:[], workerFavorite:false, workerBlocked:false, online:navigator.onLine, currentPayment:null, publishBusy:false, offerBusy:false, checkoutBusy:false, savedCards:null, paymentMethodsBusy:false, splash:true
+  workerLocation:null, workerLocationError:"", workerAddress:"", workerCategory:"", workerTaskTab:"pending", taskBackRoute:"", showContactDetails:false, workerProfile:null, workerProfileBack:"taskDetail", swipeConversationId:null, currentTaskRating:0, currentTaskReview:"", taskMedia:[], pendingTaskFiles:[], pendingCompletionFiles:[], currentClientRating:0, currentClientReview:"", clientProfile:null, clientReviews:[], workerCategories:[], blockedUsers:[], myReports:[], notifications:[], unreadNotifications:0, unreadMessages:0, workerReviews:[], workerFavorite:false, workerBlocked:false, online:navigator.onLine, currentPayment:null, publishBusy:false, offerBusy:false, checkoutBusy:false, savedCards:null, paymentMethodsBusy:false, splash:true, clientOfferCounts:{}, earningsPayments:[], earningsTasks:{}, earningsLoading:false
 };
 let poller=null;
 let deliveryPoller=null;
@@ -718,6 +767,10 @@ function iconSvg(name,opts={}){
  if(name==="crown")return svgWrap(`<path ${s} d="m4 8 4 3 4-6 4 6 4-3-1.5 10h-13L4 8Z"/><path ${s} d="M6 20h12"/>`);
  if(name==="gear")return svgWrap(`<circle ${s} cx="12" cy="12" r="3"/><path ${s} d="M19.2 13.5a7.7 7.7 0 0 0 0-3l2-1.5-2-3.4-2.4 1a8 8 0 0 0-2.6-1.5L14 2.5h-4l-.3 2.6a8 8 0 0 0-2.6 1.5l-2.4-1-2 3.4 2 1.5a7.7 7.7 0 0 0 0 3l-2 1.5 2 3.4 2.4-1a8 8 0 0 0 2.6 1.5l.3 2.6h4l.3-2.6a8 8 0 0 0 2.6-1.5l2.4 1 2-3.4-2.1-1.5Z"/>`);
  if(name==="document")return svgWrap(`<rect ${s} x="5" y="3.5" width="14" height="17" rx="2.2"/><path ${s} d="M8.5 8h7M8.5 12h7M8.5 16h4.5"/>`);
+ if(name==="wallet")return svgWrap(`<path ${s} d="M4 6.5h13.5A2.5 2.5 0 0 1 20 9v9H5.5A2.5 2.5 0 0 1 3 15.5V7.8A2.8 2.8 0 0 1 5.8 5H16"/><path ${s} d="M15 11h5v4h-5a2 2 0 1 1 0-4Z"/>`);
+ if(name==="trend")return svgWrap(`<path ${s} d="m4 16 5-5 3.2 3.2L20 6.5"/><path ${s} d="M15 6.5h5v5"/>`);
+ if(name==="bolt")return svgWrap(`<path ${s} d="m13.5 2.8-7 10h5l-1 8.4 7-11h-5l1-7.4Z"/>`);
+ if(name==="route")return svgWrap(`<circle ${s} cx="6" cy="18" r="2"/><circle ${s} cx="18" cy="6" r="2"/><path ${s} d="M7.5 16.7c1.5-1.5 1.8-3.2.7-4.5-1.1-1.4-.7-3.1.8-4.2 1.7-1.3 3.7-.7 5.3-1"/>`);
  return svgWrap(`<path ${s} d="m12 3 1.6 5.1L19 10l-5.4 1.9L12 17l-1.6-5.1L5 10l5.4-1.9L12 3Z"/>`)
 }
 function taskIcon(task){const m=taskMeta(typeof task==="string"?task:task?.category);return iconSvg(m.base,m)}
@@ -824,7 +877,7 @@ function navBar(){const home=state.mode==="client"?"clientHome":"workerHome";con
 <button class="${state.route===home?"active":""}" onclick="go('${home}')"><b>${iconSvg("home")}</b><br>Inicio</button>
 <button class="${state.route===second?"active":""}" onclick="go('${second}')"><b>${iconSvg(state.mode==="client"?"plus":"tasks")}</b><br>${state.mode==="client"?"Publicar":"Tareas"}</button>
 <button class="${["messagesHome","chat"].includes(state.route)?"active":""}" onclick="openMessagesHome()"><b>${iconSvg("chat")}</b>${state.unreadMessages?`<span class="nav-badge">${Math.min(99,state.unreadMessages)}</span>`:""}<br>Mensajes</button>
-<button class="${["profile","editProfile","addresses","payments","billing","verification","language","notifications","help","terms","privacy","favorites","clientProfile","safetyCenter","blockedUsers","myReports","supportCenter","newSupportCase","supportCase","admin"].includes(state.route)?"active":""}" onclick="go('profile')"><b>${iconSvg("user")}</b><br>Perfil</button>
+<button class="${["profile","editProfile","addresses","payments","earnings","billing","verification","language","notifications","help","terms","privacy","favorites","clientProfile","safetyCenter","blockedUsers","myReports","supportCenter","newSupportCase","supportCase","admin"].includes(state.route)?"active":""}" onclick="go('profile')"><b>${iconSvg("user")}</b><br>Perfil</button>
 </nav>`}
 function clearPoll(){
 if(poller){clearInterval(poller);poller=null}
@@ -901,19 +954,73 @@ return shell(`<section class="screen"><div class="top">${logo(true)}${state.sess
 </div></section>`)
 }
 function taskCard(t,client=false){
-return `<button class="card task" onclick="openTask('${t.id}')">
-<div class="thumb">${taskIcon(t)}</div><div><h3>${escapeHtml(t.title)}</h3><div class="meta" style="display:flex;align-items:center;gap:3px">${locationMarkup(t.location_label||"Sin ubicación")}</div><span class="status-mini">${taskStatusLabel(t)}</span></div><div class="task-price"><div class="price">${money(t.offered_price)}</div><span class="task-arrow">›</span></div>
-</button>`
+ const offers=Number(state.clientOfferCounts?.[t.id]||0);
+ const when=t.scheduled_for?new Date(t.scheduled_for).toLocaleDateString("es-MX",{day:"numeric",month:"short"}):"Flexible";
+ const tone=t.status==="completed"?"done":t.status==="in_progress"?"progress":t.status==="assigned"?"assigned":t.status==="cancelled"?"cancelled":"open";
+ return `<button class="client-task-card tone-${tone}" onclick="openTask('${t.id}')">
+   <span class="client-task-icon">${taskIcon(t)}</span>
+   <span class="client-task-main">
+     <span class="client-task-top"><b>${escapeHtml(t.title)}</b><em>${money(t.offered_price)}</em></span>
+     <span class="client-task-meta">${iconSvg("calendar")} ${escapeHtml(when)} · ${escapeHtml(baseCategory(t.category))}</span>
+     <span class="client-task-bottom"><i>${taskStatusLabel(t)}</i>${t.status==="open"?`<small>${offers} propuesta${offers===1?"":"s"}</small>`:""}</span>
+   </span>
+   <span class="client-task-arrow">›</span>
+ </button>`
 }
 function statusText(s){return ({open:"Abierta",assigned:"Asignada",in_progress:"En curso",completed:"Terminada",cancelled:"Cancelada"})[s]||s}
 async function clientHome(){
-await Promise.all([loadMyTasks(),loadNotificationSummary()]);
-root.innerHTML=shell(`<section class="screen"><div class="top"><div>${logo(true)}<div class="small">Hola, ${escapeHtml((state.profile?.full_name||"Usuario").split(" ")[0])}</div></div><div style="display:flex;gap:8px">${notificationBell()}<button class="icon" onclick="go('mode')">⇄</button></div></div>
-<div class="home-hero"><div class="hero-row"><div><div class="kicker">Modo cliente</div><h1>¿Qué necesitas resolver hoy?</h1></div><button class="switch-chip" onclick="go('mode')">Cambiar modo</button></div><p>Describe la tarea, define cuánto pagas y recibe propuestas.</p><button class="btn" onclick="go('createTask')">＋ Publicar una tarea</button></div>
-<div class="section"><h2>Mis tareas</h2><button class="pill" onclick="loadMyTasks().then(render)">Actualizar</button></div>
-<div class="cards">${state.tasks.length?state.tasks.map(t=>taskCard(t,true)).join(""):`<div class="empty">Todavía no has publicado ninguna tarea.</div>`}</div>
+await Promise.all([loadMyTasks(),loadNotificationSummary(),loadClientTaskStats()]);
+const first=(state.profile?.full_name||"Usuario").trim().split(" ")[0]||"Usuario";
+const active=state.tasks.filter(t=>["open","assigned","in_progress"].includes(t.status));
+const completed=state.tasks.filter(t=>t.status==="completed").length;
+const offers=Object.values(state.clientOfferCounts||{}).reduce((a,b)=>a+Number(b||0),0);
+root.innerHTML=shell(`<section class="client-market-home">
+ <div class="client-market-top">
+   <div><span class="client-hello">Hola, ${escapeHtml(first)}</span><button class="client-location" onclick="go('addresses')">${iconSvg("location")}<span>Tu ubicación</span><b>⌄</b></button></div>
+   <div class="client-top-actions">${notificationBell()}<button class="market-avatar" onclick="go('profile')">${avatarMarkup(state.profile)}</button></div>
+ </div>
+
+ <button class="client-search-launch" onclick="go('createTask')">${iconSvg("search")}<span>¿Qué necesitas resolver hoy?</span><em>${iconSvg("plus")}</em></button>
+
+ <section class="client-main-banner">
+   <div class="client-banner-copy"><span class="promo-pill">PUBLICA EN MINUTOS</span><h1>Tu pendiente,<br>resuelto hoy.</h1><p>Cuéntanos qué necesitas, recibe propuestas y elige a quién contratar.</p><button onclick="go('createTask')">Publicar una tarea</button></div>
+   <div class="client-banner-art"><span class="cb-orb one"></span><span class="cb-orb two"></span><div>${iconSvg("verify")}</div></div>
+ </section>
+
+ <div class="client-mini-stats">
+   <button onclick="go('clientHome')"><b>${active.length}</b><span>Activas</span></button>
+   <button onclick="go('clientHome')"><b>${offers}</b><span>Propuestas</span></button>
+   <button onclick="go('clientHome')"><b>${completed}</b><span>Terminadas</span></button>
+ </div>
+
+ <div class="client-section-head"><div><span>Servicios</span><h2>¿En qué te ayudamos?</h2></div><button onclick="go('createTask')">Ver todo</button></div>
+ <div class="client-category-scroll">${categories.map((cat,i)=>`<button class="client-category cat-${i%5}" onclick="startClientCategory('${escapeAttr(cat)}')"><span>${iconSvg(cat)}</span><b>${escapeHtml(cat)}</b></button>`).join("")}</div>
+
+ <div class="client-trust-strip">
+   <span class="trust-icon">${iconSvg("shield")}</span>
+   <div><b>Contrata con más confianza</b><small>Perfiles, chat, pagos y calificaciones dentro de DOHOY.</small></div>
+   <span>›</span>
+ </div>
+
+ <div class="client-section-head"><div><span>Tu actividad</span><h2>${active.length?"Tareas en movimiento":"Tus publicaciones"}</h2></div><button onclick="loadMyTasks().then(()=>loadClientTaskStats()).then(render)">Actualizar</button></div>
+ <div class="client-task-list">${state.tasks.length?state.tasks.slice(0,6).map(t=>taskCard(t,true)).join(""):`<div class="client-empty"><span>${iconSvg("plus")}</span><h3>Publica tu primera tarea</h3><p>Recibe propuestas de personas interesadas en ayudarte.</p><button onclick="go('createTask')">Empezar</button></div>`}</div>
+
+ ${state.tasks.length?`<button class="client-big-publish" onclick="go('createTask')"><span>${iconSvg("plus")}</span><span><b>Publicar otra tarea</b><small>Describe lo que necesitas y define tu presupuesto.</small></span><em>›</em></button>`:""}
 </section>`,true)
 }
+async function loadClientTaskStats(){
+ state.clientOfferCounts={};
+ const ids=(state.tasks||[]).filter(t=>t.status==="open").map(t=>t.id);
+ if(!ids.length)return;
+ const {data,error}=await sb.from("task_offers").select("task_id,status").in("task_id",ids);
+ if(error)return;
+ for(const o of data||[])if(["pending","accepted"].includes(o.status))state.clientOfferCounts[o.task_id]=(state.clientOfferCounts[o.task_id]||0)+1
+}
+function startClientCategory(cat){
+ state.publishPrefillCategory=cat;
+ go("createTask")
+}
+
 function workerTaskCard(t){const d=taskDistanceKm(t);return `<button class="worker-task" onclick="openTask('${t.id}')"><div class="task-visual">${taskIcon(t)}</div><div><h3>${escapeHtml(t.title)}</h3><div class="price">${money(t.offered_price)}</div><div class="worker-meta">${iconSvg("location")}${d!=null?`<span class="distance-badge">${distanceLabel(d)}</span><span>·</span>`:""}<span>Ubicación aproximada</span><span>·</span><span>${t.scheduled_for?timeText(t.scheduled_for):"Hoy"}</span></div></div><span class="worker-arrow">›</span></button>`}
 
 async function workerHome(){
@@ -970,6 +1077,9 @@ root.innerHTML=shell(`<section class="market-screen marketplace-v2">
       <em>›</em>
     </button>
   </div>
+
+  ${visible.length?`<div class="market-v2-section-head featured-head"><div><span>Destacadas</span><h2>Mejor pagadas</h2></div><button onclick="scrollToWorkerJobs()">Ver todas</button></div>
+  <div class="worker-featured-scroll">${[...visible].sort((a,b)=>Number(b.offered_price||0)-Number(a.offered_price||0)).slice(0,4).map(t=>`<button class="worker-featured-card" onclick="openTask('${t.id}')"><span class="wf-icon">${taskIcon(t)}</span><span class="wf-cat">${escapeHtml(baseCategory(t.category))}</span><b>${escapeHtml(t.title)}</b><strong>${money(t.offered_price)}</strong><small>${taskDistanceKm(t)!=null?distanceLabel(taskDistanceKm(t))+" · ":""}${t.scheduled_for?timeText(t.scheduled_for):"Flexible"}</small></button>`).join("")}</div>`:""}
 
   <div class="market-v2-section-head">
     <div><span>Explora</span><h2>¿Qué quieres hacer?</h2></div>
@@ -1055,11 +1165,11 @@ async function workerJobs(){
 }
 function selectPublishCategory(cat,btn){document.getElementById("taskCategoryHidden").value=cat;document.querySelectorAll(".publish-category").forEach(x=>x.classList.remove("selected"));if(btn)btn.classList.add("selected");toggleVehicleOptions(cat)}
 function createTask(){
-const defaultCat="Vehículo";state.pendingTaskFiles=[];state.pendingTaskPhotoLimit=5;state.taskPhotoSelectionNote="";
+const defaultCat=categories.includes(state.publishPrefillCategory)?state.publishPrefillCategory:"Vehículo";state.pendingTaskFiles=[];state.pendingTaskPhotoLimit=5;state.taskPhotoSelectionNote="";
 root.innerHTML=shell(`<section class="publish-screen"><div class="publish-head"><button class="icon" onclick="go('clientHome')">←</button>${logo(true)}<span></span></div>
 <div class="publish-eyebrow">Publicar tarea</div><h1 class="publish-title">Cuéntanos qué necesitas</h1>${authMsg()}
 <form id="taskForm"><input id="taskCategoryHidden" type="hidden" name="category" value="${defaultCat}">
-<div class="publish-category-grid">${categories.slice(0,6).map((c,i)=>`<button type="button" class="publish-category ${i===0?"selected":""}" onclick="selectPublishCategory('${escapeAttr(c)}',this)">${iconSvg(c)}<span>${escapeHtml(c)}</span></button>`).join("")}</div>
+<div class="publish-category-grid">${categories.slice(0,6).map((c,i)=>`<button type="button" class="publish-category ${c===defaultCat?"selected":""}" onclick="selectPublishCategory('${escapeAttr(c)}',this)">${iconSvg(c)}<span>${escapeHtml(c)}</span></button>`).join("")}</div>
 <div class="publish-card"><div class="pc-icon">${iconSvg("tasks")}</div><div><label>Título de la tarea</label><input name="title" required placeholder="Ej. Lavar mi carro"></div></div>
 <div class="publish-card"><div class="pc-icon">${iconSvg("tasks")}</div><div><label>Descripción</label><textarea name="description" required placeholder="Explícale a la persona exactamente qué necesitas"></textarea></div></div>
 <div class="media-picker"><h3>Fotos de la tarea</h3><p>Agrega hasta 5 fotos para explicar mejor lo que necesitas.</p><input id="taskPhotosInput" class="media-input" type="file" accept="image/*" multiple onchange="selectTaskPhotos(event)"><button type="button" class="media-add-btn" onclick="document.getElementById('taskPhotosInput').click()">${iconSvg("camera")} Agregar fotos</button><div id="taskPhotoPreview" class="media-preview-list"></div></div>
@@ -1249,7 +1359,21 @@ if(isOwner&&t.status==="open"){
 }
 if((t.client_id===state.user.id||t.worker_id===state.user.id)&&t.worker_id&&closed)body+=`<div class="task-mini-actions"><button class="task-inline-delete" onclick="deleteConversation('${t.id}',true)">${iconSvg("trash")} Borrar conversación</button></div>`;
 const statusCls=t.status==="open"?"pending":(t.status==="in_progress"&&t.completion_requested_at?"awaiting":"");
-root.innerHTML=shell(`<section class="screen"><div class="detail-shell"><div class="detail-topline"><button class="icon" onclick="go('${state.taskBackRoute||(isOwner?"clientHome":"workerHome")}')">←</button><span class="detail-category-pill">${taskIcon(t)} ${escapeHtml(baseCategory(t.category))}</span><span></span></div>${authMsg()}<div class="detail-card"><div class="detail-icon-box">${taskIcon(t)}</div><div class="detail-money">${money(t.offered_price)}</div><h1 class="detail-title">${escapeHtml(t.title)}</h1><p class="detail-copy">${escapeHtml(t.description)}</p><span class="detail-location">${iconSvg("location")}<span>${(!isOwner&&t.status==="open")?"Ubicación aproximada":escapeHtml(t.location_label||"Sin ubicación")}${!isOwner&&taskDistanceKm(t)!=null?` · ${distanceLabel(taskDistanceKm(t))} de ti`:""}</span></span>${taskMediaGallery("request","Fotos de la tarea")}</div>${taskLocationCard(t)}<div class="status-banner ${statusCls}"><span class="dot"></span><span>${taskStatusLabel(t)}</span></div>${timelineHtml(t)}${isOwner&&t.status==="open"&&!t.worker_id?`<button class="edit-task-btn" onclick="go('editTask')">Editar tarea</button>`:""}${t.status==="cancelled"&&t.cancellation_reason?`<div class="policy-note"><b>Motivo de cancelación:</b> ${escapeHtml(t.cancellation_reason)}</div>`:""}${(t.client_id===state.user.id||t.worker_id===state.user.id)&&t.worker_id&&!closed?`<button class="chat-cta-btn" onclick="openChat('${t.id}')"><span class="left">${iconSvg("chat")}<span>Abrir chat</span></span><span>›</span></button>`:(t.client_id===state.user.id||t.worker_id===state.user.id)&&t.worker_id&&closed?`<div class="chat-closed-banner"><span class="left">${iconSvg("chat")}<span>El chat se cerró al finalizar la tarea.</span></span></div>`:""}${body}${participantCanCancel(t)?`<button class="cancel-task-btn" onclick="openCancelTaskSheet('${t.id}')">Cancelar tarea</button>`:""}${t.worker_id&&otherParticipantId(t)?`<div class="safety-card"><h3>Seguridad</h3><p>Reporta conductas inapropiadas o bloquea a la otra persona si es necesario.</p><div class="safety-actions"><button class="safety-btn" onclick="openUserReportSheet('${t.id}')">${iconSvg("flag")} Reportar</button><button class="safety-btn danger" onclick="blockOtherUser('${t.id}')">${iconSvg("shield")} Bloquear</button></div></div>`:""}</div></section>`,true);renderCompletionEvidencePreview()
+root.innerHTML=shell(`<section class="screen"><div class="detail-shell"><div class="detail-topline"><button class="icon" onclick="go('${state.taskBackRoute||(isOwner?"clientHome":"workerHome")}')">←</button><span class="detail-category-pill">${taskIcon(t)} ${escapeHtml(baseCategory(t.category))}</span><span></span></div>${authMsg()}<div class="detail-card"><div class="detail-icon-box">${taskIcon(t)}</div><div class="detail-money">${money(t.offered_price)}</div><h1 class="detail-title">${escapeHtml(t.title)}</h1><p class="detail-copy">${escapeHtml(t.description)}</p><span class="detail-location">${iconSvg("location")}<span>${(!isOwner&&t.status==="open")?"Ubicación aproximada":escapeHtml(t.location_label||"Sin ubicación")}${!isOwner&&taskDistanceKm(t)!=null?` · ${distanceLabel(taskDistanceKm(t))} de ti`:""}</span></span>${taskMediaGallery("request","Fotos de la tarea")}</div>${taskLocationCard(t)}<div class="status-banner ${statusCls}"><span class="dot"></span><span>${taskStatusLabel(t)}</span></div>${taskJourneyCard(t,isOwner)}${timelineHtml(t)}${isOwner&&t.status==="open"&&!t.worker_id?`<button class="edit-task-btn" onclick="go('editTask')">Editar tarea</button>`:""}${t.status==="cancelled"&&t.cancellation_reason?`<div class="policy-note"><b>Motivo de cancelación:</b> ${escapeHtml(t.cancellation_reason)}</div>`:""}${(t.client_id===state.user.id||t.worker_id===state.user.id)&&t.worker_id&&!closed?`<button class="chat-cta-btn" onclick="openChat('${t.id}')"><span class="left">${iconSvg("chat")}<span>Abrir chat</span></span><span>›</span></button>`:(t.client_id===state.user.id||t.worker_id===state.user.id)&&t.worker_id&&closed?`<div class="chat-closed-banner"><span class="left">${iconSvg("chat")}<span>El chat se cerró al finalizar la tarea.</span></span></div>`:""}${body}${participantCanCancel(t)?`<button class="cancel-task-btn" onclick="openCancelTaskSheet('${t.id}')">Cancelar tarea</button>`:""}${t.worker_id&&otherParticipantId(t)?`<div class="safety-card"><h3>Seguridad</h3><p>Reporta conductas inapropiadas o bloquea a la otra persona si es necesario.</p><div class="safety-actions"><button class="safety-btn" onclick="openUserReportSheet('${t.id}')">${iconSvg("flag")} Reportar</button><button class="safety-btn danger" onclick="blockOtherUser('${t.id}')">${iconSvg("shield")} Bloquear</button></div></div>`:""}</div></section>`,true);renderCompletionEvidencePreview()
+}
+
+
+function taskJourneyCard(t,isOwner){
+ if(!t.worker_id||t.status==="open"||t.status==="cancelled")return "";
+ const paid=state.currentPayment?.payment_status==="paid";
+ let step=1,label="Acuerdo confirmado",copy=isOwner?"Realiza el pago para asegurar el trabajo.":"El cliente debe completar el pago.";
+ if(paid){step=2;label="Pago confirmado";copy=isOwner?"El trabajador ya puede coordinar su llegada.":"Coordina tu llegada con el cliente."}
+ if(t.en_route_at){step=3;label="En camino";copy="El trabajador se dirige a la ubicación acordada."}
+ if(t.arrived_at){step=4;label=t.status==="in_progress"?"Trabajo en curso":"Trabajador en la ubicación";copy=t.status==="in_progress"?"La tarea ya comenzó.":"Ya pueden comenzar cuando estén listos."}
+ if(t.completion_requested_at){step=5;label="Esperando confirmación";copy=isOwner?"Revisa la evidencia y confirma si quedó terminado.":"El cliente está revisando la finalización."}
+ if(t.status==="completed"){step=6;label="Trabajo finalizado";copy="La tarea quedó cerrada. Ya pueden calificarse."}
+ const pct=Math.max(8,Math.min(100,((step-1)/5)*100));
+ return `<section class="journey-card"><div class="journey-head"><span>${iconSvg("route")}</span><div><small>PASO ${step} DE 6</small><h3>${escapeHtml(label)}</h3><p>${escapeHtml(copy)}</p></div></div><div class="journey-track"><i style="width:${pct}%"></i></div><div class="journey-labels"><span>Acuerdo</span><span>Pago</span><span>Llegada</span><span>Trabajo</span><span>Confirmar</span><span>Listo</span></div></section>`
 }
 
 function agreedTaskAmount(t,offer){
@@ -1300,6 +1424,38 @@ async function markTaskArrived(id){const {data,error}=await sb.rpc("mark_task_ar
 async function editTaskScreen(){const t=state.selectedTask;if(!t||t.client_id!==state.user.id||t.status!=="open"||t.worker_id){state.notice="Esta tarea ya no se puede editar.";go("taskDetail");return}await loadPrivateTaskLocation(t);await loadTaskMedia(t.id);state.pendingTaskFiles=[];state.pendingTaskPhotoLimit=Math.max(0,5-state.taskMedia.filter(m=>m.kind==="request").length);state.taskPhotoSelectionNote="";root.innerHTML=shell(`<section class="publish-screen"><div class="publish-head"><button class="icon" onclick="go('taskDetail')">←</button>${logo(true)}<span></span></div><div class="publish-eyebrow">Editar tarea</div><h1 class="publish-title">Actualiza los detalles</h1>${authMsg()}<form id="editTaskForm"><div class="publish-card"><div class="pc-icon">${iconSvg("tasks")}</div><div><label>Título</label><input name="title" value="${escapeAttr(t.title)}" required></div></div><div class="publish-card"><div class="pc-icon">${iconSvg("tasks")}</div><div><label>Descripción</label><textarea name="description" required>${escapeHtml(t.description)}</textarea></div></div><div class="publish-card" style="grid-template-columns:42px 1fr"><div class="pc-icon">${iconSvg("tasks")}</div><div><label>Categoría</label><select name="category">${categories.map(c=>`<option value="${escapeAttr(c)}" ${c===baseCategory(t.category)?"selected":""}>${escapeHtml(c)}</option>`).join("")}</select></div></div><input id="taskLatitude" type="hidden" name="latitude" value="${t.latitude??""}"><input id="taskLongitude" type="hidden" name="longitude" value="${t.longitude??""}"><div class="publish-two"><div class="publish-card" style="grid-template-columns:42px 1fr"><div class="pc-icon">${iconSvg("location")}</div><div><label>Ubicación</label><input name="location" value="${escapeAttr(t.location_label||"")}" required><button type="button" class="location-use-btn" onclick="useTaskCurrentLocation(this)">${iconSvg("location")} Usar mi ubicación actual</button></div></div><div class="publish-card" style="grid-template-columns:42px 1fr"><div class="pc-icon">$</div><div><label>Presupuesto</label><input name="price" type="number" min="1" value="${Number(t.offered_price)}" required></div></div></div><div class="publish-two"><div class="publish-card" style="grid-template-columns:42px 1fr"><div class="pc-icon">${iconSvg("calendar")}</div><div><label>Fecha</label><input name="task_date" type="date" value="${localDateValue(t.scheduled_for)}"></div></div><div class="publish-card" style="grid-template-columns:42px 1fr"><div class="pc-icon">${iconSvg("clock")}</div><div><label>Hora</label><input name="task_time" type="time" value="${localTimeValue(t.scheduled_for)}"></div></div></div><label class="card" style="display:flex;gap:10px;align-items:center;margin:10px 0"><input name="license" type="checkbox" ${t.requires_driver_license?"checked":""}> Requiere licencia de conducir</label><div class="media-picker"><h3>Agregar más fotos</h3><p>${state.pendingTaskPhotoLimit?`Puedes agregar hasta ${state.pendingTaskPhotoLimit} fotos nuevas (máximo 5 por tarea).`:"Esta tarea ya tiene las 5 fotos permitidas."}</p><input id="taskPhotosInput" class="media-input" type="file" accept="image/*" multiple onchange="selectTaskPhotos(event)"><button type="button" class="media-add-btn" onclick="document.getElementById('taskPhotosInput').click()">${iconSvg("camera")} Agregar fotos</button><div id="taskPhotoPreview" class="media-preview-list"></div></div><button class="publish-submit">Guardar cambios</button></form></section>`,true);bindForms()}
 async function saveEditTask(e){e.preventDefault();const t=state.selectedTask,f=new FormData(e.target),d=f.get("task_date"),tm=f.get("task_time"),scheduled=d?new Date(`${d}T${tm||"12:00"}:00`).toISOString():null,base=f.get("category"),category=base==="Vehículo"?encodeCategory("Vehículo",taskMeta(t.category).variant,taskMeta(t.category).colorKey):base;const {data,error}=await sb.rpc("edit_open_task",{p_task_id:t.id,p_title:f.get("title"),p_description:f.get("description"),p_category:category,p_offered_price:Number(f.get("price")),p_location_label:f.get("location"),p_latitude:f.get("latitude")?Number(f.get("latitude")):null,p_longitude:f.get("longitude")?Number(f.get("longitude")):null,p_scheduled_for:scheduled,p_requires_driver_license:f.get("license")==="on"});if(error)return setMsg("error",error.message);state.selectedTask=Array.isArray(data)?data[0]:data;try{if(state.pendingTaskFiles.length)await uploadTaskMedia(t.id,state.pendingTaskFiles)}catch(err){state.notice="Los cambios se guardaron, pero alguna foto no pudo subirse."}state.pendingTaskFiles=[];go("taskDetail")}
 
+
+async function openEarnings(){
+ if(state.mode!=="worker"){state.notice="Cambia a modo Trabajador para consultar tus ganancias.";go("profile");return}
+ state.route="earnings";state.earningsLoading=true;render();
+ const {data,error}=await sb.from("task_payments").select("id,task_id,amount_total,commission_amount,worker_net_amount,payment_status,paid_at,created_at").eq("worker_id",state.user.id).order("created_at",{ascending:false}).limit(100);
+ state.earningsPayments=error?[]:(data||[]);
+ state.earningsTasks={};
+ const ids=[...new Set(state.earningsPayments.map(p=>p.task_id).filter(Boolean))];
+ if(ids.length){const {data:tasks}=await sb.from("tasks").select("id,title,category,status,completed_at").in("id",ids);for(const t of tasks||[])state.earningsTasks[t.id]=t}
+ state.earningsLoading=false;render()
+}
+function earningsScreen(){
+ const rows=state.earningsPayments||[];
+ const paid=rows.filter(x=>x.payment_status==="paid");
+ const total=paid.reduce((s,x)=>s+Number(x.worker_net_amount||0),0);
+ const gross=paid.reduce((s,x)=>s+Number(x.amount_total||0),0);
+ const commission=paid.reduce((s,x)=>s+Number(x.commission_amount||0),0);
+ const monthKey=new Date().toISOString().slice(0,7);
+ const month=paid.filter(x=>String(x.paid_at||x.created_at||"").slice(0,7)===monthKey).reduce((s,x)=>s+Number(x.worker_net_amount||0),0);
+ return shell(`<section class="earnings-page">
+   <div class="earnings-head"><button class="icon" onclick="go('profile')">←</button><div><span>DOHOY TRABAJADOR</span><h1>Mis ganancias</h1></div><button class="earnings-help" onclick="openEarningsInfo()">${iconSvg("help")}</button></div>
+   ${authMsg()}
+   <section class="earnings-hero"><span class="earnings-kicker">Total registrado</span><h2>${money(total)}</h2><p>Ganancia neta después de la comisión DOHOY.</p><div class="earnings-month"><span>Este mes</span><b>${money(month)}</b></div></section>
+   <div class="earnings-metrics"><div><span>${iconSvg("wallet")}</span><small>Trabajos pagados</small><b>${paid.length}</b></div><div><span>${iconSvg("trend")}</span><small>Total cobrado</small><b>${money(gross)}</b></div><div><span>${iconSvg("receipt")}</span><small>Comisión DOHOY</small><b>${money(commission)}</b></div></div>
+   <section class="payout-setup-card"><span class="payout-icon">${iconSvg("payment")}</span><div><b>Configura cómo recibirás tus pagos</b><p>El historial ya usa pagos reales de DOHOY. La transferencia automática al trabajador se activará con Stripe Connect.</p></div><button onclick="openPayoutSetup()">Configurar cobros</button></section>
+   <div class="earnings-section-head"><div><span>Movimientos</span><h2>Historial</h2></div></div>
+   ${state.earningsLoading?`<div class="empty">Cargando ganancias…</div>`:rows.length?`<div class="earnings-list">${rows.map(p=>{const t=state.earningsTasks[p.task_id]||{};return `<article class="earning-row"><span class="earning-row-icon">${taskIcon(t.category||"Otro")}</span><div><b>${escapeHtml(t.title||"Trabajo DOHOY")}</b><small>${new Date(p.paid_at||p.created_at).toLocaleDateString("es-MX")} · ${p.payment_status==="paid"?"Pagado":escapeHtml(p.payment_status)}</small></div><strong>${p.payment_status==="paid"?"+":""}${money(p.worker_net_amount)}</strong></article>`}).join("")}</div>`:`<div class="client-empty"><span>${iconSvg("wallet")}</span><h3>Aún no hay ganancias registradas</h3><p>Cuando un cliente pague una tarea asignada a ti, aparecerá aquí.</p><button onclick="go('workerHome')">Buscar trabajos</button></div>`}
+ </section>`,true)
+}
+function openEarningsInfo(){openProfileSheet("Cómo se calculan tus ganancias","DOHOY cobra una comisión del 15% sobre el monto acordado.",`<div class="earnings-info-example"><span>Ejemplo</span><div><b>Cliente paga</b><strong>$1,000</strong></div><div><b>Comisión DOHOY (15%)</b><strong>−$150</strong></div><div class="net"><b>Tu ganancia</b><strong>$850</strong></div></div>`)}
+function openPayoutSetup(){openProfileSheet("Cobros al trabajador","El historial de ganancias ya funciona. Para enviar automáticamente el dinero a tu banco debemos activar Stripe Connect en la cuenta de DOHOY.",`<div class="private-note">${iconSvg("shield")}<span>No te pediremos datos bancarios dentro de esta pantalla hasta que el flujo seguro de Stripe Connect esté habilitado.</span></div><button class="btn primary" onclick="closeProfileSheet()">Entendido</button>`)}
+
 function profileDisplayName(p){
  const first=String(p?.full_name||"").trim(),last=String(p?.last_name||"").trim();
  if(!first&&!last)return "Usuario DOHOY";
@@ -1326,6 +1482,7 @@ async function profile(){
    ${settingsRow("Direcciones","addresses","location","Ubicación guardada y actual")}
    <button class="settings-row payment-settings-row setting-payments" onclick="go('payments')"><span class="row-ico payment-row-ico">${iconSvg("payment")}</span><span><span class="row-main">Métodos de pago <em class="new-pill">NUEVO</em></span><span class="row-sub">Añade y administra tus tarjetas con Stripe</span></span><span class="chev">›</span></button>
    ${settingsRow("Verificaciones","verification","verify","Foto, identidad y licencia")}
+   ${state.mode==="worker"?`<button class="settings-row setting-earnings" onclick="openEarnings()"><span class="row-ico">${iconSvg("wallet")}</span><span><span class="row-main">Mis ganancias <em class="new-pill">NUEVO</em></span><span class="row-sub">Pagos, comisión y movimientos</span></span><span class="chev">›</span></button>`:""}
    ${state.mode==="client"?`<button class="settings-row" onclick="openFavorites()"><span class="row-ico">${iconSvg("heart")}</span><span><span class="row-main">Trabajadores favoritos</span></span><span class="chev">›</span></button>`:""}
    <button class="settings-row setting-safety" onclick="openSafetyCenter()"><span class="row-ico">${iconSvg("shield")}</span><span><span class="row-main">Centro de seguridad</span></span><span class="chev">›</span></button>
    ${settingsRow("Cambiar modo","mode","mode","Cliente o trabajador")}
@@ -1341,7 +1498,7 @@ async function profile(){
    ${settingsRow("Política de privacidad","privacy","document","Cómo protegemos tus datos")}
  </div>
  <div class="account-actions"><button class="logout-btn" onclick="signOutCurrent()">${iconSvg("logout")} Cerrar sesión</button></div>
- <div class="version-note">DOHOY · Versión 2.1.0 · MARKETPLACE UI</div>
+ <div class="version-note">DOHOY · Versión 3.0.0 · FULL FLOW</div>
  </section>`,true)
 }
 function settingsRow(title,route,icon,sub=""){
@@ -1731,6 +1888,7 @@ if(state.route==="blockedUsers"){root.innerHTML=blockedUsersScreen();return}
 if(state.route==="myReports"){root.innerHTML=myReportsScreen();return}
 if(state.route==="addresses"){root.innerHTML=addressesScreen();return}
 if(state.route==="payments"){root.innerHTML=paymentsScreen();return}
+if(state.route==="earnings"){root.innerHTML=earningsScreen();return}
 if(state.route==="billing"){root.innerHTML=billingScreen();return}
 if(state.route==="verification"){root.innerHTML=verificationScreen();return}
 if(state.route==="language"){root.innerHTML=languageScreen();return}
@@ -1817,7 +1975,7 @@ async function publishTask(e){
   const {data,error}=await sb.rpc('create_task_secure',args);if(error)throw error;
   state.selectedTask=Array.isArray(data)?data[0]:data;await loadPrivateTaskLocation(state.selectedTask);
   let notice='';try{if(state.pendingTaskFiles.length)await uploadTaskMedia(state.selectedTask.id,state.pendingTaskFiles)}catch(err){notice='La tarea se publicó, pero alguna foto no pudo subirse.'}
-  state.pendingTaskFiles=[];state.notice=notice;state.error="";go('taskDetail')
+  state.pendingTaskFiles=[];state.publishPrefillCategory="";state.notice=notice;state.error="";go('taskDetail')
  }catch(err){state.error="No pudimos publicar la tarea: "+(err?.message||err);render()}
  finally{state.publishBusy=false}
 }
