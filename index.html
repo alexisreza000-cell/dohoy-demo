@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="DOHOY">
-<title>DOHOY 0.9.1 Beta</title>
+<title>DOHOY 1.0 Beta</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20128%20128%22%3E%3Crect%20width%3D%22128%22%20height%3D%22128%22%20rx%3D%2228%22%20fill%3D%22%23071B3B%22%2F%3E%3Cpath%20d%3D%22M15%2031C45%2020%2082%2020%20103%2034c15%2010%2020%2025%2016%2042-7-17-22-27-42-33-22-7-43-10-62-12Z%22%20fill%3D%22%23FF7A00%22%2F%3E%3Cpath%20d%3D%22M31%2049c18-1%2037%200%2051%207%2016%208%2024%2019%2023%2031-1%2013-10%2022-24%2024H18c17-12%2032-24%2043-35%208-8%207-14-1-19-7-4-18-7-29-8Z%22%20fill%3D%22%230066FF%22%2F%3E%3Cpath%20d%3D%22M57%2076c8-8%207-14-1-19%208%200%2016%202%2022%206%209%205%2013%2011%2012%2018-1%208-7%2015-19%2023h14c10-2%2016-8%2017-17%201-10-7-19-20-25%209%204%2016%2011%2018%2019%203%2012-4%2023-17%2028H42c7-7%2012-13%2015-18%205-7%206-11%200-15Z%22%20fill%3D%22%230B3D91%22%2F%3E%3C%2Fsvg%3E">
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20128%20128%22%3E%3Crect%20width%3D%22128%22%20height%3D%22128%22%20rx%3D%2228%22%20fill%3D%22%23071B3B%22%2F%3E%3Cpath%20d%3D%22M15%2031C45%2020%2082%2020%20103%2034c15%2010%2020%2025%2016%2042-7-17-22-27-42-33-22-7-43-10-62-12Z%22%20fill%3D%22%23FF7A00%22%2F%3E%3Cpath%20d%3D%22M31%2049c18-1%2037%200%2051%207%2016%208%2024%2019%2023%2031-1%2013-10%2022-24%2024H18c17-12%2032-24%2043-35%208-8%207-14-1-19-7-4-18-7-29-8Z%22%20fill%3D%22%230066FF%22%2F%3E%3Cpath%20d%3D%22M57%2076c8-8%207-14-1-19%208%200%2016%202%2022%206%209%205%2013%2011%2012%2018-1%208-7%2015-19%2023h14c10-2%2016-8%2017-17%201-10-7-19-20-25%209%204%2016%2011%2018%2019%203%2012-4%2023-17%2028H42c7-7%2012-13%2015-18%205-7%206-11%200-15Z%22%20fill%3D%22%230B3D91%22%2F%3E%3C%2Fsvg%3E">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -105,6 +105,74 @@ html,body{background:#E9EFF7}
 .location-use-btn.ok{background:#eefaf5;border-color:#cfeedd;color:#0a8a58}
 .distance-badge{display:inline-flex;align-items:center;gap:4px;background:#eef6ff;color:#0b3d91;border-radius:999px;padding:4px 7px;font-weight:850}
 .geo-note{font-size:11px;color:#768195;margin-top:5px;line-height:1.35}
+
+/* ===== DOHOY 1.0 · Cuenta / Perfil ===== */
+.account-screen{padding:24px 20px 118px;background:#f7f8fa;min-height:100vh}
+.account-top{display:grid;grid-template-columns:46px 1fr 46px;align-items:center;gap:12px;margin-bottom:24px}
+.account-top h1{margin:0;text-align:center;font-size:26px;letter-spacing:-.5px;color:#101828}
+.account-profile-card{display:flex;align-items:center;gap:14px;padding:10px 2px 22px}
+.account-profile-card .avatar{width:76px;height:76px;min-width:76px}
+.account-profile-copy{min-width:0;flex:1}
+.account-profile-copy h2{margin:0 0 3px;font-size:22px;color:#101828;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.account-profile-copy button{border:0;background:transparent;padding:0;color:#667085;font-weight:700;display:flex;align-items:center;gap:5px}
+.account-mode-card{background:linear-gradient(135deg,#071B3B 0%,#0B3D91 100%);border-radius:24px;color:white;padding:18px 18px 17px;box-shadow:0 12px 30px rgba(11,61,145,.16);margin-bottom:22px;position:relative;overflow:hidden}
+.account-mode-card:after{content:"";position:absolute;width:130px;height:130px;border-radius:50%;background:rgba(255,122,0,.18);right:-40px;top:-52px}
+.account-mode-card .mode-label{font-size:13px;opacity:.72;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+.account-mode-card h3{margin:5px 0 5px;font-size:21px}
+.account-mode-card p{margin:0;opacity:.78;font-size:14px;max-width:82%}
+.account-quick{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:26px}
+.account-quick button{border:0;background:#fff;border-radius:20px;padding:15px 8px 13px;box-shadow:0 5px 16px rgba(16,24,40,.05);min-height:104px;color:#101828}
+.account-quick .qico{width:38px;height:38px;border-radius:12px;background:#eef4ff;color:#0B3D91;display:grid;place-items:center;margin:0 auto 8px}
+.account-quick .qico .svg-icon{width:22px;height:22px}
+.account-quick span:last-child{font-size:13px;font-weight:800;display:block;line-height:1.2}
+.settings-section{margin:0 -20px 16px;background:white;padding:22px 20px 6px;border-top:1px solid #eef0f3;border-bottom:1px solid #eef0f3}
+.settings-section h2{font-size:22px;margin:0 0 10px;color:#101828}
+.settings-row{width:100%;display:grid;grid-template-columns:34px 1fr 24px;align-items:center;gap:10px;border:0;border-bottom:1px solid #edf0f3;background:white;padding:16px 2px;text-align:left;color:#101828}
+.settings-row:last-child{border-bottom:0}
+.settings-row .row-ico{width:30px;height:30px;color:#344054;display:grid;place-items:center}
+.settings-row .row-ico .svg-icon{width:24px;height:24px}
+.settings-row .row-main{font-weight:750;font-size:16px}
+.settings-row .row-sub{font-size:12px;color:#98a2b3;margin-top:2px}
+.settings-row .chev{font-size:28px;color:#667085;line-height:1;text-align:right}
+.account-actions{padding:8px 0 2px}
+.account-actions .logout-btn{width:100%;border:0;border-radius:20px;background:#eceff3;padding:16px;font-weight:800;color:#20252d;margin-bottom:10px}
+.account-actions .logout-btn.secondary{background:white;border:1px solid #dde1e7}
+.version-note{text-align:center;color:#98a2b3;font-size:11px;padding:12px 0 4px}
+.settings-page{padding:22px 20px 118px;min-height:100vh;background:#f8f9fb}
+.settings-page .settings-title{font-size:28px;margin:12px 0 22px;color:#101828}
+.settings-card{background:white;border-radius:20px;padding:4px 16px;box-shadow:0 6px 20px rgba(16,24,40,.05);margin-bottom:14px}
+.settings-card .settings-row{padding:15px 0}
+.edit-profile-shell .profile-hero{margin-top:8px}
+.setting-empty{text-align:center;background:#fff;border-radius:22px;padding:38px 22px;color:#667085}
+.setting-empty .empty-icon{width:64px;height:64px;border-radius:20px;background:#eef4ff;color:#0B3D91;display:grid;place-items:center;margin:0 auto 15px}
+.setting-empty .empty-icon .svg-icon{width:30px;height:30px}
+.setting-empty h3{color:#101828;margin:0 0 6px}
+.toggle-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:15px 0;border-bottom:1px solid #edf0f3}
+.toggle-row:last-child{border-bottom:0}
+.toggle-row b{display:block;color:#101828}
+.toggle-row small{color:#98a2b3}
+.switch{position:relative;width:50px;height:30px;flex:none}
+.switch input{display:none}
+.switch span{position:absolute;inset:0;border-radius:999px;background:#d9dde4;transition:.2s}
+.switch span:after{content:"";position:absolute;width:24px;height:24px;border-radius:50%;background:white;top:3px;left:3px;box-shadow:0 2px 5px rgba(0,0,0,.18);transition:.2s}
+.switch input:checked+span{background:#0B3D91}
+.switch input:checked+span:after{transform:translateX(20px)}
+.simple-choice{width:100%;border:0;border-bottom:1px solid #edf0f3;background:white;padding:16px 0;display:flex;justify-content:space-between;align-items:center;text-align:left}
+.simple-choice:last-child{border-bottom:0}
+.simple-choice b{color:#101828}
+.simple-choice small{color:#98a2b3;display:block;margin-top:3px}
+.choice-check{color:#0B3D91;font-weight:900}
+.legal-copy{background:white;border-radius:20px;padding:18px;line-height:1.55;color:#475467;box-shadow:0 6px 20px rgba(16,24,40,.05)}
+.legal-copy h3{color:#101828}
+.address-card{background:white;border-radius:20px;padding:16px;margin-bottom:12px;box-shadow:0 6px 20px rgba(16,24,40,.05)}
+.address-line{display:flex;gap:12px;align-items:flex-start}
+.address-line .svg-icon{width:22px;height:22px;color:#0B3D91;flex:none;margin-top:2px}
+.address-line b{display:block;color:#101828}
+.address-line small{display:block;color:#98a2b3;margin-top:3px}
+.help-faq details{background:white;border-radius:16px;padding:14px 16px;margin-bottom:10px}
+.help-faq summary{font-weight:800;color:#101828;cursor:pointer}
+.help-faq p{color:#667085;line-height:1.5}
+
 </style>
 </head>
 <body><div id="root"></div>
@@ -161,6 +229,14 @@ function iconSvg(name,opts={}){
  if(name==="camera")return svgWrap(`<rect ${s} x="3.5" y="7" width="17" height="11.5" rx="2.2"/><path ${s} d="M8 7l1.4-2h5.2L16 7"/><circle ${s} cx="12" cy="12.6" r="3.1"/>`);
  if(name==="briefcase")return svgWrap(`<rect ${s} x="4" y="7" width="16" height="11" rx="2"/><path ${s} d="M9 7V5.2h6V7M4 11.7h16M10 11.7v1.8h4v-1.8"/>`);
  if(name==="help")return svgWrap(`<circle ${s} cx="12" cy="12" r="8.5"/><path ${s} d="M9.8 9.4a2.3 2.3 0 0 1 4.4.9c0 1.9-2.2 2-2.2 3.5M12 17.2h.01"/>`);
+ if(name==="payment")return svgWrap(`<rect ${s} x="3.5" y="6" width="17" height="12" rx="2.5"/><path ${s} d="M3.5 10h17M7 14.2h3.2"/>`);
+ if(name==="receipt")return svgWrap(`<path ${s} d="M6 3.8h12v16.4l-2-1.4-2 1.4-2-1.4-2 1.4-2-1.4-2 1.4V3.8Z"/><path ${s} d="M9 8h6M9 11.5h6M9 15h3.6"/>`);
+ if(name==="globe")return svgWrap(`<circle ${s} cx="12" cy="12" r="8.5"/><path ${s} d="M3.8 12h16.4M12 3.5c2.2 2.3 3.3 5.1 3.3 8.5S14.2 18.2 12 20.5M12 3.5C9.8 5.8 8.7 8.6 8.7 12s1.1 6.2 3.3 8.5"/>`);
+ if(name==="shield")return svgWrap(`<path ${s} d="M12 3.5 19 6v5.6c0 4.2-2.5 7.2-7 9-4.5-1.8-7-4.8-7-9V6l7-2.5Z"/><path ${s} d="m9.2 12.2 1.8 1.8 3.9-4"/>`);
+ if(name==="info")return svgWrap(`<circle ${s} cx="12" cy="12" r="8.5"/><path ${s} d="M12 10.5v5.3M12 7.3h.01"/>`);
+ if(name==="logout")return svgWrap(`<path ${s} d="M10 5H5v14h5M14 8l4 4-4 4M18 12H9"/>`);
+ if(name==="mode")return svgWrap(`<path ${s} d="M7 7h11l-2.6-2.6M17 17H6l2.6 2.6"/><path ${s} d="M18 7l-2.6 2.6M6 17l2.6-2.6"/>`);
+ if(name==="verify")return svgWrap(`<circle ${s} cx="12" cy="12" r="8.5"/><path ${s} d="m8.7 12.2 2.1 2.1 4.6-4.8"/>`);
  return svgWrap(`<path ${s} d="m12 3 1.6 5.1L19 10l-5.4 1.9L12 17l-1.6-5.1L5 10l5.4-1.9L12 3Z"/>`)
 }
 function taskIcon(task){const m=taskMeta(typeof task==="string"?task:task?.category);return iconSvg(m.base,m)}
@@ -266,7 +342,7 @@ function navBar(){const home=state.mode==="client"?"clientHome":"workerHome";con
 <button class="${state.route===home?"active":""}" onclick="go('${home}')"><b>${iconSvg("home")}</b><br>Inicio</button>
 <button class="${state.route===second?"active":""}" onclick="go('${second}')"><b>${iconSvg(state.mode==="client"?"plus":"tasks")}</b><br>${state.mode==="client"?"Publicar":"Tareas"}</button>
 <button class="${["messagesHome","chat"].includes(state.route)?"active":""}" onclick="openMessagesHome()"><b>${iconSvg("chat")}</b><br>Mensajes</button>
-<button class="${state.route==="profile"?"active":""}" onclick="go('profile')"><b>${iconSvg("user")}</b><br>Perfil</button>
+<button class="${["profile","editProfile","addresses","payments","billing","verification","language","notifications","help","terms","privacy"].includes(state.route)?"active":""}" onclick="go('profile')"><b>${iconSvg("user")}</b><br>Perfil</button>
 </nav>`}
 function clearPoll(){
 if(poller){clearInterval(poller);poller=null}
@@ -280,7 +356,7 @@ function authMsg(){return `${state.error?`<div class="error">${state.error}</div
 function welcome(){
 return shell(`<section class="hero">
 <div>${logo()}<div class="tag">Lo necesitas. Alguien lo hace.</div></div>
-<div class="hero-copy"><span class="hero-badge">BETA PRIVADA · DOHOY 0.9.1</span><h1>Resuelve lo de hoy, hoy.</h1><p>Publica una tarea, recibe ofertas y coordina todo desde un solo lugar.</p>
+<div class="hero-copy"><span class="hero-badge">BETA PRIVADA · DOHOY 1.0</span><h1>Resuelve lo de hoy, hoy.</h1><p>Publica una tarea, recibe ofertas y coordina todo desde un solo lugar.</p>
 <div class="hero-proof"><div class="proof"><b>${iconSvg("plus")}</b><span>Publica rápido</span></div><div class="proof"><b>${iconSvg("chat")}</b><span>Chat por tarea</span></div><div class="proof"><b>✓✓</b><span>Estados de lectura</span></div></div></div>
 <div><button class="btn light" onclick="go('signup')">Crear cuenta</button><button class="btn outline" onclick="go('login')">Ya tengo cuenta</button></div>
 </section>`)
@@ -397,13 +473,108 @@ if(t.status==="in_progress")return `<button class="btn orange" onclick="setTaskS
 return `<div class="ok">Trabajo ${statusText(t.status).toLowerCase()}.</div>`
 }
 async function profile(){
-await loadProfile();
-root.innerHTML=shell(`<section class="screen"><div class="top">${logo(true)}<button class="icon" onclick="signOut()">↪</button></div>
-<div class="profile-hero"><div class="profile-photo-wrap">${avatarMarkup(state.profile)}<button class="camera-badge" onclick="openProfileCamera()" aria-label="Tomar foto">${iconSvg("camera")}</button></div><h1>${escapeHtml(state.profile?.full_name||"Usuario DOHOY")}</h1><p class="sub">${escapeHtml(state.user.email||"")}</p><div class="profile-stats"><div class="profile-stat"><b>⭐ ${state.profile?.rating??5}</b><span>Calificación</span></div><div class="profile-stat"><b>${state.profile?.completed_tasks??0}</b><span>Tareas completadas</span></div></div></div>${authMsg()}
-<div class="form-card"><form id="profileForm"><div class="photo-note">${iconSvg("camera")}<div><b>${state.profile?.avatar_url?"Cambiar foto de perfil":"Agrega tu foto de perfil"}</b><br>La foto se toma en el momento con la cámara frontal; no se elige desde la galería.</div></div><button class="btn orange" type="button" onclick="openProfileCamera()">${iconSvg("camera")} ${state.profile?.avatar_url?"Tomar una foto nueva":"Tomar mi foto"}</button><div class="field"><label>Nombre</label><input class="input" name="name" value="${escapeAttr(state.profile?.full_name||"")}"></div><div class="field"><label>Bio</label><textarea name="bio">${escapeHtml(state.profile?.bio||"")}</textarea></div><button class="btn primary">Guardar perfil</button></form></div>
-<div class="card" style="margin-top:15px"><b>Verificaciones</b><br><br>${state.profile?.avatar_url?"✅":"○"} Foto de perfil tomada<br><br>${state.profile?.identity_verified?"✅":"○"} Identidad verificada<br><br>${state.profile?.driver_license_verified?"✅":"○"} Licencia verificada</div>
-<button class="btn ghost" onclick="go('mode')">Cambiar modo</button></section>`,true)
+ await loadProfile();
+ const first=(state.profile?.full_name||"Usuario DOHOY").trim();
+ const modeText=state.mode==="client"?"Cliente":"Trabajador";
+ root.innerHTML=shell(`<section class="account-screen">
+ <div class="account-top"><button class="icon" onclick="go('${state.mode==="client"?"clientHome":"workerHome"}')">←</button><h1>Cuenta</h1><span></span></div>
+ <div class="account-profile-card"><div class="profile-photo-wrap">${avatarMarkup(state.profile)}</div><div class="account-profile-copy"><h2>${escapeHtml(first)}</h2><button onclick="go('editProfile')">Editar perfil <span>›</span></button></div></div>
+ <div class="account-mode-card"><div class="mode-label">Tu modo actual</div><h3>${modeText}</h3><p>${state.mode==="client"?"Publica tareas y encuentra a alguien que te ayude.":"Encuentra solicitudes cercanas y gana realizando tareas."}</p></div>
+ <div class="account-quick">
+   <button onclick="go('${state.mode==="client"?"clientHome":"workerHome"}')"><span class="qico">${iconSvg("tasks")}</span><span>${state.mode==="client"?"Mis tareas":"Trabajos"}</span></button>
+   <button onclick="go('help')"><span class="qico">${iconSvg("help")}</span><span>Ayuda</span></button>
+   <button onclick="go('payments')"><span class="qico">${iconSvg("payment")}</span><span>Métodos de pago</span></button>
+ </div>
+ <div class="settings-section"><h2>Mi cuenta</h2>
+   ${settingsRow("Direcciones","addresses","location","Ubicación guardada y actual")}
+   ${settingsRow("Métodos de pago","payments","payment","Pagos seguros en una próxima etapa")}
+   ${settingsRow("Datos de facturación","billing","receipt","Información fiscal")}
+   ${settingsRow("Verificaciones","verification","verify","Foto, identidad y licencia")}
+   ${settingsRow("Cambiar modo","mode","mode","Cliente o trabajador")}
+ </div>
+ <div class="settings-section"><h2>Configuración</h2>
+   ${settingsRow("Idioma","language","globe","Español")}
+   ${settingsRow("Notificaciones","notifications","bell","Mensajes, ofertas y tareas")}
+ </div>
+ <div class="settings-section"><h2>Más información</h2>
+   ${settingsRow("Ayuda","help","help","Preguntas frecuentes")}
+   ${settingsRow("Términos y condiciones","terms","info","Versión beta")}
+   ${settingsRow("Política de privacidad","privacy","shield","Cómo tratamos tus datos")}
+ </div>
+ <div class="account-actions"><button class="logout-btn" onclick="signOutCurrent()">${iconSvg("logout")} Cerrar sesión</button><button class="logout-btn secondary" onclick="signOutAllSessions()">${iconSvg("logout")} Cerrar todas las sesiones</button></div>
+ <div class="version-note">DOHOY Beta · Versión 1.0</div>
+ </section>`,true)
 }
+function settingsRow(title,route,icon,sub=""){
+ return `<button class="settings-row" onclick="go('${route}')"><span class="row-ico">${iconSvg(icon)}</span><span><span class="row-main">${escapeHtml(title)}</span>${sub?`<span class="row-sub">${escapeHtml(sub)}</span>`:""}</span><span class="chev">›</span></button>`
+}
+function settingsHeader(title){
+ return `<div class="account-top"><button class="icon" onclick="go('profile')">←</button><h1>${escapeHtml(title)}</h1><span></span></div>`
+}
+async function editProfile(){
+ await loadProfile();
+ root.innerHTML=shell(`<section class="settings-page edit-profile-shell">${settingsHeader("Editar perfil")}
+ <div class="profile-hero"><div class="profile-photo-wrap">${avatarMarkup(state.profile)}<button class="camera-badge" onclick="openProfileCamera()" aria-label="Tomar foto">${iconSvg("camera")}</button></div><h1>${escapeHtml(state.profile?.full_name||"Usuario DOHOY")}</h1><p class="sub">${escapeHtml(state.user.email||"")}</p><div class="profile-stats"><div class="profile-stat"><b>⭐ ${state.profile?.rating??5}</b><span>Calificación</span></div><div class="profile-stat"><b>${state.profile?.completed_tasks??0}</b><span>Tareas completadas</span></div></div></div>${authMsg()}
+ <div class="form-card"><form id="profileForm"><div class="photo-note">${iconSvg("camera")}<div><b>${state.profile?.avatar_url?"Cambiar foto de perfil":"Agrega tu foto de perfil"}</b><br>La foto se toma en el momento con la cámara frontal.</div></div><button class="btn orange" type="button" onclick="openProfileCamera()">${iconSvg("camera")} ${state.profile?.avatar_url?"Tomar una foto nueva":"Tomar mi foto"}</button><div class="field"><label>Nombre</label><input class="input" name="name" value="${escapeAttr(state.profile?.full_name||"")}"></div><div class="field"><label>Bio</label><textarea name="bio">${escapeHtml(state.profile?.bio||"")}</textarea></div><button class="btn primary">Guardar cambios</button></form></div>
+ </section>`,true)
+}
+function addressesScreen(){
+ const saved=localStorage.getItem("dohoy_saved_address")||"";
+ return shell(`<section class="settings-page">${settingsHeader("Direcciones")}<h2 class="settings-title">Tus ubicaciones</h2>
+ ${saved?`<div class="address-card"><div class="address-line">${iconSvg("location")}<div><b>Ubicación guardada</b><small>${escapeHtml(saved)}</small></div></div></div>`:`<div class="setting-empty"><div class="empty-icon">${iconSvg("location")}</div><h3>Aún no guardas una ubicación</h3><p>Usa tu ubicación actual para verla aquí.</p></div>`}
+ <button class="btn primary" type="button" onclick="saveCurrentAddress(this)">${iconSvg("location")} Usar mi ubicación actual</button>
+ </section>`,true)
+}
+async function saveCurrentAddress(btn){
+ if(!navigator.geolocation){return alert("Tu navegador no permite acceder a la ubicación.")}
+ const old=btn.innerHTML;btn.disabled=true;btn.textContent="Buscando ubicación…";
+ navigator.geolocation.getCurrentPosition(async pos=>{
+   const address=await reverseGeocode(pos.coords.latitude,pos.coords.longitude);
+   localStorage.setItem("dohoy_saved_address",address);
+   localStorage.setItem("dohoy_saved_lat",String(pos.coords.latitude));
+   localStorage.setItem("dohoy_saved_lon",String(pos.coords.longitude));
+   btn.disabled=false;go("addresses")
+ },err=>{btn.disabled=false;btn.innerHTML=old;alert(err.code===1?"Necesitamos permiso de ubicación para guardar tu dirección.":"No pudimos obtener tu ubicación.")},{enableHighAccuracy:true,maximumAge:0,timeout:12000})
+}
+function paymentsScreen(){
+ return shell(`<section class="settings-page">${settingsHeader("Métodos de pago")}<h2 class="settings-title">Pagos</h2><div class="setting-empty"><div class="empty-icon">${iconSvg("payment")}</div><h3>Aún no hay métodos de pago</h3><p>Esta sección ya queda preparada en la interfaz. La conexión con un proveedor de pagos se integrará antes de aceptar tarjetas o cobrar tareas.</p></div></section>`,true)
+}
+function billingScreen(){
+ return shell(`<section class="settings-page">${settingsHeader("Datos de facturación")}<h2 class="settings-title">Facturación</h2><div class="setting-empty"><div class="empty-icon">${iconSvg("receipt")}</div><h3>Facturación en preparación</h3><p>Podremos agregar RFC, razón social y datos fiscales cuando integremos el módulo de pagos y comprobantes.</p></div></section>`,true)
+}
+function verificationScreen(){
+ return shell(`<section class="settings-page">${settingsHeader("Verificaciones")}<h2 class="settings-title">Tu confianza en DOHOY</h2><div class="settings-card">
+ <div class="settings-row"><span class="row-ico">${iconSvg("camera")}</span><span><span class="row-main">Foto de perfil</span><span class="row-sub">${state.profile?.avatar_url?"Completada":"Pendiente"}</span></span><span>${state.profile?.avatar_url?"✅":"○"}</span></div>
+ <div class="settings-row"><span class="row-ico">${iconSvg("verify")}</span><span><span class="row-main">Identidad</span><span class="row-sub">${state.profile?.identity_verified?"Verificada":"Pendiente"}</span></span><span>${state.profile?.identity_verified?"✅":"○"}</span></div>
+ <div class="settings-row"><span class="row-ico">${iconSvg("Vehículo")}</span><span><span class="row-main">Licencia de conducir</span><span class="row-sub">${state.profile?.driver_license_verified?"Verificada":"Pendiente"}</span></span><span>${state.profile?.driver_license_verified?"✅":"○"}</span></div>
+ </div></section>`,true)
+}
+function languageScreen(){
+ return shell(`<section class="settings-page">${settingsHeader("Idioma")}<h2 class="settings-title">Idioma de DOHOY</h2><div class="settings-card"><button class="simple-choice"><span><b>Español</b><small>Idioma actual</small></span><span class="choice-check">✓</span></button><button class="simple-choice" onclick="alert('Inglés estará disponible en una próxima actualización.')"><span><b>English</b><small>Próximamente</small></span><span>›</span></button></div></section>`,true)
+}
+function notificationPref(key,def=true){const v=localStorage.getItem("dohoy_notif_"+key);return v==null?def:v==="1"}
+function toggleNotif(key,el){localStorage.setItem("dohoy_notif_"+key,el.checked?"1":"0")}
+function notificationsScreen(){
+ return shell(`<section class="settings-page">${settingsHeader("Notificaciones")}<h2 class="settings-title">Qué quieres recibir</h2><div class="settings-card">
+ ${notificationToggle("Mensajes","Cuando alguien te escriba","messages")}
+ ${notificationToggle("Ofertas","Nuevas propuestas para tus tareas","offers")}
+ ${notificationToggle("Estado de tareas","Cambios importantes en tus trabajos","tasks")}
+ </div><p class="small">Estas preferencias se guardan en este dispositivo. Las notificaciones push se conectarán cuando empaquetemos DOHOY como app.</p></section>`,true)
+}
+function notificationToggle(title,sub,key){return `<div class="toggle-row"><div><b>${escapeHtml(title)}</b><small>${escapeHtml(sub)}</small></div><label class="switch"><input type="checkbox" ${notificationPref(key)?"checked":""} onchange="toggleNotif('${key}',this)"><span></span></label></div>`}
+function helpScreen(){
+ return shell(`<section class="settings-page">${settingsHeader("Ayuda")}<h2 class="settings-title">¿Cómo podemos ayudarte?</h2><div class="help-faq">
+ <details><summary>¿Cómo funciona DOHOY?</summary><p>Una persona publica una tarea, los trabajadores disponibles envían propuestas y el cliente elige con quién realizarla.</p></details>
+ <details><summary>¿Cómo contacto al otro usuario?</summary><p>Cuando una propuesta es aceptada se habilita el chat de esa tarea.</p></details>
+ <details><summary>¿Cómo funciona la ubicación?</summary><p>DOHOY usa tu ubicación únicamente cuando das permiso para mostrar trabajos cercanos o guardar la ubicación de una tarea.</p></details>
+ <details><summary>¿Qué hago si tengo un problema?</summary><p>Durante esta beta puedes reportarlo directamente al equipo de DOHOY. Más adelante agregaremos soporte dentro de la app.</p></details>
+ </div></section>`,true)
+}
+function termsScreen(){return legalScreen("Términos y condiciones","DOHOY se encuentra en etapa beta. Las tareas son acuerdos entre usuarios y todavía no procesamos pagos dentro de la plataforma. Antes del lanzamiento público se publicarán los términos completos de uso, cancelaciones, responsabilidad y resolución de disputas.")}
+function privacyScreen(){return legalScreen("Política de privacidad","DOHOY utiliza datos de cuenta, perfil, mensajes y ubicación únicamente para ofrecer las funciones solicitadas. La ubicación se solicita con permiso del dispositivo. Las fotos de perfil se almacenan de forma privada y solo usuarios autenticados con acceso permitido pueden consultarlas. Antes del lanzamiento público se publicará la política legal completa.")}
+function legalScreen(title,copy){return shell(`<section class="settings-page">${settingsHeader(title)}<h2 class="settings-title">${escapeHtml(title)}</h2><div class="legal-copy"><h3>Versión beta</h3><p>${escapeHtml(copy)}</p><p>Última actualización: octubre de 2026.</p></div></section>`,true)}
+async function signOutCurrent(){stopWorkerLocation();await sb.auth.signOut({scope:"local"});if(deliveryPoller){clearInterval(deliveryPoller);deliveryPoller=null}state.session=null;state.user=null;state.profile=null;state.tasks=[];state.conversations=[];go("welcome")}
+async function signOutAllSessions(){if(!confirm("¿Quieres cerrar tu cuenta en todos los dispositivos donde esté abierta?"))return;stopWorkerLocation();await sb.auth.signOut({scope:"global"});if(deliveryPoller){clearInterval(deliveryPoller);deliveryPoller=null}state.session=null;state.user=null;state.profile=null;state.tasks=[];state.conversations=[];go("welcome")}
 async function openProfileCamera(){
  if(!navigator.mediaDevices?.getUserMedia){state.error="Este navegador no permite abrir la cámara desde DOHOY.";render();return}
  try{
@@ -546,6 +717,16 @@ if(state.route==="workerCategory"){workerCategory();return}
 if(state.route==="createTask"){createTask();bindForms();return}
 if(state.route==="taskDetail"){taskDetail().then(bindForms);return}
 if(state.route==="profile"){profile().then(bindForms);return}
+if(state.route==="editProfile"){editProfile().then(bindForms);return}
+if(state.route==="addresses"){root.innerHTML=addressesScreen();return}
+if(state.route==="payments"){root.innerHTML=paymentsScreen();return}
+if(state.route==="billing"){root.innerHTML=billingScreen();return}
+if(state.route==="verification"){root.innerHTML=verificationScreen();return}
+if(state.route==="language"){root.innerHTML=languageScreen();return}
+if(state.route==="notifications"){root.innerHTML=notificationsScreen();return}
+if(state.route==="help"){root.innerHTML=helpScreen();return}
+if(state.route==="terms"){root.innerHTML=termsScreen();return}
+if(state.route==="privacy"){root.innerHTML=privacyScreen();return}
 const sync={welcome,signup,login,mode:chooseMode,chat:chatScreen,messagesHome:messagesHomeScreen};
 const fn=sync[state.route]||welcome;root.innerHTML=fn();bindForms()
 }
@@ -567,7 +748,7 @@ async function signIn(e){
 e.preventDefault();const f=new FormData(e.target);const {data,error}=await sb.auth.signInWithPassword({email:f.get("email"),password:f.get("password")});
 if(error)return setMsg("error",error.message);state.session=data.session;state.user=data.user;await loadProfile();await markAllIncomingDelivered();startDeliveryPoll();go("mode")
 }
-async function signOut(){stopWorkerLocation();await sb.auth.signOut();if(deliveryPoller){clearInterval(deliveryPoller);deliveryPoller=null}state.session=null;state.user=null;state.profile=null;state.tasks=[];state.conversations=[];go("welcome")}
+async function signOut(){return signOutCurrent()}
 async function loadProfile(){
 if(!state.user)return;const {data,error}=await sb.from("profiles").select("id,full_name,avatar_url,bio,rating,completed_tasks,identity_verified,phone_verified,driver_license_verified,created_at").eq("id",state.user.id).single();
 if(!error)state.profile=await resolveAvatar(data)
