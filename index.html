@@ -382,8 +382,19 @@ label{color:#263A59!important;font-weight:850!important}
 .payment-row-ico{background:linear-gradient(145deg,#fff0df,#e6f0ff)!important;color:#0b3d91!important}
 .new-pill{display:inline-flex;align-items:center;margin-left:7px;padding:3px 7px;border-radius:999px;background:#ff7a00;color:#fff;font-size:8px;font-style:normal;font-weight:950;letter-spacing:.08em;vertical-align:middle}
 @media(max-width:430px){.account-quick-four{grid-template-columns:repeat(2,1fr)!important}.account-quick-four button{min-height:92px}}
+
+/* DOHOY 1.9.4 — splash de bienvenida */
+.dohoy-splash{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(155deg,#071a3a 0%,#0b3d91 44%,#0967f4 78%,#ff7a00 150%);color:#fff;padding:max(28px,env(safe-area-inset-top)) 24px max(28px,env(safe-area-inset-bottom));animation:splashFadeOut .42s ease 1.48s both}
+.dohoy-splash:before,.dohoy-splash:after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.08);filter:blur(.2px)}
+.dohoy-splash:before{width:320px;height:320px;right:-155px;top:-95px}.dohoy-splash:after{width:250px;height:250px;left:-145px;bottom:-75px}
+.splash-inner{position:relative;z-index:2;text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px;animation:splashRise .7s cubic-bezier(.2,.75,.25,1) both}
+.splash-logo{display:flex;align-items:center;gap:13px;filter:drop-shadow(0 12px 24px rgba(0,0,0,.18))}.splash-logo .brand-mark{width:86px;height:64px}.splash-logo .brand-word{font-size:48px;color:#fff;letter-spacing:-3.3px}.splash-logo .brand-word .accent{color:#ff8a24}
+.splash-welcome{margin-top:12px;font-size:13px;font-weight:950;letter-spacing:.18em;text-transform:uppercase;color:#ffd3ad}.splash-tagline{margin:0;max-width:310px;font-size:17px;line-height:1.45;font-weight:750;color:rgba(255,255,255,.9)}
+.splash-loader{display:flex;gap:6px;margin-top:16px}.splash-loader i{width:7px;height:7px;border-radius:50%;background:#fff;opacity:.45;animation:splashDot .9s ease-in-out infinite}.splash-loader i:nth-child(2){animation-delay:.15s;background:#ff9a47}.splash-loader i:nth-child(3){animation-delay:.3s}
+@keyframes splashRise{from{opacity:0;transform:translateY(18px) scale(.96)}to{opacity:1;transform:none}}@keyframes splashDot{0%,100%{transform:scale(.75);opacity:.35}50%{transform:scale(1.2);opacity:1}}@keyframes splashFadeOut{from{opacity:1;visibility:visible}to{opacity:0;visibility:hidden;pointer-events:none}}
+@media(prefers-reduced-motion:reduce){.dohoy-splash,.splash-inner,.splash-loader i{animation:none!important}}
 </style>
-<link rel="manifest" href="./manifest.webmanifest?v=1.9.3"><link rel="apple-touch-icon" href="./icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="./manifest.webmanifest?v=1.9.4"><link rel="apple-touch-icon" href="./icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default">
 </head>
 <body><div id="root"></div>
 <script>
@@ -396,7 +407,7 @@ const root=document.getElementById("root");
 let state={
   route:"loading", mode:localStorage.getItem("dohoy_mode")||"client",
   session:null,user:null,profile:null,privateProfile:null,tasks:[],selectedTask:null,offers:[],messages:[],conversations:[],chatBack:"taskDetail",chatDraft:"",notice:"",error:"",
-  workerLocation:null, workerLocationError:"", workerAddress:"", workerCategory:"", workerTaskTab:"pending", taskBackRoute:"", showContactDetails:false, workerProfile:null, workerProfileBack:"taskDetail", swipeConversationId:null, currentTaskRating:0, currentTaskReview:"", taskMedia:[], pendingTaskFiles:[], pendingCompletionFiles:[], currentClientRating:0, currentClientReview:"", clientProfile:null, clientReviews:[], workerCategories:[], blockedUsers:[], myReports:[], notifications:[], unreadNotifications:0, unreadMessages:0, workerReviews:[], workerFavorite:false, workerBlocked:false, online:navigator.onLine, currentPayment:null, publishBusy:false, offerBusy:false, checkoutBusy:false, savedCards:null, paymentMethodsBusy:false
+  workerLocation:null, workerLocationError:"", workerAddress:"", workerCategory:"", workerTaskTab:"pending", taskBackRoute:"", showContactDetails:false, workerProfile:null, workerProfileBack:"taskDetail", swipeConversationId:null, currentTaskRating:0, currentTaskReview:"", taskMedia:[], pendingTaskFiles:[], pendingCompletionFiles:[], currentClientRating:0, currentClientReview:"", clientProfile:null, clientReviews:[], workerCategories:[], blockedUsers:[], myReports:[], notifications:[], unreadNotifications:0, unreadMessages:0, workerReviews:[], workerFavorite:false, workerBlocked:false, online:navigator.onLine, currentPayment:null, publishBusy:false, offerBusy:false, checkoutBusy:false, savedCards:null, paymentMethodsBusy:false, splash:true
 };
 let poller=null;
 let deliveryPoller=null;
@@ -555,6 +566,7 @@ function brandSymbol(){return `<svg class="brand-mark" viewBox="0 0 128 96" xmln
 function logo(sm=false){return `<div class="brand-lockup ${sm?"sm":""}">${brandSymbol()}<div class="brand-word">DOH<span class="accent">O</span>Y</div></div>`}
 function avatarMarkup(profile,extra=""){const url=profile?.avatar_display_url||(/^https?:/i.test(profile?.avatar_url||"")?profile.avatar_url:"");return `<div class="avatar ${extra}">${url?`<img src="${escapeAttr(url)}" alt="Foto de ${escapeAttr(profile?.full_name||"usuario")}" referrerpolicy="no-referrer">`:`<div class="avatar-fallback">${iconSvg("user")}</div>`}</div>`}
 async function resolveAvatar(profile){if(!profile?.avatar_url)return profile;if(/^https?:/i.test(profile.avatar_url)){profile.avatar_display_url=profile.avatar_url;return profile}const {data,error}=await sb.storage.from("avatars").createSignedUrl(profile.avatar_url,3600);if(!error&&data?.signedUrl)profile.avatar_display_url=data.signedUrl;return profile}
+function splashScreen(){return `<div class="dohoy-splash" role="status" aria-label="Bienvenido a DOHOY"><div class="splash-inner"><div class="splash-logo">${brandSymbol()}<div class="brand-word">DOH<span class="accent">O</span>Y</div></div><div class="splash-welcome">Bienvenido a DOHOY</div><p class="splash-tagline">Lo que necesitas, cuando lo necesitas.</p><div class="splash-loader" aria-hidden="true"><i></i><i></i><i></i></div></div></div>`}
 function shell(content,nav=false){return `<main class="app">${!state.online?`<div class="connection-banner">Sin conexión. Vuelve a conectarte para enviar mensajes y guardar cambios.</div>`:""}${content}${nav?navBar():""}</main>`}
 function navBar(){const home=state.mode==="client"?"clientHome":"workerHome";const second=state.mode==="client"?"createTask":"workerJobs";return `<nav class="nav">
 <button class="${state.route===home?"active":""}" onclick="go('${home}')"><b>${iconSvg("home")}</b><br>Inicio</button>
@@ -1356,6 +1368,7 @@ await loadMessages(state.selectedTask.id);await markChatRead(state.selectedTask.
 state.chatDraft=draft;refreshChatDom(false)
 }
 function render(){
+if(state.splash){root.innerHTML=splashScreen();return}
 if(state.route==="loading"){root.innerHTML=shell(`<section class="screen spinner">Cargando DOHOY…</section>`);return}
 if(state.session&&state.profile?.is_suspended&&!['suspended','supportCenter','newSupportCase','supportCase'].includes(state.route))state.route='suspended';
 if(!state.session&&!['welcome','signup','login','onboarding','mode'].includes(state.route))state.route=onboardingDone()?'welcome':'onboarding';
@@ -1533,12 +1546,15 @@ state.chatDraft="";if(inp)inp.value="";if(data)upsertRealtimeMessage(data);refre
 function escapeHtml(v){return String(v??"").replace(/[&<>"']/g,s=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[s]))}
 function escapeAttr(v){return escapeHtml(v).replace(/`/g,"&#96;")}
 async function init(){
+const splashStarted=Date.now();render();
 const {data}=await sb.auth.getSession();state.session=data.session;state.user=data.session?.user||null;if(state.user){await loadProfile();await markAllIncomingDelivered();await loadNotificationSummary();startDeliveryPoll();subscribeNotifications();await loadFeatureStatus();await refreshPushStatus()}
-state.route=state.session?(onboardingDone()?'mode':'onboarding'):(onboardingDone()?'welcome':'onboarding');render();consumePushTask();
+state.route=state.session?(onboardingDone()?'mode':'onboarding'):(onboardingDone()?'welcome':'onboarding');
+const finishSplash=()=>{state.splash=false;render();consumePushTask()};
+const remaining=Math.max(0,1850-(Date.now()-splashStarted));setTimeout(finishSplash,remaining);
 sb.auth.onAuthStateChange(async(_event,session)=>{state.session=session;state.user=session?.user||null;if(state.user){await loadProfile();await loadNotificationSummary();subscribeNotifications()}if(!session&&!['welcome','signup','login','onboarding','mode'].includes(state.route))go(onboardingDone()?'welcome':'onboarding')})
 }
 const DOHOY_VAPID_PUBLIC="BIqp0MxIqy8rJPGj8mCRF-P_FwaMWgRMKSR_x6AazRKylHNhyT3NEPjNODKzvsSyIpt6OE3BUQXEz8-OkV-k14E";
-// DOHOY 1.9.1 — registro seguro, pagos, ofertas seguras, anti-duplicados y refinamiento visual.
+// DOHOY 1.9.4 — splash de bienvenida, pagos, ofertas seguras y refinamiento visual.
 const DEFAULT_FILTERS={query:'',category:'',minPrice:0,maxDistance:null,todayOnly:false,vehicleOnly:false,notifyMatching:true};
 function workerFilterState(){if(!state.workerFilters)state.workerFilters={...DEFAULT_FILTERS};return state.workerFilters}
 function searchStorageKey(){return 'dohoy_search_'+(state.user?.id||'guest')}
