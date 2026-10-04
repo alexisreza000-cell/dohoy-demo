@@ -393,6 +393,33 @@ label{color:#263A59!important;font-weight:850!important}
 .splash-loader{display:flex;gap:6px;margin-top:16px}.splash-loader i{width:7px;height:7px;border-radius:50%;background:#fff;opacity:.45;animation:splashDot .9s ease-in-out infinite}.splash-loader i:nth-child(2){animation-delay:.15s;background:#ff9a47}.splash-loader i:nth-child(3){animation-delay:.3s}
 @keyframes splashRise{from{opacity:0;transform:translateY(18px) scale(.96)}to{opacity:1;transform:none}}@keyframes splashDot{0%,100%{transform:scale(.75);opacity:.35}50%{transform:scale(1.2);opacity:1}}@keyframes splashFadeOut{from{opacity:1;visibility:visible}to{opacity:0;visibility:hidden;pointer-events:none}}
 @media(prefers-reduced-motion:reduce){.dohoy-splash,.splash-inner,.splash-loader i{animation:none!important}}
+
+/* DOHOY 1.9.7 — rediseño de Cuenta */
+.account-screen{background:linear-gradient(180deg,#f6f9ff 0%,#f8fafc 55%,#fff8f2 100%)}
+.account-screen .settings-section{margin:18px 0 20px;padding:0;background:transparent;border:0}
+.account-screen .settings-section h2{margin:0 4px 12px;font-size:13px;font-weight:950;letter-spacing:.13em;text-transform:uppercase;color:#0b3d91}
+.account-screen .settings-row{position:relative;grid-template-columns:52px minmax(0,1fr) 34px;gap:13px;margin:0 0 10px;padding:13px 12px;border:1px solid #e5edf8!important;border-radius:19px;background:rgba(255,255,255,.94)!important;box-shadow:0 7px 20px rgba(11,61,145,.055);min-height:76px;overflow:hidden;transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease}
+.account-screen .settings-row:active{transform:scale(.985);box-shadow:0 3px 10px rgba(11,61,145,.05)}
+.account-screen .settings-row .row-ico{width:48px;height:48px;border-radius:15px;background:#edf4ff;color:#0b56b7;display:grid;place-items:center;border:0!important;box-shadow:inset 0 0 0 1px rgba(11,61,145,.05)}
+.account-screen .settings-row:nth-of-type(3n+2) .row-ico{background:#fff1e6;color:#f56b12}
+.account-screen .settings-row:nth-of-type(3n+3) .row-ico{background:#f2edff;color:#663cc7}
+.account-screen .settings-row .row-ico .svg-icon{width:23px;height:23px}
+.account-screen .settings-row>span:nth-child(2){min-width:0;display:flex;flex-direction:column;justify-content:center}
+.account-screen .settings-row .row-main{display:block;font-size:16px;font-weight:900;line-height:1.18;color:#101828;letter-spacing:-.01em}
+.account-screen .settings-row .row-sub{display:block!important;margin-top:5px;font-size:11.5px;line-height:1.3;color:#7c879b;font-weight:600;white-space:normal}
+.account-screen .settings-row .chev{width:30px;height:30px;border-radius:11px;background:#f2f6fc;color:#0b56b7;display:grid;place-items:center;font-size:24px;font-weight:600;line-height:1;text-align:center}
+.account-screen .payment-settings-row{border-color:#ffd7b8!important;background:linear-gradient(100deg,#fffaf6 0%,#fff 58%,#f5f9ff 100%)!important;box-shadow:0 8px 22px rgba(255,122,0,.08)}
+.account-screen .payment-settings-row:before{content:"";position:absolute;left:0;top:15px;bottom:15px;width:4px;border-radius:0 6px 6px 0;background:#ff7a00}
+.account-screen .payment-settings-row .payment-row-ico{background:linear-gradient(145deg,#fff0df,#ffe4cc)!important;color:#ef6c00!important}
+.account-screen .payment-settings-row .chev{background:#fff0e3;color:#f56b12}
+.account-screen .new-pill{font-size:8px;padding:4px 7px;margin-left:6px;box-shadow:0 3px 8px rgba(255,122,0,.18)}
+.account-screen .account-quick{gap:11px;margin-bottom:22px}
+.account-screen .account-quick button{border:1px solid #e5edf8;border-radius:19px;box-shadow:0 7px 20px rgba(11,61,145,.055);background:rgba(255,255,255,.94)}
+.account-screen .account-quick .qico{width:42px;height:42px;border-radius:14px;background:#edf4ff}
+.account-screen .account-quick button:nth-child(2) .qico{background:#fff1e6;color:#f56b12}
+.account-screen .account-quick button:nth-child(3) .qico{background:#f2edff;color:#663cc7}
+.account-screen .account-quick button:nth-child(4) .qico{background:#eaf8f4;color:#087b65}
+@media(max-width:430px){.account-screen .settings-row{grid-template-columns:48px minmax(0,1fr) 32px;padding:12px 11px;min-height:72px}.account-screen .settings-row .row-ico{width:44px;height:44px;border-radius:14px}.account-screen .settings-row .row-main{font-size:15.5px}.account-screen .settings-row .row-sub{font-size:11px}}
 </style>
 <link rel="manifest" href="./manifest.webmanifest?v=1.9.4"><link rel="apple-touch-icon" href="./icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default">
 </head>
@@ -1004,11 +1031,11 @@ async function profile(){
    ${settingsRow("Política de privacidad","privacy","shield","Cómo tratamos tus datos")}
  </div>
  <div class="account-actions"><button class="logout-btn" onclick="signOutCurrent()">${iconSvg("logout")} Cerrar sesión</button></div>
- <div class="version-note">DOHOY · Versión 1.9.1</div>
+ <div class="version-note">DOHOY · Versión 1.9.7</div>
  </section>`,true)
 }
 function settingsRow(title,route,icon,sub=""){
- return `<button class="settings-row" onclick="go('${route}')"><span class="row-ico">${iconSvg(icon)}</span><span><span class="row-main">${escapeHtml(title)}</span></span><span class="chev">›</span></button>`
+ return `<button class="settings-row" onclick="go('${route}')"><span class="row-ico">${iconSvg(icon)}</span><span><span class="row-main">${escapeHtml(title)}</span>${sub?`<span class="row-sub">${escapeHtml(sub)}</span>`:""}</span><span class="chev">›</span></button>`
 }
 function settingsHeader(title){
  return `<div class="account-top"><button class="icon" aria-label="Volver al perfil" onclick="go('profile')">←</button><h1>${escapeHtml(title)}</h1><span></span></div>`
