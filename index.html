@@ -544,6 +544,104 @@ body{background:#edf3fb}
  .account-screen .settings-row .row-sub{font-size:10.5px!important}
 }
 
+
+/* DOHOY 2.1.0 — Inicio marketplace inspirado en apps on-demand */
+.marketplace-v2{padding:22px 18px 118px;background:linear-gradient(180deg,#fffaf3 0,#fff 25%,#f8fbff 68%,#fff 100%)}
+.market-v2-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.market-v2-location{display:grid;gap:3px;min-width:0}
+.market-v2-location .eyebrow{font-size:12px;font-weight:800;color:#8a94a6;letter-spacing:.02em}
+.market-location-v2{border:0;background:transparent;padding:0;display:flex;align-items:center;gap:6px;color:#101828;font-size:20px;font-weight:950;max-width:255px;text-align:left}
+.market-location-v2 .svg-icon{width:19px;height:19px;color:#ff7417;flex:0 0 auto}
+.market-location-v2 span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.market-location-v2 b{font-size:18px;color:#667085}
+.market-v2-actions{display:flex;align-items:center;gap:8px}
+.market-v2-actions .icon{width:45px;height:45px;border-radius:50%;background:#fff;border:1px solid #e9eef6;box-shadow:0 7px 20px rgba(29,58,104,.08)}
+.market-avatar{border:0;background:transparent;padding:0;width:47px;height:47px;border-radius:50%;box-shadow:0 8px 20px rgba(29,58,104,.12)}
+.market-avatar .avatar{width:47px!important;height:47px!important;border-radius:50%!important;border:3px solid #fff;box-shadow:0 0 0 1px #e5ebf4}
+.market-v2-error{margin:-8px 0 12px;text-align:left!important;padding:9px 12px;border-radius:12px;background:#fff0f1}
+
+.market-v2-search{height:64px;display:grid;grid-template-columns:27px 1fr 44px;align-items:center;gap:10px;padding:0 10px 0 18px;background:#fff;border:1px solid #e5ebf3;border-radius:25px;box-shadow:0 12px 30px rgba(34,62,105,.10);margin-bottom:18px}
+.market-v2-search>.svg-icon{width:25px;height:25px;color:#111827}
+.market-v2-search input{border:0!important;background:transparent!important;outline:0;font-size:16px;min-width:0;color:#172033}
+.market-v2-search input::placeholder{color:#9aa4b4}
+.filter-trigger{width:44px;height:44px;border:0;border-radius:16px;background:#edf4ff;color:#1467e8;display:grid;place-items:center}
+.filter-trigger .svg-icon{width:22px;height:22px}
+
+.worker-filters-panel{display:none;margin:-5px 0 18px}
+.worker-filters-panel.open{display:block;animation:marketPanelIn .2s ease}
+.worker-filters-panel .discovery-filters{border:1px solid #e4ebf5!important;background:#fff!important;border-radius:22px!important;box-shadow:0 12px 28px rgba(34,62,105,.08)!important}
+.worker-filters-panel .discovery-filters>summary{display:none}
+@keyframes marketPanelIn{from{opacity:0;transform:translateY(-7px)}to{opacity:1;transform:none}}
+
+.worker-promo{min-height:208px;border-radius:30px;padding:24px;position:relative;overflow:hidden;background:linear-gradient(125deg,#0a3f99 0%,#1467e8 56%,#ff7a1a 145%);box-shadow:0 20px 42px rgba(20,103,232,.20);color:#fff;display:grid;grid-template-columns:minmax(0,1fr) 112px;align-items:center;margin-bottom:16px}
+.worker-promo:before{content:"";position:absolute;width:190px;height:190px;border-radius:50%;right:-70px;top:-80px;background:rgba(255,183,116,.28)}
+.worker-promo:after{content:"";position:absolute;width:145px;height:145px;border-radius:50%;right:32px;bottom:-95px;background:rgba(255,255,255,.10)}
+.worker-promo-copy{position:relative;z-index:2}
+.promo-pill{display:inline-flex;padding:6px 9px;border-radius:999px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.16);font-size:9px;font-weight:950;letter-spacing:.12em}
+.worker-promo h1{font-size:25px;line-height:1.05;margin:11px 0 8px;letter-spacing:-.7px;max-width:280px}
+.worker-promo p{font-size:12px;line-height:1.45;margin:0 0 15px;color:#eaf2ff;max-width:265px}
+.worker-promo button{border:0;background:#fff;color:#0b4fae;border-radius:15px;padding:11px 15px;font-weight:950;box-shadow:0 8px 20px rgba(7,27,59,.16)}
+.promo-art{position:relative;height:140px;z-index:2}
+.promo-bag{position:absolute;right:-4px;bottom:4px;width:100px;height:100px;border-radius:31px;background:linear-gradient(145deg,#ff8a2b,#ff6818);display:grid;place-items:center;transform:rotate(7deg);box-shadow:0 17px 30px rgba(72,38,8,.22);border:1px solid rgba(255,255,255,.35)}
+.promo-bag .svg-icon{width:51px;height:51px;color:#fff}
+.promo-coin{position:absolute;width:37px;height:37px;border-radius:50%;background:#fff6dc;color:#f08b00;display:grid;place-items:center;font-weight:1000;box-shadow:0 8px 18px rgba(7,27,59,.18);border:3px solid rgba(255,255,255,.6)}
+.coin-a{right:72px;top:5px;transform:rotate(-12deg)}.coin-b{right:2px;top:20px;color:#13a17d;transform:rotate(11deg)}
+
+.quick-opportunity-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:27px}
+.quick-opportunity{border:0;border-radius:24px;min-height:112px;padding:15px;display:grid;grid-template-columns:48px 1fr 18px;gap:10px;align-items:center;text-align:left;box-shadow:0 9px 24px rgba(36,66,111,.07)}
+.quick-opportunity.today{background:#fff2e7}.quick-opportunity.near{background:#eaf8f5}
+.quick-opportunity-icon{width:48px;height:48px;border-radius:17px;display:grid;place-items:center;background:#fff;color:#ff7417;box-shadow:0 6px 16px rgba(42,69,108,.07)}
+.quick-opportunity.near .quick-opportunity-icon{color:#0aa17c}
+.quick-opportunity-icon .svg-icon{width:25px;height:25px}
+.quick-opportunity b{display:block;font-size:15px;color:#152238}.quick-opportunity small{display:block;font-size:10px;line-height:1.25;color:#748096;margin-top:3px}
+.quick-opportunity em{font-style:normal;font-size:25px;color:#98a3b4}
+
+.market-v2-section-head{display:flex;justify-content:space-between;align-items:end;margin:0 2px 13px}
+.market-v2-section-head span{display:block;font-size:11px;font-weight:900;color:#8c98aa;text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px}
+.market-v2-section-head h2{font-size:23px;line-height:1.05;margin:0;color:#111827;letter-spacing:-.55px}
+.market-v2-section-head button{border:0;background:transparent;color:#0f5fcf;font-weight:900;padding:6px 0}
+.market-category-scroll{display:flex;gap:11px;overflow-x:auto;padding:2px 2px 14px;margin:0 -18px 20px;padding-left:18px;padding-right:18px;scrollbar-width:none}
+.market-category-scroll::-webkit-scrollbar{display:none}
+.market-category-pill{flex:0 0 103px;min-height:118px;border:1px solid #e7ecf3;border-radius:24px;background:#fff;padding:12px 7px 10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;box-shadow:0 8px 20px rgba(39,69,111,.055);color:#172033}
+.market-category-icon{width:59px;height:59px;border-radius:21px;display:grid;place-items:center;background:#eaf3ff;color:#1467e8}
+.market-category-icon .svg-icon{width:30px;height:30px}
+.market-category-pill b{font-size:12px;line-height:1.1}
+.market-category-pill.cat-1 .market-category-icon{background:#fff0e4;color:#ff7417}
+.market-category-pill.cat-2 .market-category-icon{background:#f1ebff;color:#6b4be3}
+.market-category-pill.cat-3 .market-category-icon{background:#e6f8f2;color:#0aa17c}
+.market-category-pill.cat-4 .market-category-icon{background:#fff0f3;color:#e65778}
+
+.worker-earn-card{display:grid;grid-template-columns:48px 1fr auto;gap:12px;align-items:center;background:linear-gradient(110deg,#fff 0,#f7faff 55%,#eef5ff 100%);border:1px solid #e2ebf7;border-radius:24px;padding:15px;margin-bottom:28px;box-shadow:0 9px 24px rgba(36,66,111,.06)}
+.earn-icon{width:48px;height:48px;border-radius:16px;background:#fff1df;color:#f18400;display:grid;place-items:center}
+.earn-icon .svg-icon{width:25px;height:25px}
+.worker-earn-card span{display:block;font-size:9px;color:#8995a7;font-weight:900;text-transform:uppercase;letter-spacing:.07em}
+.worker-earn-card b{display:block;font-size:14px;color:#14213a;margin:2px 0}.worker-earn-card small{font-size:10px;color:#7b879a}
+.worker-earn-card button{border:0;background:#e6f0ff;color:#0e5fcf;border-radius:13px;padding:9px 10px;font-size:11px;font-weight:950}
+
+.jobs-head{scroll-margin-top:20px;margin-top:2px}
+.worker-list-v2{gap:12px}
+.worker-list-v2 .worker-task{border-radius:25px!important;padding:12px!important;grid-template-columns:82px 1fr 20px!important;box-shadow:0 10px 26px rgba(37,67,111,.07)!important;border:1px solid #e6edf6!important}
+.worker-list-v2 .worker-task .task-visual{width:82px;height:82px;border-radius:22px}
+.worker-list-v2 .worker-task h3{font-size:16px;margin-bottom:5px}
+.worker-list-v2 .worker-task .price{font-size:20px;color:#0b8e63}
+.worker-list-v2 .worker-meta{font-size:10px;line-height:1.25;margin-top:4px}
+
+/* Floating bottom navigation on marketplace */
+.marketplace-v2~.nav,.app>.nav{border-radius:30px!important}
+.nav{left:18px!important;right:18px!important;width:auto!important;bottom:max(12px,env(safe-area-inset-bottom))!important;padding:7px 6px!important;box-shadow:0 16px 38px rgba(31,56,98,.17)!important}
+.nav button{border-radius:22px!important;min-height:58px}
+.nav button.active{background:linear-gradient(145deg,#edf5ff,#e2efff)!important}
+.nav button.active:after{width:24px!important}
+
+@media(max-width:390px){
+ .marketplace-v2{padding-left:14px;padding-right:14px}
+ .worker-promo{padding:20px;grid-template-columns:minmax(0,1fr) 90px;min-height:200px}
+ .worker-promo h1{font-size:22px}.promo-bag{width:84px;height:84px;border-radius:27px}.promo-bag .svg-icon{width:43px;height:43px}
+ .quick-opportunity{grid-template-columns:42px 1fr 14px;padding:12px;gap:8px}.quick-opportunity-icon{width:42px;height:42px}
+ .market-category-scroll{margin-left:-14px;margin-right:-14px;padding-left:14px;padding-right:14px}
+ .worker-earn-card{grid-template-columns:44px 1fr}.worker-earn-card button{grid-column:2;justify-self:start}
+}
+
 </style>
 <link rel="manifest" href="./manifest.webmanifest?v=1.9.4"><link rel="apple-touch-icon" href="./icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default">
 </head>
@@ -820,15 +918,100 @@ function workerTaskCard(t){const d=taskDistanceKm(t);return `<button class="work
 
 async function workerHome(){
 await Promise.all([loadOpenTasks(),loadNotificationSummary(),loadSearchPreferences(),loadFeatureStatus()]);
-root.innerHTML=shell(`<section class="market-screen"><div class="market-head"><button onclick="go('profile')" style="border:0;background:transparent;padding:0">${avatarMarkup(state.profile)}</button>${logo(true)}${notificationBell()}</div>
-<button id="workerLocationButton" type="button" class="market-location ${state.workerLocation?"active":""}" onclick="toggleWorkerLocation()">${iconSvg("location")}<span>${state.workerLocation?(state.workerAddress||"Ubicación activa"):"Activar ubicación para ver trabajos cercanos"}</span></button>
-${state.workerLocationError?`<div class="geo-note" style="text-align:center;color:#b44">${escapeHtml(state.workerLocationError)}</div>`:""}
-<div class="market-search">${iconSvg("search")}<input id="workerSearch" oninput="filterWorkerTasks()" value="${escapeAttr(workerFilterState().query)}" placeholder="¿Qué trabajo buscas hoy?"></div>
-${workerFilterControls()}${authMsg()}<div class="cat-grid">${categories.map(c=>`<button class="cat-tile" data-cat="${escapeAttr(c)}" onclick="openWorkerCategory('${escapeAttr(c)}')"><span class="cat-ico">${iconSvg(c)}</span><span>${escapeHtml(c)}</span></button>`).join("")}</div>
-<div class="market-section"><h2>Publicaciones recientes</h2><button class="text-link" onclick="resetWorkerFilters()">Ver todas</button></div>
-<div id="workerTaskList" class="worker-list">${filteredWorkerTasks().length?filteredWorkerTasks().map(workerTaskCard).join(""):`<div class="empty">No hay tareas abiertas por ahora.</div>`}</div>
+const first=(state.profile?.full_name||"").trim().split(" ")[0]||"";
+const visible=filteredWorkerTasks();
+const nearby=visible.filter(t=>{const d=taskDistanceKm(t);return d!=null&&d<=10}).length;
+root.innerHTML=shell(`<section class="market-screen marketplace-v2">
+  <div class="market-v2-top">
+    <div class="market-v2-location">
+      <span class="eyebrow">Trabajos en</span>
+      <button id="workerLocationButton" type="button" class="market-location-v2 ${state.workerLocation?"active":""}" onclick="toggleWorkerLocation()">
+        ${iconSvg("location")}<span>${state.workerLocation?(state.workerAddress||"Tu zona"):"Torreón"}</span><b>⌄</b>
+      </button>
+    </div>
+    <div class="market-v2-actions">
+      <button class="market-avatar" onclick="go('profile')" aria-label="Abrir perfil">${avatarMarkup(state.profile)}</button>
+      ${notificationBell()}
+    </div>
+  </div>
+  ${state.workerLocationError?`<div class="geo-note market-v2-error">${escapeHtml(state.workerLocationError)}</div>`:""}
+
+  <div class="market-v2-search">
+    ${iconSvg("search")}
+    <input id="workerSearch" oninput="filterWorkerTasks()" value="${escapeAttr(workerFilterState().query)}" placeholder="Busca un trabajo, mandado o servicio">
+    <button type="button" class="filter-trigger" onclick="toggleWorkerFilters()" aria-label="Abrir filtros">${iconSvg("mode")}</button>
+  </div>
+
+  <div id="workerFiltersPanel" class="worker-filters-panel">${workerFilterControls()}</div>
+  ${authMsg()}
+
+  <section class="worker-promo">
+    <div class="worker-promo-copy">
+      <span class="promo-pill">DOHOY · GANA HOY</span>
+      <h1>${first?`Hola, ${escapeHtml(first)}.`:""} Encuentra una tarea y empieza a ganar.</h1>
+      <p>Elige trabajos cercanos, manda tu propuesta y organiza tu tiempo.</p>
+      <button type="button" onclick="scrollToWorkerJobs()">Ver oportunidades</button>
+    </div>
+    <div class="promo-art" aria-hidden="true">
+      <span class="promo-coin coin-a">$</span><span class="promo-coin coin-b">✓</span>
+      <div class="promo-bag">${iconSvg("briefcase")}</div>
+    </div>
+  </section>
+
+  <div class="quick-opportunity-grid">
+    <button class="quick-opportunity today" onclick="quickWorkerToday()">
+      <span class="quick-opportunity-icon">${iconSvg("clock")}</span>
+      <span><b>Para hoy</b><small>Tareas que puedes hacer hoy</small></span>
+      <em>›</em>
+    </button>
+    <button class="quick-opportunity near" onclick="quickWorkerNearby()">
+      <span class="quick-opportunity-icon">${iconSvg("location")}</span>
+      <span><b>Cerca de ti</b><small>${state.workerLocation?(nearby?`${nearby} oportunidades a ≤10 km`:"Explora tu zona"):"Activa tu ubicación"}</small></span>
+      <em>›</em>
+    </button>
+  </div>
+
+  <div class="market-v2-section-head">
+    <div><span>Explora</span><h2>¿Qué quieres hacer?</h2></div>
+    <button onclick="resetWorkerFilters()">Ver todo</button>
+  </div>
+  <div class="market-category-scroll">
+    ${categories.map((cat,i)=>`<button class="market-category-pill cat-${i%5}" data-cat="${escapeAttr(cat)}" onclick="openWorkerCategory('${escapeAttr(cat)}')">
+      <span class="market-category-icon">${iconSvg(cat)}</span><b>${escapeHtml(cat)}</b>
+    </button>`).join("")}
+  </div>
+
+  <div class="worker-earn-card">
+    <div class="earn-icon">${iconSvg("star")}</div>
+    <div><span>Más opciones, más oportunidades</span><b>Guarda tus filtros favoritos</b><small>Te ayudamos a encontrar tareas que encajen contigo.</small></div>
+    <button onclick="toggleWorkerFilters()">Configurar</button>
+  </div>
+
+  <div id="workerOpportunities" class="market-v2-section-head jobs-head">
+    <div><span>Seleccionadas para ti</span><h2>Oportunidades recientes</h2></div>
+    <button onclick="resetWorkerFilters()">Ver todas</button>
+  </div>
+  <div id="workerTaskList" class="worker-list worker-list-v2">
+    ${visible.length?visible.map(workerTaskCard).join(""):`<div class="empty">No hay tareas abiertas por ahora.</div>`}
+  </div>
 </section>`,true)
 }
+
+function toggleWorkerFilters(){
+ const panel=document.getElementById("workerFiltersPanel");
+ if(!panel)return;
+ panel.classList.toggle("open");
+ if(panel.classList.contains("open"))panel.scrollIntoView({behavior:"smooth",block:"nearest"});
+}
+function scrollToWorkerJobs(){document.getElementById("workerOpportunities")?.scrollIntoView({behavior:"smooth",block:"start"})}
+function quickWorkerToday(){
+ const f=workerFilterState();f.todayOnly=true;f.category="";filterWorkerTasks();scrollToWorkerJobs()
+}
+function quickWorkerNearby(){
+ if(!state.workerLocation){toggleWorkerLocation();return}
+ const f=workerFilterState();f.maxDistance=10;f.category="";filterWorkerTasks();scrollToWorkerJobs()
+}
+
 async function loadWorkerJobs(){
  const {data,error}=await sb.from("tasks").select("*").eq("worker_id",state.user.id).order("updated_at",{ascending:false});
  state.tasks=error?[]:(data||[]);
@@ -1158,7 +1341,7 @@ async function profile(){
    ${settingsRow("Política de privacidad","privacy","document","Cómo protegemos tus datos")}
  </div>
  <div class="account-actions"><button class="logout-btn" onclick="signOutCurrent()">${iconSvg("logout")} Cerrar sesión</button></div>
- <div class="version-note">DOHOY · Versión 2.0.0 · PASTEL UI</div>
+ <div class="version-note">DOHOY · Versión 2.1.0 · MARKETPLACE UI</div>
  </section>`,true)
 }
 function settingsRow(title,route,icon,sub=""){
