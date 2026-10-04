@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="DOHOY">
-<title>DOHOY 1.0.8 Beta</title>
+<title>DOHOY 1.0.9 Beta</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20128%20128%22%3E%3Crect%20width%3D%22128%22%20height%3D%22128%22%20rx%3D%2228%22%20fill%3D%22%23071B3B%22%2F%3E%3Cpath%20d%3D%22M15%2031C45%2020%2082%2020%20103%2034c15%2010%2020%2025%2016%2042-7-17-22-27-42-33-22-7-43-10-62-12Z%22%20fill%3D%22%23FF7A00%22%2F%3E%3Cpath%20d%3D%22M31%2049c18-1%2037%200%2051%207%2016%208%2024%2019%2023%2031-1%2013-10%2022-24%2024H18c17-12%2032-24%2043-35%208-8%207-14-1-19-7-4-18-7-29-8Z%22%20fill%3D%22%230066FF%22%2F%3E%3Cpath%20d%3D%22M57%2076c8-8%207-14-1-19%208%200%2016%202%2022%206%209%205%2013%2011%2012%2018-1%208-7%2015-19%2023h14c10-2%2016-8%2017-17%201-10-7-19-20-25%209%204%2016%2011%2018%2019%203%2012-4%2023-17%2028H42c7-7%2012-13%2015-18%205-7%206-11%200-15Z%22%20fill%3D%22%230B3D91%22%2F%3E%3C%2Fsvg%3E">
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20128%20128%22%3E%3Crect%20width%3D%22128%22%20height%3D%22128%22%20rx%3D%2228%22%20fill%3D%22%23071B3B%22%2F%3E%3Cpath%20d%3D%22M15%2031C45%2020%2082%2020%20103%2034c15%2010%2020%2025%2016%2042-7-17-22-27-42-33-22-7-43-10-62-12Z%22%20fill%3D%22%23FF7A00%22%2F%3E%3Cpath%20d%3D%22M31%2049c18-1%2037%200%2051%207%2016%208%2024%2019%2023%2031-1%2013-10%2022-24%2024H18c17-12%2032-24%2043-35%208-8%207-14-1-19-7-4-18-7-29-8Z%22%20fill%3D%22%230066FF%22%2F%3E%3Cpath%20d%3D%22M57%2076c8-8%207-14-1-19%208%200%2016%202%2022%206%209%205%2013%2011%2012%2018-1%208-7%2015-19%2023h14c10-2%2016-8%2017-17%201-10-7-19-20-25%209%204%2016%2011%2018%2019%203%2012-4%2023-17%2028H42c7-7%2012-13%2015-18%205-7%206-11%200-15Z%22%20fill%3D%22%230B3D91%22%2F%3E%3C%2Fsvg%3E">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -181,6 +181,11 @@ html,body{background:#E9EFF7}
 
 /* DOHOY 1.0.8 fixes */
 .account-contact-wrap{display:grid;grid-template-columns:minmax(0,1fr) 38px;align-items:center;gap:10px;margin-top:11px;width:100%;max-width:100%}.account-contact-lines{display:grid;gap:10px;width:100%;max-width:100%}.account-contact-row{display:grid;grid-template-columns:1fr;gap:2px;min-width:0;font-size:12px;line-height:1.25}.account-contact-label{display:block;font-size:10px;line-height:1.15;letter-spacing:.15px;font-weight:900;color:#7b8796}.account-contact-value{display:block;min-width:0;font-size:13px;font-weight:750;color:#344054;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.account-contact-row.phone .account-contact-value{color:#344054}.contact-eye{width:36px;height:36px;border:1px solid #dbe6f3;border-radius:12px;background:#eef4fb;color:#0b3d91;display:grid;place-items:center;padding:0;box-shadow:0 4px 12px rgba(7,27,59,.06)}.contact-eye svg{width:19px;height:19px;display:block}.contact-eye:active{transform:scale(.96)}.gallery-input-persistent{position:absolute!important;left:0!important;top:0!important;width:1px!important;height:1px!important;opacity:.001!important;overflow:hidden!important;z-index:-1!important}.photo-choice{cursor:pointer}.profile-save-status{display:none;font-size:12px;color:#0b3d91;margin-top:8px}.profile-save-status.show{display:block}
+
+
+/* DOHOY 1.0.9 · detalle bonito, perfil de trabajador y chats cerrados */
+.detail-shell{display:grid;gap:16px}.detail-topline{display:flex;align-items:center;justify-content:space-between;gap:10px}.detail-category-pill{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;background:#efe9fb;color:#38206f;font-size:13px;font-weight:900}.detail-category-pill .svg-icon{width:20px;height:20px}.detail-card{position:relative;overflow:hidden;background:linear-gradient(145deg,#fff 0%,#fffdfb 100%);border:1px solid #ece6f0;border-radius:28px;padding:20px;box-shadow:0 14px 35px rgba(22,15,38,.08)}.detail-card:after{content:"";position:absolute;right:-30px;top:-10px;width:220px;height:220px;background:radial-gradient(circle,#ffb46a1f,transparent 66%);pointer-events:none}.detail-icon-box{width:98px;height:98px;border-radius:28px;display:grid;place-items:center;background:#f3eeff;color:#20145c;box-shadow:inset 0 0 0 1px #e6def3}.detail-icon-box .svg-icon{width:54px;height:54px}.detail-money{font-size:32px;font-weight:1000;color:#08915d;margin:16px 0 6px}.detail-title{font-size:28px;line-height:1.05;letter-spacing:-1.1px;margin:0 0 9px;color:#09184f}.detail-copy{font-size:15px;color:#404a5c;margin:0 0 16px}.detail-location{display:inline-flex;align-items:center;gap:8px;padding:12px 14px;border-radius:999px;background:#f3f7fd;color:#6b7890;font-weight:800}.detail-location .svg-icon{width:18px;height:18px}.status-banner{display:flex;align-items:center;gap:11px;padding:17px 18px;border-radius:22px;font-size:16px;font-weight:950;border:1px solid #d8efdf;background:#eef9f1;color:#147b4f}.status-banner .dot{width:14px;height:14px;border-radius:50%;background:#2fc17d;box-shadow:0 0 0 5px #2fc17d26}.status-banner.pending{background:#fff8ea;border-color:#f4dfb0;color:#a76200}.status-banner.pending .dot{background:#ffb22e;box-shadow:0 0 0 5px #ffb22e22}.chat-cta-btn,.chat-closed-banner{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;padding:18px 20px;border-radius:22px;font-weight:950;font-size:17px;border:0}.chat-cta-btn{background:linear-gradient(135deg,#421a8d 0%,#3c1f99 52%,#2d1a77 100%);color:#fff;box-shadow:0 16px 28px rgba(57,30,125,.22)}.chat-cta-btn .left,.chat-closed-banner .left{display:flex;align-items:center;gap:12px}.chat-cta-btn .svg-icon,.chat-closed-banner .svg-icon{width:24px;height:24px}.chat-closed-banner{background:#f4f6fb;color:#57657f;border:1px dashed #cdd6e5}.task-section-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:6px}.task-section-title h2{margin:0;font-size:21px;color:#0b1548}.task-section-title .sub{margin:2px 0 0;font-size:12px}.selected-worker-card,.offer-person-card,.worker-profile-card,.rating-card{background:#fff;border:1px solid #ece6f0;border-radius:24px;padding:18px;box-shadow:0 12px 30px rgba(22,15,38,.06)}.selected-worker-head,.offer-person-head{display:grid;grid-template-columns:78px 1fr auto;gap:14px;align-items:center}.selected-worker-card .avatar,.offer-person-card .avatar,.worker-profile-card .avatar{width:78px;height:78px;border-radius:50%;overflow:hidden;background:#f2f4f8}.selected-worker-name,.offer-person-name{font-size:20px;font-weight:950;color:#0c1748;line-height:1.05;margin:0 0 6px}.worker-meta-lines{display:grid;gap:7px}.stars-line{display:flex;align-items:center;gap:9px;flex-wrap:wrap}.stars-value{font-size:16px;font-weight:900;color:#111c54}.star-display{display:inline-flex;gap:4px}.star-display span{font-size:22px;line-height:1;color:#c8cbd4}.star-display span.filled{color:#ffbf1f}.works-count{font-size:14px;color:#75809a;font-weight:700}.worker-price{font-size:18px;font-weight:1000;color:#08915d;white-space:nowrap}.worker-card-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}.secondary-soft,.accent-soft{border:0;border-radius:17px;padding:15px 14px;font-weight:950;font-size:16px}.secondary-soft{background:#f5f6fa;color:#111b50}.accent-soft{background:#fff3e7;color:#ff7a00}.offer-message{margin-top:12px;padding:12px 14px;border-radius:16px;background:#fafbfe;color:#667185;font-size:13px;line-height:1.45}.offer-action-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}.simple-empty{background:#fff;border:1px solid #ece6f0;border-radius:22px;padding:28px 18px;text-align:center;color:#6b7280}.rating-card h3{margin:0 0 4px;font-size:18px;color:#0c1748}.rating-card p{margin:0 0 16px;color:#75809a}.interactive-stars{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.star-btn{border:0;background:transparent;padding:0;cursor:pointer;font-size:46px;line-height:1;color:#c7cbd3}.star-btn.active{color:#ffbf1f}.rating-actions{display:grid;grid-template-columns:1fr;gap:10px;margin-top:12px}.tiny-link-btn{border:0;background:transparent;padding:0;font-size:12px;font-weight:800;color:#6e7a91;text-decoration:underline;cursor:pointer}.worker-profile-screen{display:grid;gap:16px}.worker-profile-card{position:relative;overflow:hidden}.worker-profile-card:after{content:"";position:absolute;right:-10px;top:0;width:190px;height:190px;background:radial-gradient(circle,#ffb46a1b,transparent 68%);pointer-events:none}.worker-profile-main{display:grid;grid-template-columns:92px 1fr;gap:16px;align-items:center}.worker-profile-main .avatar{width:92px;height:92px}.worker-profile-card h1{margin:0 0 6px;font-size:30px;color:#08144a}.worker-badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.worker-badge{display:inline-flex;align-items:center;gap:9px;padding:11px 14px;border-radius:999px;background:#f2ecff;color:#4934a3;font-size:13px;font-weight:900}.worker-badge .svg-icon{width:20px;height:20px}.important-card{background:#fff;border:1px solid #ece6f0;border-radius:24px;padding:10px 18px;box-shadow:0 12px 30px rgba(22,15,38,.05)}.important-row{display:grid;grid-template-columns:56px 1fr auto;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid #edf0f4}.important-row:last-child{border-bottom:0}.important-ico{width:56px;height:56px;border-radius:18px;background:#f3efff;color:#4630a0;display:grid;place-items:center}.important-ico .svg-icon{width:28px;height:28px}.important-label{font-size:15px;font-weight:800;color:#14204b}.important-value{font-size:15px;font-weight:850;color:#111c54;text-align:right}.recent-review{background:#fff;border:1px solid #ece6f0;border-radius:24px;padding:18px;box-shadow:0 12px 30px rgba(22,15,38,.05)}.recent-review .review-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:8px}.review-user{display:flex;gap:12px;align-items:center}.review-mini-avatar{width:44px;height:44px;border-radius:50%;background:#eef0f6;display:grid;place-items:center;color:#6f32a0}.review-mini-avatar .svg-icon{width:22px;height:22px}.mini-avatar{width:54px!important;height:54px!important;border-radius:50%!important;overflow:hidden}.chat-list-shell{display:grid;gap:12px}.chat-item-shell{display:grid;grid-template-columns:minmax(0,1fr) 48px;gap:10px;align-items:stretch}.chat-item-shell .chat-item{margin:0;width:100%}.chat-item-shell .chat-item.closed{opacity:.96}.chat-delete-btn{border:1px solid #ecdde4;background:#fff5f6;color:#b42318;border-radius:16px;display:grid;place-items:center;padding:0;box-shadow:0 8px 20px rgba(180,35,24,.08)}.chat-delete-btn .svg-icon{width:20px;height:20px}.chat-meta-badge{font-size:11px;font-weight:900;padding:6px 8px;border-radius:999px;background:#f3f6fb;color:#65728a;display:inline-flex}.chat-meta-badge.closed{background:#fff1f0;color:#b1462f}.chat-note-small{font-size:12px;color:#7d8798;margin-top:4px}.task-mini-actions{display:grid;grid-template-columns:1fr;gap:10px}.task-inline-delete{border:1px solid #f0d7d9;background:#fff6f6;color:#b42318;border-radius:16px;padding:13px 16px;font-weight:900}.task-inline-delete .svg-icon{width:18px;height:18px;vertical-align:-3px;margin-right:6px}@media (max-width:390px){.selected-worker-head,.offer-person-head{grid-template-columns:68px 1fr}.selected-worker-card .avatar,.offer-person-card .avatar{width:68px;height:68px}.worker-card-actions,.offer-action-row{grid-template-columns:1fr}.worker-price{font-size:16px}.worker-profile-main{grid-template-columns:78px 1fr}.worker-profile-main .avatar{width:78px;height:78px}.important-row{grid-template-columns:50px 1fr}.important-value{max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}}
+
 </style>
 </head>
 <body><div id="root"></div>
@@ -194,7 +199,7 @@ const root=document.getElementById("root");
 let state={
   route:"loading", mode:localStorage.getItem("dohoy_mode")||"client",
   session:null,user:null,profile:null,privateProfile:null,tasks:[],selectedTask:null,offers:[],messages:[],conversations:[],chatBack:"taskDetail",chatDraft:"",notice:"",error:"",
-  workerLocation:null, workerLocationError:"", workerAddress:"", workerCategory:"", workerTaskTab:"pending", taskBackRoute:"", showContactDetails:false
+  workerLocation:null, workerLocationError:"", workerAddress:"", workerCategory:"", workerTaskTab:"pending", taskBackRoute:"", showContactDetails:false, workerProfile:null, workerProfileBack:"taskDetail"
 };
 let poller=null;
 let deliveryPoller=null;
@@ -217,6 +222,8 @@ function vehicleSvg(variant="sedan",color=vehicleColors.graphite){
 function iconSvg(name,opts={}){
  const s='stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"';
  if(name==="Vehículo")return vehicleSvg(opts.variant||"sedan",opts.color||vehicleColors.graphite);
+ if(name==="trash")return svgWrap(`<path ${s} d="M4.8 7.1h14.4"/><path ${s} d="M9.2 3.8h5.6"/><path ${s} d="M7.2 7.1l.8 11.1h8l.8-11.1"/><path ${s} d="M10 10.2v5.2M14 10.2v5.2"/>`);
+ if(name==="star")return svgWrap(`<path ${s} d="M12 3.7l2.44 4.95 5.46.79-3.95 3.85.93 5.44L12 16.1 7.12 18.7l.93-5.44L4.1 9.4l5.46-.79L12 3.7Z"/>`);
  if(name==="Mandados")return svgWrap(`<path ${s} d="M6.5 8.2h11l-.65 10.2H7.15L6.5 8.2Z"/><path ${s} d="M9 8.2V6.9a3 3 0 0 1 6 0v1.3"/>`);
  if(name==="Paquetería")return svgWrap(`<path ${s} d="m4.5 7.2 7.5-3.7 7.5 3.7v9.5L12 20.5l-7.5-3.8V7.2Z"/><path ${s} d="m4.5 7.2 7.5 3.9 7.5-3.9M12 11.1v9.4"/>`);
  if(name==="Hogar")return svgWrap(`<path ${s} d="m4 10.6 8-6.3 8 6.3v8.1h-5.3v-5.1H9.3v5.1H4v-8.1Z"/>`);
@@ -496,26 +503,70 @@ root.innerHTML=shell(`<section class="publish-screen"><div class="publish-head">
 function toggleVehicleOptions(category){const el=document.getElementById("vehicleOptions");if(el)el.style.display=category==="Vehículo"?"block":"none"}
 function updateCategoryPreview(category){const el=document.getElementById("categoryPreview");if(!el)return;el.innerHTML=`${iconSvg(category)}<span>${escapeHtml(category)}</span>`}
 function updateVehiclePreview(){const variant=document.querySelector('input[name="vehicle_variant"]:checked')?.value||"sedan";const colorKey=document.querySelector('input[name="vehicle_color"]:checked')?.value||"graphite";const el=document.getElementById("vehiclePreview");if(el)el.innerHTML=vehicleSvg(variant,vehicleColors[colorKey]||vehicleColors.graphite);const cp=document.getElementById("categoryPreview");if(cp)cp.innerHTML=`${vehicleSvg(variant,vehicleColors[colorKey]||vehicleColors.graphite)}<span>Vehículo · ${variant==="suv"?"SUV":"Auto"}</span>`}
+
+function taskChatClosed(task){return ["completed","cancelled"].includes(task?.status)}
+function deletedChatsKey(){return `dohoy_deleted_chats_${state.user?.id||"guest"}`}
+function getDeletedChats(){try{return JSON.parse(localStorage.getItem(deletedChatsKey())||"[]")}catch{return []}}
+function setDeletedChats(list){localStorage.setItem(deletedChatsKey(),JSON.stringify(Array.from(new Set(list))))}
+function isConversationDeleted(taskId){return getDeletedChats().includes(taskId)}
+async function deleteConversation(taskId,fromTask=false){
+ if(!confirm("¿Quieres borrar esta conversación de tu lista? Solo se ocultará en tu cuenta."))return;
+ const list=getDeletedChats();if(!list.includes(taskId))list.push(taskId);setDeletedChats(list);
+ state.notice="Conversación eliminada de tu lista.";state.error="";
+ if(state.selectedTask?.id===taskId&&fromTask){go(state.mode==="worker"?"workerJobs":"clientHome");return}
+ if(state.route==="messagesHome"){await openMessagesHome();return}
+ render()
+}
+function taskRatingKey(taskId){return `dohoy_task_rating_${state.user?.id||"guest"}_${taskId}`}
+function getTaskRating(taskId){const n=Number(localStorage.getItem(taskRatingKey(taskId))||0);return Number.isFinite(n)?Math.max(0,Math.min(5,n)):0}
+function starDisplay(value,size=''){const rounded=Math.round(Number(value||0));return `<span class="star-display ${size}">${Array.from({length:5},(_,i)=>`<span class="${i<rounded?'filled':''}">★</span>`).join('')}</span>`}
+function ratingButtons(taskId,value){return `<div class="interactive-stars">${Array.from({length:5},(_,i)=>{const n=i+1;return `<button type="button" class="star-btn ${n<=value?'active':''}" onclick="selectTaskRating('${taskId}',${n})" aria-label="Calificar con ${n} estrellas">★</button>`}).join('')}</div>`}
+function selectTaskRating(taskId,value){localStorage.setItem(taskRatingKey(taskId),String(value));state.notice=`Calificación guardada: ${value} estrella${value===1?'':'s'}.`;state.error='';render()}
+function clearTaskRating(taskId){localStorage.removeItem(taskRatingKey(taskId));state.notice='Calificación eliminada.';state.error='';render()}
+function prettyRating(v){const n=Number(v||0);return Number.isFinite(n)&&n>0?n.toFixed(1):'0.0'}
+function currentWorkerFromOffers(task){if(!task?.worker_id)return null;return state.offers.find(o=>o.worker_id===task.worker_id||o.status==='accepted')||null}
+function workerSummaryHtml(profile,opts={}){
+ const rating=Number(profile?.rating||0);const works=Number(profile?.completed_tasks||0);
+ return `<div class="worker-meta-lines"><h3 class="${opts.offer?'offer-person-name':'selected-worker-name'}">${escapeHtml(profileDisplayName(profile))}</h3><div class="stars-line">${starDisplay(rating)}<span class="stars-value">${prettyRating(rating)}</span></div><div class="works-count">${works} trabajo${works===1?'':'s'} realizado${works===1?'':'s'}</div></div>`
+}
+async function openWorkerProfile(userId,backRoute='taskDetail'){
+ if(!userId)return;
+ const {data,error}=await sb.from('profiles').select('id,full_name,last_name,avatar_url,bio,phone,rating,completed_tasks,identity_verified,phone_verified,driver_license_verified,created_at').eq('id',userId).maybeSingle();
+ if(error||!data){setMsg('error',error?.message||'No pudimos abrir el perfil del trabajador.');return}
+ state.workerProfile=await resolveAvatar(data);state.workerProfileBack=backRoute;go('workerProfile')
+}
+function workerProfileScreen(){
+ const p=state.workerProfile;if(!p)return shell(`<section class="screen"><div class="top"><button class="icon" onclick="go('taskDetail')">←</button><div><b>Perfil del trabajador</b></div><span></span></div><div class="empty">No encontramos este perfil.</div></section>`,true);
+ const task=state.selectedTask||{};const canRate=task?.client_id===state.user?.id&&task?.worker_id===p.id&&task?.status==='completed';const rating=getTaskRating(task?.id||'');
+ const chatAllowed=task&&task.worker_id===p.id&&!taskChatClosed(task)&&(task.client_id===state.user?.id||task.worker_id===state.user?.id);
+ return shell(`<section class="screen worker-profile-screen"><div class="detail-topline"><button class="icon" onclick="go('${state.workerProfileBack||'taskDetail'}')">←</button><span class="detail-category-pill">${iconSvg('user')} Perfil del trabajador</span><span></span></div>${authMsg()}<div class="worker-profile-card"><div class="worker-profile-main">${avatarMarkup(p)}<div><h1>${escapeHtml(profileDisplayName(p))}</h1><div class="stars-line">${starDisplay(p.rating)}<span class="stars-value">${prettyRating(p.rating)}</span></div><div class="works-count" style="font-size:18px">${Number(p.completed_tasks||0)} trabajos realizados</div></div></div><div class="worker-badges"><span class="worker-badge">${iconSvg('verify')} Verificado</span><span class="worker-badge">${iconSvg('chat')} Respuesta rápida</span><span class="worker-badge">${iconSvg('clock')} Puntual</span></div></div><div><h2 style="margin:0 0 12px">Información importante</h2><div class="important-card"><div class="important-row"><div class="important-ico">${iconSvg('camera')}</div><div class="important-label">Foto</div><div>${avatarMarkup(p,'mini-avatar')}</div></div><div class="important-row"><div class="important-ico">${iconSvg('user')}</div><div class="important-label">Nombre</div><div class="important-value">${escapeHtml(profileDisplayName(p))}</div></div><div class="important-row"><div class="important-ico">${iconSvg('briefcase')}</div><div class="important-label">Trabajos realizados</div><div class="important-value">${Number(p.completed_tasks||0)} trabajos</div></div><div class="important-row"><div class="important-ico">${iconSvg('star')}</div><div class="important-label">Calificación</div><div class="important-value">${starDisplay(p.rating)} <span class="stars-value" style="margin-left:6px">${prettyRating(p.rating)}</span></div></div></div></div>${canRate?`<div class="rating-card"><h3>Calificar trabajador</h3><p>Selecciona de 0 a 5 estrellas</p>${ratingButtons(task.id,rating)}<div class="rating-actions"><button class="btn orange" onclick="selectTaskRating('${task.id}',${Math.max(1,rating||1)})">Guardar calificación</button><button type="button" class="tiny-link-btn" onclick="clearTaskRating('${task.id}')">Dejar en 0 estrellas</button></div></div>`:''}${chatAllowed?`<button class="chat-cta-btn" onclick="openChat('${task.id}')"><span class="left">${iconSvg('chat')}<span>Abrir chat</span></span><span>›</span></button>`:task?.id?`<div class="chat-closed-banner"><span class="left">${iconSvg('chat')}<span>${taskChatClosed(task)?'El chat se cerró al finalizar la tarea.':'Chat no disponible en este momento.'}</span></span></div>`:''}<div class="recent-review"><h3 style="margin:0 0 12px;color:#0b1548">Opinión reciente</h3><div class="review-head"><div class="review-user"><div class="review-mini-avatar">${iconSvg('user')}</div><div><b>Ana Rodríguez</b><div class="stars-line" style="gap:6px">${starDisplay(5)}<span class="stars-value">5.0</span></div></div></div><span class="small">12 abr 2024</span></div><div class="small" style="font-size:15px;color:#657289">Excelente trabajo, muy puntual y profesional.</div></div></section>`,true)
+}
+
 async function taskDetail(){
 const t=state.selectedTask;if(!t)return go(state.mode==="client"?"clientHome":"workerHome");
 const isOwner=t.client_id===state.user.id;
-if(isOwner) await loadOffers(t.id);
-else await loadMyOffer(t.id);
+if(isOwner) await loadOffers(t.id); else await loadMyOffer(t.id);
+const assignedOffer=currentWorkerFromOffers(t);
+const selectedProfile=assignedOffer?.profiles||null;
+const closed=taskChatClosed(t);
 let body="";
-if(isOwner){
-body=`<h2>Ofertas recibidas</h2><div class="cards">${state.offers.length?state.offers.map(o=>{
-const p=o.profiles||{};return `<div class="card"><div class="offer">${avatarMarkup(p)}<div><b>${escapeHtml(p.full_name||"Trabajador")}</b><div class="stars">★ ${p.rating??5}</div><div class="small">${escapeHtml(o.message||"Sin mensaje")}</div></div><div class="price">${money(o.amount)}</div></div>
-${t.status==="open"?`<button class="btn primary" onclick="acceptOffer('${o.id}','${o.worker_id}')">Elegir trabajador</button>`:`<div class="pill">${o.status}</div>`}</div>`}).join(""):`<div class="empty">Aún no hay ofertas.</div>`}</div>`;
-}else{
-const my=state.offers[0];
-body=t.status==="open"?`<h2>Haz una oferta</h2>${my?`<div class="ok">Ya ofreciste ${money(my.amount)}. Estado: ${my.status}.</div>`:`<form id="offerForm"><div class="field"><label>Tu precio</label><input class="input" name="amount" type="number" min="1" value="${Number(t.offered_price)}" required></div><div class="field"><label>Mensaje</label><textarea name="message" placeholder="Ej. Puedo hacerlo hoy por la tarde"></textarea></div><button class="btn primary">Enviar oferta</button></form>`}`:
-t.worker_id===state.user.id?`<div class="ok">Esta tarea está asignada a ti.</div>${taskProgressButtons(t)}`:`<div class="sub">Esta tarea ya no está disponible.</div>`;
+if(isOwner&&t.worker_id&&selectedProfile){
+ const savedRating=getTaskRating(t.id);
+ body+=`<div class="task-section-title"><div><h2>Trabajador seleccionado</h2><div class="sub">Te mostramos solo la información más importante.</div></div></div><div class="selected-worker-card"><div class="selected-worker-head">${avatarMarkup(selectedProfile)}${workerSummaryHtml(selectedProfile)}<div class="worker-price">${money(assignedOffer?.amount||t.offered_price)}</div></div><div class="worker-card-actions"><button class="secondary-soft" onclick="openWorkerProfile('${selectedProfile.id||t.worker_id}','taskDetail')">Ver perfil</button>${t.status==='completed'?`<button class="accent-soft" onclick="openWorkerProfile('${selectedProfile.id||t.worker_id}','taskDetail')">Calificar</button>`:`<button class="accent-soft" onclick="openChat('${t.id}')">Chat</button>`}</div></div>`;
+ if(t.status==='completed')body+=`<div class="rating-card"><h3>Califica tu experiencia</h3><p>Selecciona de 0 a 5 estrellas</p>${ratingButtons(t.id,savedRating)}<div class="rating-actions"><button class="btn orange" onclick="selectTaskRating('${t.id}',${Math.max(1,savedRating||1)})">Guardar calificación</button><button type="button" class="tiny-link-btn" onclick="clearTaskRating('${t.id}')">Dejar en 0 estrellas</button></div></div>`;
 }
-root.innerHTML=shell(`<section class="screen"><div class="top"><button class="icon" onclick="go('${state.taskBackRoute|| (isOwner?"clientHome":"workerHome")}')">←</button><span class="pill">${escapeHtml(baseCategory(t.category))}</span><span></span></div>
-<div class="detail-hero"><div class="detail-icon">${taskIcon(t)}</div><div class="detail-price">${money(t.offered_price)}</div><h1>${escapeHtml(t.title)}</h1><p>${escapeHtml(t.description)}</p><span class="location-chip">${locationMarkup(t.location_label||"")}${!isOwner&&taskDistanceKm(t)!=null?` · ${distanceLabel(taskDistanceKm(t))} de ti`:""}</span></div>
-<div class="status"><div class="active">● ${statusText(t.status)}</div></div>
-${(t.client_id===state.user.id||t.worker_id===state.user.id)&&t.worker_id?`<button class="btn ghost" onclick="openChat('${t.id}')">${iconSvg("chat")} Abrir chat</button>`:""}
-${body}</section>`,true)
+if(isOwner&&t.status==='open'){
+ body+=`<div class="task-section-title"><div><h2>Ofertas recibidas</h2><div class="sub">Elige al trabajador que más te convenga.</div></div></div>`;
+ body+=state.offers.length?`<div class="cards">${state.offers.map(o=>{const p=o.profiles||{};return `<div class="offer-person-card"><div class="offer-person-head">${avatarMarkup(p)}${workerSummaryHtml(p,{offer:true})}<div class="worker-price">${money(o.amount)}</div></div>${o.message?`<div class="offer-message">${escapeHtml(o.message)}</div>`:''}<div class="offer-action-row"><button class="secondary-soft" onclick="openWorkerProfile('${o.worker_id}','taskDetail')">Ver perfil</button><button class="accent-soft" onclick="acceptOffer('${o.id}','${o.worker_id}')">Elegir</button></div></div>`}).join('')}</div>`:`<div class="simple-empty">Aún no hay ofertas.</div>`;
+}else if(!isOwner){
+ const my=state.offers[0];
+ body+=t.status==='open'?`${my?`<div class="ok">Ya ofreciste ${money(my.amount)}. Estado: ${my.status}.</div>`:`<div class="rating-card"><h3>Haz una oferta</h3><p>Preséntate y envía tu propuesta.</p><form id="offerForm"><div class="field"><label>Tu precio</label><input class="input" name="amount" type="number" min="1" value="${Number(t.offered_price)}" required></div><div class="field"><label>Mensaje</label><textarea name="message" placeholder="Ej. Puedo hacerlo hoy por la tarde"></textarea></div><button class="btn primary">Enviar oferta</button></form></div>`}`:(t.worker_id===state.user.id?`${t.worker_id&&selectedProfile?`<div class="selected-worker-card"><div class="selected-worker-head">${avatarMarkup(selectedProfile)}${workerSummaryHtml(selectedProfile)}<div class="worker-price">${money(assignedOffer?.amount||t.offered_price)}</div></div></div>`:''}${taskProgressButtons(t)}`:`<div class="simple-empty">Esta tarea ya no está disponible.</div>`);
+}
+if((t.client_id===state.user.id||t.worker_id===state.user.id)&&t.worker_id&&closed){
+ body+=`<div class="task-mini-actions"><button class="task-inline-delete" onclick="deleteConversation('${t.id}',true)">${iconSvg('trash')} Borrar conversación</button></div>`
+}
+const statusCls=t.status==='open'?'pending':'';
+root.innerHTML=shell(`<section class="screen"><div class="detail-shell"><div class="detail-topline"><button class="icon" onclick="go('${state.taskBackRoute|| (isOwner?"clientHome":"workerHome")}')">←</button><span class="detail-category-pill">${taskIcon(t)} ${escapeHtml(baseCategory(t.category))}</span><span></span></div>${authMsg()}<div class="detail-card"><div class="detail-icon-box">${taskIcon(t)}</div><div class="detail-money">${money(t.offered_price)}</div><h1 class="detail-title">${escapeHtml(t.title)}</h1><p class="detail-copy">${escapeHtml(t.description)}</p><span class="detail-location">${iconSvg('location')}<span>${escapeHtml(t.location_label||'Sin ubicación')}${!isOwner&&taskDistanceKm(t)!=null?` · ${distanceLabel(taskDistanceKm(t))} de ti`:''}</span></span></div><div class="status-banner ${statusCls}"><span class="dot"></span><span>${statusText(t.status)}</span></div>${(t.client_id===state.user.id||t.worker_id===state.user.id)&&t.worker_id&&!closed?`<button class="chat-cta-btn" onclick="openChat('${t.id}')"><span class="left">${iconSvg('chat')}<span>Abrir chat</span></span><span>›</span></button>`:(t.client_id===state.user.id||t.worker_id===state.user.id)&&t.worker_id&&closed?`<div class="chat-closed-banner"><span class="left">${iconSvg('chat')}<span>El chat se cerró al finalizar la tarea.</span></span></div>`:''}${body}</div></section>`,true)
 }
 function taskProgressButtons(t){
 if(t.status==="assigned")return `<button class="btn orange" onclick="setTaskStatus('${t.id}','in_progress')">Comenzar tarea</button>`;
@@ -560,7 +611,7 @@ async function profile(){
    ${settingsRow("Política de privacidad","privacy","shield","Cómo tratamos tus datos")}
  </div>
  <div class="account-actions"><button class="logout-btn" onclick="signOutCurrent()">${iconSvg("logout")} Cerrar sesión</button></div>
- <div class="version-note">DOHOY Beta · Versión 1.0.8</div>
+ <div class="version-note">DOHOY Beta · Versión 1.0.9</div>
  </section>`,true)
 }
 function settingsRow(title,route,icon,sub=""){
@@ -794,11 +845,12 @@ async function loadConversations(){
 const {data:tasks,error}=await sb.from("tasks").select("id,title,category,status,client_id,worker_id,updated_at").or(`client_id.eq.${state.user.id},worker_id.eq.${state.user.id}`).not("worker_id","is",null).order("updated_at",{ascending:false});
 if(error){state.error=error.message;state.conversations=[];return}
 await markDeliveredForTasks(tasks.map(t=>t.id));
-state.conversations=await Promise.all(tasks.map(async t=>{
+const hidden=new Set(getDeletedChats());
+state.conversations=(await Promise.all(tasks.map(async t=>{
   const {data:msgs}=await sb.from("messages").select("id,sender_id,body,created_at,delivered_at,read_at").eq("task_id",t.id).order("created_at",{ascending:false}).limit(50);
   const arr=msgs||[];
   return {...t,last_message:arr[0]||null,unread:arr.filter(m=>m.sender_id!==state.user.id&&!m.read_at).length}
-}));
+}))).filter(t=>!hidden.has(t.id));
 state.conversations.sort((a,b)=>new Date(b.last_message?.created_at||b.updated_at)-new Date(a.last_message?.created_at||a.updated_at))
 }
 async function openMessagesHome(){
@@ -807,18 +859,15 @@ poller=setInterval(async()=>{if(state.route!=="messagesHome")return;await loadCo
 }
 function conversationListHtml(){
 if(!state.conversations.length)return `<div class="empty">Aún no tienes conversaciones.</div>`;
-return state.conversations.map(t=>`<button class="card chat-item" onclick="openChat('${t.id}','messagesHome')">
-<div class="thumb">${taskIcon(t)}</div>
-<div><div class="chat-title">${escapeHtml(t.title)}</div><div class="chat-preview">${t.last_message?`${t.last_message.sender_id===state.user.id?"Tú: ":""}${escapeHtml(t.last_message.body)}`:"Todavía no hay mensajes"}</div></div>
-<div>${t.unread?`<span class="unread">${t.unread}</span>`:`<span class="small">${statusText(t.status)}</span>`}</div>
-</button>`).join("")
+return `<div class="chat-list-shell">${state.conversations.map(t=>`<div class="chat-item-shell"><button class="card chat-item ${taskChatClosed(t)?'closed':''}" onclick="${taskChatClosed(t)?`openTask('${t.id}')`:`openChat('${t.id}','messagesHome')`}"><div class="thumb">${taskIcon(t)}</div><div><div class="chat-title">${escapeHtml(t.title)}</div><div class="chat-preview">${t.last_message?`${t.last_message.sender_id===state.user.id?"Tú: ":""}${escapeHtml(t.last_message.body)}`:"Todavía no hay mensajes"}</div>${taskChatClosed(t)?`<div class="chat-note-small">La tarea ya finalizó; el chat está cerrado.</div>`:''}</div><div>${taskChatClosed(t)?`<span class="chat-meta-badge closed">Chat cerrado</span>`:(t.unread?`<span class="unread">${t.unread}</span>`:`<span class="chat-meta-badge">${statusText(t.status)}</span>`)}</div></button><button class="chat-delete-btn" type="button" onclick="deleteConversation('${t.id}')" aria-label="Borrar conversación">${iconSvg('trash')}</button></div>`).join('')}</div>`
 }
 function messagesHomeScreen(){
 return shell(`<section class="screen"><div class="top"><button class="icon" onclick="go('${state.mode==="client"?"clientHome":"workerHome"}')">←</button><div><b>Mensajes</b><div class="small">Chats organizados por tarea</div></div><span></span></div>
-<div class="kicker">Bandeja</div><h1 style="margin-top:8px">Tus conversaciones</h1><p class="sub">Cada chat está vinculado a una tarea.</p><div id="conversationList" class="chat-list" style="margin-top:18px">${conversationListHtml()}</div></section>`,true)
+<div class="kicker">Bandeja</div><h1 style="margin-top:8px">Tus conversaciones</h1><p class="sub">Cada chat está vinculado a una tarea. También puedes borrar conversaciones de tu lista.</p><div id="conversationList" class="chat-list" style="margin-top:18px">${conversationListHtml()}</div></section>`,true)
 }
 async function openChat(id,backRoute="taskDetail"){
 clearPoll();const {data:t,error}=await sb.from("tasks").select("*").eq("id",id).single();if(error)return setMsg("error",error.message);
+if(taskChatClosed(t)){state.selectedTask=t;state.taskBackRoute=backRoute;state.notice="El chat se cerró al finalizar la tarea.";state.error="";go("taskDetail");return}
 state.selectedTask=t;state.chatBack=backRoute;state.route="chat";state.chatDraft="";await loadMessages(id);await markChatRead(id);await loadMessages(id);render();scrollChatToBottom();
 subscribeToChat(id)
 }
@@ -842,7 +891,7 @@ return `<div class="bubble ${mine?"me":"other"}"><div>${escapeHtml(m.body)}</div
 }
 function chatScreen(){
 const t=state.selectedTask;
-return shell(`<section class="screen"><div class="top"><button class="icon" onclick="backFromChat()">←</button><div><b>Chat de la tarea</b><div class="small">${escapeHtml(t.title)}</div></div><span></span></div>
+return shell(`<section class="screen"><div class="top"><button class="icon" onclick="backFromChat()">←</button><div><b>Chat de la tarea</b><div class="small">${escapeHtml(t.title)}</div></div>${taskChatClosed(t)?`<span class="chat-meta-badge closed">Cerrado</span>`:`<button class="chat-delete-btn" type="button" onclick="deleteConversation('${t.id}',true)">${iconSvg('trash')}</button>`}</div>
 <div class="kicker" style="margin-bottom:12px">Conversación de la tarea</div><div id="chatMessages" class="chat">${messagesHtml()}</div><div style="height:104px"></div>
 <div class="chatbar"><input id="chatInput" autocomplete="off" value="${escapeAttr(state.chatDraft||"")}" oninput="state.chatDraft=this.value" placeholder="Escribe un mensaje…"><button onclick="sendMessage()">➤</button></div></section>`,true)
 }
@@ -887,6 +936,7 @@ if(state.route==="createTask"){createTask();bindForms();return}
 if(state.route==="taskDetail"){taskDetail().then(bindForms);return}
 if(state.route==="profile"){profile().then(bindForms);return}
 if(state.route==="editProfile"){editProfile().then(bindForms);return}
+if(state.route==="workerProfile"){root.innerHTML=workerProfileScreen();bindForms();return}
 if(state.route==="addresses"){root.innerHTML=addressesScreen();return}
 if(state.route==="payments"){root.innerHTML=paymentsScreen();return}
 if(state.route==="billing"){root.innerHTML=billingScreen();return}
@@ -956,7 +1006,7 @@ r=await sb.from("tasks").update({worker_id:workerId,status:"assigned"}).eq("id",
 if(r.error)return setMsg("error",r.error.message);state.selectedTask=r.data;state.notice="Trabajador seleccionado.";await loadOffers(tid);render()
 }
 async function setTaskStatus(id,status){
-const {data,error}=await sb.from("tasks").update({status}).eq("id",id).select().single();if(error)return setMsg("error",error.message);state.selectedTask=data;render()
+const {data,error}=await sb.from("tasks").update({status}).eq("id",id).select().single();if(error)return setMsg("error",error.message);state.selectedTask=data;if(status==="completed"){state.notice="Tarea finalizada. El chat quedó cerrado automáticamente.";state.error=""}render()
 }
 async function loadMessages(taskId){
 const {data,error}=await sb.from("messages").select("*").eq("task_id",taskId).order("created_at",{ascending:true});if(!error)state.messages=data
@@ -974,6 +1024,6 @@ const {data}=await sb.auth.getSession();state.session=data.session;state.user=da
 state.route=state.session?"mode":"welcome";render();
 sb.auth.onAuthStateChange(async(_event,session)=>{state.session=session;state.user=session?.user||null;if(state.user)await loadProfile();if(!session&&!["welcome","signup","login"].includes(state.route))go("welcome")})
 }
-window.state=state;window.openProfileField=openProfileField;window.openPhotoChoiceSheet=openPhotoChoiceSheet;window.openGalleryPicker=openGalleryPicker;window.handleGalleryPhoto=handleGalleryPhoto;window.closeProfileSheet=closeProfileSheet;window.saveProfileField=saveProfileField;window.saveSocialNetworks=saveSocialNetworks;window.requestAccountDeletion=requestAccountDeletion;window.go=go;window.mode=mode;window.signOut=signOut;window.openTask=openTask;window.acceptOffer=acceptOffer;window.setTaskStatus=setTaskStatus;window.openChat=openChat;window.openMessagesHome=openMessagesHome;window.sendMessage=sendMessage;window.backFromChat=backFromChat;window.toggleVehicleOptions=toggleVehicleOptions;window.updateVehiclePreview=updateVehiclePreview;window.updateCategoryPreview=updateCategoryPreview;
+window.state=state;window.openProfileField=openProfileField;window.openPhotoChoiceSheet=openPhotoChoiceSheet;window.openGalleryPicker=openGalleryPicker;window.handleGalleryPhoto=handleGalleryPhoto;window.closeProfileSheet=closeProfileSheet;window.saveProfileField=saveProfileField;window.saveSocialNetworks=saveSocialNetworks;window.requestAccountDeletion=requestAccountDeletion;window.go=go;window.mode=mode;window.signOut=signOut;window.openTask=openTask;window.acceptOffer=acceptOffer;window.setTaskStatus=setTaskStatus;window.openChat=openChat;window.openMessagesHome=openMessagesHome;window.sendMessage=sendMessage;window.backFromChat=backFromChat;window.toggleVehicleOptions=toggleVehicleOptions;window.updateVehiclePreview=updateVehiclePreview;window.updateCategoryPreview=updateCategoryPreview;window.openWorkerProfile=openWorkerProfile;window.selectTaskRating=selectTaskRating;window.clearTaskRating=clearTaskRating;window.deleteConversation=deleteConversation;
 init();
 </script></body></html>
