@@ -359,10 +359,10 @@ label{color:#263A59!important;font-weight:850!important}
  .screen,.settings-page{padding-left:14px!important;padding-right:14px!important}
  .card,.task,.detail-card,.offer-person-card,.settings-section{border-radius:22px!important}
  .home-hero,.hero,.profile-hero,.mode-hero,.account-hero{border-radius:26px!important}
- .nav{left:10px!important;right:10px!important;bottom:10px!important}
+ .nav{left:10px!important;right:10px!important;width:auto!important;transform:none!important;bottom:max(10px,env(safe-area-inset-bottom))!important}
 }
 
-/* DOHOY 1.9.2 · métodos de pago visible */
+/* DOHOY 1.9.3 · métodos de pago + barra inferior corregida */
 .payment-methods-page{background:linear-gradient(180deg,#eef5ff 0,#f7faff 28%,#fff7ef 100%)}
 .payment-methods-hero{display:grid;grid-template-columns:58px 1fr;gap:14px;align-items:start;background:linear-gradient(135deg,#0b3d91 0%,#1268df 68%,#ff7a00 140%);color:#fff;border-radius:26px;padding:19px;margin:12px 0 16px;box-shadow:0 18px 38px rgba(11,61,145,.2)}
 .payment-methods-hero h2{margin:3px 0 6px;font-size:23px;line-height:1.05}.payment-methods-hero p{margin:0;color:#e8f0ff;font-size:12px;line-height:1.45}.payment-methods-hero>div>span{font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:950;color:#ffd9b8}.payment-hero-icon{width:54px;height:54px;border-radius:18px;display:grid;place-items:center;background:#ffffff18;border:1px solid #ffffff2e}.payment-hero-icon .svg-icon{width:27px;height:27px}
@@ -372,7 +372,7 @@ label{color:#263A59!important;font-weight:850!important}
 .add-payment-card{width:100%;min-height:54px;border:0;border-radius:17px;margin-top:15px;background:linear-gradient(110deg,#ff7a00 0%,#ff8e2b 50%,#1268df 115%);color:#fff;font-size:16px;font-weight:1000;box-shadow:0 13px 26px rgba(255,122,0,.25)}.add-payment-card:disabled,.add-card-mini:disabled{opacity:.6}.payment-security-note{display:flex;gap:8px;align-items:flex-start;margin-top:12px;padding:11px 12px;border-radius:15px;background:#f5f8fc;color:#607086;font-size:10px;line-height:1.4}.payment-security-note .svg-icon{width:15px;height:15px;flex:0 0 15px;color:#0b3d91}
 
 
-/* DOHOY 1.9.2 · acceso visible a métodos de pago */
+/* DOHOY 1.9.3 · acceso visible a métodos de pago */
 .account-quick-four{grid-template-columns:repeat(4,minmax(0,1fr))!important}
 .account-quick-four button{min-width:0;padding:13px 8px!important}
 .account-quick-four button span:last-child{font-size:11px;line-height:1.15}
@@ -383,7 +383,7 @@ label{color:#263A59!important;font-weight:850!important}
 .new-pill{display:inline-flex;align-items:center;margin-left:7px;padding:3px 7px;border-radius:999px;background:#ff7a00;color:#fff;font-size:8px;font-style:normal;font-weight:950;letter-spacing:.08em;vertical-align:middle}
 @media(max-width:430px){.account-quick-four{grid-template-columns:repeat(2,1fr)!important}.account-quick-four button{min-height:92px}}
 </style>
-<link rel="manifest" href="./manifest.webmanifest?v=1.9.1"><link rel="apple-touch-icon" href="./icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="./manifest.webmanifest?v=1.9.3"><link rel="apple-touch-icon" href="./icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default">
 </head>
 <body><div id="root"></div>
 <script>
