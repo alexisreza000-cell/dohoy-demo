@@ -806,6 +806,71 @@ html[data-theme="dark"] .wizard-back{background:#1a2b40;color:#c7d5e7}
 html[data-theme="dark"] .profile-trust-card,html[data-theme="dark"] .dohoy-score-card,html[data-theme="dark"] .trusted-contact-card{background:#111f32!important;border-color:#263950!important}
 @media(max-width:390px){.work-live-track small{font-size:5.8px}.attention-grid{grid-template-columns:repeat(3,1fr)}.review-grid{grid-template-columns:1fr}.publish-category-grid{grid-template-columns:repeat(3,1fr)}}
 
+
+/* DOHOY 4.0.1 — contraste refinado del modo oscuro */
+/* El selector de modo conserva tarjetas claras: sus textos deben seguir siendo oscuros. */
+html[data-theme="dark"] .mode-choice-card.client .mode-card-copy b{
+  color:#e95f10!important;
+  text-shadow:none!important;
+}
+html[data-theme="dark"] .mode-choice-card.worker .mode-card-copy b{
+  color:#075fcf!important;
+  text-shadow:none!important;
+}
+html[data-theme="dark"] .mode-choice-card .mode-card-copy small{
+  color:#53657c!important;
+  opacity:1!important;
+}
+html[data-theme="dark"] .mode-choice-card.client{
+  background:linear-gradient(135deg,#ffffff 0%,#ffffff 50%,#fff5eb 100%)!important;
+  border-color:#f0dfcf!important;
+}
+html[data-theme="dark"] .mode-choice-card.worker{
+  background:linear-gradient(135deg,#ffffff 0%,#ffffff 50%,#edf5ff 100%)!important;
+  border-color:#d7e6f8!important;
+}
+html[data-theme="dark"] .mode-choice-card{
+  box-shadow:0 18px 42px rgba(0,0,0,.28)!important;
+}
+
+/* Logo preparado específicamente para superficies oscuras. */
+html[data-theme="dark"] .mode-choice-top .brand-word{
+  color:#f7fbff!important;
+  text-shadow:0 2px 14px rgba(0,0,0,.24);
+}
+html[data-theme="dark"] .mode-choice-top .brand-word .accent{
+  color:#ff8127!important;
+}
+html[data-theme="dark"] .mode-choice-top .brand-mark{
+  filter:brightness(1.28) saturate(1.16) drop-shadow(0 3px 12px rgba(0,102,255,.22))!important;
+}
+
+/* Encabezado: mantiene jerarquía sin apagar los textos secundarios. */
+html[data-theme="dark"] .mode-choice-copy h1{
+  color:#f7f9fd!important;
+}
+html[data-theme="dark"] .mode-choice-copy p{
+  color:#aebbd0!important;
+}
+html[data-theme="dark"] .mode-choice-copy .kicker{
+  color:#ff8127!important;
+}
+html[data-theme="dark"] .mode-choice-note{
+  color:#aebbd0!important;
+}
+
+/* Botón de salida: más integrado con el fondo oscuro. */
+html[data-theme="dark"] .mode-exit{
+  background:rgba(255,255,255,.94)!important;
+  color:#51647d!important;
+  border-color:rgba(255,255,255,.45)!important;
+}
+
+/* Protege componentes deliberadamente claros frente a las reglas globales del tema oscuro. */
+html[data-theme="dark"] .mode-role-icon{
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.9),0 9px 22px rgba(0,0,0,.10)!important;
+}
+
 </style>
 <link rel="manifest" href="./manifest.webmanifest?v=1.9.4"><link rel="apple-touch-icon" href="./icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default">
 </head>
@@ -1870,7 +1935,7 @@ async function profile(){
    ${settingsRow("Política de privacidad","privacy","document","Cómo protegemos tus datos")}
  </div>
  <div class="account-actions"><button class="logout-btn" onclick="signOutCurrent()">${iconSvg("logout")} Cerrar sesión</button></div>
- <div class="version-note">DOHOY · Versión 4.0.0 · BETA READY</div>
+ <div class="version-note">DOHOY · Versión 4.0.1 · BETA READY</div>
  </section>`,true)
 }
 function settingsRow(title,route,icon,sub=""){
@@ -2482,7 +2547,7 @@ const remaining=Math.max(0,1850-(Date.now()-splashStarted));setTimeout(finishSpl
 sb.auth.onAuthStateChange(async(_event,session)=>{state.session=session;state.user=session?.user||null;if(state.user){await loadProfile();await loadNotificationSummary();subscribeNotifications()}if(!session&&!['welcome','signup','login','onboarding','mode'].includes(state.route))go(onboardingDone()?'welcome':'onboarding')})
 }
 const DOHOY_VAPID_PUBLIC="BIqp0MxIqy8rJPGj8mCRF-P_FwaMWgRMKSR_x6AazRKylHNhyT3NEPjNODKzvsSyIpt6OE3BUQXEz8-OkV-k14E";
-// DOHOY 4.0.0 — cierre V1: flujo guiado, centro de trabajo, chat multimedia, reputación, tema y hardening.
+// DOHOY 4.0.1 — corrección de contraste y legibilidad del modo oscuro.
 const DEFAULT_FILTERS={query:'',category:'',minPrice:0,maxDistance:null,todayOnly:false,vehicleOnly:false,notifyMatching:true};
 function workerFilterState(){if(!state.workerFilters)state.workerFilters={...DEFAULT_FILTERS};return state.workerFilters}
 function searchStorageKey(){return 'dohoy_search_'+(state.user?.id||'guest')}
