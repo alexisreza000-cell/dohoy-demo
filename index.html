@@ -933,6 +933,83 @@ html[data-theme="dark"] .category-switcher button.active{background:#1467e8!impo
 .activity-day{font-size:8px;letter-spacing:.1em;font-weight:950;color:#8996a8;margin:14px 3px 7px;text-transform:uppercase}.notification-list-v3{display:grid;gap:8px}.notification-group-card{width:100%;border:1px solid #e4ebf4;background:#fff;border-radius:20px;padding:11px;display:grid;grid-template-columns:42px 1fr 37px;gap:9px;align-items:start;text-align:left;box-shadow:0 6px 18px rgba(31,56,98,.045)}.notification-group-card.unread{border-color:#b9d5fb;background:linear-gradient(135deg,#f7fbff,#fff);box-shadow:0 7px 20px rgba(20,103,232,.08)}.notification-group-card .notification-ico{width:42px;height:42px;border-radius:14px}.notification-group-card .notification-copy{min-width:0}.notification-group-card .notification-copy>small{display:block;font-size:6.5px;letter-spacing:.08em;color:#8b98aa;font-weight:950;margin-bottom:2px}.notification-group-card .notification-copy b{font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.notification-group-card .notification-copy p{font-size:8.5px;line-height:1.35;margin:3px 0;color:#68778b;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.notification-mini-stack{display:flex;gap:4px;flex-wrap:wrap;margin-top:6px}.notification-mini-stack i{font-style:normal;font-size:6.5px;color:#61738b;background:#f0f4f9;border-radius:999px;padding:4px 6px;max-width:110px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.notification-side{display:flex;flex-direction:column;align-items:flex-end;gap:5px}.notification-side>i{font-style:normal;min-width:19px;height:19px;padding:0 5px;border-radius:999px;background:#ff7417;color:#fff;display:grid;place-items:center;font-size:7px;font-weight:950}.notification-side time{font-size:7px;color:#98a4b4;white-space:nowrap}.notification-side em{font-style:normal;font-size:18px;color:#a2adba}
 html[data-theme="dark"] .worker-proposal-home,html[data-theme="dark"] .jobs-summary-v3 button,html[data-theme="dark"] .notification-group-card{background:#111f32!important;border-color:#263a54!important}html[data-theme="dark"] .worker-proposal-home b,html[data-theme="dark"] .notification-group-card .notification-copy b{color:#f3f7fd!important}html[data-theme="dark"] .activity-v3{background:linear-gradient(180deg,#0b1422,#0d1929)!important}html[data-theme="dark"] .notification-mini-stack i{background:#1a2c43;color:#b9c8da}
 
+
+/* DOHOY 4.3 — compactación, simetría y QA visual */
+*,*:before,*:after{box-sizing:border-box}
+button,input,textarea,select{max-width:100%}
+button{touch-action:manipulation}
+.screen,.settings-page,.jobs-screen,.marketplace-v2,.client-market-home{overflow-x:hidden}
+h1,h2,h3,b,p,span,small{overflow-wrap:anywhere}
+
+/* Perfil: tarjetas iguales y bastante más compactas */
+.account-screen .settings-section{gap:9px!important;margin:16px 0!important}
+.account-screen .settings-section h2{margin-bottom:0!important}
+.account-screen .settings-section .settings-row,
+.account-screen .settings-row{min-height:96px!important;height:96px!important;padding:11px!important;border-radius:19px!important;display:grid!important;grid-template-columns:42px minmax(0,1fr) 24px!important;grid-template-rows:1fr!important;align-items:center!important;gap:9px!important}
+.account-screen .settings-section .settings-row .row-ico,
+.account-screen .settings-row .row-ico{width:42px!important;height:42px!important;min-width:42px!important;border-radius:14px!important}
+.account-screen .settings-section .settings-row .row-ico .svg-icon,
+.account-screen .settings-row .row-ico .svg-icon{width:21px!important;height:21px!important}
+.account-screen .settings-section .settings-row>span:nth-child(2){align-self:center!important}
+.account-screen .settings-section .settings-row .row-main,.account-screen .settings-row .row-main{font-size:13.5px!important;line-height:1.12!important;padding-right:0!important}
+.account-screen .settings-section .settings-row .row-sub,.account-screen .settings-row .row-sub{font-size:9.5px!important;line-height:1.25!important;margin-top:4px!important;display:-webkit-box!important;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.account-screen .settings-section .settings-row .chev,.account-screen .settings-row .chev{position:static!important;width:24px!important;height:24px!important;font-size:18px!important;border-radius:9px!important;align-self:center!important}
+.account-screen .settings-section .payment-settings-row,
+.account-screen .settings-section:first-of-type .settings-row:last-child,
+.account-screen .setting-mode,.account-screen .setting-admin{grid-column:1/-1!important;height:82px!important;min-height:82px!important;grid-template-columns:42px minmax(0,1fr) 24px!important}
+.account-screen .account-quick{gap:9px!important}
+.account-screen .account-quick button{min-height:76px!important;height:76px!important;padding:10px!important;border-radius:18px!important;grid-template-columns:42px 1fr!important}
+.account-screen .account-quick .qico{width:42px!important;height:42px!important;border-radius:14px!important}
+.account-screen .account-quick .svg-icon{width:22px!important;height:22px!important}
+.account-screen .account-quick button>span:last-child{font-size:13px!important}
+
+/* Marketplace trabajador: menos aire muerto y mejor proporción */
+.marketplace-v2{padding-top:16px!important}
+.market-v2-top{margin-bottom:13px!important}
+.market-v2-search{height:56px!important;border-radius:20px!important;margin-bottom:13px!important}
+.worker-promo{min-height:166px!important;padding:18px!important;border-radius:24px!important;grid-template-columns:minmax(0,1fr) 88px!important;margin-bottom:12px!important}
+.worker-promo h1{font-size:22px!important;margin:8px 0 6px!important}.worker-promo p{font-size:10.5px!important;margin-bottom:10px!important}
+.promo-art{height:110px!important}.promo-bag{width:78px!important;height:78px!important;border-radius:24px!important}.promo-bag .svg-icon{width:39px!important;height:39px!important}.promo-coin{width:30px!important;height:30px!important}
+.quick-opportunity-grid{gap:9px!important;margin-bottom:19px!important}.quick-opportunity{min-height:88px!important;border-radius:20px!important;padding:11px!important;grid-template-columns:40px 1fr 14px!important;gap:7px!important}.quick-opportunity-icon{width:40px!important;height:40px!important;border-radius:14px!important}.quick-opportunity-icon .svg-icon{width:21px!important;height:21px!important}.quick-opportunity b{font-size:13px!important}.quick-opportunity small{font-size:8.5px!important}
+.market-category-scroll{gap:9px!important;margin-bottom:14px!important}.market-category-pill{flex-basis:90px!important;min-height:94px!important;border-radius:20px!important;padding:9px 6px!important;gap:6px!important}.market-category-icon{width:47px!important;height:47px!important;border-radius:16px!important}.market-category-icon .svg-icon{width:24px!important;height:24px!important}.market-category-pill b{font-size:10.5px!important}
+.worker-earn-card{margin-bottom:18px!important;border-radius:20px!important;padding:11px!important;grid-template-columns:42px 1fr auto!important;gap:9px!important}.earn-icon{width:42px!important;height:42px!important;border-radius:14px!important}
+
+/* Cliente: filtros reales; una tarea aceptada no puede perderse visualmente */
+.client-activity-head{scroll-margin-top:12px}
+.client-activity-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;background:#edf3fa;border-radius:16px;padding:5px;margin:0 0 11px}
+.client-activity-tab{border:0;background:transparent;border-radius:12px;min-height:39px;padding:6px 4px;font-size:8px;font-weight:900;color:#748196;display:flex;align-items:center;justify-content:center;gap:4px;white-space:nowrap}
+.client-activity-tab b{min-width:17px;height:17px;border-radius:999px;background:#dce6f3;display:grid;place-items:center;font-size:7px}
+.client-activity-tab.active{background:#fff;color:#0b56b7;box-shadow:0 4px 12px rgba(20,70,130,.08)}
+.client-activity-tab.active b{background:#1467e8;color:#fff}
+.client-empty.compact{padding:20px 14px!important}
+
+/* Detalle: botones y tarjetas simétricos */
+.offer-action-row{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:7px!important}
+.offer-action-row button{min-width:0!important;padding:11px 6px!important;font-size:11px!important}
+.worker-card-actions,.completion-actions,.safety-actions,.counter-actions{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}
+.worker-card-actions button,.completion-actions button,.safety-actions button,.counter-actions button{width:100%!important;min-width:0!important}
+.detail-card{border-radius:23px!important;padding:16px!important}.detail-icon-box{width:72px!important;height:72px!important;border-radius:22px!important}.detail-icon-box .svg-icon{width:39px!important;height:39px!important}.detail-money{font-size:27px!important;margin:12px 0 5px!important}.detail-title{font-size:24px!important}.detail-copy{font-size:13px!important}.status-banner{padding:13px 14px!important;border-radius:18px!important;font-size:13px!important}
+.selected-worker-card,.offer-person-card,.worker-profile-card,.rating-card{border-radius:20px!important;padding:14px!important}.selected-worker-head,.offer-person-head{grid-template-columns:60px minmax(0,1fr) auto!important;gap:10px!important}.selected-worker-card .avatar,.offer-person-card .avatar{width:60px!important;height:60px!important}.selected-worker-name,.offer-person-name{font-size:16px!important}
+
+/* Mis tareas y notificaciones: alturas estables */
+.worker-job-card{grid-template-columns:48px minmax(0,1fr) 18px!important;padding:10px!important;border-radius:18px!important;gap:9px!important}.worker-job-icon{width:48px!important;height:48px!important;border-radius:14px!important}.worker-job-icon .svg-icon{width:25px!important;height:25px!important}.worker-job-top h3{max-width:none!important;min-width:0}.jobs-empty{padding:24px 16px!important}
+.notification-group-card{grid-template-columns:38px minmax(0,1fr) 34px!important;border-radius:17px!important;padding:9px!important;gap:8px!important}.notification-group-card .notification-ico{width:38px!important;height:38px!important;border-radius:12px!important}.activity-hero{border-radius:20px!important;padding:14px!important;margin-top:11px!important}.activity-hero h1{font-size:20px!important}
+.notification-mini-stack i{max-width:96px!important}
+
+/* Navegación: cinco zonas exactamente iguales */
+.nav{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;align-items:end!important;gap:0!important;padding-left:7px!important;padding-right:7px!important}
+.nav button{width:100%!important;min-width:0!important;padding-left:2px!important;padding-right:2px!important;text-align:center!important}
+.nav button b{margin-left:auto!important;margin-right:auto!important}
+
+/* Pantallas estrechas */
+@media(max-width:370px){
+ .account-screen .settings-section{grid-template-columns:1fr!important}
+ .account-screen .settings-section .settings-row{grid-column:1!important;height:76px!important;min-height:76px!important}
+ .client-activity-tabs{grid-template-columns:1fr 1fr}
+ .offer-action-row{grid-template-columns:1fr!important}
+ .worker-promo{grid-template-columns:1fr 72px!important}
+}
+
 </style>
 <link rel="manifest" href="./manifest.webmanifest?v=1.9.4"><link rel="apple-touch-icon" href="./icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default">
 </head>
@@ -947,7 +1024,7 @@ const root=document.getElementById("root");
 let state={
   route:"loading", mode:localStorage.getItem("dohoy_mode")||"client",
   session:null,user:null,profile:null,privateProfile:null,tasks:[],selectedTask:null,offers:[],messages:[],conversations:[],chatBack:"taskDetail",chatDraft:"",notice:"",error:"",
-  workerLocation:null, workerLocationError:"", workerAddress:"", workerCategory:"", workerTaskTab:"pending", taskBackRoute:"", showContactDetails:false, workerProfile:null, workerProfileBack:"taskDetail", swipeConversationId:null, currentTaskRating:0, currentTaskReview:"", taskMedia:[], pendingTaskFiles:[], pendingCompletionFiles:[], currentClientRating:0, currentClientReview:"", clientProfile:null, clientReviews:[], workerCategories:[], blockedUsers:[], myReports:[], notifications:[], unreadNotifications:0, unreadMessages:0, workerReviews:[], workerFavorite:false, workerBlocked:false, online:navigator.onLine, currentPayment:null, publishBusy:false, offerBusy:false, checkoutBusy:false, savedCards:null, paymentMethodsBusy:false, splash:true, clientOfferCounts:{}, earningsPayments:[], earningsTasks:{}, earningsLoading:false, installPrompt:null, recentSearches:(()=>{try{return JSON.parse(localStorage.getItem('dohoy_recent_searches')||'[]')}catch{return []}})(), agendaView:'upcoming', workerAvailability:null, workerInvitations:[], workerActivity:[], taskQuestions:[], workerPortfolio:[], banners:[], adminBusinessMetrics:null, adminBanners:[], priceSuggestion:null, pendingPortfolioFile:null, viewedWorkerAvailability:null, notificationFilter:'all', adminProductFunnel:null, trustedContact:(()=>{try{return JSON.parse(localStorage.getItem('dohoy_trusted_contact')||'null')}catch{return null}})(), actionBusy:false, publishStep:1, workerReputation:null, chatImageBusy:false, otherTyping:false, typingStopTimer:null, theme:localStorage.getItem('dohoy_theme')||'auto', adminAttention:null, lastClientErrorAt:0
+  workerLocation:null, workerLocationError:"", workerAddress:"", workerCategory:"", workerTaskTab:"pending", taskBackRoute:"", showContactDetails:false, workerProfile:null, workerProfileBack:"taskDetail", swipeConversationId:null, currentTaskRating:0, currentTaskReview:"", taskMedia:[], pendingTaskFiles:[], pendingCompletionFiles:[], currentClientRating:0, currentClientReview:"", clientProfile:null, clientReviews:[], workerCategories:[], blockedUsers:[], myReports:[], notifications:[], unreadNotifications:0, unreadMessages:0, workerReviews:[], workerFavorite:false, workerBlocked:false, online:navigator.onLine, currentPayment:null, publishBusy:false, offerBusy:false, checkoutBusy:false, savedCards:null, paymentMethodsBusy:false, splash:true, clientOfferCounts:{}, clientTaskFilter:'active', earningsPayments:[], earningsTasks:{}, earningsLoading:false, installPrompt:null, recentSearches:(()=>{try{return JSON.parse(localStorage.getItem('dohoy_recent_searches')||'[]')}catch{return []}})(), agendaView:'upcoming', workerAvailability:null, workerInvitations:[], workerActivity:[], taskQuestions:[], workerPortfolio:[], banners:[], adminBusinessMetrics:null, adminBanners:[], priceSuggestion:null, pendingPortfolioFile:null, viewedWorkerAvailability:null, notificationFilter:'all', adminProductFunnel:null, trustedContact:(()=>{try{return JSON.parse(localStorage.getItem('dohoy_trusted_contact')||'null')}catch{return null}})(), actionBusy:false, publishStep:1, workerReputation:null, chatImageBusy:false, otherTyping:false, typingStopTimer:null, theme:localStorage.getItem('dohoy_theme')||'auto', adminAttention:null, lastClientErrorAt:0
 };
 let poller=null;
 let deliveryPoller=null;
@@ -1063,10 +1140,13 @@ function availabilityCard(){const active=state.workerAvailability&&new Date(stat
 async function loadWorkerInvitations(){const {data}=await sb.from("task_invitations").select("id,task_id,client_id,status,message,proposed_amount,created_at,tasks(title,category,offered_price,scheduled_for)").eq("worker_id",state.user.id).eq("status","pending").order("created_at",{ascending:false}).limit(5);state.workerInvitations=data||[]}
 function invitationsHtml(){if(!state.workerInvitations?.length)return "";return `<section class="invites-box"><div class="market-v2-section-head"><div><span>Invitaciones</span><h2>Te buscan directamente</h2></div></div>${state.workerInvitations.map(i=>`<div class="invite-card"><span>${taskIcon(i.tasks?.category)}</span><div><b>${escapeHtml(i.tasks?.title||"Tarea")}</b><small>${money(i.proposed_amount||i.tasks?.offered_price)} · Invitación directa</small></div><button onclick="acceptDirectInvite('${i.id}','${i.task_id}',${Number(i.proposed_amount||i.tasks?.offered_price||0)})">Aceptar</button><button class="decline" onclick="declineDirectInvite('${i.id}')">×</button></div>`).join("")}</section>`}
 async function acceptDirectInvite(id,taskId,amount){
- const {error}=await sb.rpc("submit_task_offer",{p_task_id:taskId,p_amount:Number(amount),p_message:"Me interesa tu invitación directa."});
- if(error)return setMsg("error",error.message);
- await sb.from("task_invitations").update({status:"accepted",updated_at:new Date().toISOString()}).eq("id",id).eq("worker_id",state.user.id);
- state.workerTaskTab="proposals";state.notice="Invitación aceptada. La propuesta quedó guardada en Mis tareas > Propuestas.";await workerHome()
+ return runOnce("invite:"+id,async()=>{
+   const {error}=await sb.rpc("submit_task_offer",{p_task_id:taskId,p_amount:Number(amount),p_message:"Me interesa tu invitación directa."});
+   if(error)return setMsg("error",error.message);
+   const {error:updateError}=await sb.from("task_invitations").update({status:"accepted",updated_at:new Date().toISOString()}).eq("id",id).eq("worker_id",state.user.id);
+   if(updateError)return setMsg("error","La propuesta se guardó, pero no pudimos cerrar la invitación: "+updateError.message);
+   state.workerTaskTab="proposals";state.notice="Invitación aceptada. La propuesta quedó guardada en Mis tareas > Propuestas.";await workerHome()
+ })
 }
 async function declineDirectInvite(id){await sb.from("task_invitations").update({status:"declined",updated_at:new Date().toISOString()}).eq("id",id).eq("worker_id",state.user.id);await loadWorkerInvitations();render()}
 
@@ -1253,7 +1333,7 @@ function notificationsCenterScreen(){
    const n=g.latest,day=notificationDay(n.created_at),heading=day!==lastDay?`<div class="activity-day">${escapeHtml(day)}</div>`:"";lastDay=day;
    const count=g.items.length;
    const recent=g.items.slice(0,3);
-   return `${heading}<button class="notification-group-card ${g.unread?"unread":""}" onclick="openNotificationGroup('${g.task_id||""}','${g.items.map(x=>x.id).join(",")}')">
+   return `${heading}<button class="notification-group-card ${g.unread?"unread":""}" onclick="openNotificationGroup('${g.task_id||""}','${g.items.map(x=>x.id).join(",")}','${g.kind}')">
      <span class="notification-ico">${notificationIcon(n.type)}</span>
      <span class="notification-copy">
        <small>${escapeHtml(notificationGroupLabel(g))}${count>1?` · ${count} actualizaciones`:""}</small>
@@ -1272,11 +1352,14 @@ function notificationsCenterScreen(){
    <div class="notification-list-v3">${body||emptyState("bell",f==="all"?"Todo al día":"No hay avisos aquí",f==="all"?"Cuando pase algo importante aparecerá aquí.":"Prueba otra categoría de actividad.")}</div>
  </section>`,true)
 }
-async function openNotificationGroup(taskId,idsCsv){
+async function openNotificationGroup(taskId,idsCsv,kind=""){
  const ids=String(idsCsv||"").split(",").map(x=>Number(x)).filter(Number.isFinite);
  if(ids.length)await sb.from("notifications").update({read_at:new Date().toISOString()}).eq("user_id",state.user.id).in("id",ids).is("read_at",null);
  await loadNotificationSummary();
- if(taskId){await openTask(taskId)}else{await openNotificationsCenter()}
+ if(taskId){
+   await openTask(taskId);
+   if(kind==="messages"&&state.selectedTask?.id===taskId&&!taskChatClosed(state.selectedTask))await openChat(taskId);
+ }else await openNotificationsCenter()
 }
 async function openNotificationsCenter(){clearPoll();await loadNotifications();state.route='activity';render()}
 function notificationGroup(n){if(["offer","offer_accepted","task_cancelled","rating"].includes(n.type))return "jobs";if(["payment","payment_succeeded","payment_failed","refund","payout"].includes(n.type))return "payments";return "system"}
@@ -1300,7 +1383,7 @@ function openUserReportSheet(taskId){openProfileSheet('Reportar usuario','Usa es
 async function submitUserReport(e,taskId){e.preventDefault();const f=new FormData(e.target);const {error}=await sb.rpc('report_user_for_task',{p_task_id:taskId,p_reason:f.get('reason'),p_details:f.get('details')||null});closeProfileSheet();if(error){state.error='No pudimos enviar el reporte: '+error.message;render();return}state.notice='Reporte recibido. Gracias por ayudarnos a mantener DOHOY seguro.';render()}
 async function blockOtherUser(taskId){const task=state.selectedTask;if(!task||task.id!==taskId)return;const other=otherParticipantId(task);if(!other)return;if(!confirm('¿Bloquear a esta persona? No podrán enviarse mensajes ni nuevas ofertas entre ustedes.'))return;const {error}=await sb.from('user_blocks').upsert({blocker_id:state.user.id,blocked_id:other},{onConflict:'blocker_id,blocked_id',ignoreDuplicates:true});if(error){state.error='No pudimos bloquear al usuario: '+error.message;render();return}state.workerBlocked=true;state.notice='Usuario bloqueado.';render()}
 async function loadWorkerExtras(workerId){state.workerFavorite=false;state.workerBlocked=false;state.workerReviews=[];state.workerPortfolio=[];if(!state.user||!workerId)return;const [{data:fav},{data:block},{data:reviews},{data:portfolio}]=await Promise.all([sb.from('favorite_workers').select('worker_id').eq('client_id',state.user.id).eq('worker_id',workerId).maybeSingle(),sb.from('user_blocks').select('blocked_id').eq('blocker_id',state.user.id).eq('blocked_id',workerId).maybeSingle(),sb.from('task_reviews').select('task_id,client_id,comment,created_at').eq('worker_id',workerId).order('created_at',{ascending:false}).limit(3),sb.from('worker_portfolio').select('id,storage_path,caption,kind,created_at').eq('worker_id',workerId).order('created_at',{ascending:false}).limit(12)]);state.workerFavorite=!!fav;state.workerBlocked=!!block;state.workerReviews=await Promise.all((reviews||[]).map(async r=>{const [{data:p},{data:rt}]=await Promise.all([sb.from('profiles').select('full_name,avatar_url').eq('id',r.client_id).maybeSingle(),sb.from('task_ratings').select('score').eq('task_id',r.task_id).maybeSingle()]);return {...r,score:Number(rt?.score||0),client:await resolveAvatar(p||{})}}));state.workerPortfolio=await Promise.all((portfolio||[]).map(async x=>{const {data:u}=await sb.storage.from('worker-portfolio').createSignedUrl(x.storage_path,3600);return {...x,url:u?.signedUrl||''}}))}
-async function toggleFavoriteWorker(workerId){if(!workerId||!state.user)return;if(state.workerFavorite){await sb.from('favorite_workers').delete().eq('client_id',state.user.id).eq('worker_id',workerId);state.workerFavorite=false}else{const {error}=await sb.from('favorite_workers').upsert({client_id:state.user.id,worker_id:workerId});if(error){state.error='No pudimos guardar el favorito: '+error.message;render();return}state.workerFavorite=true}render()}
+async function toggleFavoriteWorker(workerId){if(!workerId||!state.user)return;if(state.workerFavorite){await sb.from('favorite_workers').delete().eq('client_id',state.user.id).eq('worker_id',workerId);state.workerFavorite=false}else{const {error}=await sb.from('favorite_workers').insert({client_id:state.user.id,worker_id:workerId});if(error){state.error='No pudimos guardar el favorito: '+error.message;render();return}state.workerFavorite=true}render()}
 function workerReviewsHtml(){return state.workerReviews.length?`<div><h2 style="margin:0 0 12px">Opiniones reales</h2><div class="real-reviews">${state.workerReviews.map(r=>`<div class="real-review"><div class="real-review-head">${avatarMarkup(r.client)}<div><b>${escapeHtml((r.client?.full_name||'Usuario').split(' ')[0])}</b><div class="small">${starDisplay(r.score)} · ${new Date(r.created_at).toLocaleDateString('es-MX')}</div></div></div><p>${escapeHtml(r.comment)}</p></div>`).join('')}</div></div>`:''}
 async function openFavorites(){const {data,error}=await sb.from('favorite_workers').select('worker_id').eq('client_id',state.user.id).order('created_at',{ascending:false});state.favoriteWorkers=[];if(!error&&data?.length){const ids=data.map(x=>x.worker_id);const {data:ps}=await sb.from('profiles').select('id,full_name,last_name,avatar_url,rating,completed_tasks').in('id',ids);state.favoriteWorkers=await Promise.all((ps||[]).map(resolveAvatar))}state.route='favorites';render()}
 function favoritesScreen(){const list=state.favoriteWorkers||[];return shell(`<section class="screen"><div class="top"><button class="icon" aria-label="Volver al perfil" onclick="go('profile')">←</button><div><b>Favoritos</b><div class="small">Trabajadores que guardaste</div></div><span></span></div><h1>Trabajadores favoritos</h1><div class="favorite-list">${list.length?list.map(p=>`<button class="favorite-worker-card" onclick="state.selectedTask=null;openWorkerProfile('${p.id}','favorites')">${avatarMarkup(p)}<div><h3>${escapeHtml(profileDisplayName(p))}</h3><p>${Number(p.completed_tasks||0)} trabajos · ${prettyRating(p.rating)} ★</p></div><span>›</span></button>`).join(''):`${emptyState("heart","Aún no tienes favoritos","Cuando encuentres un trabajador que te guste, guárdalo para contratarlo otra vez.","go(\'clientHome\')","Ver mis tareas")}`}</div></section>`,true)}
@@ -1382,12 +1465,33 @@ function taskCard(t,client=false){
  </button>`
 }
 function statusText(s){return ({open:"Abierta",assigned:"Asignada",in_progress:"En curso",completed:"Terminada",cancelled:"Cancelada"})[s]||s}
+function clientTaskBuckets(){
+ const rows=[...(state.tasks||[])];
+ const priority=t=>t.status==="in_progress"?0:t.status==="assigned"?1:t.status==="open"?2:t.status==="completed"?3:4;
+ rows.sort((a,b)=>priority(a)-priority(b)||new Date(b.updated_at||b.created_at)-new Date(a.updated_at||a.created_at));
+ return {
+   active:rows.filter(t=>["open","assigned","in_progress"].includes(t.status)),
+   proposals:rows.filter(t=>t.status==="open"&&Number(state.clientOfferCounts?.[t.id]||0)>0),
+   completed:rows.filter(t=>t.status==="completed"),
+   all:rows
+ }
+}
+function setClientTaskFilter(v){
+ state.clientTaskFilter=v;
+ const host=document.getElementById("clientActivityList"),tabs=document.querySelectorAll(".client-activity-tab");
+ if(!host)return clientHome();
+ const buckets=clientTaskBuckets(),list=buckets[v]||buckets.active;
+ tabs.forEach(x=>x.classList.toggle("active",x.dataset.tab===v));
+ host.innerHTML=list.length?list.map(t=>taskCard(t,true)).join(""):`<div class="client-empty compact"><span>${iconSvg(v==="completed"?"verify":v==="proposals"?"briefcase":"tasks")}</span><h3>${v==="completed"?"Aún no hay tareas terminadas":v==="proposals"?"No tienes propuestas pendientes":"No tienes tareas aquí"}</h3><p>${v==="proposals"?"Cuando alguien envíe una propuesta aparecerá aquí.":"Tus tareas se irán organizando automáticamente."}</p></div>`;
+ document.getElementById("clientActivity")?.scrollIntoView({behavior:"smooth",block:"start"})
+}
 async function clientHome(){
 await Promise.all([loadMyTasks(),loadNotificationSummary(),loadClientTaskStats(),loadBanners()]);
 const first=(state.profile?.full_name||"Usuario").trim().split(" ")[0]||"Usuario";
-const active=state.tasks.filter(t=>["open","assigned","in_progress"].includes(t.status));
-const completed=state.tasks.filter(t=>t.status==="completed").length;
+const buckets=clientTaskBuckets(),active=buckets.active,completed=buckets.completed.length;
 const offers=Object.values(state.clientOfferCounts||{}).reduce((a,b)=>a+Number(b||0),0);
+const filter=["active","proposals","completed","all"].includes(state.clientTaskFilter)?state.clientTaskFilter:"active";
+const visible=buckets[filter]||active;
 root.innerHTML=shell(`<section class="client-market-home">
  <div class="client-market-top">
    <div><span class="client-hello">Hola, ${escapeHtml(first)}</span><button class="client-location" onclick="go('addresses')">${iconSvg("location")}<span>Tu ubicación</span><b>⌄</b></button></div>
@@ -1403,9 +1507,9 @@ root.innerHTML=shell(`<section class="client-market-home">
  </section>
 
  <div class="client-mini-stats">
-   <button onclick="go('clientHome')"><b>${active.length}</b><span>Activas</span></button>
-   <button onclick="go('clientHome')"><b>${offers}</b><span>Propuestas</span></button>
-   <button onclick="go('clientHome')"><b>${completed}</b><span>Terminadas</span></button>
+   <button onclick="setClientTaskFilter('active')"><b>${active.length}</b><span>Activas</span></button>
+   <button onclick="setClientTaskFilter('proposals')"><b>${offers}</b><span>Propuestas</span></button>
+   <button onclick="setClientTaskFilter('completed')"><b>${completed}</b><span>Terminadas</span></button>
  </div>
 
  <div class="client-section-head"><div><span>Servicios</span><h2>¿En qué te ayudamos?</h2></div><button onclick="go('createTask')">Ver todo</button></div>
@@ -1417,8 +1521,14 @@ root.innerHTML=shell(`<section class="client-market-home">
    <span>›</span>
  </div>
 
- <div class="client-section-head"><div><span>Tu actividad</span><h2>${active.length?"Tareas en movimiento":"Tus publicaciones"}</h2></div><button onclick="loadMyTasks().then(()=>loadClientTaskStats()).then(render)">Actualizar</button></div>
- <div class="client-task-list">${state.tasks.length?state.tasks.slice(0,6).map(t=>taskCard(t,true)).join(""):`<div class="client-empty"><span>${iconSvg("plus")}</span><h3>Publica tu primera tarea</h3><p>Recibe propuestas de personas interesadas en ayudarte.</p><button onclick="go('createTask')">Empezar</button></div>`}</div>
+ <div id="clientActivity" class="client-section-head client-activity-head"><div><span>Tu actividad</span><h2>${active.length?"Tus tareas":"Tus publicaciones"}</h2></div><button onclick="loadMyTasks().then(()=>loadClientTaskStats()).then(clientHome)">Actualizar</button></div>
+ <div class="client-activity-tabs">
+   <button class="client-activity-tab ${filter==="active"?"active":""}" data-tab="active" onclick="setClientTaskFilter('active')">Activas <b>${active.length}</b></button>
+   <button class="client-activity-tab ${filter==="proposals"?"active":""}" data-tab="proposals" onclick="setClientTaskFilter('proposals')">Propuestas <b>${buckets.proposals.length}</b></button>
+   <button class="client-activity-tab ${filter==="completed"?"active":""}" data-tab="completed" onclick="setClientTaskFilter('completed')">Terminadas <b>${completed}</b></button>
+   <button class="client-activity-tab ${filter==="all"?"active":""}" data-tab="all" onclick="setClientTaskFilter('all')">Todas <b>${buckets.all.length}</b></button>
+ </div>
+ <div id="clientActivityList" class="client-task-list">${visible.length?visible.map(t=>taskCard(t,true)).join(""):`<div class="client-empty"><span>${iconSvg("plus")}</span><h3>Publica tu primera tarea</h3><p>Recibe propuestas de personas interesadas en ayudarte.</p><button onclick="go('createTask')">Empezar</button></div>`}</div>
 
  ${state.tasks.length?`<button class="client-big-publish" onclick="go('createTask')"><span>${iconSvg("plus")}</span><span><b>Publicar otra tarea</b><small>Describe lo que necesitas y define tu presupuesto.</small></span><em>›</em></button>`:""}
 </section>`,true)
@@ -1999,8 +2109,8 @@ function taskProgressButtons(t){
 function openCounterOfferSheet(offerId,amount){openProfileSheet("Enviar contraoferta","Propón un monto diferente al trabajador.",`<form class="profile-inline-form" onsubmit="submitCounterOffer(event,'${offerId}')"><label>Nuevo monto</label><input name="amount" type="number" min="1" value="${Number(amount||0)}" required><label>Mensaje</label><textarea name="message" maxlength="300" placeholder="Ej. ¿Podrías hacerlo por este monto?"></textarea><button class="btn primary">Enviar contraoferta</button></form>`)}
 async function submitCounterOffer(e,offerId){e.preventDefault();const f=new FormData(e.target),{error}=await sb.rpc("counter_task_offer",{p_offer_id:offerId,p_amount:Number(f.get("amount")),p_message:f.get("message")||null});closeProfileSheet();if(error)return setMsg("error",error.message);await loadOffers(state.selectedTask.id);state.notice="Contraoferta enviada.";render()}
 async function respondCounterOffer(offerId,accept){const {data,error}=await sb.rpc("respond_counter_offer",{p_offer_id:offerId,p_accept:!!accept});if(error)return setMsg("error",error.message);state.selectedTask=Array.isArray(data)?data[0]:data;await loadMyOffer(state.selectedTask.id);if(accept)state.workerTaskTab="active";state.notice=accept?"Contraoferta aceptada. La tarea quedó en Mis tareas > Activos.":"Contraoferta rechazada.";render()}
-async function markTaskEnRoute(id){const {data,error}=await sb.rpc("mark_task_en_route",{p_task_id:id});if(error)return setMsg("error",error.message);state.selectedTask=Array.isArray(data)?data[0]:data;state.notice="Avisamos al cliente que vas en camino.";render();setTimeout(()=>showSuccessMoment('¡Vas en camino!','El cliente ya recibió el cambio de estado.'),100)}
-async function markTaskArrived(id){const {data,error}=await sb.rpc("mark_task_arrived",{p_task_id:id});if(error)return setMsg("error",error.message);state.selectedTask=Array.isArray(data)?data[0]:data;state.notice="Avisamos al cliente que llegaste.";render();setTimeout(()=>showSuccessMoment('Llegada registrada','Ya pueden comenzar cuando estén listos.','orange'),100)}
+async function markTaskEnRoute(id){return runOnce("route:"+id,async()=>{const {data,error}=await sb.rpc("mark_task_en_route",{p_task_id:id});if(error)return setMsg("error",error.message);state.selectedTask=Array.isArray(data)?data[0]:data;state.notice="Avisamos al cliente que vas en camino.";render();setTimeout(()=>showSuccessMoment('¡Vas en camino!','El cliente ya recibió el cambio de estado.'),100)})}
+async function markTaskArrived(id){return runOnce("arrived:"+id,async()=>{const {data,error}=await sb.rpc("mark_task_arrived",{p_task_id:id});if(error)return setMsg("error",error.message);state.selectedTask=Array.isArray(data)?data[0]:data;state.notice="Avisamos al cliente que llegaste.";render();setTimeout(()=>showSuccessMoment('Llegada registrada','Ya pueden comenzar cuando estén listos.','orange'),100)})}
 async function editTaskScreen(){const t=state.selectedTask;if(!t||t.client_id!==state.user.id||t.status!=="open"||t.worker_id){state.notice="Esta tarea ya no se puede editar.";go("taskDetail");return}await loadPrivateTaskLocation(t);await loadTaskMedia(t.id);state.pendingTaskFiles=[];state.pendingTaskPhotoLimit=Math.max(0,5-state.taskMedia.filter(m=>m.kind==="request").length);state.taskPhotoSelectionNote="";root.innerHTML=shell(`<section class="publish-screen"><div class="publish-head"><button class="icon" onclick="go('taskDetail')">←</button>${logo(true)}<span></span></div><div class="publish-eyebrow">Editar tarea</div><h1 class="publish-title">Actualiza los detalles</h1>${authMsg()}<form id="editTaskForm"><div class="publish-card"><div class="pc-icon">${iconSvg("tasks")}</div><div><label>Título</label><input name="title" value="${escapeAttr(t.title)}" required></div></div><div class="publish-card"><div class="pc-icon">${iconSvg("tasks")}</div><div><label>Descripción</label><textarea name="description" required>${escapeHtml(t.description)}</textarea></div></div><div class="publish-card" style="grid-template-columns:42px 1fr"><div class="pc-icon">${iconSvg("tasks")}</div><div><label>Categoría</label><select name="category">${categories.map(c=>`<option value="${escapeAttr(c)}" ${c===baseCategory(t.category)?"selected":""}>${escapeHtml(c)}</option>`).join("")}</select></div></div><input id="taskLatitude" type="hidden" name="latitude" value="${t.latitude??""}"><input id="taskLongitude" type="hidden" name="longitude" value="${t.longitude??""}"><div class="publish-two"><div class="publish-card" style="grid-template-columns:42px 1fr"><div class="pc-icon">${iconSvg("location")}</div><div><label>Ubicación</label><input name="location" value="${escapeAttr(t.location_label||"")}" required><button type="button" class="location-use-btn" onclick="useTaskCurrentLocation(this)">${iconSvg("location")} Usar mi ubicación actual</button></div></div><div class="publish-card" style="grid-template-columns:42px 1fr"><div class="pc-icon">$</div><div><label>Presupuesto</label><input name="price" type="number" min="1" value="${Number(t.offered_price)}" required></div></div></div><div class="publish-two"><div class="publish-card" style="grid-template-columns:42px 1fr"><div class="pc-icon">${iconSvg("calendar")}</div><div><label>Fecha</label><input name="task_date" type="date" value="${localDateValue(t.scheduled_for)}"></div></div><div class="publish-card" style="grid-template-columns:42px 1fr"><div class="pc-icon">${iconSvg("clock")}</div><div><label>Hora</label><input name="task_time" type="time" value="${localTimeValue(t.scheduled_for)}"></div></div></div><label class="card" style="display:flex;gap:10px;align-items:center;margin:10px 0"><input name="license" type="checkbox" ${t.requires_driver_license?"checked":""}> Requiere licencia de conducir</label><div class="media-picker"><h3>Agregar más fotos</h3><p>${state.pendingTaskPhotoLimit?`Puedes agregar hasta ${state.pendingTaskPhotoLimit} fotos nuevas (máximo 5 por tarea).`:"Esta tarea ya tiene las 5 fotos permitidas."}</p><input id="taskPhotosInput" class="media-input" type="file" accept="image/*" multiple onchange="selectTaskPhotos(event)"><button type="button" class="media-add-btn" onclick="document.getElementById('taskPhotosInput').click()">${iconSvg("camera")} Agregar fotos</button><div id="taskPhotoPreview" class="media-preview-list"></div></div><button class="publish-submit">Guardar cambios</button></form></section>`,true);bindForms()}
 async function saveEditTask(e){e.preventDefault();const t=state.selectedTask,f=new FormData(e.target),d=f.get("task_date"),tm=f.get("task_time"),scheduled=d?new Date(`${d}T${tm||"12:00"}:00`).toISOString():null,base=f.get("category"),category=base==="Vehículo"?encodeCategory("Vehículo",taskMeta(t.category).variant,taskMeta(t.category).colorKey):base;const {data,error}=await sb.rpc("edit_open_task",{p_task_id:t.id,p_title:f.get("title"),p_description:f.get("description"),p_category:category,p_offered_price:Number(f.get("price")),p_location_label:f.get("location"),p_latitude:f.get("latitude")?Number(f.get("latitude")):null,p_longitude:f.get("longitude")?Number(f.get("longitude")):null,p_scheduled_for:scheduled,p_requires_driver_license:f.get("license")==="on"});if(error)return setMsg("error",error.message);state.selectedTask=Array.isArray(data)?data[0]:data;try{if(state.pendingTaskFiles.length)await uploadTaskMedia(t.id,state.pendingTaskFiles)}catch(err){state.notice="Los cambios se guardaron, pero alguna foto no pudo subirse."}state.pendingTaskFiles=[];go("taskDetail")}
 
@@ -2110,7 +2220,7 @@ async function profile(){
    ${settingsRow("Política de privacidad","privacy","document","Cómo protegemos tus datos")}
  </div>
  <div class="account-actions"><button class="logout-btn" onclick="signOutCurrent()">${iconSvg("logout")} Cerrar sesión</button></div>
- <div class="version-note">DOHOY · Versión 4.2.0 · STABILITY</div>
+ <div class="version-note">DOHOY · Versión 4.3.0 · POLISH & QA</div>
  </section>`,true)
 }
 function settingsRow(title,route,icon,sub=""){
@@ -2526,6 +2636,13 @@ const draft=document.getElementById("chatInput")?.value??state.chatDraft;
 await loadMessages(state.selectedTask.id);await markChatRead(state.selectedTask.id);await loadMessages(state.selectedTask.id);
 state.chatDraft=draft;refreshChatDom(false)
 }
+
+const actionLocks=new Set();
+async function runOnce(key,work){
+ if(actionLocks.has(key))return;
+ actionLocks.add(key);
+ try{return await work()}finally{actionLocks.delete(key)}
+}
 function render(){
 if(state.splash){root.innerHTML=splashScreen();return}
 if(state.route==="loading"){root.innerHTML=skeletonScreen("Cargando DOHOY");return}
@@ -2655,7 +2772,21 @@ async function loadMyTasks(){const {data,error}=await sb.from("tasks").select("*
 async function loadOpenTasks(){const {data,error}=await sb.rpc('browse_open_tasks');state.tasks=error?[]:(data||[]);if(!error)await hydrateTaskPriorities(state.tasks);if(error)state.error='No pudimos cargar las tareas: '+error.message}
 async function openTask(id){
 if(state.selectedTask?.id!==id){state.pendingCompletionFiles=[];state.completionSelectionNote='';state.clientRatingTaskId=null}
-const back=state.route;let response=await sb.from('tasks').select('*').eq('id',id).maybeSingle();if(response.error||!response.data)response=await sb.rpc('get_open_task_preview',{p_task_id:id});if(response.error||!response.data)return setMsg('error',response.error?.message||'La tarea ya no está disponible.');state.selectedTask=Array.isArray(response.data)?response.data[0]:response.data;await loadPrivateTaskLocation(state.selectedTask);state.taskBackRoute=back;await sb.from('notifications').update({read_at:new Date().toISOString()}).eq('user_id',state.user.id).eq('task_id',id).is('read_at',null);await loadNotificationSummary();go('taskDetail')
+const back=state.route;
+let response=await sb.from('tasks').select('*').eq('id',id).maybeSingle();
+let task=response.data||null;
+if(!task){
+ const cached=(state.workerActivity||[]).find(t=>t.id===id);
+ if(cached)task={...cached};
+}
+if(!task){
+ response=await sb.rpc('get_open_task_preview',{p_task_id:id});
+ task=Array.isArray(response.data)?response.data[0]:response.data;
+}
+if(!task)return setMsg('error',response.error?.message||'La tarea ya no está disponible.');
+state.selectedTask=task;await loadPrivateTaskLocation(state.selectedTask);state.taskBackRoute=back;
+await sb.from('notifications').update({read_at:new Date().toISOString()}).eq('user_id',state.user.id).eq('task_id',id).is('read_at',null);
+await loadNotificationSummary();go('taskDetail')
 }
 async function loadOffers(taskId){
 const {data,error}=await sb.from("task_offers").select("id,task_id,worker_id,amount,message,status,created_at,counter_amount,counter_message,counter_status,countered_at,profiles!task_offers_worker_id_fkey(id,full_name,last_name,avatar_url,rating,completed_tasks,identity_verified,phone_verified,driver_license_verified)").eq("task_id",taskId).order("created_at",{ascending:true});
@@ -2676,13 +2807,13 @@ try{
 }catch(err){state.error="No pudimos enviar la oferta: "+(err?.message||err);render()}
 finally{state.offerBusy=false}
 }
-async function acceptOffer(offerId,workerId){
+async function acceptOffer(offerId,workerId){return runOnce("accept:"+offerId,async()=>{
 const tid=state.selectedTask.id;const {data,error}=await sb.rpc('accept_task_offer',{p_offer_id:offerId});
-if(error)return setMsg("error",error.message);state.selectedTask=Array.isArray(data)?data[0]:data;await trackEvent("offer_accepted",{},tid);state.notice="Trabajador seleccionado.";await loadOffers(tid);render();setTimeout(()=>showSuccessMoment("¡Trabajador elegido!","Ya pueden coordinar el trabajo desde DOHOY."),100)
-}
-async function startTask(id){
+if(error)return setMsg("error",error.message);state.selectedTask=Array.isArray(data)?data[0]:data;await trackEvent("offer_accepted",{},tid);state.notice="Trabajador seleccionado. La tarea seguirá visible en Activas.";state.clientTaskFilter="active";await loadOffers(tid);render();setTimeout(()=>showSuccessMoment("¡Trabajador elegido!","La tarea quedó guardada en tu actividad."),100)
+})}
+async function startTask(id){return runOnce("start:"+id,async()=>{
 const {data,error}=await sb.rpc('start_task',{p_task_id:id});if(error)return setMsg('error',error.message);state.selectedTask=Array.isArray(data)?data[0]:data;state.notice='Tarea iniciada.';render();setTimeout(()=>showSuccessMoment('Trabajo iniciado','El centro del trabajo se actualizó.'),100)
-}
+})}
 async function requestTaskCompletion(id){
  const task=state.selectedTask;if(state.completionBusy||!task||task.id!==id||task.worker_id!==state.user?.id||task.status!=="in_progress"||task.completion_requested_at)return;
  if(!confirm('¿Ya terminaste la tarea? El cliente deberá confirmarlo.'))return;
@@ -2694,8 +2825,9 @@ async function requestTaskCompletion(id){
 }
 async function confirmTaskCompletion(id){
 if(!confirm('¿Confirmas que la tarea fue terminada correctamente? Al confirmar se cerrará el chat.'))return;
+return runOnce("complete:"+id,async()=>{
 const {data,error}=await sb.rpc('confirm_task_completion',{p_task_id:id});if(error)return setMsg('error',error.message);state.selectedTask=Array.isArray(data)?data[0]:data;state.notice='Tarea finalizada. El chat quedó cerrado y ya puedes calificar al trabajador.';await trackEvent("task_completed",{},id);await loadOffers(id);await loadTaskRating(id);render();setTimeout(()=>showSuccessMoment("¡Trabajo terminado!","Gracias por usar DOHOY. Ahora pueden calificarse.","orange"),100)
-}
+})}
 async function setTaskStatus(id,status){
 if(status==='in_progress')return startTask(id);
 if(status==='completed')return requestTaskCompletion(id)
@@ -2722,7 +2854,7 @@ const remaining=Math.max(0,1850-(Date.now()-splashStarted));setTimeout(finishSpl
 sb.auth.onAuthStateChange(async(_event,session)=>{state.session=session;state.user=session?.user||null;if(state.user){await loadProfile();await loadNotificationSummary();subscribeNotifications()}if(!session&&!['welcome','signup','login','onboarding','mode'].includes(state.route))go(onboardingDone()?'welcome':'onboarding')})
 }
 const DOHOY_VAPID_PUBLIC="BIqp0MxIqy8rJPGj8mCRF-P_FwaMWgRMKSR_x6AazRKylHNhyT3NEPjNODKzvsSyIpt6OE3BUQXEz8-OkV-k14E";
-// DOHOY 4.2.0 — auditoría de estabilidad, tareas persistentes y centro de actividad.
+// DOHOY 4.3.0 — auditoría funcional, consistencia visual, acciones protegidas y tareas persistentes.
 const DEFAULT_FILTERS={query:'',category:'',minPrice:0,maxDistance:null,todayOnly:false,vehicleOnly:false,notifyMatching:true};
 function workerFilterState(){if(!state.workerFilters)state.workerFilters={...DEFAULT_FILTERS};return state.workerFilters}
 function searchStorageKey(){return 'dohoy_search_'+(state.user?.id||'guest')}
