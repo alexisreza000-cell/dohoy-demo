@@ -1201,6 +1201,87 @@ html[data-theme="dark"] .payment-paid-details b{color:#f2fff9}
 .work-live-track span.done i{box-shadow:none!important}
 html[data-theme="light"] .work-live-track span.current small{color:#27466f!important}
 
+
+/* DOHOY 4.5.0 — jerarquía operativa tipo marketplace */
+:root{--v4-radius:18px;--v4-line:#e5eaf1;--v4-shadow:0 4px 16px rgba(20,45,82,.055)}
+.marketplace-v4,.client-home-v4{padding:18px 16px 112px;background:#f7f8fa;min-height:100vh}
+.worker-home-head.v4,.client-market-top.v4{margin-bottom:16px}
+.worker-home-head.v4 .icon,.client-market-top.v4 .icon{box-shadow:none;border-color:var(--v4-line)}
+.marketplace-v4 .market-avatar,.client-home-v4 .market-avatar{box-shadow:none}
+.marketplace-v4 .worker-home-place>small{font-size:7px}
+.marketplace-v4 .worker-place-button{font-size:15px}
+
+/* Trabajo actual: siempre es la prioridad número uno */
+.worker-active-v4{margin:0 0 12px}
+.worker-active-v4>button:first-child{width:100%;border:0;border-radius:20px;background:#0d6efd;color:#fff;padding:13px;display:grid;grid-template-columns:50px minmax(0,1fr) auto;gap:11px;align-items:center;text-align:left;box-shadow:0 8px 22px rgba(13,110,253,.18)}
+.active-v4-icon{width:50px;height:50px;border-radius:15px;background:#fff;display:grid;place-items:center;color:#12213a}
+.active-v4-icon .svg-icon{width:29px}.active-v4-copy{min-width:0}.active-v4-copy small{display:block;font-size:7px;letter-spacing:.08em;font-weight:950;color:#dceaff;margin-bottom:3px}
+.active-v4-copy b{display:block;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.active-v4-copy em{display:flex;align-items:center;gap:3px;margin-top:5px;font-style:normal;font-size:8px;color:#e8f1ff}.active-v4-copy em .svg-icon{width:11px}
+.active-v4-go{font-size:9px;font-weight:950;white-space:nowrap}.active-v4-more{border:0;background:transparent;color:#0d6efd;font-size:9px;font-weight:900;padding:7px 4px}
+.worker-proposal-v4{width:100%;border:1px solid var(--v4-line);border-radius:18px;background:#fff;padding:12px;display:grid;grid-template-columns:38px 1fr auto;gap:10px;align-items:center;text-align:left;margin-bottom:12px;box-shadow:var(--v4-shadow)}
+.worker-proposal-v4>span:first-child{width:38px;height:38px;border-radius:12px;background:#edf4ff;color:#0d6efd;display:grid;place-items:center}.worker-proposal-v4 .svg-icon{width:19px}.worker-proposal-v4 small{display:block;font-size:7px;color:#7a8798;font-weight:900}.worker-proposal-v4 b{font-size:11px;color:#162033}.worker-proposal-v4 em{font-style:normal;font-size:9px;color:#0d6efd;font-weight:900}
+
+/* Estado del trabajador en una sola tarjeta */
+.worker-control-v4{background:#fff;border:1px solid var(--v4-line);border-radius:20px;padding:10px;margin-bottom:14px;box-shadow:var(--v4-shadow)}
+.worker-control-v4 .availability-card{margin:0!important;border:0!important;box-shadow:none!important;background:transparent!important;padding:6px!important;min-height:52px!important}
+.worker-control-v4 .availability-card small{max-width:190px}
+.worker-control-links{border-top:1px solid #edf0f4;margin-top:5px;padding-top:8px;display:grid;grid-template-columns:repeat(3,1fr)}
+.worker-control-links button{border:0;background:transparent;min-height:42px;display:flex;align-items:center;justify-content:center;gap:5px;color:#56647a;font-size:9px;font-weight:800}
+.worker-control-links button+button{border-left:1px solid #edf0f4}.worker-control-links b{font-size:13px;color:#111827}.worker-control-links .svg-icon{width:16px;color:#0d6efd}
+
+/* Buscar + categorías: como herramientas, no como banners */
+.worker-search-v4{height:52px;border:1px solid var(--v4-line);background:#fff;border-radius:16px;padding:0 8px 0 14px;display:grid;grid-template-columns:21px 1fr 40px;gap:8px;align-items:center;box-shadow:var(--v4-shadow);margin-bottom:10px}
+.worker-search-v4>.svg-icon{width:19px;color:#65748a}.worker-search-v4 input{border:0!important;background:transparent!important;outline:0;min-width:0;font-size:14px}.worker-search-v4 button{width:38px;height:38px;border:0;border-radius:12px;background:#eef3f9;color:#1d4f91;display:grid;place-items:center}.worker-search-v4 button .svg-icon{width:18px}
+.worker-category-strip-v4,.client-category-strip-v4{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:2px 1px 11px;margin:0 -1px 10px}.worker-category-strip-v4::-webkit-scrollbar,.client-category-strip-v4::-webkit-scrollbar{display:none}
+.worker-category-strip-v4 button{flex:0 0 auto;min-width:68px;border:1px solid var(--v4-line);background:#fff;border-radius:15px;padding:9px 8px;display:grid;justify-items:center;gap:5px;color:#4f5e73}
+.worker-category-strip-v4 button span{width:30px;height:30px;border-radius:10px;background:#f0f4f9;display:grid;place-items:center}.worker-category-strip-v4 .svg-icon{width:17px}.worker-category-strip-v4 b{font-size:8px;max-width:70px;overflow:hidden;text-overflow:ellipsis}.worker-category-strip-v4 button.active{border-color:#0d6efd;background:#eef5ff;color:#0b56bd}.worker-category-strip-v4 button.active span{background:#dbeaff}
+.worker-section-title.v4{margin:8px 0 10px;align-items:center}.worker-section-title.v4 h2{font-size:20px}.worker-section-title.v4 p{font-size:8px}.worker-section-title.v4>button{background:#fff;border:1px solid var(--v4-line);border-radius:12px;padding:8px 9px}
+.worker-opportunities-v4{margin-top:4px}.worker-opportunities-v4 .worker-list-v3 .worker-task{box-shadow:none!important;border-radius:17px!important;background:#fff!important}
+.see-all-v4{width:100%;margin:10px 0 0;border:1px solid var(--v4-line);background:#fff;border-radius:14px;padding:11px;color:#0d5fc7;font-size:10px;font-weight:900}
+
+/* Cliente: intención primero, publicidad fuera */
+.client-intent-v4{margin:2px 0 18px}.client-intent-v4>small{font-size:8px;letter-spacing:.12em;color:#7f8b9c;font-weight:950}.client-intent-v4 h1{font-size:28px;margin:5px 0 13px;color:#111827}
+.client-intent-v4>button{width:100%;height:58px;border:1px solid #dfe5ed;background:#fff;border-radius:18px;padding:0 10px 0 15px;display:grid;grid-template-columns:22px 1fr 38px;gap:10px;align-items:center;text-align:left;box-shadow:0 6px 20px rgba(20,45,82,.07);color:#68768a}
+.client-intent-v4>button>.svg-icon{width:20px}.client-intent-v4>button span{font-size:14px;font-weight:750}.client-intent-v4>button em{width:36px;height:36px;border-radius:12px;background:#0d6efd;color:#fff;display:grid;place-items:center}.client-intent-v4>button em .svg-icon{width:18px}
+.client-section-head.v4{margin:18px 0 10px;align-items:center}.client-section-head.v4 span{font-size:7px;letter-spacing:.11em}.client-section-head.v4 h2{font-size:19px;margin:2px 0}.client-section-head.v4>button{font-size:9px}
+.client-current-v4 .client-task-list,.client-current-v4>.task{margin:0}
+.client-offer-alert-v4{width:100%;border:1px solid #dbe7f8;background:#eef5ff;border-radius:17px;padding:12px;display:grid;grid-template-columns:36px 1fr auto;gap:9px;align-items:center;text-align:left;color:#17365f;margin:12px 0}.client-offer-alert-v4>span:first-child{width:36px;height:36px;border-radius:11px;background:#fff;color:#0d6efd;display:grid;place-items:center}.client-offer-alert-v4 .svg-icon{width:18px}.client-offer-alert-v4 b{display:block;font-size:11px}.client-offer-alert-v4 small{display:block;font-size:8px;color:#63758d;margin-top:2px}.client-offer-alert-v4 em{font-style:normal;color:#0d6efd;font-weight:950}
+.client-category-strip-v4 button{flex:0 0 78px;border:0;background:transparent;padding:2px;display:grid;justify-items:center;gap:6px;color:#28364a}.client-category-strip-v4 button span{width:54px;height:54px;border-radius:17px;background:#fff;border:1px solid var(--v4-line);display:grid;place-items:center;box-shadow:var(--v4-shadow)}.client-category-strip-v4 .svg-icon{width:24px;color:#0d6efd}.client-category-strip-v4 b{font-size:8px;line-height:1.1}
+.client-activity-v4{margin-top:4px}.client-activity-tabs.v4{display:flex;gap:6px;overflow-x:auto;margin:0 0 10px;padding:0;background:transparent;border:0}.client-activity-tabs.v4 button{flex:0 0 auto;border:1px solid var(--v4-line);background:#fff;border-radius:999px;padding:8px 11px;font-size:9px}.client-activity-tabs.v4 button.active{background:#111827;color:#fff;border-color:#111827}.client-activity-tabs.v4 b{font-size:8px}
+.client-home-v4 .client-task-list{display:grid;gap:8px}
+
+/* Herramientas secundarias ocultas hasta que el usuario las pida */
+.home-more-v4{margin-top:16px;border:1px solid var(--v4-line);background:#fff;border-radius:17px;overflow:hidden}
+.home-more-v4 summary{list-style:none;padding:12px;display:grid;grid-template-columns:20px 1fr auto;gap:9px;align-items:center;color:#46566d;cursor:pointer}.home-more-v4 summary::-webkit-details-marker{display:none}.home-more-v4 summary>.svg-icon{width:18px}.home-more-v4 summary b{display:block;font-size:10px}.home-more-v4 summary small{display:block;font-size:7.5px;color:#8793a4}.home-more-v4 summary em{font-style:normal}.home-more-v4[open] summary em{transform:rotate(180deg)}
+.home-more-v4>div{border-top:1px solid #edf0f4;padding:6px;display:grid}.home-more-v4>div button{border:0;background:transparent;padding:11px;display:flex;align-items:center;gap:9px;text-align:left;color:#35455b;font-size:10px;font-weight:800}.home-more-v4>div .svg-icon{width:17px;color:#0d6efd}
+
+/* Cuenta agrupada */
+.account-v4{background:#f7f8fa}.account-profile-v4{width:100%;border:0;background:transparent;padding:4px 0 14px;display:grid;grid-template-columns:62px 1fr auto;gap:12px;align-items:center;text-align:left}.account-profile-v4 .avatar{width:62px;height:62px;border-radius:20px}.account-profile-v4 h2{font-size:20px;margin:0 0 3px}.account-profile-v4 small{font-size:10px;color:#7a8798}.account-profile-v4 em{font-style:normal;font-size:22px;color:#9aa5b3}
+.account-primary-v4{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0 18px}.account-primary-v4 button{border:1px solid var(--v4-line);background:#fff;border-radius:17px;min-height:82px;padding:10px 6px;display:grid;justify-items:center;align-content:center;gap:7px;color:#26364b;box-shadow:var(--v4-shadow)}.account-primary-v4 button span{width:34px;height:34px;border-radius:11px;background:#edf4ff;color:#0d6efd;display:grid;place-items:center}.account-primary-v4 .svg-icon{width:18px}.account-primary-v4 b{font-size:9px}
+.account-groups-v4{display:grid;gap:9px}.account-groups-v4 details{border:1px solid var(--v4-line);background:#fff;border-radius:18px;overflow:hidden}.account-groups-v4 summary{list-style:none;padding:14px;display:flex;justify-content:space-between;align-items:center;cursor:pointer}.account-groups-v4 summary::-webkit-details-marker{display:none}.account-groups-v4 summary>span{display:flex;align-items:center;gap:10px}.account-groups-v4 summary .svg-icon{width:19px;color:#0d6efd}.account-groups-v4 summary b{font-size:12px}.account-groups-v4 summary em{font-style:normal;color:#8a96a7}.account-groups-v4 details[open] summary em{transform:rotate(180deg)}.account-groups-v4 details>div{border-top:1px solid #edf0f4}.account-groups-v4 .settings-row{box-shadow:none!important;border:0!important;border-radius:0!important;margin:0!important}.account-groups-v4 .settings-row+.settings-row{border-top:1px solid #f0f2f5!important}
+
+/* Navegación inferior más discreta */
+.nav{border-radius:18px;box-shadow:0 8px 28px rgba(18,39,68,.13);padding-top:5px}.nav button{min-height:47px}.nav button.active{background:transparent}.nav button.active b{background:#e8f1ff}
+
+/* Reducir ruido general en pantallas secundarias */
+.settings-page,.worker-profile-screen,.task-detail-page,.activity-v3{padding-left:16px!important;padding-right:16px!important}
+.card,.form-card,.important-card,.rating-card,.safety-card{box-shadow:none!important}
+@media(max-width:380px){
+ .worker-control-links button{font-size:8px}.active-v4-go{font-size:8px}
+ .client-intent-v4 h1{font-size:25px}.worker-category-strip-v4 button{min-width:62px}
+}
+
+/* Dark mode */
+html[data-theme="dark"] .marketplace-v4,html[data-theme="dark"] .client-home-v4,html[data-theme="dark"] .account-v4{background:#081525}
+html[data-theme="dark"] .worker-control-v4,html[data-theme="dark"] .worker-search-v4,html[data-theme="dark"] .worker-category-strip-v4 button,html[data-theme="dark"] .worker-opportunities-v4 .worker-task,html[data-theme="dark"] .home-more-v4,html[data-theme="dark"] .client-intent-v4>button,html[data-theme="dark"] .client-category-strip-v4 button span,html[data-theme="dark"] .account-primary-v4 button,html[data-theme="dark"] .account-groups-v4 details{background:#102238!important;border-color:#20364f!important}
+html[data-theme="dark"] .client-intent-v4 h1,html[data-theme="dark"] .account-profile-v4 h2{color:#f5f8fc}
+html[data-theme="dark"] .worker-category-strip-v4 button{color:#c8d4e4}
+html[data-theme="dark"] .worker-category-strip-v4 button.active{background:#15345b!important;border-color:#2e7de7!important}
+html[data-theme="dark"] .worker-control-links{border-color:#20364f}
+html[data-theme="dark"] .worker-control-links button+button{border-color:#20364f}
+html[data-theme="dark"] .home-more-v4>div,html[data-theme="dark"] .account-groups-v4 details>div{border-color:#20364f}
+
 </style>
 <link rel="manifest" href="./manifest.webmanifest?v=1.9.4"><link rel="apple-touch-icon" href="./icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default">
 </head>
@@ -1428,7 +1509,7 @@ function navBar(){const home=state.mode==="client"?"clientHome":"workerHome";con
 <button class="${state.route===home?"active":""}" onclick="go('${home}')"><b>${iconSvg("home")}</b><br>Inicio</button>
 <button class="${state.route===second?"active":""}" onclick="go('${second}')"><b>${iconSvg(state.mode==="client"?"plus":"tasks")}</b><br>${state.mode==="client"?"Publicar":"Tareas"}</button>
 <button class="${["messagesHome","chat"].includes(state.route)?"active":""}" onclick="openMessagesHome()"><b>${iconSvg("chat")}</b>${state.unreadMessages?`<span class="nav-badge">${Math.min(99,state.unreadMessages)}</span>`:""}<br>Mensajes</button>
-<button class="${["profile","editProfile","addresses","payments","earnings","agenda","growth","portfolio","adminBanners","billing","verification","language","notifications","help","terms","privacy","favorites","clientProfile","safetyCenter","blockedUsers","myReports","supportCenter","newSupportCase","supportCase","admin"].includes(state.route)?"active":""}" onclick="go('profile')"><b>${iconSvg("user")}</b><br>Perfil</button>
+<button class="${["profile","editProfile","addresses","payments","earnings","agenda","growth","portfolio","adminBanners","billing","verification","language","notifications","help","terms","privacy","favorites","clientProfile","safetyCenter","blockedUsers","myReports","supportCenter","newSupportCase","supportCase","admin"].includes(state.route)?"active":""}" onclick="go('profile')"><b>${iconSvg("user")}</b><br>Cuenta</button>
 </nav>`}
 function clearPoll(){
 if(poller){clearInterval(poller);poller=null}
@@ -1670,52 +1751,54 @@ function setClientTaskFilter(v){
  document.getElementById("clientActivity")?.scrollIntoView({behavior:"smooth",block:"start"})
 }
 async function clientHome(){
-await Promise.all([loadMyTasks(),loadNotificationSummary(),loadClientTaskStats(),loadBanners()]);
-const first=(state.profile?.full_name||"Usuario").trim().split(" ")[0]||"Usuario";
-const buckets=clientTaskBuckets(),active=buckets.active,completed=buckets.completed.length;
-const offers=Object.values(state.clientOfferCounts||{}).reduce((a,b)=>a+Number(b||0),0);
-const filter=["active","proposals","completed","all"].includes(state.clientTaskFilter)?state.clientTaskFilter:"active";
-const visible=buckets[filter]||active;
-root.innerHTML=shell(`<section class="client-market-home">
- <div class="client-market-top">
-   <div><span class="client-hello">Hola, ${escapeHtml(first)}</span><button class="client-location" onclick="go('addresses')">${iconSvg("location")}<span>Tu ubicación</span><b>⌄</b></button></div>
-   <div class="client-top-actions">${notificationBell()}<button class="market-avatar" onclick="go('profile')">${avatarMarkup(state.profile)}</button></div>
- </div>
+ await Promise.all([loadMyTasks(),loadNotificationSummary(),loadClientTaskStats(),loadBanners()]);
+ const first=(state.profile?.full_name||"Usuario").trim().split(" ")[0]||"Usuario";
+ const buckets=clientTaskBuckets(),active=buckets.active,completed=buckets.completed.length;
+ const offers=Object.values(state.clientOfferCounts||{}).reduce((a,b)=>a+Number(b||0),0);
+ const filter=["active","proposals","completed","all"].includes(state.clientTaskFilter)?state.clientTaskFilter:"active";
+ const visible=buckets[filter]||active;
+ root.innerHTML=shell(`<section class="client-home-v4">
+  <header class="client-market-top v4">
+    <div><span class="client-hello">Hola, ${escapeHtml(first)}</span><button class="client-location" onclick="go('addresses')">${iconSvg("location")}<span>Tu ubicación</span><b>⌄</b></button></div>
+    <div class="client-top-actions">${notificationBell()}<button class="market-avatar" onclick="go('profile')" aria-label="Abrir cuenta">${avatarMarkup(state.profile)}</button></div>
+  </header>
+  ${authMsg()}
 
- <button class="client-search-launch" onclick="go('createTask')">${iconSvg("search")}<span>¿Qué necesitas resolver hoy?</span><em>${iconSvg("plus")}</em></button>
- ${bannerCarouselHtml()}
+  <section class="client-intent-v4">
+    <small>DOHOY</small>
+    <h1>¿Qué necesitas resolver?</h1>
+    <button onclick="go('createTask')">${iconSvg("search")}<span>Describe lo que necesitas</span><em>${iconSvg("plus")}</em></button>
+  </section>
 
- <section class="client-main-banner">
-   <div class="client-banner-copy"><span class="promo-pill">PUBLICA EN MINUTOS</span><h1>Tu pendiente,<br>resuelto hoy.</h1><p>Cuéntanos qué necesitas, recibe propuestas y elige a quién contratar.</p><button onclick="go('createTask')">Publicar una tarea</button></div>
-   <div class="client-banner-art"><span class="cb-orb one"></span><span class="cb-orb two"></span><div>${iconSvg("verify")}</div></div>
- </section>
+  ${active.length?`<section class="client-current-v4"><div class="client-section-head v4"><div><span>EN CURSO</span><h2>Tu tarea activa</h2></div>${active.length>1?`<button onclick="setClientTaskFilter('active')">${active.length} activas</button>`:""}</div>${taskCard(active[0],true)}</section>`:""}
 
- <div class="client-mini-stats">
-   <button onclick="setClientTaskFilter('active')"><b>${active.length}</b><span>Activas</span></button>
-   <button onclick="setClientTaskFilter('proposals')"><b>${offers}</b><span>Propuestas</span></button>
-   <button onclick="setClientTaskFilter('completed')"><b>${completed}</b><span>Terminadas</span></button>
- </div>
+  ${offers?`<button class="client-offer-alert-v4" onclick="setClientTaskFilter('proposals')"><span>${iconSvg("briefcase")}</span><span><b>${offers} propuesta${offers===1?"":"s"} por revisar</b><small>Compara perfiles y elige cuando estés listo.</small></span><em>›</em></button>`:""}
 
- <div class="client-section-head"><div><span>Servicios</span><h2>¿En qué te ayudamos?</h2></div><button onclick="go('createTask')">Ver todo</button></div>
- <div class="client-category-scroll">${categories.map((cat,i)=>`<button class="client-category cat-${i%5}" onclick="startClientCategory('${escapeAttr(cat)}')"><span>${iconSvg(cat)}</span><b>${escapeHtml(cat)}</b></button>`).join("")}</div>
+  <section class="client-services-v4">
+    <div class="client-section-head v4"><div><span>SERVICIOS</span><h2>Explora por categoría</h2></div><button onclick="go('createTask')">Ver todo</button></div>
+    <div class="client-category-strip-v4">${categories.map((cat,i)=>`<button onclick="startClientCategory('${escapeAttr(cat)}')"><span>${iconSvg(cat)}</span><b>${escapeHtml(cat)}</b></button>`).join("")}</div>
+  </section>
 
- <div class="client-trust-strip">
-   <span class="trust-icon">${iconSvg("shield")}</span>
-   <div><b>Contrata con más confianza</b><small>Perfiles, chat, pagos y calificaciones dentro de DOHOY.</small></div>
-   <span>›</span>
- </div>
+  <section id="clientActivity" class="client-activity-v4">
+    <div class="client-section-head v4"><div><span>ACTIVIDAD</span><h2>Mis tareas</h2></div><button onclick="loadMyTasks().then(()=>loadClientTaskStats()).then(clientHome)">Actualizar</button></div>
+    <div class="client-activity-tabs v4">
+      <button class="client-activity-tab ${filter==="active"?"active":""}" data-tab="active" onclick="setClientTaskFilter('active')">Activas <b>${active.length}</b></button>
+      <button class="client-activity-tab ${filter==="proposals"?"active":""}" data-tab="proposals" onclick="setClientTaskFilter('proposals')">Propuestas <b>${buckets.proposals.length}</b></button>
+      <button class="client-activity-tab ${filter==="completed"?"active":""}" data-tab="completed" onclick="setClientTaskFilter('completed')">Historial <b>${completed}</b></button>
+    </div>
+    <div id="clientActivityList" class="client-task-list">${visible.length?visible.slice(0,5).map(t=>taskCard(t,true)).join(""):`<div class="client-empty compact"><span>${iconSvg("plus")}</span><h3>${filter==="completed"?"Aún no hay historial":"Aquí aparecerán tus tareas"}</h3><p>${filter==="completed"?"Tus trabajos terminados se guardarán aquí.":"Publica lo que necesitas y recibe propuestas."}</p>${filter!=="completed"?`<button onclick="go('createTask')">Publicar tarea</button>`:""}</div>`}</div>
+    ${visible.length>5?`<button class="see-all-v4" onclick="setClientTaskFilter('all')">Ver todas</button>`:""}
+  </section>
 
- <div id="clientActivity" class="client-section-head client-activity-head"><div><span>Tu actividad</span><h2>${active.length?"Tus tareas":"Tus publicaciones"}</h2></div><button onclick="loadMyTasks().then(()=>loadClientTaskStats()).then(clientHome)">Actualizar</button></div>
- <div class="client-activity-tabs">
-   <button class="client-activity-tab ${filter==="active"?"active":""}" data-tab="active" onclick="setClientTaskFilter('active')">Activas <b>${active.length}</b></button>
-   <button class="client-activity-tab ${filter==="proposals"?"active":""}" data-tab="proposals" onclick="setClientTaskFilter('proposals')">Propuestas <b>${buckets.proposals.length}</b></button>
-   <button class="client-activity-tab ${filter==="completed"?"active":""}" data-tab="completed" onclick="setClientTaskFilter('completed')">Terminadas <b>${completed}</b></button>
-   <button class="client-activity-tab ${filter==="all"?"active":""}" data-tab="all" onclick="setClientTaskFilter('all')">Todas <b>${buckets.all.length}</b></button>
- </div>
- <div id="clientActivityList" class="client-task-list">${visible.length?visible.map(t=>taskCard(t,true)).join(""):`<div class="client-empty"><span>${iconSvg("plus")}</span><h3>Publica tu primera tarea</h3><p>Recibe propuestas de personas interesadas en ayudarte.</p><button onclick="go('createTask')">Empezar</button></div>`}</div>
-
- ${state.tasks.length?`<button class="client-big-publish" onclick="go('createTask')"><span>${iconSvg("plus")}</span><span><b>Publicar otra tarea</b><small>Describe lo que necesitas y define tu presupuesto.</small></span><em>›</em></button>`:""}
-</section>`,true)
+  <details class="home-more-v4 client">
+    <summary>${iconSvg("shield")} <span><b>Ayuda y seguridad</b><small>Pagos, soporte y protección</small></span><em>⌄</em></summary>
+    <div>
+      <button onclick="openSafetyCenter()">${iconSvg("shield")} Centro de seguridad</button>
+      <button onclick="openSupportCenter()">${iconSvg("help")} Soporte</button>
+      <button onclick="go('payments')">${iconSvg("payment")} Métodos de pago</button>
+    </div>
+  </details>
+ </section>`,true)
 }
 async function loadClientTaskStats(){
  state.clientOfferCounts={};
@@ -1765,99 +1848,66 @@ function workerTaskCard(t){
 
 async function workerHome(){
  await Promise.all([loadOpenTasks(),loadWorkerActivity(),loadNotificationSummary(),loadSearchPreferences(),loadFeatureStatus(),loadWorkerAvailability(),loadWorkerInvitations(),loadBanners()]);
- const first=(state.profile?.full_name||"").trim().split(" ")[0]||"";
  const visible=filteredWorkerTasks(),allOpen=state.tasks||[];
- const nearby=visible.filter(t=>{const d=taskDistanceKm(t);return d!=null&&d<=10}).length;
  const urgent=allOpen.filter(t=>t.is_urgent||taskUrgency(t)).length;
- const level=workerLevel();
- root.innerHTML=shell(`<section class="market-screen marketplace-v3">
-  <header class="worker-home-head">
+ const proposals=pendingWorkerProposals().length,active=activeWorkerJobs().length;
+ root.innerHTML=shell(`<section class="market-screen marketplace-v4">
+  <header class="worker-home-head v4">
     <div class="worker-home-place">
-      <small>TRABAJAR EN</small>
+      <small>TU ZONA</small>
       <button id="workerLocationButton" type="button" class="worker-place-button ${state.workerLocation?"active":""}" onclick="toggleWorkerLocation()">
         ${iconSvg("location")}<span>${state.workerLocation?(state.workerAddress||"Tu zona"):"Activar ubicación"}</span><b>⌄</b>
       </button>
     </div>
-    <div class="worker-home-actions">
-      ${notificationBell()}
-      <button class="market-avatar" onclick="go('profile')" aria-label="Abrir perfil">${avatarMarkup(state.profile)}</button>
-    </div>
+    <div class="worker-home-actions">${notificationBell()}<button class="market-avatar" onclick="go('profile')" aria-label="Abrir cuenta">${avatarMarkup(state.profile)}</button></div>
   </header>
   ${state.workerLocationError?`<div class="geo-note market-v2-error">${escapeHtml(state.workerLocationError)}</div>`:""}
-
-  <div class="worker-search-v3">
-    ${iconSvg("search")}
-    <input id="workerSearch" oninput="filterWorkerTasks()" onkeydown="workerSearchKey(event)" value="${escapeAttr(workerFilterState().query)}" placeholder="¿Qué trabajo quieres encontrar?">
-    <button type="button" class="filter-trigger-v3" onclick="toggleWorkerFilters()" aria-label="Abrir filtros">${iconSvg("mode")}<span>Filtros</span></button>
-  </div>
-  ${state.recentSearches?.length?`<div class="recent-search-strip"><span>Recientes</span>${state.recentSearches.slice(0,4).map(q=>`<button onclick="useRecentWorkerSearch('${escapeAttr(q)}')">${iconSvg("clock")} ${escapeHtml(q)}</button>`).join("")}</div>`:""}
-  <div id="workerFiltersPanel" class="worker-filters-panel">${workerFilterControls()}</div>
   ${authMsg()}
 
-  <div class="worker-status-row">
-    ${availabilityCard()}
-    <button class="worker-mini-level" onclick="go('profile')">
-      <span>${iconSvg(level.icon)}</span>
-      <span><small>NIVEL</small><b>${escapeHtml(level.name)}</b></span>
-      <em>${Math.round(level.pct)}%</em>
-    </button>
-  </div>
-
   ${workerActiveHomeCard()}
-  ${invitationsHtml()}
-  ${bannerCarouselHtml()}
 
-  <section class="worker-hero-v3">
-    <div class="worker-hero-copy">
-      <span class="worker-hero-kicker">DOHOY · GANA HOY</span>
-      <h1>${first?`Hola, ${escapeHtml(first)}.`:""}<br><strong>Encuentra tu próximo trabajo.</strong></h1>
-      <p>Explora oportunidades, compara el pago y envía tu propuesta.</p>
-      <div class="worker-hero-buttons">
-        <button class="primary" onclick="openAllWorkerOpportunities()">Ver trabajos</button>
-        <button class="secondary" onclick="openWorkerMap()">${iconSvg("map")} Mapa</button>
-      </div>
-    </div>
-    <div class="worker-hero-art" aria-hidden="true">
-      <span class="hero-spark s1"></span><span class="hero-spark s2"></span>
-      <div class="hero-briefcase">${iconSvg("briefcase")}</div>
-      <span class="hero-money">$</span>
+  <section class="worker-control-v4">
+    ${availabilityCard()}
+    <div class="worker-control-links">
+      <button onclick="state.workerTaskTab='active';go('workerJobs')"><b>${active}</b><span>Activos</span></button>
+      <button onclick="state.workerTaskTab='proposals';go('workerJobs')"><b>${proposals}</b><span>Propuestas</span></button>
+      <button onclick="openAgenda()">${iconSvg("calendar")}<span>Agenda</span></button>
     </div>
   </section>
 
-  <div class="worker-quick-v3">
-    <button onclick="quickWorkerToday()"><span class="orange">${iconSvg("clock")}</span><b>Para hoy</b><small>${urgent?`${urgent} urgentes o próximas`:"Ver tareas de hoy"}</small></button>
-    <button onclick="quickWorkerNearby()"><span class="green">${iconSvg("location")}</span><b>Cerca de ti</b><small>${state.workerLocation?(nearby?`${nearby} a ≤10 km`:"Explorar tu zona"):"Activar ubicación"}</small></button>
-    <button onclick="openAgenda()"><span class="blue">${iconSvg("calendar")}</span><b>Mi agenda</b><small>Próximos trabajos</small></button>
+  ${invitationsHtml()}
+
+  <div class="worker-search-v4">
+    ${iconSvg("search")}
+    <input id="workerSearch" oninput="filterWorkerTasks()" onkeydown="workerSearchKey(event)" value="${escapeAttr(workerFilterState().query)}" placeholder="Buscar trabajos">
+    <button type="button" onclick="toggleWorkerFilters()" aria-label="Filtros">${iconSvg("mode")}</button>
+  </div>
+  <div id="workerFiltersPanel" class="worker-filters-panel">${workerFilterControls()}</div>
+
+  <div class="worker-category-strip-v4" aria-label="Categorías">
+    <button class="${!workerFilterState().category?"active":""}" onclick="clearWorkerFiltersInPlace()"><span>${iconSvg("tasks")}</span><b>Todos</b></button>
+    ${categories.map((cat,i)=>`<button class="${workerFilterState().category===cat?"active":""}" onclick="openWorkerCategory('${escapeAttr(cat)}')"><span>${iconSvg(cat)}</span><b>${escapeHtml(cat)}</b></button>`).join("")}
   </div>
 
-  <section class="worker-discover-v3">
-    <div class="worker-section-title">
-      <div><small>EXPLORA</small><h2>¿Qué quieres hacer?</h2></div>
-      <button onclick="openAllWorkerOpportunities()">Ver todos</button>
-    </div>
-    <div class="worker-category-grid-v3">
-      ${categories.map((cat,i)=>`<button class="worker-cat-v3 cat-${i%5} ${workerFilterState().category===cat?"active":""}" onclick="openWorkerCategory('${escapeAttr(cat)}')">
-        <span>${iconSvg(cat)}</span><b>${escapeHtml(cat)}</b><em>›</em>
-      </button>`).join("")}
-    </div>
-  </section>
-
-  <section id="workerOpportunities" class="worker-opportunities-v3">
-    <div class="worker-section-title">
-      <div><small>PARA TI</small><h2>Oportunidades</h2><p>${workerFilterState().category?`Mostrando ${escapeHtml(workerFilterState().category)}`:"Ordenadas para que encuentres trabajo más rápido."}</p></div>
-      <div class="worker-section-actions"><button onclick="openWorkerMap()">${iconSvg("map")} Mapa</button><button onclick="openAllWorkerOpportunities()">Ver todas</button></div>
+  <section id="workerOpportunities" class="worker-opportunities-v4">
+    <div class="worker-section-title v4">
+      <div><small>OPORTUNIDADES</small><h2>Trabajos para ti</h2><p>${workerFilterState().category?escapeHtml(workerFilterState().category):urgent?`${urgent} con prioridad hoy`:"Ordenados por compatibilidad"}</p></div>
+      <button onclick="openWorkerMap()">${iconSvg("map")} Mapa</button>
     </div>
     <div id="workerTaskList" class="worker-list worker-list-v3">
-      ${visible.length?visible.slice(0,6).map(workerTaskCard).join(""):`<div class="worker-empty-v3"><span>${iconSvg("search")}</span><h3>No encontramos trabajos con esos filtros</h3><p>Prueba otra categoría o quita los filtros para ver todas las oportunidades disponibles.</p><div><button onclick="clearWorkerFiltersInPlace()">Ver todos los trabajos</button><button class="ghost" onclick="toggleWorkerFilters()">Ajustar filtros</button></div></div>`}
+      ${visible.length?visible.slice(0,8).map(workerTaskCard).join(""):`<div class="worker-empty-v3"><span>${iconSvg("search")}</span><h3>No hay trabajos con esos filtros</h3><p>Prueba otra categoría o amplía tu búsqueda.</p><div><button onclick="clearWorkerFiltersInPlace()">Quitar filtros</button></div></div>`}
     </div>
+    ${visible.length>8?`<button class="see-all-v4" onclick="openAllWorkerOpportunities()">Ver los ${visible.length} trabajos</button>`:""}
   </section>
 
-  <section class="worker-tools-v3">
-    <button onclick="toggleWorkerFilters()"><span>${iconSvg("star")}</span><div><b>Filtros favoritos</b><small>Guarda lo que buscas</small></div><em>›</em></button>
-    <button onclick="go('notifications')"><span>${iconSvg("bell")}</span><div><b>Alertas</b><small>Configura tus avisos</small></div><em>›</em></button>
-  </section>
-
-  ${Number(state.profile?.completed_tasks||0)===0?`<section class="first-job-card first-job-v3"><span>${iconSvg("bolt")}</span><div><small>PRIMER TRABAJO</small><h3>Tu primera oportunidad empieza aquí</h3><p>Completa tu perfil, activa tu disponibilidad y envía una propuesta cuando encuentres una tarea que te convenga.</p><div class="first-job-steps"><i class="done">Perfil</i><i class="${state.workerAvailability?"done":""}">Disponible</i><i>Propuesta</i></div></div></section>`:""}
+  <details class="home-more-v4">
+    <summary>${iconSvg("gear")} <span><b>Más herramientas</b><small>Alertas, filtros guardados y mapa</small></span><em>⌄</em></summary>
+    <div>
+      <button onclick="toggleWorkerFilters()">${iconSvg("star")} Filtros favoritos</button>
+      <button onclick="go('notifications')">${iconSvg("bell")} Configurar alertas</button>
+      <button onclick="openWorkerMap()">${iconSvg("map")} Ver mapa</button>
+    </div>
+  </details>
  </section>`,true)
 }
 
@@ -1914,10 +1964,10 @@ function workerActiveHomeCard(){
  const active=activeWorkerJobs(),proposals=pendingWorkerProposals();
  if(!active.length&&!proposals.length)return "";
  if(active.length){
-   const t=active[0],stage=t.status==="in_progress"?(t.completion_requested_at?"Esperando confirmación":"Trabajo en curso"):(t.arrived_at?"Ya llegaste":t.en_route_at?"Vas en camino":"Trabajo asignado");
-   return `<section class="worker-active-home"><div class="active-job-head"><span>${iconSvg("bolt")}</span><div><small>TRABAJO ACTIVO</small><b>${escapeHtml(stage)}</b></div><em>${active.length}</em></div><button class="active-job-main" onclick="openTask('${t.id}')"><span>${taskIcon(t)}</span><div><h3>${escapeHtml(t.title)}</h3><p>${locationMarkup(t.location_label||"Ubicación del trabajo")}</p><strong>${money(t.offer?.amount||t.offered_price)}</strong></div><i>Continuar ›</i></button>${active.length>1?`<button class="active-job-all" onclick="state.workerTaskTab='active';go('workerJobs')">Ver ${active.length} trabajos activos</button>`:""}</section>`
+   const t=active[0],stage=t.status==="in_progress"?(t.completion_requested_at?"Esperando confirmación":"Trabajo en curso"):(t.arrived_at?"Ya llegaste":t.en_route_at?"Vas en camino":"Listo para comenzar");
+   return `<section class="worker-active-v4"><button onclick="openTask('${t.id}')"><span class="active-v4-icon">${taskIcon(t)}</span><span class="active-v4-copy"><small>EN CURSO · ${escapeHtml(stage)}</small><b>${escapeHtml(t.title)}</b><em>${moneyExact(t.offer?.amount||t.offered_price)} · ${locationMarkup(t.location_label||"Zona aproximada")}</em></span><span class="active-v4-go">Continuar ›</span></button>${active.length>1?`<button class="active-v4-more" onclick="state.workerTaskTab='active';go('workerJobs')">+${active.length-1} trabajo${active.length-1===1?"":"s"} activo${active.length-1===1?"":"s"}</button>`:""}</section>`
  }
- return `<section class="worker-proposal-home"><span>${iconSvg("briefcase")}</span><div><small>PROPUESTAS ENVIADAS</small><b>${proposals.length} esperando respuesta</b><p>No se perdieron: puedes seguirlas desde Mis tareas.</p></div><button onclick="state.workerTaskTab='proposals';go('workerJobs')">Ver propuestas</button></section>`
+ return `<button class="worker-proposal-v4" onclick="state.workerTaskTab='proposals';go('workerJobs')"><span>${iconSvg("briefcase")}</span><span><small>PROPUESTAS</small><b>${proposals} esperando respuesta</b></span><em>Ver ›</em></button>`
 }
 
 async function loadWorkerJobs(){await loadWorkerActivity()}
@@ -2387,43 +2437,55 @@ async function profile(){
  await loadProfile();
  const first=profileDisplayName(state.profile);
  const modeText=state.mode==="client"?"Cliente":"Trabajador";
- root.innerHTML=shell(`<section class="account-screen">
- <div class="account-top"><button class="icon" onclick="go('${state.mode==="client"?"clientHome":"workerHome"}')">←</button><h1>Cuenta</h1><span></span></div>
- ${authMsg()}
- <div class="account-profile-card"><div class="profile-photo-wrap">${avatarMarkup(state.profile)}</div><div class="account-profile-copy"><h2>${escapeHtml(first)}</h2><button onclick="go('editProfile')">Editar perfil <span>›</span></button><div class="account-contact-wrap"><div class="account-contact-lines"><div class="account-contact-row"><span class="account-contact-label">Correo</span><span class="account-contact-value">${escapeHtml(state.showContactDetails?(state.user?.email||"Agregar"):maskedEmail(state.user?.email||""))}</span></div><div class="account-contact-row phone"><span class="account-contact-label">Teléfono</span><span class="account-contact-value">${escapeHtml(state.showContactDetails?(state.profile?.phone||"Agregar"):(state.profile?.phone?maskedPhone(state.profile.phone):"Agregar"))}</span></div></div><button class="contact-eye" type="button" onclick="toggleContactDetails()" aria-label="${state.showContactDetails?'Ocultar correo y teléfono':'Mostrar correo y teléfono'}">${contactEyeIcon(state.showContactDetails)}</button></div></div></div>
- ${profileTrustCard(state.profile)}
- <div class="account-mode-card"><div class="mode-label">Tu modo actual</div><h3>${modeText}</h3><p>${state.mode==="client"?"Publica tareas y encuentra a alguien que te ayude.":"Encuentra solicitudes cercanas y gana realizando tareas."}</p></div>
- <div class="account-quick account-quick-four">
-   <button onclick="go('${state.mode==="client"?"clientHome":"workerJobs"}')"><span class="qico">${iconSvg("tasks")}</span><span>${state.mode==="client"?"Mis tareas":"Trabajos"}</span></button>
-   <button onclick="go('payments')" class="payment-quick"><span class="qico">${iconSvg("payment")}</span><span>Métodos de pago</span></button>
-   <button onclick="go('help')"><span class="qico">${iconSvg("help")}</span><span>Ayuda</span></button>
-   <button onclick="openSafetyCenter()"><span class="qico">${iconSvg("shield")}</span><span>Seguridad</span></button>
- </div>
- <div class="settings-section"><h2>Mi cuenta</h2>
-   ${settingsRow("Direcciones","addresses","location","Ubicación guardada y actual")}
-   <button class="settings-row payment-settings-row setting-payments" onclick="go('payments')"><span class="row-ico payment-row-ico">${iconSvg("payment")}</span><span><span class="row-main">Métodos de pago <em class="new-pill">NUEVO</em></span><span class="row-sub">Añade y administra tus tarjetas con Stripe</span></span><span class="chev">›</span></button>
-   ${settingsRow("Verificaciones","verification","verify","Foto, identidad y licencia")}
-   ${state.mode==="worker"?`<button class="settings-row setting-earnings" onclick="openEarnings()"><span class="row-ico">${iconSvg("wallet")}</span><span><span class="row-main">Mis ganancias <em class="new-pill">NUEVO</em></span><span class="row-sub">Pagos, comisión y movimientos</span></span><span class="chev">›</span></button>`:""}
-   ${state.mode==="worker"?`<button class="settings-row setting-agenda" onclick="openAgenda()"><span class="row-ico">${iconSvg("calendar")}</span><span><span class="row-main">Mi agenda</span><span class="row-sub">Trabajos de hoy y próximos</span></span><span class="chev">›</span></button>`:""}
-   ${state.mode==="worker"?`<button class="settings-row setting-portfolio" onclick="openPortfolioManager()"><span class="row-ico">${iconSvg("gallery")}</span><span><span class="row-main">Mi portafolio <em class="new-pill">NUEVO</em></span><span class="row-sub">Fotos de trabajos y perfil profesional</span></span><span class="chev">›</span></button><div class="dohoy-pro-card"><span>${iconSvg("crown")}</span><div><small>PRÓXIMAMENTE</small><b>DOHOY Pro</b><p>Herramientas y estadísticas avanzadas para trabajadores. Sin cobros activados por ahora.</p></div></div>`:""}
-   ${state.mode==="client"?`<button class="settings-row" onclick="openFavorites()"><span class="row-ico">${iconSvg("heart")}</span><span><span class="row-main">Trabajadores favoritos</span></span><span class="chev">›</span></button>`:""}
-   <button class="settings-row setting-safety" onclick="openSafetyCenter()"><span class="row-ico">${iconSvg("shield")}</span><span><span class="row-main">Centro de seguridad</span></span><span class="chev">›</span></button>
-   ${settingsRow("Cambiar modo","mode","mode","Cliente o trabajador")}
-   ${adminAllowed()?`<button class="settings-row setting-admin" onclick="openAdmin()"><span class="row-ico">${iconSvg("crown")}</span><span><span class="row-main">Panel administrativo</span><span class="row-sub">Usuarios, reportes y disputas</span></span><span class="chev">›</span></button>`:""}
- </div>
- <div class="settings-section"><h2>Configuración</h2>
-   
-   ${settingsRow("Notificaciones","notifications","bell","Avisos del teléfono y preferencias")}${settingsRow("Apariencia","appearance","mode","Automático, claro u oscuro")}
-   <button class="settings-row setting-growth" onclick="go('growth')"><span class="row-ico">${iconSvg("users")}</span><span><span class="row-main">Invitar e instalar DOHOY <em class="new-pill">NUEVO</em></span><span class="row-sub">Comparte tu código e instala la app</span></span><span class="chev">›</span></button>
-   <button class="settings-row setting-support" onclick="openSupportCenter()"><span class="row-ico">${iconSvg("gear")}</span><span><span class="row-main">Soporte y disputas</span><span class="row-sub">Casos, evidencia y seguimiento</span></span><span class="chev">›</span></button>
- </div>
- <div class="settings-section"><h2>Más información</h2>
-   ${settingsRow("Ayuda","help","help","Preguntas frecuentes")}
-   ${settingsRow("Términos y condiciones","terms","info","Versión beta")}
-   ${settingsRow("Política de privacidad","privacy","document","Cómo protegemos tus datos")}
- </div>
- <div class="account-actions"><button class="logout-btn" onclick="signOutCurrent()">${iconSvg("logout")} Cerrar sesión</button></div>
- <div class="version-note">DOHOY · Versión 4.4.3 · FLOW QA</div>
+ root.innerHTML=shell(`<section class="account-screen account-v4">
+  <div class="account-top"><button class="icon" onclick="go('${state.mode==="client"?"clientHome":"workerHome"}')">←</button><h1>Cuenta</h1><span></span></div>
+  ${authMsg()}
+  <button class="account-profile-v4" onclick="go('editProfile')">${avatarMarkup(state.profile)}<span><h2>${escapeHtml(first)}</h2><small>${modeText} · Editar perfil</small></span><em>›</em></button>
+  ${profileTrustCard(state.profile)}
+
+  <div class="account-primary-v4">
+    <button onclick="go('${state.mode==="client"?"clientHome":"workerJobs"}')"><span>${iconSvg("tasks")}</span><b>${state.mode==="client"?"Mis tareas":"Mis trabajos"}</b></button>
+    ${state.mode==="worker"?`<button onclick="openEarnings()"><span>${iconSvg("wallet")}</span><b>Ganancias</b></button>`:`<button onclick="go('payments')"><span>${iconSvg("payment")}</span><b>Pagos</b></button>`}
+    <button onclick="openSafetyCenter()"><span>${iconSvg("shield")}</span><b>Seguridad</b></button>
+  </div>
+
+  <div class="account-groups-v4">
+    <details open>
+      <summary><span>${iconSvg("user")}<b>Cuenta y trabajo</b></span><em>⌄</em></summary>
+      <div>
+        ${settingsRow("Direcciones","addresses","location","Ubicación guardada")}
+        ${settingsRow("Métodos de pago","payments","payment","Tarjetas y pagos")}
+        ${settingsRow("Verificaciones","verification","verify","Identidad y documentos")}
+        ${state.mode==="worker"?settingsRow("Mi agenda","agenda","calendar","Próximos trabajos"):""}
+        ${state.mode==="worker"?`<button class="settings-row" onclick="openPortfolioManager()"><span class="row-ico">${iconSvg("gallery")}</span><span><span class="row-main">Mi portafolio</span><span class="row-sub">Fotos de trabajos</span></span><span class="chev">›</span></button>`:""}
+        ${state.mode==="client"?`<button class="settings-row" onclick="openFavorites()"><span class="row-ico">${iconSvg("heart")}</span><span><span class="row-main">Trabajadores favoritos</span></span><span class="chev">›</span></button>`:""}
+        ${settingsRow("Cambiar modo","mode","mode","Cliente o trabajador")}
+      </div>
+    </details>
+
+    <details>
+      <summary><span>${iconSvg("gear")}<b>Preferencias</b></span><em>⌄</em></summary>
+      <div>
+        ${settingsRow("Notificaciones","notifications","bell","Avisos y preferencias")}
+        ${settingsRow("Apariencia","appearance","mode","Claro, oscuro o automático")}
+        ${settingsRow("Invitar e instalar DOHOY","growth","users","Compartir e instalar")}
+      </div>
+    </details>
+
+    <details>
+      <summary><span>${iconSvg("help")}<b>Ayuda y soporte</b></span><em>⌄</em></summary>
+      <div>
+        <button class="settings-row" onclick="openSupportCenter()"><span class="row-ico">${iconSvg("gear")}</span><span><span class="row-main">Soporte y disputas</span><span class="row-sub">Casos y seguimiento</span></span><span class="chev">›</span></button>
+        ${settingsRow("Ayuda","help","help","Preguntas frecuentes")}
+        ${settingsRow("Términos y condiciones","terms","info","Información legal")}
+        ${settingsRow("Política de privacidad","privacy","document","Protección de datos")}
+      </div>
+    </details>
+
+    ${adminAllowed()?`<details><summary><span>${iconSvg("crown")}<b>Administración</b></span><em>⌄</em></summary><div><button class="settings-row" onclick="openAdmin()"><span class="row-ico">${iconSvg("crown")}</span><span><span class="row-main">Panel administrativo</span><span class="row-sub">Operación de DOHOY</span></span><span class="chev">›</span></button></div></details>`:""}
+  </div>
+  <div class="account-actions"><button class="logout-btn" onclick="signOutCurrent()">${iconSvg("logout")} Cerrar sesión</button></div>
+  <div class="version-note">DOHOY · Versión 4.5.0 · ORDERED UX</div>
  </section>`,true)
 }
 function settingsRow(title,route,icon,sub=""){
