@@ -1375,6 +1375,21 @@ html[data-theme="dark"] .operational-location-v501{background:#102238;border-col
 /* 5.0.2 — iOS/PWA resume reliability */
 html.app-resuming .nav,html.app-resuming button{pointer-events:auto}
 
+
+/* 5.0.3 — iPhone form alignment + reliable completion */
+.publish-wizard-step[data-step="3"] .publish-two{display:grid!important;grid-template-columns:1fr!important;gap:10px!important;width:100%!important}
+.publish-wizard-step[data-step="3"] .publish-card{display:grid!important;grid-template-columns:48px minmax(0,1fr)!important;width:100%!important;max-width:100%!important;overflow:hidden!important;box-sizing:border-box!important;gap:12px!important;padding:12px!important}
+.publish-wizard-step[data-step="3"] .publish-card>div:last-child{display:grid!important;grid-template-columns:1fr!important;min-width:0!important;width:100%!important;max-width:100%!important;overflow:hidden!important}
+.publish-wizard-step[data-step="3"] .publish-card label{display:block!important;margin:0 0 6px!important;line-height:1.1!important}
+.publish-wizard-step[data-step="3"] .publish-card input[type="date"],.publish-wizard-step[data-step="3"] .publish-card input[type="time"]{-webkit-appearance:none!important;appearance:none!important;display:block!important;width:100%!important;max-width:100%!important;min-width:0!important;box-sizing:border-box!important;height:46px!important;margin:0!important;padding:0 12px!important;border-radius:13px!important;font-size:16px!important;line-height:46px!important;text-align:left!important;overflow:hidden!important}
+.publish-wizard-step[data-step="3"] .publish-card input::-webkit-date-and-time-value{text-align:left!important;margin:0!important;min-width:0!important}.publish-wizard-step[data-step="3"] .publish-card input::-webkit-calendar-picker-indicator{margin-left:auto!important;opacity:.72!important}
+@media(max-width:430px){.publish-wizard-step[data-step="3"] .publish-card{grid-template-columns:44px minmax(0,1fr)!important}.publish-wizard-step[data-step="3"] .publish-card .pc-icon{width:44px!important;height:44px!important}}
+.finish-confirm-v503{text-align:center}.finish-confirm-v503>.svg-icon{width:42px;height:42px;color:#1267e8;margin:4px auto 8px}.finish-confirm-v503 h3{font-size:18px;margin:4px 0 7px;color:#111827}.finish-confirm-v503 p{font-size:11px;line-height:1.5;color:#69778a;margin:0 0 14px}.finish-confirm-v503>div{display:grid;grid-template-columns:1fr 1fr;gap:8px}.finish-confirm-v503 button{min-height:48px;margin:0!important}
+html[data-theme="dark"] .selected-worker-card,html[data-theme="dark"] .completion-card,html[data-theme="dark"] .paid-line-v50{background:#102238!important;border-color:#263b54!important;color:#eef5ff!important}
+html[data-theme="dark"] .selected-worker-card h2,html[data-theme="dark"] .selected-worker-card h3,html[data-theme="dark"] .selected-worker-card b,html[data-theme="dark"] .completion-card h3,html[data-theme="dark"] .finish-confirm-v503 h3{color:#f3f7fd!important}
+html[data-theme="dark"] .selected-worker-card p,html[data-theme="dark"] .selected-worker-card small,html[data-theme="dark"] .completion-card p,html[data-theme="dark"] .finish-confirm-v503 p{color:#aab8ca!important}
+html[data-theme="dark"] .paid-line-v50{background:#102820!important;border-color:#245a48!important}html[data-theme="dark"] .paid-line-v50 b{color:#dff7ee!important}html[data-theme="dark"] .completion-card .danger-outline{background:#25191b!important;color:#ff9d91!important;border-color:#6e3535!important}
+
 </style>
 <link rel="manifest" href="./manifest.webmanifest?v=1.9.4"><link rel="apple-touch-icon" href="./icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default">
 </head>
@@ -2577,7 +2592,7 @@ async function profile(){
     ${adminAllowed()?`<details><summary><span>${iconSvg("crown")}<b>Administración</b></span><em>⌄</em></summary><div><button class="settings-row" onclick="openAdmin()"><span class="row-ico">${iconSvg("crown")}</span><span><span class="row-main">Panel administrativo</span><span class="row-sub">Operación de DOHOY</span></span><span class="chev">›</span></button></div></details>`:""}
   </div>
   <div class="account-actions"><button class="logout-btn" onclick="signOutCurrent()">${iconSvg("logout")} Cerrar sesión</button></div>
-  <div class="version-note">DOHOY · Versión 5.0.2 · IOS RESUME FIX</div>
+  <div class="version-note">DOHOY · Versión 5.0.3 · FORM + COMPLETION FIX</div>
  </section>`,true)
 }
 function settingsRow(title,route,icon,sub=""){
@@ -3181,20 +3196,41 @@ if(error)return setMsg("error",error.message);state.selectedTask=Array.isArray(d
 async function startTask(id){return runOnce("start:"+id,async()=>{
 const {data,error}=await sb.rpc('start_task',{p_task_id:id});if(error)return setMsg('error',error.message);state.selectedTask=Array.isArray(data)?data[0]:data;state.notice='Tarea iniciada.';render();setTimeout(()=>showSuccessMoment('Trabajo iniciado','El centro del trabajo se actualizó.'),100)
 })}
-async function requestTaskCompletion(id){
+function requestTaskCompletion(id){
  const task=state.selectedTask;if(state.completionBusy||!task||task.id!==id||task.worker_id!==state.user?.id||task.status!=="in_progress"||task.completion_requested_at)return;
- if(!confirm('¿Ya terminaste la tarea? El cliente deberá confirmarlo.'))return;
- state.completionBusy=true;const btn=document.getElementById('completionSubmit');if(btn){btn.disabled=true;btn.textContent='Enviando…'}
- try{while(state.pendingCompletionFiles?.length){await uploadTaskMedia(id,[state.pendingCompletionFiles[0]],"completion");state.pendingCompletionFiles.shift()}
- const {data,error}=await sb.rpc('request_task_completion',{p_task_id:id});if(error)throw error;state.selectedTask=Array.isArray(data)?data[0]:data;state.notice='Avisamos al cliente que terminaste.';state.error='';
- }catch(err){state.error='No pudimos enviar la finalización: '+(err?.message||err)}
+ openProfileSheet("Finalizar trabajo","El cliente tendrá que revisar y confirmar.",`<div class="finish-confirm-v503">${iconSvg("verify")}<h3>¿Ya terminaste la tarea?</h3><p>Se enviará tu evidencia y avisaremos al cliente para que confirme el trabajo.</p><div><button class="btn ghost" onclick="closeProfileSheet()">Todavía no</button><button id="completionConfirmBtn" class="btn primary" onclick="requestTaskCompletionNow('${id}')">Sí, terminé</button></div></div>`)
+}
+async function requestTaskCompletionNow(id){
+ const task=state.selectedTask;if(state.completionBusy||!task||task.id!==id||task.worker_id!==state.user?.id||task.status!=="in_progress"||task.completion_requested_at)return;
+ state.completionBusy=true;const btn=document.getElementById('completionConfirmBtn');if(btn){btn.disabled=true;btn.textContent='Enviando…'}
+ try{
+  while(state.pendingCompletionFiles?.length){await uploadTaskMedia(id,[state.pendingCompletionFiles[0]],"completion");state.pendingCompletionFiles.shift()}
+  const {data,error}=await sb.rpc('request_task_completion',{p_task_id:id});if(error)throw error;
+  closeProfileSheet();state.selectedTask=Array.isArray(data)?data[0]:data;state.notice='Avisamos al cliente que terminaste.';state.error='';
+ }catch(err){logClientError(err,{kind:'request_task_completion',task_id:id});state.error=friendlyError(err?.message||err);if(btn){btn.disabled=false;btn.textContent='Sí, terminé'}}
  finally{state.completionBusy=false;await loadTaskMedia(id);await render();renderCompletionEvidencePreview()}
 }
-async function confirmTaskCompletion(id){
-if(!confirm('¿Confirmas que la tarea fue terminada correctamente? Al confirmar se cerrará el chat.'))return;
-return runOnce("complete:"+id,async()=>{
-const {data,error}=await sb.rpc('confirm_task_completion',{p_task_id:id});if(error)return setMsg('error',error.message);state.selectedTask=Array.isArray(data)?data[0]:data;state.notice='Tarea finalizada. El chat quedó cerrado y ya puedes calificar al trabajador.';await trackEvent("task_completed",{},id);await loadOffers(id);await loadTaskRating(id);render();setTimeout(()=>showSuccessMoment("¡Trabajo terminado!","Gracias por usar DOHOY. Ahora pueden calificarse.","orange"),100)
-})}
+function confirmTaskCompletion(id){
+ const t=state.selectedTask;if(!t||t.id!==id)return;
+ openProfileSheet("Confirmar trabajo","Esta acción cerrará el servicio y el chat.",`<div class="finish-confirm-v503">${iconSvg("verify")}<h3>¿El trabajo quedó terminado correctamente?</h3><p>Confirma solo después de revisar el trabajo y cualquier evidencia enviada.</p><div><button class="danger-outline" onclick="closeProfileSheet();openCompletionProblemSheet('${id}')">Reportar problema</button><button id="finalConfirmTaskBtn" class="btn primary" onclick="confirmTaskCompletionNow('${id}')">Sí, confirmar</button></div></div>`)
+}
+async function confirmTaskCompletionNow(id){
+ if(actionLocks.has("complete:"+id))return;
+ const btn=document.getElementById('finalConfirmTaskBtn');if(btn){btn.disabled=true;btn.textContent='Confirmando…'}
+ return runOnce("complete:"+id,async()=>{
+  try{
+   const {data,error}=await sb.rpc('confirm_task_completion',{p_task_id:id});if(error)throw error;
+   closeProfileSheet();state.selectedTask=Array.isArray(data)?data[0]:data;state.notice='Trabajo finalizado. El chat quedó cerrado y ya puedes calificar al trabajador.';state.error='';
+   await Promise.allSettled([trackEvent("task_completed",{},id),loadOffers(id),loadTaskRating(id),loadTaskPayment(id)]);
+   render();setTimeout(()=>showSuccessMoment("¡Trabajo terminado!","Gracias por usar DOHOY. Ahora pueden calificarse.","orange"),100);
+  }catch(err){
+   logClientError(err,{kind:'confirm_task_completion',task_id:id});
+   if(btn){btn.disabled=false;btn.textContent='Sí, confirmar'}
+   const msg=friendlyError(err?.message||err);state.error=msg;
+   const copy=document.querySelector('.profile-sheet-copy');if(copy)copy.textContent=msg;
+  }
+ })
+}
 async function setTaskStatus(id,status){
 if(status==='in_progress')return startTask(id);
 if(status==='completed')return requestTaskCompletion(id)
