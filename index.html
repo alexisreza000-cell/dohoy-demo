@@ -1133,6 +1133,63 @@ html[data-theme="dark"] .task-more-details summary{color:#f2f7ff!important}
 html[data-theme="dark"] .compact-safety-actions button{background:#162940!important;border-color:#2a425f!important;color:#c7d5e7!important}
 html[data-theme="dark"] .checkout-inline-error{background:#321c20!important;border-color:#66313a!important;color:#ffb6bf!important}
 
+
+/* DOHOY 4.4.2 — pago confirmado compacto */
+.payment-paid-compact{
+  margin:10px 0 14px;border:1px solid #bfe9d9;border-radius:17px;
+  background:#f1fbf7;overflow:hidden
+}
+.payment-paid-compact summary{
+  list-style:none;cursor:pointer;min-height:64px;padding:10px 13px;
+  display:flex;align-items:center;justify-content:space-between;gap:10px
+}
+.payment-paid-compact summary::-webkit-details-marker{display:none}
+.payment-paid-left{display:flex;align-items:center;gap:10px;min-width:0}
+.payment-paid-left>i{
+  width:38px;height:38px;flex:0 0 38px;border-radius:12px;
+  display:grid;place-items:center;background:#daf5ea;color:#07966d;font-style:normal
+}
+.payment-paid-left>i .svg-icon{width:20px}
+.payment-paid-left small{
+  display:block;font-size:7px;line-height:1.1;letter-spacing:.1em;
+  font-weight:950;color:#07815f
+}
+.payment-paid-left b{display:block;margin-top:3px;font-size:14px;color:#18332b}
+.payment-paid-right{
+  display:flex;align-items:center;gap:5px;white-space:nowrap;
+  font-size:9px;font-weight:900;color:#547368
+}
+.payment-paid-right em{font-size:17px;font-style:normal;transition:transform .2s ease}
+.payment-paid-compact[open] .payment-paid-right em{transform:rotate(180deg)}
+.payment-paid-details{
+  border-top:1px solid #d5eee5;padding:10px 13px 12px;
+  display:grid;grid-template-columns:1fr 1fr;gap:8px
+}
+.payment-paid-details>div{background:#fff;border-radius:12px;padding:9px 10px}
+.payment-paid-details span{display:block;font-size:7.5px;color:#748b83;font-weight:800}
+.payment-paid-details b{display:block;margin-top:3px;font-size:12px;color:#18332b}
+.payment-paid-details p{
+  grid-column:1/-1;margin:1px 0 0;display:flex;align-items:center;gap:6px;
+  font-size:8px;line-height:1.35;color:#688078
+}
+.payment-paid-details p .svg-icon{width:14px;flex:0 0 14px}
+
+html[data-theme="dark"] .payment-paid-compact{
+  background:#102820;border-color:#245a48
+}
+html[data-theme="dark"] .payment-paid-left>i{background:#173f34;color:#50d4aa}
+html[data-theme="dark"] .payment-paid-left small{color:#69d9b6}
+html[data-theme="dark"] .payment-paid-left b{color:#f2fff9}
+html[data-theme="dark"] .payment-paid-right{color:#a8c8bc}
+html[data-theme="dark"] .payment-paid-details{border-top-color:#245a48}
+html[data-theme="dark"] .payment-paid-details>div{background:#16342b}
+html[data-theme="dark"] .payment-paid-details span,
+html[data-theme="dark"] .payment-paid-details p{color:#a8c8bc}
+html[data-theme="dark"] .payment-paid-details b{color:#f2fff9}
+
+/* La tarjeta grande anterior ya no se usa después de pagar. */
+.payment-paid-v2{display:none!important}
+
 </style>
 <link rel="manifest" href="./manifest.webmanifest?v=1.9.4"><link rel="apple-touch-icon" href="./icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default">
 </head>
@@ -1161,6 +1218,7 @@ let swipeSuppressUntil=0;
 const categories=["Vehículo","Mandados","Paquetería","Hogar","Mascotas","Trámites","Eventos","Tecnología","Otro"];
 const vehicleColors={graphite:"#2B2B30",white:"#F4F4F2",red:"#D84B4B",blue:"#3E73C8",green:"#4F8A63",orange:"#F28B3C"};
 const money=n=>new Intl.NumberFormat("es-MX",{style:"currency",currency:"MXN",maximumFractionDigits:0}).format(Number(n||0));
+const moneyExact=n=>new Intl.NumberFormat("es-MX",{style:"currency",currency:"MXN",minimumFractionDigits:2,maximumFractionDigits:2}).format(Number(n||0));
 function svgWrap(body,viewBox="0 0 24 24",cls="svg-icon"){return `<svg class="${cls}" viewBox="${viewBox}" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">${body}</svg>`}
 function baseCategory(raw){return String(raw||"Otro").split("|")[0]||"Otro"}
 function taskMeta(raw){const p=String(raw||"Otro").split("|");const base=p[0]||"Otro";const variant=p[1]||"sedan";const colorKey=vehicleColors[p[2]]?p[2]:"graphite";return {base,variant,colorKey,color:vehicleColors[colorKey]}}
@@ -2200,8 +2258,8 @@ function paymentActionHtml(t,offer){
  if(t.client_id!==state.user?.id||!t.worker_id||!["assigned","in_progress"].includes(t.status))return "";
  const pay=state.currentPayment,amount=agreedTaskAmount(t,offer);
  const total=Number(pay?.amount_total||amount||0),commission=Number(pay?.commission_amount??(total*.15)),workerNet=Number(pay?.worker_net_amount??(total-commission));
- if(pay?.payment_status==="paid")return `<div class="payment-paid-v2"><div class="payment-paid-head"><span>${iconSvg("verify")}</span><div><small>PAGO CONFIRMADO</small><b>${money(total)} asociados a esta tarea</b><p>El trabajador ya puede comenzar.</p></div></div><div class="payment-split-preview"><span><small>Cálculo trabajador · 85%</small><b>${money(workerNet)}</b></span><span><small>Comisión DOHOY · 15%</small><b>${money(commission)}</b></span></div></div>`;
- return `<div class="payment-card payment-required-card"><div class="payment-required-head"><span>${iconSvg("shield")}</span><div><small>PAGO REQUERIDO</small><h3>Confirma el trabajo con el pago</h3><p>El trabajador no podrá ir en camino ni comenzar hasta que Stripe confirme el pago.</p></div></div><div class="payment-summary"><div><span>Total acordado</span><b>${money(total)}</b></div><div><span>Cálculo trabajador · 85%</span><b>${money(workerNet)}</b></div><div><span>Comisión DOHOY · 15%</span><b>${money(commission)}</b></div></div><button id="payTaskButton" class="payment-cta" onclick="startTaskCheckout('${t.id}')">${pay?.payment_status==="processing"?"CONTINUAR PAGO":"PAGAR Y CONFIRMAR"}</button><div id="checkoutInlineError" class="checkout-inline-error" hidden></div><div class="payment-secure">${iconSvg("shield")} Pago procesado por Stripe · el trabajo se habilita al confirmarse</div></div>`
+ if(pay?.payment_status==="paid")return `<details class="payment-paid-compact"><summary><span class="payment-paid-left"><i>${iconSvg("verify")}</i><span><small>PAGO CONFIRMADO</small><b>${moneyExact(total)}</b></span></span><span class="payment-paid-right">Detalles <em>⌄</em></span></summary><div class="payment-paid-details"><div><span>Trabajador · 85%</span><b>${moneyExact(workerNet)}</b></div><div><span>Comisión DOHOY · 15%</span><b>${moneyExact(commission)}</b></div><p>${iconSvg("shield")} Pago confirmado por Stripe. El trabajador ya puede continuar con la tarea.</p></div></details>`;
+ return `<div class="payment-card payment-required-card"><div class="payment-required-head"><span>${iconSvg("shield")}</span><div><small>PAGO REQUERIDO</small><h3>Confirma el trabajo con el pago</h3><p>El trabajador no podrá ir en camino ni comenzar hasta que Stripe confirme el pago.</p></div></div><div class="payment-summary"><div><span>Total acordado</span><b>${moneyExact(total)}</b></div><div><span>Trabajador · 85%</span><b>${moneyExact(workerNet)}</b></div><div><span>Comisión DOHOY · 15%</span><b>${moneyExact(commission)}</b></div></div><button id="payTaskButton" class="payment-cta" onclick="startTaskCheckout('${t.id}')">${pay?.payment_status==="processing"?"CONTINUAR PAGO":"PAGAR Y CONFIRMAR"}</button><div id="checkoutInlineError" class="checkout-inline-error" hidden></div><div class="payment-secure">${iconSvg("shield")} Pago procesado por Stripe · el trabajo se habilita al confirmarse</div></div>`
 }
 async function startTaskCheckout(taskId){
  if(state.checkoutBusy)return;
@@ -2353,7 +2411,7 @@ async function profile(){
    ${settingsRow("Política de privacidad","privacy","document","Cómo protegemos tus datos")}
  </div>
  <div class="account-actions"><button class="logout-btn" onclick="signOutCurrent()">${iconSvg("logout")} Cerrar sesión</button></div>
- <div class="version-note">DOHOY · Versión 4.4.1 · CHECKOUT & MOBILE UX</div>
+ <div class="version-note">DOHOY · Versión 4.4.2 · COMPACT PAYMENT</div>
  </section>`,true)
 }
 function settingsRow(title,route,icon,sub=""){
