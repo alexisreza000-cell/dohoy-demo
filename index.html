@@ -1371,6 +1371,10 @@ details.operational-location-v501>summary{list-style:none;display:flex;justify-c
 .service-center-v50{margin-top:8px!important}.service-state-v50 h2{font-size:18px!important}.service-track-v50{margin-top:14px!important}.service-track-v50 b{white-space:nowrap}
 html[data-theme="dark"] .operational-location-v501{background:#102238;border-color:#20364f}html[data-theme="dark"] .operational-location-head-v501 b,html[data-theme="dark"] details.operational-location-v501>summary b{color:#eef3f8}
 
+
+/* 5.0.2 — iOS/PWA resume reliability */
+html.app-resuming .nav,html.app-resuming button{pointer-events:auto}
+
 </style>
 <link rel="manifest" href="./manifest.webmanifest?v=1.9.4"><link rel="apple-touch-icon" href="./icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default">
 </head>
@@ -1620,7 +1624,7 @@ function friendlyError(msg){
  return "No pudimos completar la acción. Intenta nuevamente.";
 }
 function setMsg(type,msg){state.error=type==="error"?friendlyError(msg):"";state.notice=type==="ok"?msg:"";render()}
-function go(r){clearPoll();if(r!=="profile")state.showContactDetails=false;state.route=r;state.error="";state.notice="";render();window.scrollTo({top:0,behavior:"auto"});trackEvent(r==="clientHome"||r==="workerHome"?"home_view":r==="createTask"?"publish_started":"route_view",{route:r})}
+function go(r){releaseTransientUiLocks();clearPoll();if(r!=="profile")state.showContactDetails=false;state.route=r;state.error="";state.notice="";render();window.scrollTo({top:0,behavior:"auto"});trackEvent(r==="clientHome"||r==="workerHome"?"home_view":r==="createTask"?"publish_started":"route_view",{route:r})}
 function haptic(kind="light"){try{if(navigator.vibrate)navigator.vibrate(kind==="success"?[18,35,28]:12)}catch{}}
 function applyTheme(){
  const pref=state.theme||"auto",dark=pref==="dark"||(pref==="auto"&&window.matchMedia?.("(prefers-color-scheme: dark)").matches);
@@ -2573,7 +2577,7 @@ async function profile(){
     ${adminAllowed()?`<details><summary><span>${iconSvg("crown")}<b>Administración</b></span><em>⌄</em></summary><div><button class="settings-row" onclick="openAdmin()"><span class="row-ico">${iconSvg("crown")}</span><span><span class="row-main">Panel administrativo</span><span class="row-sub">Operación de DOHOY</span></span><span class="chev">›</span></button></div></details>`:""}
   </div>
   <div class="account-actions"><button class="logout-btn" onclick="signOutCurrent()">${iconSvg("logout")} Cerrar sesión</button></div>
-  <div class="version-note">DOHOY · Versión 5.0.1 · SCREENSHOT POLISH</div>
+  <div class="version-note">DOHOY · Versión 5.0.2 · IOS RESUME FIX</div>
  </section>`,true)
 }
 function settingsRow(title,route,icon,sub=""){
@@ -2998,6 +3002,13 @@ async function runOnce(key,work){
  actionLocks.add(key);
  try{return await work()}finally{actionLocks.delete(key)}
 }
+function releaseTransientUiLocks(){
+ // iOS can freeze fetches while the PWA is backgrounded. Never carry a stale UI lock
+ // into a new foreground session.
+ actionLocks.clear();
+ state.publishBusy=false;state.completionBusy=false;state.paymentMethodsBusy=false;
+ state.adminBusy=false;
+}
 function render(){
 if(state.splash){root.innerHTML=splashScreen();return}
 if(state.route==="loading"){root.innerHTML=skeletonScreen("Cargando DOHOY");return}
@@ -3213,7 +3224,21 @@ if(state.user){
 state.route=state.session?(onboardingDone()?'mode':'onboarding'):(onboardingDone()?'welcome':'onboarding');
 const finishSplash=()=>{state.splash=false;render();consumePushTask()};
 const remaining=Math.max(0,420-(Date.now()-splashStarted));setTimeout(finishSplash,remaining);
-sb.auth.onAuthStateChange(async(_event,session)=>{state.session=session;state.user=session?.user||null;if(state.user){await Promise.all([loadProfile(),loadNotificationSummary()]);subscribeNotifications()}if(!session&&!['welcome','signup','login','onboarding','mode'].includes(state.route))go(onboardingDone()?'welcome':'onboarding')})
+sb.auth.onAuthStateChange((_event,session)=>{
+ state.session=session;state.user=session?.user||null;
+ if(!session){
+  if(!['welcome','signup','login','onboarding','mode'].includes(state.route))go(onboardingDone()?'welcome':'onboarding');
+  return;
+ }
+ // Important: defer Supabase queries until the auth callback has released its internal lock.
+ setTimeout(async()=>{
+  try{
+   await Promise.all([loadProfile(),loadNotificationSummary()]);
+   subscribeNotifications();
+   if(!document.hidden)await refreshForegroundView({force:true,reason:'auth_event'});
+  }catch(err){logClientError(err,{kind:'auth_resume_sync'})}
+ },0)
+})
 }
 const DOHOY_VAPID_PUBLIC="BIqp0MxIqy8rJPGj8mCRF-P_FwaMWgRMKSR_x6AazRKylHNhyT3NEPjNODKzvsSyIpt6OE3BUQXEz8-OkV-k14E";
 // DOHOY 4.4.0 — pago obligatorio antes del trabajo, rendimiento, layout móvil y barras sin solaparse.
@@ -3418,23 +3443,55 @@ function suspendedScreen(){return shell(`<section class="screen"><div class="top
 window.setNotificationFilter=setNotificationFilter;window.setTheme=setTheme;window.publishWizardNext=publishWizardNext;window.sendQuickReply=sendQuickReply;window.sendChatImage=sendChatImage;window.retryCurrentView=retryCurrentView;window.saveTrustedContact=saveTrustedContact;window.contactTrustedPerson=contactTrustedPerson;window.removePendingTaskPhoto=removePendingTaskPhoto;window.removeCompletionEvidence=removeCompletionEvidence;window.selectCompletionEvidence=selectCompletionEvidence;window.openMediaPhoto=openMediaPhoto;window.openClientProfile=openClientProfile;window.saveClientRating=saveClientRating;window.openSafetyCenter=openSafetyCenter;window.openBlockedUsers=openBlockedUsers;window.unblockUser=unblockUser;window.openMyReports=openMyReports;window.shareCurrentTask=shareCurrentTask;window.selectTaskPhotos=selectTaskPhotos;window.openCounterOfferSheet=openCounterOfferSheet;window.submitCounterOffer=submitCounterOffer;window.respondCounterOffer=respondCounterOffer;window.markTaskEnRoute=markTaskEnRoute;window.markTaskArrived=markTaskArrived;window.saveEditTask=saveEditTask;window.state=state;window.openProfileField=openProfileField;window.openPhotoChoiceSheet=openPhotoChoiceSheet;window.openGalleryPicker=openGalleryPicker;window.handleGalleryPhoto=handleGalleryPhoto;window.closeProfileSheet=closeProfileSheet;window.saveProfileField=saveProfileField;window.saveSocialNetworks=saveSocialNetworks;window.requestAccountDeletion=requestAccountDeletion;window.go=go;window.mode=mode;window.signOut=signOut;window.openTask=openTask;window.acceptOffer=acceptOffer;window.startTask=startTask;window.requestTaskCompletion=requestTaskCompletion;window.confirmTaskCompletion=confirmTaskCompletion;window.setTaskStatus=setTaskStatus;window.openChat=openChat;window.openMessagesHome=openMessagesHome;window.sendMessage=sendMessage;window.backFromChat=backFromChat;window.toggleVehicleOptions=toggleVehicleOptions;window.updateVehiclePreview=updateVehiclePreview;window.updateCategoryPreview=updateCategoryPreview;window.openWorkerProfile=openWorkerProfile;window.openWorkerPhoto=openWorkerPhoto;window.closeWorkerPhoto=closeWorkerPhoto;window.openConversationFromList=openConversationFromList;window.bindConversationSwipes=bindConversationSwipes;window.selectTaskRating=selectTaskRating;window.clearTaskRating=clearTaskRating;window.deleteConversation=deleteConversation;window.openNotificationsCenter=openNotificationsCenter;window.openNotification=openNotification;window.markAllNotificationsRead=markAllNotificationsRead;window.openCancelTaskSheet=openCancelTaskSheet;window.submitCancelTask=submitCancelTask;window.openCompletionProblemSheet=openCompletionProblemSheet;window.submitCompletionProblem=submitCompletionProblem;window.openUserReportSheet=openUserReportSheet;window.submitUserReport=submitUserReport;window.blockOtherUser=blockOtherUser;window.toggleFavoriteWorker=toggleFavoriteWorker;window.openFavorites=openFavorites;window.saveRatingReview=saveRatingReview;
 window.openWorkerMap=openWorkerMap;window.showMapTask=showMapTask;window.setWorkerAvailability=setWorkerAvailability;window.acceptDirectInvite=acceptDirectInvite;window.declineDirectInvite=declineDirectInvite;window.openInviteWorker=openInviteWorker;window.sendWorkerInvite=sendWorkerInvite;window.askTaskQuestion=askTaskQuestion;window.answerTaskQuestion=answerTaskQuestion;window.openPortfolioManager=openPortfolioManager;window.savePortfolioPhoto=savePortfolioPhoto;window.deletePortfolioPhoto=deletePortfolioPhoto;window.loadPriceSuggestion=loadPriceSuggestion;window.openAdminBanners=openAdminBanners;window.createAdminBanner=createAdminBanner;window.toggleAdminBanner=toggleAdminBanner;
 window.filterWorkerTasks=filterWorkerTasks;window.setWorkerFilter=setWorkerFilter;window.resetWorkerFilters=resetWorkerFilters;window.saveSearchPreferences=saveSearchPreferences;window.openWorkerCategory=openWorkerCategory;window.requestDiscoveryLocation=requestDiscoveryLocation;window.enablePushNotifications=enablePushNotifications;window.disablePushNotifications=disablePushNotifications;window.openSupportCenter=openSupportCenter;window.newSupportCase=newSupportCase;window.selectSupportFiles=selectSupportFiles;window.removeSupportFile=removeSupportFile;window.submitSupportCase=submitSupportCase;window.openSupportCase=openSupportCase;window.editSupportDraft=editSupportDraft;window.replySupportCase=replySupportCase;
-window.addEventListener('online',()=>{state.online=true;state.notice='Conexión restablecida.';render();setTimeout(()=>{state.notice='';render()},1200)});
+window.addEventListener('online',()=>{state.online=true;state.notice='Conexión restablecida.';render();resumeApp('online');setTimeout(()=>{state.notice='';render()},1200)});
 window.addEventListener('offline',()=>{state.online=false;render()});
 let lastForegroundRefresh=0;
-async function refreshForegroundView(){
- if(!state.user||!navigator.onLine||document.hidden||Date.now()-lastForegroundRefresh<2500)return;
+let foregroundRefreshPromise=null;
+let resumeTimer=null;
+async function refreshForegroundView(options={}){
+ const force=!!options.force;
+ if(foregroundRefreshPromise)return foregroundRefreshPromise;
+ if(!state.user||!navigator.onLine||document.hidden)return;
+ if(!force&&Date.now()-lastForegroundRefresh<3500)return;
  lastForegroundRefresh=Date.now();
- try{
-  if(state.route==='clientHome')return await clientHome();
-  if(state.route==='clientTasks')return await clientTasks();
-  if(state.route==='workerHome')return await workerHome();
-  if(state.route==='workerJobs')return await workerJobs();
-  if(state.route==='taskDetail'&&state.selectedTask)return await openTask(state.selectedTask.id);
-  if(state.route==='messagesHome')return await openMessagesHome();
- }catch(err){logClientError(err,{kind:'foreground_refresh'})}
+ foregroundRefreshPromise=(async()=>{
+  try{
+   if(state.route==='clientHome')return await clientHome();
+   if(state.route==='clientTasks')return await clientTasks();
+   if(state.route==='workerHome')return await workerHome();
+   if(state.route==='workerJobs')return await workerJobs();
+   if(state.route==='taskDetail'&&state.selectedTask)return await openTask(state.selectedTask.id);
+   if(state.route==='messagesHome')return await openMessagesHome();
+  }catch(err){logClientError(err,{kind:'foreground_refresh',reason:options.reason||'unknown'})}
+  finally{foregroundRefreshPromise=null}
+ })();
+ return foregroundRefreshPromise;
 }
-document.addEventListener('visibilitychange',()=>{if(!document.hidden)refreshForegroundView()});
-window.addEventListener('focus',refreshForegroundView);
+async function resumeApp(reason='resume'){
+ if(document.hidden)return;
+ clearTimeout(resumeTimer);
+ resumeTimer=setTimeout(async()=>{
+  releaseTransientUiLocks();
+  try{
+   // getSession restores the persisted Supabase session without forcing the user to log in again.
+   const {data,error}=await sb.auth.getSession();
+   if(error)throw error;
+   state.session=data.session||null;state.user=data.session?.user||null;
+   if(!state.session){
+    if(!['welcome','signup','login','onboarding','mode'].includes(state.route))go(onboardingDone()?'welcome':'onboarding');
+    return;
+   }
+   await refreshForegroundView({force:true,reason});
+  }catch(err){
+   logClientError(err,{kind:'resume_app',reason});
+   // Keep the current UI usable. A transient resume/network failure must not force logout.
+   state.error='';
+  }
+ },280);
+}
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)resumeApp('visibility')});
+window.addEventListener('pageshow',e=>resumeApp(e.persisted?'bfcache':'pageshow'));
+window.addEventListener('focus',()=>resumeApp('focus'));
 document.addEventListener('click',e=>{if(e.target.closest('button'))haptic('light')},{passive:true});
 if('serviceWorker' in navigator)navigator.serviceWorker.addEventListener('message',e=>{if(e.data?.type==='DOHOY_OPEN_TASK')openTaskFromPush(e.data.taskId);if(e.data?.type==='DOHOY_OPEN_ACTIVITY'){if(state.user)openNotificationsCenter();else sessionStorage.setItem('dohoy_pending_activity','1')}});
 window.matchMedia?.('(prefers-color-scheme: dark)').addEventListener?.('change',()=>{if(state.theme==='auto')applyTheme()});
