@@ -1190,6 +1190,17 @@ html[data-theme="dark"] .payment-paid-details b{color:#f2fff9}
 /* La tarjeta grande anterior ya no se usa después de pagar. */
 .payment-paid-v2{display:none!important}
 
+
+/* DOHOY 4.4.3 — QA del flujo */
+.work-live-track span.current i{
+  background:#fff!important;color:#1467e8!important;
+  box-shadow:0 0 0 3px rgba(20,103,232,.18)!important;
+  border:2px solid #1467e8!important
+}
+.work-live-track span.current small{color:#eaf2ff!important;font-weight:900!important}
+.work-live-track span.done i{box-shadow:none!important}
+html[data-theme="light"] .work-live-track span.current small{color:#27466f!important}
+
 </style>
 <link rel="manifest" href="./manifest.webmanifest?v=1.9.4"><link rel="apple-touch-icon" href="./icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default">
 </head>
@@ -2178,7 +2189,8 @@ function workCenterHtml(t,isOwner){
  const s=workCenterStage(t);if(!s)return "";
  const canChat=!taskChatClosed(t),paid=state.currentPayment?.payment_status==="paid";
  const workerBlocked=!isOwner&&t.worker_id===state.user.id&&t.status==="assigned"&&!paid;
- return `<section class="work-center tone-${s.tone}"><div class="work-center-head"><span>${iconSvg(s.icon)}</span><div><small>CENTRO DEL TRABAJO · ETAPA ${s.n}/6</small><h2>${escapeHtml(s.title)}</h2><p>${escapeHtml(s.copy)}</p></div></div><div class="work-live-track">${["Pago","En camino","Llegó","Trabajo","Confirmar","Listo"].map((x,i)=>`<span class="${i<s.n?"done":i===s.n-1?"current":""}"><i>${i<s.n?"✓":i+1}</i><small>${x}</small></span>`).join("")}</div>${workerBlocked?`<div class="payment-wait-worker">${iconSvg("shield")}<div><b>Esperando el pago del cliente</b><small>No podrás iniciar el traslado ni el trabajo hasta que Stripe confirme el pago.</small></div></div>`:""}<div class="work-center-actions">${canChat?`<button onclick="openChat('${t.id}')">${iconSvg("chat")} Chat</button>`:""}<button onclick="openSafetyCenter()">${iconSvg("shield")} Seguridad</button>${isOwner&&!paid&&t.status==="assigned"?`<button class="primary" onclick="startTaskCheckout('${t.id}')">${iconSvg("payment")} Pagar ahora</button>`:""}${!isOwner&&t.worker_id===state.user.id&&t.status==="assigned"&&paid&&!t.en_route_at?`<button class="primary" onclick="markTaskEnRoute('${t.id}')">${iconSvg("route")} Voy en camino</button>`:""}</div></section>`
+ const doneCount=t.status==="completed"?6:t.completion_requested_at?4:t.status==="in_progress"?3:t.arrived_at?3:t.en_route_at?2:paid?1:0;
+ return `<section class="work-center tone-${s.tone}"><div class="work-center-head"><span>${iconSvg(s.icon)}</span><div><small>CENTRO DEL TRABAJO · ${doneCount}/6 COMPLETADAS</small><h2>${escapeHtml(s.title)}</h2><p>${escapeHtml(s.copy)}</p></div></div><div class="work-live-track">${["Pago","En camino","Llegó","Trabajo","Confirmar","Listo"].map((x,i)=>`<span class="${i<doneCount?"done":i===doneCount&&doneCount<6?"current":""}"><i>${i<doneCount?"✓":i+1}</i><small>${x}</small></span>`).join("")}</div>${workerBlocked?`<div class="payment-wait-worker">${iconSvg("shield")}<div><b>Esperando el pago del cliente</b><small>No podrás iniciar el traslado ni el trabajo hasta que Stripe confirme el pago.</small></div></div>`:""}<div class="work-center-actions">${canChat?`<button onclick="openChat('${t.id}')">${iconSvg("chat")} Chat</button>`:""}<button onclick="openSafetyCenter()">${iconSvg("shield")} Seguridad</button>${isOwner&&!paid&&t.status==="assigned"?`<button class="primary" onclick="startTaskCheckout('${t.id}')">${iconSvg("payment")} Pagar ahora</button>`:""}${!isOwner&&t.worker_id===state.user.id&&t.status==="assigned"&&paid&&!t.en_route_at?`<button class="primary" onclick="markTaskEnRoute('${t.id}')">${iconSvg("route")} Voy en camino</button>`:""}</div></section>`
 }
 
 function taskMoreDetailsHtml(t,isOwner){
@@ -2206,7 +2218,7 @@ if(!isOwner&&state.clientProfile){
 if(isOwner&&t.worker_id&&selectedProfile){
  const savedRating=state.currentTaskRating||0;
  body+=paymentActionHtml(t,assignedOffer);
- body+=`<div class="task-section-title"><div><h2>Trabajador seleccionado</h2><div class="sub">Foto, experiencia y calificación real.</div></div></div><div class="selected-worker-card"><div class="selected-worker-head">${avatarMarkup(selectedProfile)}${workerSummaryHtml(selectedProfile)}<div class="worker-price">${money(assignedOffer?.amount||t.offered_price)}</div></div><div class="worker-card-actions"><button class="secondary-soft" onclick="openWorkerProfile('${selectedProfile.id||t.worker_id}','taskDetail')">Ver perfil</button>${t.status==="completed"?`<button class="accent-soft" onclick="openWorkerProfile('${selectedProfile.id||t.worker_id}','taskDetail')">Calificar</button>`:`<button class="accent-soft" onclick="openChat('${t.id}')">Chat</button>`}</div></div>`;
+ body+=`<div class="task-section-title"><div><h2>Trabajador seleccionado</h2><div class="sub">Foto, experiencia y calificación real.</div></div></div><div class="selected-worker-card"><div class="selected-worker-head">${avatarMarkup(selectedProfile)}${workerSummaryHtml(selectedProfile)}<div class="worker-price">${moneyExact(agreedTaskAmount(t,assignedOffer))}</div></div><div class="worker-card-actions"><button class="secondary-soft" onclick="openWorkerProfile('${selectedProfile.id||t.worker_id}','taskDetail')">Ver perfil</button>${t.status==="completed"?`<button class="accent-soft" onclick="openWorkerProfile('${selectedProfile.id||t.worker_id}','taskDetail')">Calificar</button>`:`<button class="accent-soft" onclick="openChat('${t.id}')">Chat</button>`}</div></div>`;
 
  if(t.status==="in_progress"&&!t.completion_requested_at)body+=`<div class="completion-card"><h3>Tarea en curso</h3><p>Cuando el trabajador indique que terminó, podrás revisar su evidencia antes de confirmar.</p></div>`;
  if(t.status==="in_progress"&&t.completion_requested_at)body+=`<div class="completion-card"><h3>El trabajador indicó que terminó</h3><p>Revisa la evidencia antes de confirmar.</p>${taskMediaGallery("completion","Evidencia de finalización")}<div class="completion-actions"><button class="btn orange" onclick="confirmTaskCompletion('${t.id}')">Confirmar</button><button class="danger-outline" onclick="openCompletionProblemSheet('${t.id}')">Reportar problema</button></div></div>`;
@@ -2255,7 +2267,7 @@ async function loadTaskPayment(taskId){
  state.currentPayment=error?null:(data?.[0]||null)
 }
 function paymentActionHtml(t,offer){
- if(t.client_id!==state.user?.id||!t.worker_id||!["assigned","in_progress"].includes(t.status))return "";
+ if(t.client_id!==state.user?.id||!t.worker_id||!["assigned","in_progress","completed"].includes(t.status))return "";
  const pay=state.currentPayment,amount=agreedTaskAmount(t,offer);
  const total=Number(pay?.amount_total||amount||0),commission=Number(pay?.commission_amount??(total*.15)),workerNet=Number(pay?.worker_net_amount??(total-commission));
  if(pay?.payment_status==="paid")return `<details class="payment-paid-compact"><summary><span class="payment-paid-left"><i>${iconSvg("verify")}</i><span><small>PAGO CONFIRMADO</small><b>${moneyExact(total)}</b></span></span><span class="payment-paid-right">Detalles <em>⌄</em></span></summary><div class="payment-paid-details"><div><span>Trabajador · 85%</span><b>${moneyExact(workerNet)}</b></div><div><span>Comisión DOHOY · 15%</span><b>${moneyExact(commission)}</b></div><p>${iconSvg("shield")} Pago confirmado por Stripe. El trabajador ya puede continuar con la tarea.</p></div></details>`;
@@ -2287,9 +2299,9 @@ async function startTaskCheckout(taskId){
 }
 function taskProgressButtons(t){
  const paid=state.currentPayment?.payment_status==="paid";
- if(t.status==="assigned"&&!paid)return `<div class="completion-card payment-lock-card"><span>${iconSvg("payment")}</span><div><h3>Esperando pago</h3><p>El cliente ya te eligió. En cuanto Stripe confirme el pago se habilitarán “Voy en camino”, “Llegué” y “Comenzar tarea”.</p></div></div>`;
+ if(t.status==="assigned"&&!paid)return "";
  if(t.status==="assigned"){
-   if(!t.en_route_at)return `<div class="completion-card"><h3>Pago confirmado · listo para salir</h3><p>Avisa al cliente cuando vayas en camino.</p><button class="btn primary" onclick="markTaskEnRoute('${t.id}')">Voy en camino</button></div>`;
+   if(!t.en_route_at)return "";
    if(!t.arrived_at)return `<div class="completion-card"><h3>Vas en camino</h3><p>Cuando llegues, avisa al cliente desde aquí.</p><button class="btn orange" onclick="markTaskArrived('${t.id}')">Llegué</button></div>`;
    return `<div class="completion-card"><h3>Ya llegaste</h3><p>El pago está confirmado. Ya puedes comenzar la tarea.</p><button class="btn orange" onclick="startTask('${t.id}')">Comenzar tarea</button></div>`;
  }
@@ -2411,7 +2423,7 @@ async function profile(){
    ${settingsRow("Política de privacidad","privacy","document","Cómo protegemos tus datos")}
  </div>
  <div class="account-actions"><button class="logout-btn" onclick="signOutCurrent()">${iconSvg("logout")} Cerrar sesión</button></div>
- <div class="version-note">DOHOY · Versión 4.4.2 · COMPACT PAYMENT</div>
+ <div class="version-note">DOHOY · Versión 4.4.3 · FLOW QA</div>
  </section>`,true)
 }
 function settingsRow(title,route,icon,sub=""){
