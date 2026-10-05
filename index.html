@@ -920,6 +920,19 @@ html[data-theme="dark"] .category-switcher button.active{background:#1467e8!impo
  .worker-category-grid-v3{grid-template-columns:repeat(2,1fr)}.worker-status-row{grid-template-columns:1fr}.worker-mini-level{display:none}.worker-quick-v3{gap:6px}.worker-quick-v3 button{padding:9px 7px}
 }
 
+
+/* DOHOY 4.2 — estabilidad visual: trabajo activo, propuestas persistentes y actividad agrupada */
+.worker-active-home{border-radius:24px;padding:12px;background:linear-gradient(135deg,#071f49,#0a66e8);color:#fff;margin:12px 0;box-shadow:0 14px 30px rgba(8,76,170,.20)}
+.active-job-head{display:flex;align-items:center;gap:8px;margin-bottom:9px}.active-job-head>span{width:34px;height:34px;border-radius:12px;background:#ff7a19;color:#fff;display:grid;place-items:center}.active-job-head .svg-icon{width:18px}.active-job-head>div{flex:1}.active-job-head small{display:block;font-size:7px;letter-spacing:.11em;color:#bcd7ff;font-weight:950}.active-job-head b{display:block;font-size:11px}.active-job-head em{font-style:normal;min-width:25px;height:25px;border-radius:999px;background:rgba(255,255,255,.15);display:grid;place-items:center;font-size:9px;font-weight:950}
+.active-job-main{width:100%;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.10);border-radius:18px;padding:10px;display:grid;grid-template-columns:48px 1fr auto;gap:9px;align-items:center;text-align:left;color:#fff}.active-job-main>span{width:48px;height:48px;border-radius:15px;background:#fff;color:#1467e8;display:grid;place-items:center}.active-job-main>span .svg-icon{width:26px}.active-job-main h3{font-size:12px;margin:0 0 3px;color:#fff}.active-job-main p{display:flex;align-items:center;gap:3px;font-size:7.5px;color:#cfe2ff;margin:0 0 3px}.active-job-main p .svg-icon{width:11px}.active-job-main strong{font-size:12px;color:#fff}.active-job-main>i{font-style:normal;font-size:8px;font-weight:950;white-space:nowrap}.active-job-all{width:100%;border:0;background:transparent;color:#dceaff;font-size:8px;font-weight:900;padding:9px 3px 0}
+.worker-proposal-home{border:1px solid #dbe8f8;background:linear-gradient(135deg,#f4f9ff,#fff);border-radius:22px;padding:12px;display:grid;grid-template-columns:42px 1fr auto;gap:9px;align-items:center;margin:12px 0}.worker-proposal-home>span{width:42px;height:42px;border-radius:14px;background:#e9f3ff;color:#1467e8;display:grid;place-items:center}.worker-proposal-home .svg-icon{width:21px}.worker-proposal-home small{display:block;font-size:7px;letter-spacing:.09em;color:#7e8da1;font-weight:950}.worker-proposal-home b{display:block;font-size:11px}.worker-proposal-home p{font-size:7.5px;color:#8795a8;margin:2px 0 0}.worker-proposal-home button{border:0;border-radius:12px;background:#1467e8;color:#fff;padding:9px;font-size:8px;font-weight:950}
+
+.jobs-summary-v3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}.jobs-summary-v3 button{border:1px solid #e4ebf4;background:#fff;border-radius:18px;padding:10px 7px;display:flex;align-items:center;gap:7px;text-align:left;box-shadow:0 6px 18px rgba(31,56,98,.05)}.jobs-summary-v3 button>span{width:34px;height:34px;border-radius:12px;background:#eaf3ff;color:#1467e8;display:grid;place-items:center}.jobs-summary-v3 button:nth-child(2)>span{background:#fff0e4;color:#ff7417}.jobs-summary-v3 button:nth-child(3)>span{background:#f1ebff;color:#6b4be3}.jobs-summary-v3 .svg-icon{width:18px}.jobs-summary-v3 b{display:block;font-size:17px;line-height:1}.jobs-summary-v3 small{display:block;font-size:7px;color:#8491a3;margin-top:2px}.jobs-tabs-3{grid-template-columns:repeat(3,1fr)}.worker-job-card.proposal{border-color:#dce9fa}.worker-job-card.proposal .worker-job-icon{background:#eaf3ff;color:#1467e8}.job-status.proposal{background:#eaf3ff;color:#1467e8}.jobs-empty-action{border:0;background:#1467e8;color:#fff;border-radius:13px;padding:10px 12px;font-size:9px;font-weight:950;margin-top:12px}
+
+.activity-v3{background:linear-gradient(180deg,#f8fbff,#fff 32%)}.activity-hero{border-radius:24px;background:linear-gradient(135deg,#0a3e91,#0871f4);color:#fff;padding:17px;display:grid;grid-template-columns:1fr 54px;gap:12px;align-items:center;margin:15px 0 9px;box-shadow:0 13px 28px rgba(11,84,188,.18)}.activity-hero small{font-size:7px;letter-spacing:.12em;font-weight:950;color:#cfe2ff}.activity-hero h1{font-size:23px;margin:3px 0;color:#fff}.activity-hero p{font-size:9px;margin:0;color:#e3efff}.activity-hero>span{width:54px;height:54px;border-radius:18px;background:rgba(255,255,255,.14);display:grid;place-items:center}.activity-hero .svg-icon{width:27px}.activity-toolbar{min-height:36px;display:flex;justify-content:flex-end;align-items:center}.activity-toolbar button{border:0;background:#edf4ff;color:#1467e8;border-radius:12px;padding:8px 10px;font-size:8px;font-weight:950;display:flex;align-items:center;gap:4px}.activity-toolbar button .svg-icon{width:14px}.activity-toolbar>span{font-size:8px;color:#8a97a9;font-weight:850}
+.activity-day{font-size:8px;letter-spacing:.1em;font-weight:950;color:#8996a8;margin:14px 3px 7px;text-transform:uppercase}.notification-list-v3{display:grid;gap:8px}.notification-group-card{width:100%;border:1px solid #e4ebf4;background:#fff;border-radius:20px;padding:11px;display:grid;grid-template-columns:42px 1fr 37px;gap:9px;align-items:start;text-align:left;box-shadow:0 6px 18px rgba(31,56,98,.045)}.notification-group-card.unread{border-color:#b9d5fb;background:linear-gradient(135deg,#f7fbff,#fff);box-shadow:0 7px 20px rgba(20,103,232,.08)}.notification-group-card .notification-ico{width:42px;height:42px;border-radius:14px}.notification-group-card .notification-copy{min-width:0}.notification-group-card .notification-copy>small{display:block;font-size:6.5px;letter-spacing:.08em;color:#8b98aa;font-weight:950;margin-bottom:2px}.notification-group-card .notification-copy b{font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.notification-group-card .notification-copy p{font-size:8.5px;line-height:1.35;margin:3px 0;color:#68778b;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.notification-mini-stack{display:flex;gap:4px;flex-wrap:wrap;margin-top:6px}.notification-mini-stack i{font-style:normal;font-size:6.5px;color:#61738b;background:#f0f4f9;border-radius:999px;padding:4px 6px;max-width:110px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.notification-side{display:flex;flex-direction:column;align-items:flex-end;gap:5px}.notification-side>i{font-style:normal;min-width:19px;height:19px;padding:0 5px;border-radius:999px;background:#ff7417;color:#fff;display:grid;place-items:center;font-size:7px;font-weight:950}.notification-side time{font-size:7px;color:#98a4b4;white-space:nowrap}.notification-side em{font-style:normal;font-size:18px;color:#a2adba}
+html[data-theme="dark"] .worker-proposal-home,html[data-theme="dark"] .jobs-summary-v3 button,html[data-theme="dark"] .notification-group-card{background:#111f32!important;border-color:#263a54!important}html[data-theme="dark"] .worker-proposal-home b,html[data-theme="dark"] .notification-group-card .notification-copy b{color:#f3f7fd!important}html[data-theme="dark"] .activity-v3{background:linear-gradient(180deg,#0b1422,#0d1929)!important}html[data-theme="dark"] .notification-mini-stack i{background:#1a2c43;color:#b9c8da}
+
 </style>
 <link rel="manifest" href="./manifest.webmanifest?v=1.9.4"><link rel="apple-touch-icon" href="./icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default">
 </head>
@@ -934,7 +947,7 @@ const root=document.getElementById("root");
 let state={
   route:"loading", mode:localStorage.getItem("dohoy_mode")||"client",
   session:null,user:null,profile:null,privateProfile:null,tasks:[],selectedTask:null,offers:[],messages:[],conversations:[],chatBack:"taskDetail",chatDraft:"",notice:"",error:"",
-  workerLocation:null, workerLocationError:"", workerAddress:"", workerCategory:"", workerTaskTab:"pending", taskBackRoute:"", showContactDetails:false, workerProfile:null, workerProfileBack:"taskDetail", swipeConversationId:null, currentTaskRating:0, currentTaskReview:"", taskMedia:[], pendingTaskFiles:[], pendingCompletionFiles:[], currentClientRating:0, currentClientReview:"", clientProfile:null, clientReviews:[], workerCategories:[], blockedUsers:[], myReports:[], notifications:[], unreadNotifications:0, unreadMessages:0, workerReviews:[], workerFavorite:false, workerBlocked:false, online:navigator.onLine, currentPayment:null, publishBusy:false, offerBusy:false, checkoutBusy:false, savedCards:null, paymentMethodsBusy:false, splash:true, clientOfferCounts:{}, earningsPayments:[], earningsTasks:{}, earningsLoading:false, installPrompt:null, recentSearches:(()=>{try{return JSON.parse(localStorage.getItem('dohoy_recent_searches')||'[]')}catch{return []}})(), agendaView:'upcoming', workerAvailability:null, workerInvitations:[], taskQuestions:[], workerPortfolio:[], banners:[], adminBusinessMetrics:null, adminBanners:[], priceSuggestion:null, pendingPortfolioFile:null, viewedWorkerAvailability:null, notificationFilter:'all', adminProductFunnel:null, trustedContact:(()=>{try{return JSON.parse(localStorage.getItem('dohoy_trusted_contact')||'null')}catch{return null}})(), actionBusy:false, publishStep:1, workerReputation:null, chatImageBusy:false, otherTyping:false, typingStopTimer:null, theme:localStorage.getItem('dohoy_theme')||'auto', adminAttention:null, lastClientErrorAt:0
+  workerLocation:null, workerLocationError:"", workerAddress:"", workerCategory:"", workerTaskTab:"pending", taskBackRoute:"", showContactDetails:false, workerProfile:null, workerProfileBack:"taskDetail", swipeConversationId:null, currentTaskRating:0, currentTaskReview:"", taskMedia:[], pendingTaskFiles:[], pendingCompletionFiles:[], currentClientRating:0, currentClientReview:"", clientProfile:null, clientReviews:[], workerCategories:[], blockedUsers:[], myReports:[], notifications:[], unreadNotifications:0, unreadMessages:0, workerReviews:[], workerFavorite:false, workerBlocked:false, online:navigator.onLine, currentPayment:null, publishBusy:false, offerBusy:false, checkoutBusy:false, savedCards:null, paymentMethodsBusy:false, splash:true, clientOfferCounts:{}, earningsPayments:[], earningsTasks:{}, earningsLoading:false, installPrompt:null, recentSearches:(()=>{try{return JSON.parse(localStorage.getItem('dohoy_recent_searches')||'[]')}catch{return []}})(), agendaView:'upcoming', workerAvailability:null, workerInvitations:[], workerActivity:[], taskQuestions:[], workerPortfolio:[], banners:[], adminBusinessMetrics:null, adminBanners:[], priceSuggestion:null, pendingPortfolioFile:null, viewedWorkerAvailability:null, notificationFilter:'all', adminProductFunnel:null, trustedContact:(()=>{try{return JSON.parse(localStorage.getItem('dohoy_trusted_contact')||'null')}catch{return null}})(), actionBusy:false, publishStep:1, workerReputation:null, chatImageBusy:false, otherTyping:false, typingStopTimer:null, theme:localStorage.getItem('dohoy_theme')||'auto', adminAttention:null, lastClientErrorAt:0
 };
 let poller=null;
 let deliveryPoller=null;
@@ -1049,7 +1062,12 @@ async function setWorkerAvailability(hours=0){
 function availabilityCard(){const active=state.workerAvailability&&new Date(state.workerAvailability.available_until)>new Date();return `<section class="availability-card ${active?"active":""}"><span class="availability-dot"></span><div><b>${active?"Estás disponible para trabajar":"Disponible ahora"}</b><small>${active?`Hasta ${new Date(state.workerAvailability.available_until).toLocaleTimeString("es-MX",{hour:"2-digit",minute:"2-digit"})}`:"Actívalo para destacar en trabajos urgentes"}</small></div>${active?`<button onclick="setWorkerAvailability(0)">Desactivar</button>`:`<select onchange="if(this.value)setWorkerAvailability(Number(this.value));this.value=''" aria-label="Activar disponibilidad"><option value="">Activar</option><option value="1">1 hora</option><option value="2">2 horas</option><option value="4">4 horas</option></select>`}</section>`}
 async function loadWorkerInvitations(){const {data}=await sb.from("task_invitations").select("id,task_id,client_id,status,message,proposed_amount,created_at,tasks(title,category,offered_price,scheduled_for)").eq("worker_id",state.user.id).eq("status","pending").order("created_at",{ascending:false}).limit(5);state.workerInvitations=data||[]}
 function invitationsHtml(){if(!state.workerInvitations?.length)return "";return `<section class="invites-box"><div class="market-v2-section-head"><div><span>Invitaciones</span><h2>Te buscan directamente</h2></div></div>${state.workerInvitations.map(i=>`<div class="invite-card"><span>${taskIcon(i.tasks?.category)}</span><div><b>${escapeHtml(i.tasks?.title||"Tarea")}</b><small>${money(i.proposed_amount||i.tasks?.offered_price)} · Invitación directa</small></div><button onclick="acceptDirectInvite('${i.id}','${i.task_id}',${Number(i.proposed_amount||i.tasks?.offered_price||0)})">Aceptar</button><button class="decline" onclick="declineDirectInvite('${i.id}')">×</button></div>`).join("")}</section>`}
-async function acceptDirectInvite(id,taskId,amount){const {data:existing}=await sb.from("task_offers").select("id").eq("task_id",taskId).eq("worker_id",state.user.id).maybeSingle();if(!existing){const {error}=await sb.from("task_offers").insert({task_id:taskId,worker_id:state.user.id,amount:Number(amount),message:"Me interesa tu invitación directa.",status:"pending"});if(error)return setMsg("error",error.message)}await sb.from("task_invitations").update({status:"accepted",updated_at:new Date().toISOString()}).eq("id",id).eq("worker_id",state.user.id);state.notice="Invitación aceptada. Tu propuesta ya fue enviada.";await workerHome()}
+async function acceptDirectInvite(id,taskId,amount){
+ const {error}=await sb.rpc("submit_task_offer",{p_task_id:taskId,p_amount:Number(amount),p_message:"Me interesa tu invitación directa."});
+ if(error)return setMsg("error",error.message);
+ await sb.from("task_invitations").update({status:"accepted",updated_at:new Date().toISOString()}).eq("id",id).eq("worker_id",state.user.id);
+ state.workerTaskTab="proposals";state.notice="Invitación aceptada. La propuesta quedó guardada en Mis tareas > Propuestas.";await workerHome()
+}
 async function declineDirectInvite(id){await sb.from("task_invitations").update({status:"declined",updated_at:new Date().toISOString()}).eq("id",id).eq("worker_id",state.user.id);await loadWorkerInvitations();render()}
 
 function sortTasksByDistance(list){
@@ -1183,9 +1201,83 @@ function mode(m){if(!['client','worker'].includes(m))return;state.mode=m;localSt
 function authMsg(){return `${state.error?`<div class="error smart-alert" role="alert"><span>${iconSvg("info")}</span><div>${escapeHtml(state.error)}</div><button type="button" onclick="retryCurrentView()">Reintentar</button></div>`:""}${state.notice?`<div class="ok smart-alert success" role="status"><span>${iconSvg("verify")}</span><div>${escapeHtml(state.notice)}</div></div>`:""}`}
 function notificationBell(){return `<button aria-label="Ver notificaciones" class="icon notify-btn" onclick="openNotificationsCenter()">${iconSvg('bell')}${state.unreadNotifications?`<span class="notify-dot">${Math.min(99,state.unreadNotifications)}</span>`:''}</button>`}
 async function loadNotificationSummary(){if(!state.user)return;const {data,error}=await sb.from('notifications').select('id,type,read_at').eq('user_id',state.user.id).is('read_at',null).limit(100);if(!error){state.unreadNotifications=(data||[]).length;state.unreadMessages=(data||[]).filter(n=>n.type==='message').length}}
-async function loadNotifications(){if(!state.user)return;const {data,error}=await sb.from('notifications').select('*').eq('user_id',state.user.id).order('created_at',{ascending:false}).limit(50);if(!error)state.notifications=data||[];await loadNotificationSummary()}
-function notificationIcon(type){if(type==='message')return iconSvg('chat');if(type==='offer'||type==='offer_accepted')return iconSvg('briefcase');if(type==='rating')return iconSvg('star');if(type==='task_cancelled')return iconSvg('info');return iconSvg('bell')}
+async function loadNotifications(){if(!state.user)return;const {data,error}=await sb.from('notifications').select('*').eq('user_id',state.user.id).order('created_at',{ascending:false}).limit(100);if(!error)state.notifications=data||[];await loadNotificationSummary()}
+function notificationIcon(type){
+ if(["message"].includes(type))return iconSvg("chat");
+ if(["offer","offer_accepted","counter_offer","counter_accepted","counter_declined","matching_task","task_completed","completion_requested","worker_en_route","worker_arrived","task_cancelled"].includes(type))return iconSvg("briefcase");
+ if(["rating","client_rating"].includes(type))return iconSvg("star");
+ if(["payment","payment_succeeded","payment_failed","refund","payout"].includes(type))return iconSvg("wallet");
+ if(["support"].includes(type))return iconSvg("help");
+ return iconSvg("bell")
+}
 function relativeTime(v){const d=new Date(v),ms=Date.now()-d.getTime(),m=Math.floor(ms/60000);if(m<1)return 'Ahora';if(m<60)return `${m} min`;const h=Math.floor(m/60);if(h<24)return `${h} h`;const days=Math.floor(h/24);return `${days} d`}
+async function openNotificationsCenter(){clearPoll();await loadNotifications();state.route='activity';render()}
+function notificationGroup(n){
+ if(["offer","offer_accepted","counter_offer","counter_accepted","counter_declined","matching_task","task_completed","completion_requested","worker_en_route","worker_arrived","task_cancelled"].includes(n.type))return "jobs";
+ if(["payment","payment_succeeded","payment_failed","refund","payout"].includes(n.type))return "payments";
+ if(n.type==="message")return "messages";
+ return "system"
+}
+function setNotificationFilter(v){state.notificationFilter=v;render()}
+function notificationDay(v){
+ const d=new Date(v),today=new Date(),y=new Date();y.setDate(today.getDate()-1);
+ const key=x=>`${x.getFullYear()}-${x.getMonth()}-${x.getDate()}`;
+ if(key(d)===key(today))return "Hoy";if(key(d)===key(y))return "Ayer";
+ return d.toLocaleDateString("es-MX",{day:"numeric",month:"long"})
+}
+function compactNotifications(items){
+ const groups=[],map=new Map();
+ for(const n of items){
+   const kind=notificationGroup(n);
+   const key=n.task_id?`${kind}:${n.task_id}`:`single:${n.id}`;
+   let g=map.get(key);
+   if(!g){g={key,kind,task_id:n.task_id||"",latest:n,items:[],unread:0};map.set(key,g);groups.push(g)}
+   g.items.push(n);if(!n.read_at)g.unread++;
+   if(new Date(n.created_at)>new Date(g.latest.created_at))g.latest=n;
+ }
+ return groups.sort((a,b)=>new Date(b.latest.created_at)-new Date(a.latest.created_at))
+}
+function notificationGroupLabel(g){
+ if(g.kind==="messages")return "Mensajes";
+ if(g.kind==="payments")return "Pagos";
+ if(g.kind==="jobs")return "Trabajo";
+ return "DOHOY"
+}
+function notificationsCenterScreen(){
+ const f=state.notificationFilter||"all";
+ const raw=(state.notifications||[]).filter(n=>f==="all"||notificationGroup(n)===f);
+ const groups=compactNotifications(raw);
+ const tabs=[["all","Todo"],["jobs","Trabajos"],["messages","Mensajes"],["payments","Pagos"],["system","Sistema"]];
+ let lastDay="";
+ const body=groups.map(g=>{
+   const n=g.latest,day=notificationDay(n.created_at),heading=day!==lastDay?`<div class="activity-day">${escapeHtml(day)}</div>`:"";lastDay=day;
+   const count=g.items.length;
+   const recent=g.items.slice(0,3);
+   return `${heading}<button class="notification-group-card ${g.unread?"unread":""}" onclick="openNotificationGroup('${g.task_id||""}','${g.items.map(x=>x.id).join(",")}')">
+     <span class="notification-ico">${notificationIcon(n.type)}</span>
+     <span class="notification-copy">
+       <small>${escapeHtml(notificationGroupLabel(g))}${count>1?` · ${count} actualizaciones`:""}</small>
+       <b>${escapeHtml(n.title||"Actualización")}</b>
+       <p>${escapeHtml(n.body||"")}</p>
+       ${count>1?`<span class="notification-mini-stack">${recent.map(x=>`<i>${escapeHtml(x.title||"Actualización")}</i>`).join("")}</span>`:""}
+     </span>
+     <span class="notification-side">${g.unread?`<i>${g.unread}</i>`:""}<time>${relativeTime(n.created_at)}</time><em>›</em></span>
+   </button>`
+ }).join("");
+ return shell(`<section class="screen activity-v3">
+   <div class="top"><button class="icon" onclick="go('${state.mode==='client'?'clientHome':'workerHome'}')">←</button><div><b>Actividad</b><div class="small">Ordenada para que encuentres lo importante</div></div><span></span></div>
+   <div class="activity-hero"><div><small>CENTRO DE ACTIVIDAD</small><h1>Todo en orden.</h1><p>${state.unreadNotifications?`Tienes ${state.unreadNotifications} aviso${state.unreadNotifications===1?"":"s"} sin leer.`:"No tienes avisos pendientes."}</p></div><span>${iconSvg("bell")}</span></div>
+   <div class="activity-toolbar">${state.unreadNotifications?`<button onclick="markAllNotificationsRead()">${iconSvg("verify")} Marcar todo leído</button>`:"<span>Estás al día</span>"}</div>
+   <div class="activity-tabs">${tabs.map(([k,l])=>`<button class="${f===k?"active":""}" onclick="setNotificationFilter('${k}')">${l}</button>`).join("")}</div>
+   <div class="notification-list-v3">${body||emptyState("bell",f==="all"?"Todo al día":"No hay avisos aquí",f==="all"?"Cuando pase algo importante aparecerá aquí.":"Prueba otra categoría de actividad.")}</div>
+ </section>`,true)
+}
+async function openNotificationGroup(taskId,idsCsv){
+ const ids=String(idsCsv||"").split(",").map(x=>Number(x)).filter(Number.isFinite);
+ if(ids.length)await sb.from("notifications").update({read_at:new Date().toISOString()}).eq("user_id",state.user.id).in("id",ids).is("read_at",null);
+ await loadNotificationSummary();
+ if(taskId){await openTask(taskId)}else{await openNotificationsCenter()}
+}
 async function openNotificationsCenter(){clearPoll();await loadNotifications();state.route='activity';render()}
 function notificationGroup(n){if(["offer","offer_accepted","task_cancelled","rating"].includes(n.type))return "jobs";if(["payment","payment_succeeded","payment_failed","refund","payout"].includes(n.type))return "payments";return "system"}
 function setNotificationFilter(v){state.notificationFilter=v;render()}
@@ -1378,7 +1470,7 @@ function workerTaskCard(t){
 }
 
 async function workerHome(){
- await Promise.all([loadOpenTasks(),loadNotificationSummary(),loadSearchPreferences(),loadFeatureStatus(),loadWorkerAvailability(),loadWorkerInvitations(),loadBanners()]);
+ await Promise.all([loadOpenTasks(),loadWorkerActivity(),loadNotificationSummary(),loadSearchPreferences(),loadFeatureStatus(),loadWorkerAvailability(),loadWorkerInvitations(),loadBanners()]);
  const first=(state.profile?.full_name||"").trim().split(" ")[0]||"";
  const visible=filteredWorkerTasks(),allOpen=state.tasks||[];
  const nearby=visible.filter(t=>{const d=taskDistanceKm(t);return d!=null&&d<=10}).length;
@@ -1417,6 +1509,7 @@ async function workerHome(){
     </button>
   </div>
 
+  ${workerActiveHomeCard()}
   ${invitationsHtml()}
   ${bannerCarouselHtml()}
 
@@ -1509,47 +1602,78 @@ function initWorkerMap(){
 }
 function showMapTask(id){const t=(state.tasks||[]).find(x=>x.id===id),host=document.getElementById("mapOpportunityTray");if(!t||!host)return;host.innerHTML=`<span class="map-tray-icon">${taskIcon(t)}</span><div><small>${escapeHtml(baseCategory(t.category))}</small><b>${escapeHtml(t.title)}</b><strong>${money(t.offered_price)}</strong></div><button onclick="openTask('${t.id}')">Ver</button>`}
 
-async function loadWorkerJobs(){
- const {data,error}=await sb.from("tasks").select("*").eq("worker_id",state.user.id).order("updated_at",{ascending:false});
- state.tasks=error?[]:(data||[]);
+async function loadWorkerActivity(){
+ if(!state.user){state.workerActivity=[];return}
+ const {data,error}=await sb.rpc("worker_activity");
+ if(error){state.workerActivity=[];state.error=state.error||("No pudimos cargar tus tareas: "+error.message);return}
+ state.workerActivity=(data||[]).map(x=>({
+   id:x.task_id,title:x.title,description:x.description,category:x.category,offered_price:x.offered_price,
+   location_label:x.location_label,scheduled_for:x.scheduled_for,status:x.task_status,worker_id:x.worker_id,client_id:x.client_id,
+   created_at:x.created_at,updated_at:x.updated_at,en_route_at:x.en_route_at,arrived_at:x.arrived_at,
+   completion_requested_at:x.completion_requested_at,completed_at:x.completed_at,
+   offer:{id:x.offer_id,status:x.offer_status,amount:x.offer_amount,counter_amount:x.counter_amount,counter_status:x.counter_status,created_at:x.offer_created_at}
+ }))
 }
-function workerJobCard(t){
- const cls=t.status==="completed"?"done":"pending";
+function activeWorkerJobs(){return (state.workerActivity||[]).filter(t=>t.worker_id===state.user?.id&&["assigned","in_progress"].includes(t.status))}
+function pendingWorkerProposals(){return (state.workerActivity||[]).filter(t=>t.status==="open"&&t.offer?.status==="pending")}
+function workerActiveHomeCard(){
+ const active=activeWorkerJobs(),proposals=pendingWorkerProposals();
+ if(!active.length&&!proposals.length)return "";
+ if(active.length){
+   const t=active[0],stage=t.status==="in_progress"?(t.completion_requested_at?"Esperando confirmación":"Trabajo en curso"):(t.arrived_at?"Ya llegaste":t.en_route_at?"Vas en camino":"Trabajo asignado");
+   return `<section class="worker-active-home"><div class="active-job-head"><span>${iconSvg("bolt")}</span><div><small>TRABAJO ACTIVO</small><b>${escapeHtml(stage)}</b></div><em>${active.length}</em></div><button class="active-job-main" onclick="openTask('${t.id}')"><span>${taskIcon(t)}</span><div><h3>${escapeHtml(t.title)}</h3><p>${locationMarkup(t.location_label||"Ubicación del trabajo")}</p><strong>${money(t.offer?.amount||t.offered_price)}</strong></div><i>Continuar ›</i></button>${active.length>1?`<button class="active-job-all" onclick="state.workerTaskTab='active';go('workerJobs')">Ver ${active.length} trabajos activos</button>`:""}</section>`
+ }
+ return `<section class="worker-proposal-home"><span>${iconSvg("briefcase")}</span><div><small>PROPUESTAS ENVIADAS</small><b>${proposals.length} esperando respuesta</b><p>No se perdieron: puedes seguirlas desde Mis tareas.</p></div><button onclick="state.workerTaskTab='proposals';go('workerJobs')">Ver propuestas</button></section>`
+}
+
+async function loadWorkerJobs(){await loadWorkerActivity()}
+function workerJobCard(t,kind="active"){
+ const proposal=kind==="proposals",done=kind==="history";
+ const amount=t.offer?.counter_status==="accepted"&&t.offer?.counter_amount!=null?t.offer.counter_amount:(t.offer?.amount||t.offered_price);
+ const label=proposal?(t.offer?.counter_status==="pending"?"Contraoferta recibida":"Esperando respuesta"):t.status==="completed"?"Realizada":t.status==="cancelled"?"Cancelada":taskStatusLabel(t);
+ const cls=t.status==="completed"?"done":proposal?"proposal":"pending";
  return `<button class="worker-job-card ${cls}" onclick="openTask('${t.id}')">
    <div class="worker-job-icon">${taskIcon(t)}</div>
-   <div class="worker-job-copy"><div class="worker-job-top"><h3>${escapeHtml(t.title)}</h3><span class="job-status ${cls}">${t.status==="completed"?"Realizada":"Pendiente"}</span></div>
-   <div class="worker-job-meta">${locationMarkup(t.location_label||"Sin ubicación")}</div>
-   <div class="worker-job-bottom"><span>${money(t.offered_price)}</span><small>${taskStatusLabel(t)}</small></div></div>
+   <div class="worker-job-copy"><div class="worker-job-top"><h3>${escapeHtml(t.title)}</h3><span class="job-status ${cls}">${escapeHtml(label)}</span></div>
+   <div class="worker-job-meta">${locationMarkup(t.location_label||"Zona aproximada")}</div>
+   <div class="worker-job-bottom"><span>${money(amount)}</span><small>${proposal?"Propuesta enviada":done?statusText(t.status):taskStatusLabel(t)}</small></div></div>
    <span class="worker-job-arrow">›</span>
  </button>`
 }
+function workerJobsLists(){
+ const all=state.workerActivity||[];
+ return {
+   active:all.filter(t=>t.worker_id===state.user?.id&&["assigned","in_progress"].includes(t.status)),
+   proposals:all.filter(t=>t.status==="open"&&t.offer?.status==="pending"),
+   history:all.filter(t=>t.status==="completed"||t.status==="cancelled"||["rejected","withdrawn"].includes(t.offer?.status))
+ }
+}
 function renderWorkerJobsTab(){
- const pending=state.tasks.filter(t=>["assigned","in_progress"].includes(t.status));
- const done=state.tasks.filter(t=>t.status==="completed");
- const tab=state.workerTaskTab||"pending";
- const list=tab==="completed"?done:pending;
+ const lists=workerJobsLists(),tab=state.workerTaskTab||"active",list=lists[tab]||[];
  const host=document.getElementById("workerJobsList");
- if(host)host.innerHTML=list.length?list.map(workerJobCard).join(""):`<div class="jobs-empty">${iconSvg("tasks")}<h3>${tab==="completed"?"Aún no tienes tareas realizadas":"No tienes tareas pendientes"}</h3><p>${tab==="completed"?"Cuando completes un trabajo aparecerá aquí.":"Cuando acepten una de tus propuestas, la tarea aparecerá aquí."}</p></div>`;
- const p=document.getElementById("pendingCount"),d=document.getElementById("doneCount");
- if(p)p.textContent=pending.length;if(d)d.textContent=done.length;
- document.querySelectorAll(".jobs-tab").forEach(x=>x.classList.toggle("active",x.dataset.tab===tab));
+ if(host)host.innerHTML=list.length?list.map(t=>workerJobCard(t,tab)).join(""):`<div class="jobs-empty">${iconSvg(tab==="proposals"?"briefcase":"tasks")}<h3>${tab==="active"?"No tienes trabajos activos":tab==="proposals"?"No tienes propuestas esperando":"Todavía no hay historial"}</h3><p>${tab==="active"?"Cuando un cliente acepte tu propuesta, aparecerá aquí y se quedará visible hasta terminarla.":tab==="proposals"?"Cada propuesta que envíes aparecerá aquí hasta que el cliente responda.":"Los trabajos terminados, cancelados o propuestas cerradas aparecerán aquí."}</p>${tab!=="history"?`<button class="jobs-empty-action" onclick="go('workerHome')">Buscar oportunidades</button>`:""}</div>`;
+ for(const [k,n] of Object.entries({active:lists.active.length,proposals:lists.proposals.length,history:lists.history.length})){const el=document.getElementById(`${k}Count`);if(el)el.textContent=n}
+ document.querySelectorAll(".jobs-tab").forEach(x=>x.classList.toggle("active",x.dataset.tab===tab))
 }
 function setWorkerTaskTab(tab){state.workerTaskTab=tab;renderWorkerJobsTab()}
 async function workerJobs(){
- await loadWorkerJobs();
- const pending=state.tasks.filter(t=>["assigned","in_progress"].includes(t.status));
- const done=state.tasks.filter(t=>t.status==="completed");
- root.innerHTML=shell(`<section class="jobs-screen">
-   <div class="jobs-head"><div><div class="kicker">Modo trabajador</div><h1>Mis tareas</h1><p>Organiza los trabajos que tienes pendientes y los que ya terminaste.</p></div>${logo(true)}</div>
-   <div class="jobs-summary"><div><b id="pendingCount">${pending.length}</b><span>Pendientes</span></div><div><b id="doneCount">${done.length}</b><span>Realizadas</span></div></div>
-   <div class="jobs-tabs">
-     <button class="jobs-tab ${state.workerTaskTab!=="completed"?"active":""}" data-tab="pending" onclick="setWorkerTaskTab('pending')">Tareas pendientes</button>
-     <button class="jobs-tab ${state.workerTaskTab==="completed"?"active":""}" data-tab="completed" onclick="setWorkerTaskTab('completed')">Tareas realizadas</button>
+ await loadWorkerJobs();const lists=workerJobsLists();if(!["active","proposals","history"].includes(state.workerTaskTab))state.workerTaskTab="active";
+ root.innerHTML=shell(`<section class="jobs-screen jobs-v3">
+   <div class="jobs-head"><div><div class="kicker">Modo trabajador</div><h1>Mis tareas</h1><p>Aquí se guardan tus trabajos y propuestas. Nada desaparece después de postularte.</p></div>${logo(true)}</div>
+   <div class="jobs-summary-v3">
+     <button onclick="setWorkerTaskTab('active')"><span>${iconSvg("bolt")}</span><div><b id="activeCount">${lists.active.length}</b><small>Activos</small></div></button>
+     <button onclick="setWorkerTaskTab('proposals')"><span>${iconSvg("briefcase")}</span><div><b id="proposalsCount">${lists.proposals.length}</b><small>Propuestas</small></div></button>
+     <button onclick="setWorkerTaskTab('history')"><span>${iconSvg("tasks")}</span><div><b id="historyCount">${lists.history.length}</b><small>Historial</small></div></button>
+   </div>
+   <div class="jobs-tabs jobs-tabs-3">
+     <button class="jobs-tab" data-tab="active" onclick="setWorkerTaskTab('active')">Activos</button>
+     <button class="jobs-tab" data-tab="proposals" onclick="setWorkerTaskTab('proposals')">Propuestas</button>
+     <button class="jobs-tab" data-tab="history" onclick="setWorkerTaskTab('history')">Historial</button>
    </div>
    <div id="workerJobsList" class="worker-jobs-list"></div>
- </section>`,true);
- renderWorkerJobsTab()
+ </section>`,true);renderWorkerJobsTab()
 }
+
 function selectPublishCategory(cat,btn){document.getElementById("taskCategoryHidden").value=cat;document.querySelectorAll(".publish-category").forEach(x=>x.classList.remove("selected"));if(btn)btn.classList.add("selected");toggleVehicleOptions(cat);loadPriceSuggestion(cat)}
 function publishStepMeta(){return [["Qué necesitas","Describe la tarea"],["Dónde","Indica la zona"],["Cuándo","Elige fecha y prioridad"],["Presupuesto","Precio y fotos"],["Revisar","Confirma y publica"]]}
 function publishWizardProgress(){const steps=publishStepMeta();return `<div class="publish-wizard-progress"><div class="publish-progress-track"><i style="width:${state.publishStep/steps.length*100}%"></i></div><div class="publish-progress-copy"><span>Paso ${state.publishStep} de ${steps.length}</span><b>${steps[state.publishStep-1][0]}</b></div></div>`}
@@ -1874,7 +1998,7 @@ function taskProgressButtons(t){
 }
 function openCounterOfferSheet(offerId,amount){openProfileSheet("Enviar contraoferta","Propón un monto diferente al trabajador.",`<form class="profile-inline-form" onsubmit="submitCounterOffer(event,'${offerId}')"><label>Nuevo monto</label><input name="amount" type="number" min="1" value="${Number(amount||0)}" required><label>Mensaje</label><textarea name="message" maxlength="300" placeholder="Ej. ¿Podrías hacerlo por este monto?"></textarea><button class="btn primary">Enviar contraoferta</button></form>`)}
 async function submitCounterOffer(e,offerId){e.preventDefault();const f=new FormData(e.target),{error}=await sb.rpc("counter_task_offer",{p_offer_id:offerId,p_amount:Number(f.get("amount")),p_message:f.get("message")||null});closeProfileSheet();if(error)return setMsg("error",error.message);await loadOffers(state.selectedTask.id);state.notice="Contraoferta enviada.";render()}
-async function respondCounterOffer(offerId,accept){const {data,error}=await sb.rpc("respond_counter_offer",{p_offer_id:offerId,p_accept:!!accept});if(error)return setMsg("error",error.message);state.selectedTask=Array.isArray(data)?data[0]:data;await loadMyOffer(state.selectedTask.id);state.notice=accept?"Contraoferta aceptada. La tarea quedó asignada.":"Contraoferta rechazada.";render()}
+async function respondCounterOffer(offerId,accept){const {data,error}=await sb.rpc("respond_counter_offer",{p_offer_id:offerId,p_accept:!!accept});if(error)return setMsg("error",error.message);state.selectedTask=Array.isArray(data)?data[0]:data;await loadMyOffer(state.selectedTask.id);if(accept)state.workerTaskTab="active";state.notice=accept?"Contraoferta aceptada. La tarea quedó en Mis tareas > Activos.":"Contraoferta rechazada.";render()}
 async function markTaskEnRoute(id){const {data,error}=await sb.rpc("mark_task_en_route",{p_task_id:id});if(error)return setMsg("error",error.message);state.selectedTask=Array.isArray(data)?data[0]:data;state.notice="Avisamos al cliente que vas en camino.";render();setTimeout(()=>showSuccessMoment('¡Vas en camino!','El cliente ya recibió el cambio de estado.'),100)}
 async function markTaskArrived(id){const {data,error}=await sb.rpc("mark_task_arrived",{p_task_id:id});if(error)return setMsg("error",error.message);state.selectedTask=Array.isArray(data)?data[0]:data;state.notice="Avisamos al cliente que llegaste.";render();setTimeout(()=>showSuccessMoment('Llegada registrada','Ya pueden comenzar cuando estén listos.','orange'),100)}
 async function editTaskScreen(){const t=state.selectedTask;if(!t||t.client_id!==state.user.id||t.status!=="open"||t.worker_id){state.notice="Esta tarea ya no se puede editar.";go("taskDetail");return}await loadPrivateTaskLocation(t);await loadTaskMedia(t.id);state.pendingTaskFiles=[];state.pendingTaskPhotoLimit=Math.max(0,5-state.taskMedia.filter(m=>m.kind==="request").length);state.taskPhotoSelectionNote="";root.innerHTML=shell(`<section class="publish-screen"><div class="publish-head"><button class="icon" onclick="go('taskDetail')">←</button>${logo(true)}<span></span></div><div class="publish-eyebrow">Editar tarea</div><h1 class="publish-title">Actualiza los detalles</h1>${authMsg()}<form id="editTaskForm"><div class="publish-card"><div class="pc-icon">${iconSvg("tasks")}</div><div><label>Título</label><input name="title" value="${escapeAttr(t.title)}" required></div></div><div class="publish-card"><div class="pc-icon">${iconSvg("tasks")}</div><div><label>Descripción</label><textarea name="description" required>${escapeHtml(t.description)}</textarea></div></div><div class="publish-card" style="grid-template-columns:42px 1fr"><div class="pc-icon">${iconSvg("tasks")}</div><div><label>Categoría</label><select name="category">${categories.map(c=>`<option value="${escapeAttr(c)}" ${c===baseCategory(t.category)?"selected":""}>${escapeHtml(c)}</option>`).join("")}</select></div></div><input id="taskLatitude" type="hidden" name="latitude" value="${t.latitude??""}"><input id="taskLongitude" type="hidden" name="longitude" value="${t.longitude??""}"><div class="publish-two"><div class="publish-card" style="grid-template-columns:42px 1fr"><div class="pc-icon">${iconSvg("location")}</div><div><label>Ubicación</label><input name="location" value="${escapeAttr(t.location_label||"")}" required><button type="button" class="location-use-btn" onclick="useTaskCurrentLocation(this)">${iconSvg("location")} Usar mi ubicación actual</button></div></div><div class="publish-card" style="grid-template-columns:42px 1fr"><div class="pc-icon">$</div><div><label>Presupuesto</label><input name="price" type="number" min="1" value="${Number(t.offered_price)}" required></div></div></div><div class="publish-two"><div class="publish-card" style="grid-template-columns:42px 1fr"><div class="pc-icon">${iconSvg("calendar")}</div><div><label>Fecha</label><input name="task_date" type="date" value="${localDateValue(t.scheduled_for)}"></div></div><div class="publish-card" style="grid-template-columns:42px 1fr"><div class="pc-icon">${iconSvg("clock")}</div><div><label>Hora</label><input name="task_time" type="time" value="${localTimeValue(t.scheduled_for)}"></div></div></div><label class="card" style="display:flex;gap:10px;align-items:center;margin:10px 0"><input name="license" type="checkbox" ${t.requires_driver_license?"checked":""}> Requiere licencia de conducir</label><div class="media-picker"><h3>Agregar más fotos</h3><p>${state.pendingTaskPhotoLimit?`Puedes agregar hasta ${state.pendingTaskPhotoLimit} fotos nuevas (máximo 5 por tarea).`:"Esta tarea ya tiene las 5 fotos permitidas."}</p><input id="taskPhotosInput" class="media-input" type="file" accept="image/*" multiple onchange="selectTaskPhotos(event)"><button type="button" class="media-add-btn" onclick="document.getElementById('taskPhotosInput').click()">${iconSvg("camera")} Agregar fotos</button><div id="taskPhotoPreview" class="media-preview-list"></div></div><button class="publish-submit">Guardar cambios</button></form></section>`,true);bindForms()}
@@ -1986,7 +2110,7 @@ async function profile(){
    ${settingsRow("Política de privacidad","privacy","document","Cómo protegemos tus datos")}
  </div>
  <div class="account-actions"><button class="logout-btn" onclick="signOutCurrent()">${iconSvg("logout")} Cerrar sesión</button></div>
- <div class="version-note">DOHOY · Versión 4.1.0 · WORKER HOME</div>
+ <div class="version-note">DOHOY · Versión 4.2.0 · STABILITY</div>
  </section>`,true)
 }
 function settingsRow(title,route,icon,sub=""){
@@ -2548,7 +2672,7 @@ try{
  const f=new FormData(e.target);
  const {error}=await sb.rpc("submit_task_offer",{p_task_id:state.selectedTask.id,p_amount:Number(f.get("amount")),p_message:f.get("message")||null});
  if(error)throw error;
- await loadMyOffer(state.selectedTask.id);await trackEvent("offer_sent",{amount:Number(f.get("amount"))},state.selectedTask.id);state.notice="Oferta enviada.";state.error="";render();setTimeout(()=>showSuccessMoment("Propuesta enviada","Te avisaremos cuando el cliente responda."),100)
+ await loadMyOffer(state.selectedTask.id);await trackEvent("offer_sent",{amount:Number(f.get("amount"))},state.selectedTask.id);state.workerTaskTab="proposals";state.notice="Propuesta enviada. La encontrarás en Mis tareas > Propuestas.";state.error="";render();setTimeout(()=>showSuccessMoment("Propuesta guardada","Puedes seguirla en Mis tareas > Propuestas."),100)
 }catch(err){state.error="No pudimos enviar la oferta: "+(err?.message||err);render()}
 finally{state.offerBusy=false}
 }
@@ -2598,7 +2722,7 @@ const remaining=Math.max(0,1850-(Date.now()-splashStarted));setTimeout(finishSpl
 sb.auth.onAuthStateChange(async(_event,session)=>{state.session=session;state.user=session?.user||null;if(state.user){await loadProfile();await loadNotificationSummary();subscribeNotifications()}if(!session&&!['welcome','signup','login','onboarding','mode'].includes(state.route))go(onboardingDone()?'welcome':'onboarding')})
 }
 const DOHOY_VAPID_PUBLIC="BIqp0MxIqy8rJPGj8mCRF-P_FwaMWgRMKSR_x6AazRKylHNhyT3NEPjNODKzvsSyIpt6OE3BUQXEz8-OkV-k14E";
-// DOHOY 4.1.0 — rediseño del inicio trabajador y navegación real por categorías.
+// DOHOY 4.2.0 — auditoría de estabilidad, tareas persistentes y centro de actividad.
 const DEFAULT_FILTERS={query:'',category:'',minPrice:0,maxDistance:null,todayOnly:false,vehicleOnly:false,notifyMatching:true};
 function workerFilterState(){if(!state.workerFilters)state.workerFilters={...DEFAULT_FILTERS};return state.workerFilters}
 function searchStorageKey(){return 'dohoy_search_'+(state.user?.id||'guest')}
