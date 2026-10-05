@@ -1093,6 +1093,46 @@ html[data-theme="dark"] .payment-required-card{background:#111f32!important;bord
 .worker-task,.client-task-card,.notification-group-card,.settings-row,.important-card{contain:layout paint}
 img{content-visibility:auto}
 
+
+/* DOHOY 4.4.1 — mobile alignment + simplified active task */
+.publish-wizard-step[data-step="3"] .publish-card{
+  width:100%!important;box-sizing:border-box!important;
+  grid-template-columns:54px minmax(0,1fr)!important;
+  gap:12px!important;padding:13px!important
+}
+.publish-wizard-step[data-step="3"] .publish-card>div:last-child{min-width:0!important;width:100%!important}
+.publish-wizard-step[data-step="3"] .publish-card label{text-align:left!important;margin:0 0 7px!important}
+.publish-wizard-step[data-step="3"] .publish-card input[type="date"],
+.publish-wizard-step[data-step="3"] .publish-card input[type="time"]{
+  display:block!important;width:100%!important;max-width:100%!important;min-width:0!important;
+  box-sizing:border-box!important;margin:0!important;height:48px!important;
+  border-radius:15px!important;padding:0 13px!important
+}
+.publish-wizard-step[data-step="3"] .publish-card .pc-icon{align-self:center!important;margin:0!important}
+.publish-wizard-step[data-step="3"] .urgent-publish-card,
+.publish-wizard-step[data-step="3"] .wizard-check{width:100%!important;box-sizing:border-box!important;margin:9px 0!important}
+
+.detail-card-compact{padding-bottom:15px!important}
+.detail-card-compact .detail-copy{margin-bottom:10px!important}
+.task-more-details{margin:13px 0;border:1px solid #dfe8f4;border-radius:19px;background:#fff;overflow:hidden}
+.task-more-details summary{list-style:none;cursor:pointer;min-height:58px;padding:0 15px;display:flex;align-items:center;justify-content:space-between;font-weight:900;color:#1a2a43}
+.task-more-details summary::-webkit-details-marker{display:none}
+.task-more-details summary>span:first-child{display:flex;align-items:center;gap:9px}.task-more-details summary .svg-icon{width:20px;color:#1467e8}
+.task-more-chevron{font-size:22px;color:#8b98aa;transition:transform .2s ease}.task-more-details[open] .task-more-chevron{transform:rotate(180deg)}
+.task-more-body{padding:0 12px 13px}.task-more-body .status-banner{margin-top:0}
+.compact-safety-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.compact-safety-actions button{min-height:44px;border:1px solid #e0e8f3;background:#f7f9fc;border-radius:13px;font-weight:850;color:#52637a}
+.compact-safety-actions .svg-icon{width:17px;vertical-align:middle;margin-right:5px}
+.compact-cancel{margin-top:10px!important;min-height:50px!important;border-radius:16px!important}
+.checkout-inline-error{margin:9px 0 0;padding:9px 11px;border-radius:12px;background:#fff0f0;border:1px solid #ffd1d1;color:#a62323;font-size:9px;font-weight:800;line-height:1.35}
+.payment-cta.is-loading{opacity:.72}
+.selected-worker-card{margin-top:10px!important}
+.task-section-title{margin-top:17px!important}
+html[data-theme="dark"] .task-more-details{background:#102035!important;border-color:#263d59!important}
+html[data-theme="dark"] .task-more-details summary{color:#f2f7ff!important}
+html[data-theme="dark"] .compact-safety-actions button{background:#162940!important;border-color:#2a425f!important;color:#c7d5e7!important}
+html[data-theme="dark"] .checkout-inline-error{background:#321c20!important;border-color:#66313a!important;color:#ffb6bf!important}
+
 </style>
 <link rel="manifest" href="./manifest.webmanifest?v=1.9.4"><link rel="apple-touch-icon" href="./icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default">
 </head>
@@ -2083,6 +2123,11 @@ function workCenterHtml(t,isOwner){
  return `<section class="work-center tone-${s.tone}"><div class="work-center-head"><span>${iconSvg(s.icon)}</span><div><small>CENTRO DEL TRABAJO · ETAPA ${s.n}/6</small><h2>${escapeHtml(s.title)}</h2><p>${escapeHtml(s.copy)}</p></div></div><div class="work-live-track">${["Pago","En camino","Llegó","Trabajo","Confirmar","Listo"].map((x,i)=>`<span class="${i<s.n?"done":i===s.n-1?"current":""}"><i>${i<s.n?"✓":i+1}</i><small>${x}</small></span>`).join("")}</div>${workerBlocked?`<div class="payment-wait-worker">${iconSvg("shield")}<div><b>Esperando el pago del cliente</b><small>No podrás iniciar el traslado ni el trabajo hasta que Stripe confirme el pago.</small></div></div>`:""}<div class="work-center-actions">${canChat?`<button onclick="openChat('${t.id}')">${iconSvg("chat")} Chat</button>`:""}<button onclick="openSafetyCenter()">${iconSvg("shield")} Seguridad</button>${isOwner&&!paid&&t.status==="assigned"?`<button class="primary" onclick="startTaskCheckout('${t.id}')">${iconSvg("payment")} Pagar ahora</button>`:""}${!isOwner&&t.worker_id===state.user.id&&t.status==="assigned"&&paid&&!t.en_route_at?`<button class="primary" onclick="markTaskEnRoute('${t.id}')">${iconSvg("route")} Voy en camino</button>`:""}</div></section>`
 }
 
+function taskMoreDetailsHtml(t,isOwner){
+ const closed=taskChatClosed(t);
+ return `<details class="task-more-details"><summary><span>${iconSvg("info")}<b>Detalles de la tarea</b></span><span class="task-more-chevron">⌄</span></summary><div class="task-more-body"><div class="status-banner ${t.status==="open"?"pending":(t.status==="in_progress"&&t.completion_requested_at?"awaiting":"")}"><span class="dot"></span><span>${taskStatusLabel(t)}</span></div>${taskJourneyCard(t,isOwner)}${timelineHtml(t)}${taskQuestionsHtml(t,isOwner)}${t.status==="cancelled"&&t.cancellation_reason?`<div class="policy-note"><b>Motivo de cancelación:</b> ${escapeHtml(t.cancellation_reason)}</div>`:""}${t.worker_id&&otherParticipantId(t)?`<div class="compact-safety-actions"><button onclick="openUserReportSheet('${t.id}')">${iconSvg("flag")} Reportar</button><button onclick="blockOtherUser('${t.id}')">${iconSvg("shield")} Bloquear</button></div>`:""}${closed?`<div class="chat-closed-banner"><span class="left">${iconSvg("chat")}<span>El chat se cerró al finalizar la tarea.</span></span></div>`:""}</div></details>`
+}
+
 async function taskDetail(){
 const t=state.selectedTask;if(!t)return go(state.mode==="client"?"clientHome":"workerHome");
 const isOwner=t.client_id===state.user.id;
@@ -2102,9 +2147,9 @@ if(!isOwner&&state.clientProfile){
 }
 if(isOwner&&t.worker_id&&selectedProfile){
  const savedRating=state.currentTaskRating||0;
- body+=`<div class="task-section-title"><div><h2>Trabajador seleccionado</h2><div class="sub">Foto, experiencia y calificación real.</div></div></div><div class="selected-worker-card"><div class="selected-worker-head">${avatarMarkup(selectedProfile)}${workerSummaryHtml(selectedProfile)}<div class="worker-price">${money(assignedOffer?.amount||t.offered_price)}</div></div><div class="worker-card-actions"><button class="secondary-soft" onclick="openWorkerProfile('${selectedProfile.id||t.worker_id}','taskDetail')">Ver perfil</button>${t.status==="completed"?`<button class="accent-soft" onclick="openWorkerProfile('${selectedProfile.id||t.worker_id}','taskDetail')">Calificar</button>`:`<button class="accent-soft" onclick="openChat('${t.id}')">Chat</button>`}</div></div>`;
  body+=paymentActionHtml(t,assignedOffer);
- if(t.status==="assigned")body+=`<div class="completion-card"><h3>${t.arrived_at?"El trabajador llegó":t.en_route_at?"El trabajador va en camino":"Trabajador asignado"}</h3><p>${t.arrived_at?"Ya puedes coordinar el inicio de la tarea.":t.en_route_at?"Te avisaremos cuando marque que llegó.":"El trabajador todavía no sale hacia la ubicación."}</p></div>`;
+ body+=`<div class="task-section-title"><div><h2>Trabajador seleccionado</h2><div class="sub">Foto, experiencia y calificación real.</div></div></div><div class="selected-worker-card"><div class="selected-worker-head">${avatarMarkup(selectedProfile)}${workerSummaryHtml(selectedProfile)}<div class="worker-price">${money(assignedOffer?.amount||t.offered_price)}</div></div><div class="worker-card-actions"><button class="secondary-soft" onclick="openWorkerProfile('${selectedProfile.id||t.worker_id}','taskDetail')">Ver perfil</button>${t.status==="completed"?`<button class="accent-soft" onclick="openWorkerProfile('${selectedProfile.id||t.worker_id}','taskDetail')">Calificar</button>`:`<button class="accent-soft" onclick="openChat('${t.id}')">Chat</button>`}</div></div>`;
+
  if(t.status==="in_progress"&&!t.completion_requested_at)body+=`<div class="completion-card"><h3>Tarea en curso</h3><p>Cuando el trabajador indique que terminó, podrás revisar su evidencia antes de confirmar.</p></div>`;
  if(t.status==="in_progress"&&t.completion_requested_at)body+=`<div class="completion-card"><h3>El trabajador indicó que terminó</h3><p>Revisa la evidencia antes de confirmar.</p>${taskMediaGallery("completion","Evidencia de finalización")}<div class="completion-actions"><button class="btn orange" onclick="confirmTaskCompletion('${t.id}')">Confirmar</button><button class="danger-outline" onclick="openCompletionProblemSheet('${t.id}')">Reportar problema</button></div></div>`;
  if(t.status==="completed")body+=`${taskMediaGallery("completion","Evidencia de finalización")}${ratingEditorHtml(t.id,savedRating)}`;
@@ -2124,7 +2169,8 @@ if(isOwner&&t.status==="open"){
 }
 if((t.client_id===state.user.id||t.worker_id===state.user.id)&&t.worker_id&&closed)body+=`<div class="task-mini-actions"><button class="task-inline-delete" onclick="deleteConversation('${t.id}',true)">${iconSvg("trash")} Borrar conversación</button></div>`;
 const statusCls=t.status==="open"?"pending":(t.status==="in_progress"&&t.completion_requested_at?"awaiting":"");
-root.innerHTML=shell(`<section class="screen"><div class="detail-shell"><div class="detail-topline"><button class="icon" onclick="go('${state.taskBackRoute||(isOwner?"clientHome":"workerHome")}')">←</button><span class="detail-category-pill">${taskIcon(t)} ${escapeHtml(baseCategory(t.category))}</span><span></span></div>${authMsg()}<div class="detail-card"><div class="detail-icon-box">${taskIcon(t)}</div><div class="detail-money">${money(t.offered_price)}</div><h1 class="detail-title">${escapeHtml(t.title)}</h1><p class="detail-copy">${escapeHtml(t.description)}</p><span class="detail-location">${iconSvg("location")}<span>${(!isOwner&&t.status==="open")?"Ubicación aproximada":escapeHtml(t.location_label||"Sin ubicación")}${!isOwner&&taskDistanceKm(t)!=null?` · ${distanceLabel(taskDistanceKm(t))} de ti`:""}</span></span>${taskMediaGallery("request","Fotos de la tarea")}</div>${taskLocationCard(t)}${workCenterHtml(t,isOwner)}<div class="status-banner ${statusCls}"><span class="dot"></span><span>${taskStatusLabel(t)}</span></div>${taskJourneyCard(t,isOwner)}${timelineHtml(t)}${taskQuestionsHtml(t,isOwner)}${isOwner&&t.status==="open"&&!t.worker_id?`<button class="edit-task-btn" onclick="go('editTask')">Editar tarea</button>`:""}${t.status==="cancelled"&&t.cancellation_reason?`<div class="policy-note"><b>Motivo de cancelación:</b> ${escapeHtml(t.cancellation_reason)}</div>`:""}${(t.client_id===state.user.id||t.worker_id===state.user.id)&&t.worker_id&&!closed?`<button class="chat-cta-btn" onclick="openChat('${t.id}')"><span class="left">${iconSvg("chat")}<span>Abrir chat</span></span><span>›</span></button>`:(t.client_id===state.user.id||t.worker_id===state.user.id)&&t.worker_id&&closed?`<div class="chat-closed-banner"><span class="left">${iconSvg("chat")}<span>El chat se cerró al finalizar la tarea.</span></span></div>`:""}${body}${participantCanCancel(t)?`<button class="cancel-task-btn" onclick="openCancelTaskSheet('${t.id}')">Cancelar tarea</button>`:""}${t.worker_id&&otherParticipantId(t)?`<div class="safety-card"><h3>Seguridad</h3><p>Reporta conductas inapropiadas o bloquea a la otra persona si es necesario.</p><div class="safety-actions"><button class="safety-btn" onclick="openUserReportSheet('${t.id}')">${iconSvg("flag")} Reportar</button><button class="safety-btn danger" onclick="blockOtherUser('${t.id}')">${iconSvg("shield")} Bloquear</button></div></div>`:""}</div></section>`,true);renderCompletionEvidencePreview()
+const assignedCompact=!!t.worker_id&&!["open","cancelled"].includes(t.status);
+root.innerHTML=shell(`<section class="screen"><div class="detail-shell"><div class="detail-topline"><button class="icon" onclick="go('${state.taskBackRoute||(isOwner?"clientHome":"workerHome")}')">←</button><span class="detail-category-pill">${taskIcon(t)} ${escapeHtml(baseCategory(t.category))}</span><span></span></div>${authMsg()}<div class="detail-card detail-card-compact"><div class="detail-icon-box">${taskIcon(t)}</div><div class="detail-money">${money(t.offered_price)}</div><h1 class="detail-title">${escapeHtml(t.title)}</h1><p class="detail-copy">${escapeHtml(t.description)}</p><span class="detail-location">${iconSvg("location")}<span>${(!isOwner&&t.status==="open")?"Ubicación aproximada":escapeHtml(t.location_label||"Sin ubicación")}${!isOwner&&taskDistanceKm(t)!=null?` · ${distanceLabel(taskDistanceKm(t))} de ti`:""}</span></span>${taskMediaGallery("request","Fotos de la tarea")}</div>${taskLocationCard(t)}${workCenterHtml(t,isOwner)}${assignedCompact?"":`<div class="status-banner ${statusCls}"><span class="dot"></span><span>${taskStatusLabel(t)}</span></div>${taskJourneyCard(t,isOwner)}${timelineHtml(t)}${taskQuestionsHtml(t,isOwner)}`}${isOwner&&t.status==="open"&&!t.worker_id?`<button class="edit-task-btn" onclick="go('editTask')">Editar tarea</button>`:""}${!assignedCompact&&t.status==="cancelled"&&t.cancellation_reason?`<div class="policy-note"><b>Motivo de cancelación:</b> ${escapeHtml(t.cancellation_reason)}</div>`:""}${!assignedCompact&&(t.client_id===state.user.id||t.worker_id===state.user.id)&&t.worker_id&&!closed?`<button class="chat-cta-btn" onclick="openChat('${t.id}')"><span class="left">${iconSvg("chat")}<span>Abrir chat</span></span><span>›</span></button>`:""}${body}${assignedCompact?taskMoreDetailsHtml(t,isOwner):""}${participantCanCancel(t)?`<button class="cancel-task-btn compact-cancel" onclick="openCancelTaskSheet('${t.id}')">Cancelar tarea</button>`:""}${!assignedCompact&&t.worker_id&&otherParticipantId(t)?`<div class="safety-card"><h3>Seguridad</h3><p>Reporta conductas inapropiadas o bloquea a la otra persona si es necesario.</p><div class="safety-actions"><button class="safety-btn" onclick="openUserReportSheet('${t.id}')">${iconSvg("flag")} Reportar</button><button class="safety-btn danger" onclick="blockOtherUser('${t.id}')">${iconSvg("shield")} Bloquear</button></div></div>`:""}</div></section>`,true);renderCompletionEvidencePreview()
 }
 
 
@@ -2155,21 +2201,30 @@ function paymentActionHtml(t,offer){
  const pay=state.currentPayment,amount=agreedTaskAmount(t,offer);
  const total=Number(pay?.amount_total||amount||0),commission=Number(pay?.commission_amount??(total*.15)),workerNet=Number(pay?.worker_net_amount??(total-commission));
  if(pay?.payment_status==="paid")return `<div class="payment-paid-v2"><div class="payment-paid-head"><span>${iconSvg("verify")}</span><div><small>PAGO CONFIRMADO</small><b>${money(total)} asociados a esta tarea</b><p>El trabajador ya puede comenzar.</p></div></div><div class="payment-split-preview"><span><small>Cálculo trabajador · 85%</small><b>${money(workerNet)}</b></span><span><small>Comisión DOHOY · 15%</small><b>${money(commission)}</b></span></div></div>`;
- return `<div class="payment-card payment-required-card"><div class="payment-required-head"><span>${iconSvg("shield")}</span><div><small>PAGO REQUERIDO</small><h3>Confirma el trabajo con el pago</h3><p>El trabajador no podrá ir en camino ni comenzar hasta que Stripe confirme el pago.</p></div></div><div class="payment-summary"><div><span>Total acordado</span><b>${money(total)}</b></div><div><span>Cálculo trabajador · 85%</span><b>${money(workerNet)}</b></div><div><span>Comisión DOHOY · 15%</span><b>${money(commission)}</b></div></div><button id="payTaskButton" class="payment-cta" onclick="startTaskCheckout('${t.id}')">${pay?.payment_status==="processing"?"CONTINUAR PAGO":"PAGAR Y CONFIRMAR"}</button><div class="payment-secure">${iconSvg("shield")} Pago procesado por Stripe · el trabajo se habilita al confirmarse</div></div>`
+ return `<div class="payment-card payment-required-card"><div class="payment-required-head"><span>${iconSvg("shield")}</span><div><small>PAGO REQUERIDO</small><h3>Confirma el trabajo con el pago</h3><p>El trabajador no podrá ir en camino ni comenzar hasta que Stripe confirme el pago.</p></div></div><div class="payment-summary"><div><span>Total acordado</span><b>${money(total)}</b></div><div><span>Cálculo trabajador · 85%</span><b>${money(workerNet)}</b></div><div><span>Comisión DOHOY · 15%</span><b>${money(commission)}</b></div></div><button id="payTaskButton" class="payment-cta" onclick="startTaskCheckout('${t.id}')">${pay?.payment_status==="processing"?"CONTINUAR PAGO":"PAGAR Y CONFIRMAR"}</button><div id="checkoutInlineError" class="checkout-inline-error" hidden></div><div class="payment-secure">${iconSvg("shield")} Pago procesado por Stripe · el trabajo se habilita al confirmarse</div></div>`
 }
 async function startTaskCheckout(taskId){
- await trackEvent('checkout_started',{},taskId);
  if(state.checkoutBusy)return;
- state.checkoutBusy=true;const btn=document.getElementById("payTaskButton");if(btn){btn.disabled=true;btn.textContent="ABRIENDO PAGO…"}
+ state.checkoutBusy=true;state.error="";
+ const btn=document.getElementById("payTaskButton");
+ if(btn){btn.disabled=true;btn.textContent="ABRIENDO STRIPE…";btn.classList.add("is-loading")}
+ trackEvent('checkout_started',{},taskId).catch(()=>{});
  try{
-   const back=new URL(REDIRECT_URL);back.searchParams.set("task",taskId);const {data,error}=await sb.functions.invoke("dohoy-create-checkout",{body:{task_id:taskId,return_url:back.toString()}});
-   if(error)throw error;
-   if(!data?.checkout_url)throw Error(data?.error||"No se recibió la liga de pago.");
-   window.location.assign(data.checkout_url)
+   const back=new URL(REDIRECT_URL);back.searchParams.set("task",taskId);
+   const {data,error}=await sb.functions.invoke("dohoy-create-checkout",{body:{task_id:taskId,return_url:back.toString()}});
+   if(error){
+     let detail=error.message||"No se pudo iniciar el pago.";
+     try{const payload=await error.context?.json?.();if(payload?.error)detail=payload.error;if(payload?.detail)detail+=" · "+payload.detail}catch{}
+     throw Error(detail)
+   }
+   if(!data?.checkout_url)throw Error(data?.error||"Stripe no devolvió una liga de pago.");
+   window.location.href=data.checkout_url;
  }catch(err){
    state.checkoutBusy=false;
-   state.error="No pudimos abrir el pago: "+(err?.message||err);
-   render()
+   state.error="No pudimos abrir Stripe: "+String(err?.message||err).replaceAll("_"," ");
+   const live=document.getElementById("checkoutInlineError");
+   if(live){live.textContent=state.error;live.hidden=false}
+   if(btn){btn.disabled=false;btn.textContent="REINTENTAR PAGO";btn.classList.remove("is-loading")}
  }
 }
 function taskProgressButtons(t){
@@ -2298,7 +2353,7 @@ async function profile(){
    ${settingsRow("Política de privacidad","privacy","document","Cómo protegemos tus datos")}
  </div>
  <div class="account-actions"><button class="logout-btn" onclick="signOutCurrent()">${iconSvg("logout")} Cerrar sesión</button></div>
- <div class="version-note">DOHOY · Versión 4.4.0 · PAYMENT GATE & SPEED</div>
+ <div class="version-note">DOHOY · Versión 4.4.1 · CHECKOUT & MOBILE UX</div>
  </section>`,true)
 }
 function settingsRow(title,route,icon,sub=""){
