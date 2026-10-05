@@ -1010,6 +1010,52 @@ h1,h2,h3,b,p,span,small{overflow-wrap:anywhere}
  .worker-promo{grid-template-columns:1fr 72px!important}
 }
 
+
+/* DOHOY 4.3.1 — Activity Center hotfix */
+.activity-v3{padding-bottom:118px!important}
+.activity-v3 .top{margin-bottom:8px!important}
+.activity-v3 .activity-tabs{
+  display:flex!important;gap:7px!important;overflow-x:auto!important;
+  padding:2px 0 7px!important;margin:0 0 8px!important;scrollbar-width:none
+}
+.activity-v3 .activity-tabs::-webkit-scrollbar{display:none}
+.activity-v3 .activity-tabs button{
+  flex:0 0 auto!important;min-height:38px!important;padding:8px 13px!important;
+  border-radius:999px!important;font-size:9px!important;font-weight:900!important;
+  white-space:nowrap!important
+}
+.notification-list-v3{gap:8px!important}
+.notification-group-card{
+  min-height:82px!important;max-height:none!important;
+  background:#fff!important;color:#172033!important;border-color:#e2eaf4!important
+}
+.notification-group-card .notification-copy b{color:#172033!important}
+.notification-group-card .notification-copy p{color:#68778b!important}
+.notification-group-card .notification-copy>small{color:#8795a8!important}
+.notification-group-card .notification-side time{color:#8d9aac!important}
+.notification-group-card .notification-ico{background:#edf4ff!important;color:#0b57bd!important}
+.notification-group-card.unread{
+  background:linear-gradient(135deg,#f4f9ff,#fff)!important;
+  border-color:#9fc5fa!important
+}
+html[data-theme="dark"] .notification-group-card{
+  background:#111f32!important;color:#f3f7fd!important;border-color:#263a54!important
+}
+html[data-theme="dark"] .notification-group-card.unread{
+  background:linear-gradient(135deg,#142943,#111f32)!important;border-color:#315c91!important
+}
+html[data-theme="dark"] .notification-group-card .notification-copy b{color:#f3f7fd!important}
+html[data-theme="dark"] .notification-group-card .notification-copy p{color:#aebcd0!important}
+html[data-theme="dark"] .notification-group-card .notification-copy>small{color:#8294aa!important}
+html[data-theme="dark"] .notification-group-card .notification-side time{color:#8393a7!important}
+html[data-theme="dark"] .notification-group-card .notification-ico{background:#183457!important;color:#79adff!important}
+html[data-theme="dark"] .activity-v3 .activity-tabs button:not(.active){
+  background:#111f32!important;color:#aab9cd!important;border-color:#263a54!important
+}
+html[data-theme="dark"] .activity-v3 .activity-tabs button.active{
+  background:#1467e8!important;color:#fff!important;border-color:#1467e8!important
+}
+
 </style>
 <link rel="manifest" href="./manifest.webmanifest?v=1.9.4"><link rel="apple-touch-icon" href="./icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default">
 </head>
@@ -1360,14 +1406,6 @@ async function openNotificationGroup(taskId,idsCsv,kind=""){
    await openTask(taskId);
    if(kind==="messages"&&state.selectedTask?.id===taskId&&!taskChatClosed(state.selectedTask))await openChat(taskId);
  }else await openNotificationsCenter()
-}
-async function openNotificationsCenter(){clearPoll();await loadNotifications();state.route='activity';render()}
-function notificationGroup(n){if(["offer","offer_accepted","task_cancelled","rating"].includes(n.type))return "jobs";if(["payment","payment_succeeded","payment_failed","refund","payout"].includes(n.type))return "payments";return "system"}
-function setNotificationFilter(v){state.notificationFilter=v;render()}
-function notificationsCenterScreen(){
- const f=state.notificationFilter||"all",items=(state.notifications||[]).filter(n=>f==="all"||notificationGroup(n)===f);
- const tabs=[["all","Todo"],["jobs","Trabajos"],["payments","Pagos"],["system","Sistema"]];
- return shell(`<section class="screen activity-v2"><div class="top"><button class="icon" onclick="go('${state.mode==='client'?'clientHome':'workerHome'}')">←</button><div><b>Actividad</b><div class="small">Todo lo importante de DOHOY</div></div><span></span></div><div class="center-actions"><div><div class="kicker">Notificaciones</div><h1 style="margin:5px 0 0">Tu actividad</h1></div>${state.unreadNotifications?`<button class="text-action" onclick="markAllNotificationsRead()">Marcar leídas</button>`:''}</div><div class="activity-tabs">${tabs.map(([k,l])=>`<button class="${f===k?"active":""}" onclick="setNotificationFilter('${k}')">${l}</button>`).join("")}</div><div class="notification-list">${items.length?items.map(n=>`<button class="notification-row ${n.read_at?'':'unread'}" onclick="openNotification('${n.id}','${n.task_id||''}')"><span class="notification-ico">${notificationIcon(n.type)}</span><span class="notification-copy"><b>${escapeHtml(n.title)}</b><p>${escapeHtml(n.body||'')}</p></span><span class="notification-time">${relativeTime(n.created_at)}</span></button>`).join(''):emptyState("bell",f==="all"?"Todo al día":"No hay avisos aquí",f==="all"?"Cuando pase algo importante aparecerá en este centro.":"Prueba otra categoría de notificaciones.")}</div></section>`,true)
 }
 async function openNotification(id,taskId){await sb.from('notifications').update({read_at:new Date().toISOString()}).eq('id',id).eq('user_id',state.user.id);await loadNotificationSummary();if(taskId){await openTask(taskId)}else{await openNotificationsCenter()}}
 async function markAllNotificationsRead(){await sb.from('notifications').update({read_at:new Date().toISOString()}).eq('user_id',state.user.id).is('read_at',null);await loadNotifications();render()}
@@ -2220,7 +2258,7 @@ async function profile(){
    ${settingsRow("Política de privacidad","privacy","document","Cómo protegemos tus datos")}
  </div>
  <div class="account-actions"><button class="logout-btn" onclick="signOutCurrent()">${iconSvg("logout")} Cerrar sesión</button></div>
- <div class="version-note">DOHOY · Versión 4.3.0 · POLISH & QA</div>
+ <div class="version-note">DOHOY · Versión 4.3.1 · ACTIVITY HOTFIX</div>
  </section>`,true)
 }
 function settingsRow(title,route,icon,sub=""){
@@ -2854,7 +2892,7 @@ const remaining=Math.max(0,1850-(Date.now()-splashStarted));setTimeout(finishSpl
 sb.auth.onAuthStateChange(async(_event,session)=>{state.session=session;state.user=session?.user||null;if(state.user){await loadProfile();await loadNotificationSummary();subscribeNotifications()}if(!session&&!['welcome','signup','login','onboarding','mode'].includes(state.route))go(onboardingDone()?'welcome':'onboarding')})
 }
 const DOHOY_VAPID_PUBLIC="BIqp0MxIqy8rJPGj8mCRF-P_FwaMWgRMKSR_x6AazRKylHNhyT3NEPjNODKzvsSyIpt6OE3BUQXEz8-OkV-k14E";
-// DOHOY 4.3.0 — auditoría funcional, consistencia visual, acciones protegidas y tareas persistentes.
+// DOHOY 4.3.1 — elimina implementación duplicada del centro de actividad y corrige contraste.
 const DEFAULT_FILTERS={query:'',category:'',minPrice:0,maxDistance:null,todayOnly:false,vehicleOnly:false,notifyMatching:true};
 function workerFilterState(){if(!state.workerFilters)state.workerFilters={...DEFAULT_FILTERS};return state.workerFilters}
 function searchStorageKey(){return 'dohoy_search_'+(state.user?.id||'guest')}
