@@ -1390,6 +1390,18 @@ html[data-theme="dark"] .selected-worker-card h2,html[data-theme="dark"] .select
 html[data-theme="dark"] .selected-worker-card p,html[data-theme="dark"] .selected-worker-card small,html[data-theme="dark"] .completion-card p,html[data-theme="dark"] .finish-confirm-v503 p{color:#aab8ca!important}
 html[data-theme="dark"] .paid-line-v50{background:#102820!important;border-color:#245a48!important}html[data-theme="dark"] .paid-line-v50 b{color:#dff7ee!important}html[data-theme="dark"] .completion-card .danger-outline{background:#25191b!important;color:#ff9d91!important;border-color:#6e3535!important}
 
+
+/* 5.0.4 — direct completion + hard dark-mode correction */
+.completion-inline-error-v504{margin-top:10px;padding:10px 12px;border-radius:12px;background:#fff0ef;color:#a72b22;border:1px solid #efc8c8;font-size:10px;font-weight:750;line-height:1.4}
+.completion-actions .btn.orange:disabled{opacity:.68!important;cursor:wait!important}
+html[data-theme="dark"] body .selected-worker-card,html[data-theme="dark"] body .completion-card{background:#102238!important;background-image:none!important;border-color:#2b4058!important;color:#f3f7fd!important}
+html[data-theme="dark"] body .selected-worker-card *,html[data-theme="dark"] body .completion-card *{text-shadow:none}
+html[data-theme="dark"] body .selected-worker-name,html[data-theme="dark"] body .selected-worker-card h2,html[data-theme="dark"] body .selected-worker-card h3,html[data-theme="dark"] body .completion-card h3{color:#f3f7fd!important}
+html[data-theme="dark"] body .selected-worker-card .works-count,html[data-theme="dark"] body .selected-worker-card p,html[data-theme="dark"] body .completion-card p{color:#aebbd0!important}
+html[data-theme="dark"] body .selected-worker-card .secondary-soft{background:#172c45!important;color:#dce9ff!important}
+html[data-theme="dark"] body .completion-card .danger-outline{background:#28191c!important;color:#ff9b8f!important;border-color:#713b3b!important}
+html[data-theme="dark"] body .completion-inline-error-v504{background:#321d20;color:#ffb1a7;border-color:#6f3639}
+
 </style>
 <link rel="manifest" href="./manifest.webmanifest?v=1.9.4"><link rel="apple-touch-icon" href="./icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default">
 </head>
@@ -2379,7 +2391,7 @@ if(isOwner&&t.worker_id&&selectedProfile){
  body+=`<div class="task-section-title"><div><h2>Trabajador seleccionado</h2><div class="sub">Foto, experiencia y calificación real.</div></div></div><div class="selected-worker-card"><div class="selected-worker-head">${avatarMarkup(selectedProfile)}${workerSummaryHtml(selectedProfile)}<div class="worker-price">${moneyExact(agreedTaskAmount(t,assignedOffer))}</div></div><div class="worker-card-actions"><button class="secondary-soft" onclick="openWorkerProfile('${selectedProfile.id||t.worker_id}','taskDetail')">Ver perfil</button>${t.status==="completed"?`<button class="accent-soft" onclick="openWorkerProfile('${selectedProfile.id||t.worker_id}','taskDetail')">Calificar</button>`:`<button class="accent-soft" onclick="openChat('${t.id}')">Chat</button>`}</div></div>`;
 
  if(t.status==="in_progress"&&!t.completion_requested_at)body+=`<div class="completion-card"><h3>Tarea en curso</h3><p>Cuando el trabajador indique que terminó, podrás revisar su evidencia antes de confirmar.</p></div>`;
- if(t.status==="in_progress"&&t.completion_requested_at)body+=`<div class="completion-card"><h3>El trabajador indicó que terminó</h3><p>Revisa la evidencia antes de confirmar.</p>${taskMediaGallery("completion","Evidencia de finalización")}<div class="completion-actions"><button class="btn orange" onclick="confirmTaskCompletion('${t.id}')">Confirmar</button><button class="danger-outline" onclick="openCompletionProblemSheet('${t.id}')">Reportar problema</button></div></div>`;
+ if(t.status==="in_progress"&&t.completion_requested_at)body+=`<div class="completion-card"><h3>El trabajador indicó que terminó</h3><p>Revisa la evidencia antes de confirmar.</p>${taskMediaGallery("completion","Evidencia de finalización")}<div class="completion-actions"><button id="confirmTask-${t.id}" class="btn orange" onclick="confirmTaskCompletion('${t.id}',this)">Confirmar trabajo</button><button class="danger-outline" onclick="openCompletionProblemSheet('${t.id}')">Reportar problema</button></div><div id="completionError-${t.id}" class="completion-inline-error-v504" hidden></div></div>`;
  if(t.status==="completed")body+=`${taskMediaGallery("completion","Evidencia de finalización")}${ratingEditorHtml(t.id,savedRating)}`;
 }
 if(isOwner&&t.status==="open"){
@@ -2592,7 +2604,7 @@ async function profile(){
     ${adminAllowed()?`<details><summary><span>${iconSvg("crown")}<b>Administración</b></span><em>⌄</em></summary><div><button class="settings-row" onclick="openAdmin()"><span class="row-ico">${iconSvg("crown")}</span><span><span class="row-main">Panel administrativo</span><span class="row-sub">Operación de DOHOY</span></span><span class="chev">›</span></button></div></details>`:""}
   </div>
   <div class="account-actions"><button class="logout-btn" onclick="signOutCurrent()">${iconSvg("logout")} Cerrar sesión</button></div>
-  <div class="version-note">DOHOY · Versión 5.0.3 · FORM + COMPLETION FIX</div>
+  <div class="version-note">DOHOY · Versión 5.0.4 · DIRECT COMPLETION FIX</div>
  </section>`,true)
 }
 function settingsRow(title,route,icon,sub=""){
@@ -3210,27 +3222,43 @@ async function requestTaskCompletionNow(id){
  }catch(err){logClientError(err,{kind:'request_task_completion',task_id:id});state.error=friendlyError(err?.message||err);if(btn){btn.disabled=false;btn.textContent='Sí, terminé'}}
  finally{state.completionBusy=false;await loadTaskMedia(id);await render();renderCompletionEvidencePreview()}
 }
-function confirmTaskCompletion(id){
- const t=state.selectedTask;if(!t||t.id!==id)return;
- openProfileSheet("Confirmar trabajo","Esta acción cerrará el servicio y el chat.",`<div class="finish-confirm-v503">${iconSvg("verify")}<h3>¿El trabajo quedó terminado correctamente?</h3><p>Confirma solo después de revisar el trabajo y cualquier evidencia enviada.</p><div><button class="danger-outline" onclick="closeProfileSheet();openCompletionProblemSheet('${id}')">Reportar problema</button><button id="finalConfirmTaskBtn" class="btn primary" onclick="confirmTaskCompletionNow('${id}')">Sí, confirmar</button></div></div>`)
+async function confirmTaskCompletion(id,sourceButton=null){
+ const key="complete:"+id;
+ if(actionLocks.has(key))return;
+ const btn=sourceButton||document.getElementById('confirmTask-'+id);
+ const errBox=document.getElementById('completionError-'+id);
+ if(errBox){errBox.hidden=true;errBox.textContent=''}
+ if(btn){btn.disabled=true;btn.dataset.originalText=btn.textContent;btn.textContent='Confirmando…'}
+ actionLocks.add(key);
+ try{
+  // Refresh the persisted session immediately before this sensitive RPC. This avoids
+  // an iOS/Safari background-resume token race without forcing a new login.
+  const {data:sessionData,error:sessionError}=await sb.auth.getSession();
+  if(sessionError)throw sessionError;
+  if(!sessionData?.session)throw new Error('session_missing');
+  state.session=sessionData.session;state.user=sessionData.session.user;
+  const {data,error}=await sb.rpc('confirm_task_completion',{p_task_id:id});
+  if(error)throw error;
+  state.selectedTask=Array.isArray(data)?data[0]:data;
+  state.notice='Trabajo finalizado correctamente.';state.error='';
+  await Promise.allSettled([trackEvent("task_completed",{},id),loadOffers(id),loadTaskRating(id),loadTaskPayment(id),loadTaskMedia(id)]);
+  render();
+  setTimeout(()=>showSuccessMoment("¡Trabajo terminado!","El servicio quedó cerrado. Ahora pueden calificarse.","orange"),80);
+ }catch(err){
+  logClientError(err,{kind:'confirm_task_completion_direct',task_id:id});
+  const raw=String(err?.message||err||'');
+  let msg=friendlyError(raw);
+  if(raw.includes('session_missing'))msg='Tu sesión se pausó al salir de la app. Vuelve a Inicio y abre la tarea otra vez; no necesitas cerrar sesión.';
+  if(raw.toLowerCase().includes('pago'))msg='El pago de esta tarea todavía no aparece confirmado. Actualiza el pago antes de cerrar el trabajo.';
+  if(raw.toLowerCase().includes('pendiente de confirmación'))msg='La tarea cambió de estado. Actualízala e inténtalo nuevamente.';
+  state.error=msg;
+  if(errBox){errBox.textContent=msg;errBox.hidden=false}
+  if(btn){btn.disabled=false;btn.textContent=btn.dataset.originalText||'Confirmar trabajo'}
+ }finally{
+  actionLocks.delete(key);
+ }
 }
-async function confirmTaskCompletionNow(id){
- if(actionLocks.has("complete:"+id))return;
- const btn=document.getElementById('finalConfirmTaskBtn');if(btn){btn.disabled=true;btn.textContent='Confirmando…'}
- return runOnce("complete:"+id,async()=>{
-  try{
-   const {data,error}=await sb.rpc('confirm_task_completion',{p_task_id:id});if(error)throw error;
-   closeProfileSheet();state.selectedTask=Array.isArray(data)?data[0]:data;state.notice='Trabajo finalizado. El chat quedó cerrado y ya puedes calificar al trabajador.';state.error='';
-   await Promise.allSettled([trackEvent("task_completed",{},id),loadOffers(id),loadTaskRating(id),loadTaskPayment(id)]);
-   render();setTimeout(()=>showSuccessMoment("¡Trabajo terminado!","Gracias por usar DOHOY. Ahora pueden calificarse.","orange"),100);
-  }catch(err){
-   logClientError(err,{kind:'confirm_task_completion',task_id:id});
-   if(btn){btn.disabled=false;btn.textContent='Sí, confirmar'}
-   const msg=friendlyError(err?.message||err);state.error=msg;
-   const copy=document.querySelector('.profile-sheet-copy');if(copy)copy.textContent=msg;
-  }
- })
-}
+window.confirmTaskCompletion=confirmTaskCompletion;
 async function setTaskStatus(id,status){
 if(status==='in_progress')return startTask(id);
 if(status==='completed')return requestTaskCompletion(id)
@@ -3276,6 +3304,7 @@ sb.auth.onAuthStateChange((_event,session)=>{
  },0)
 })
 }
+window.DOHoyBuild="5.0.4";
 const DOHOY_VAPID_PUBLIC="BIqp0MxIqy8rJPGj8mCRF-P_FwaMWgRMKSR_x6AazRKylHNhyT3NEPjNODKzvsSyIpt6OE3BUQXEz8-OkV-k14E";
 // DOHOY 4.4.0 — pago obligatorio antes del trabajo, rendimiento, layout móvil y barras sin solaparse.
 const DEFAULT_FILTERS={query:'',category:'',minPrice:0,maxDistance:null,todayOnly:false,vehicleOnly:false,notifyMatching:true};
@@ -3476,7 +3505,7 @@ function onboardingStep(i){state.onboardingStep=Math.min(2,Math.max(0,i));go('on
 function finishOnboarding(){try{localStorage.setItem('dohoy_onboarding_v1','1')}catch{}go('mode')}
 function suspendedScreen(){return shell(`<section class="screen"><div class="top">${logo(true)}</div><div class="setting-empty">${iconSvg('shield')}<h1>Cuenta suspendida</h1><p>Contacta a soporte para revisar tu situación. Puedes consultar tus casos y enviar información.</p></div>${authMsg()}<button class="btn primary" onclick="openSupportCenter()">Soporte y disputas</button><button class="btn ghost" onclick="signOutCurrent()">Cerrar sesión</button></section>`)}
 
-window.setNotificationFilter=setNotificationFilter;window.setTheme=setTheme;window.publishWizardNext=publishWizardNext;window.sendQuickReply=sendQuickReply;window.sendChatImage=sendChatImage;window.retryCurrentView=retryCurrentView;window.saveTrustedContact=saveTrustedContact;window.contactTrustedPerson=contactTrustedPerson;window.removePendingTaskPhoto=removePendingTaskPhoto;window.removeCompletionEvidence=removeCompletionEvidence;window.selectCompletionEvidence=selectCompletionEvidence;window.openMediaPhoto=openMediaPhoto;window.openClientProfile=openClientProfile;window.saveClientRating=saveClientRating;window.openSafetyCenter=openSafetyCenter;window.openBlockedUsers=openBlockedUsers;window.unblockUser=unblockUser;window.openMyReports=openMyReports;window.shareCurrentTask=shareCurrentTask;window.selectTaskPhotos=selectTaskPhotos;window.openCounterOfferSheet=openCounterOfferSheet;window.submitCounterOffer=submitCounterOffer;window.respondCounterOffer=respondCounterOffer;window.markTaskEnRoute=markTaskEnRoute;window.markTaskArrived=markTaskArrived;window.saveEditTask=saveEditTask;window.state=state;window.openProfileField=openProfileField;window.openPhotoChoiceSheet=openPhotoChoiceSheet;window.openGalleryPicker=openGalleryPicker;window.handleGalleryPhoto=handleGalleryPhoto;window.closeProfileSheet=closeProfileSheet;window.saveProfileField=saveProfileField;window.saveSocialNetworks=saveSocialNetworks;window.requestAccountDeletion=requestAccountDeletion;window.go=go;window.mode=mode;window.signOut=signOut;window.openTask=openTask;window.acceptOffer=acceptOffer;window.startTask=startTask;window.requestTaskCompletion=requestTaskCompletion;window.confirmTaskCompletion=confirmTaskCompletion;window.setTaskStatus=setTaskStatus;window.openChat=openChat;window.openMessagesHome=openMessagesHome;window.sendMessage=sendMessage;window.backFromChat=backFromChat;window.toggleVehicleOptions=toggleVehicleOptions;window.updateVehiclePreview=updateVehiclePreview;window.updateCategoryPreview=updateCategoryPreview;window.openWorkerProfile=openWorkerProfile;window.openWorkerPhoto=openWorkerPhoto;window.closeWorkerPhoto=closeWorkerPhoto;window.openConversationFromList=openConversationFromList;window.bindConversationSwipes=bindConversationSwipes;window.selectTaskRating=selectTaskRating;window.clearTaskRating=clearTaskRating;window.deleteConversation=deleteConversation;window.openNotificationsCenter=openNotificationsCenter;window.openNotification=openNotification;window.markAllNotificationsRead=markAllNotificationsRead;window.openCancelTaskSheet=openCancelTaskSheet;window.submitCancelTask=submitCancelTask;window.openCompletionProblemSheet=openCompletionProblemSheet;window.submitCompletionProblem=submitCompletionProblem;window.openUserReportSheet=openUserReportSheet;window.submitUserReport=submitUserReport;window.blockOtherUser=blockOtherUser;window.toggleFavoriteWorker=toggleFavoriteWorker;window.openFavorites=openFavorites;window.saveRatingReview=saveRatingReview;
+window.setNotificationFilter=setNotificationFilter;window.setTheme=setTheme;window.publishWizardNext=publishWizardNext;window.sendQuickReply=sendQuickReply;window.sendChatImage=sendChatImage;window.retryCurrentView=retryCurrentView;window.saveTrustedContact=saveTrustedContact;window.contactTrustedPerson=contactTrustedPerson;window.removePendingTaskPhoto=removePendingTaskPhoto;window.removeCompletionEvidence=removeCompletionEvidence;window.selectCompletionEvidence=selectCompletionEvidence;window.openMediaPhoto=openMediaPhoto;window.openClientProfile=openClientProfile;window.saveClientRating=saveClientRating;window.openSafetyCenter=openSafetyCenter;window.openBlockedUsers=openBlockedUsers;window.unblockUser=unblockUser;window.openMyReports=openMyReports;window.shareCurrentTask=shareCurrentTask;window.selectTaskPhotos=selectTaskPhotos;window.openCounterOfferSheet=openCounterOfferSheet;window.submitCounterOffer=submitCounterOffer;window.respondCounterOffer=respondCounterOffer;window.markTaskEnRoute=markTaskEnRoute;window.markTaskArrived=markTaskArrived;window.saveEditTask=saveEditTask;window.state=state;window.openProfileField=openProfileField;window.openPhotoChoiceSheet=openPhotoChoiceSheet;window.openGalleryPicker=openGalleryPicker;window.handleGalleryPhoto=handleGalleryPhoto;window.closeProfileSheet=closeProfileSheet;window.saveProfileField=saveProfileField;window.saveSocialNetworks=saveSocialNetworks;window.requestAccountDeletion=requestAccountDeletion;window.go=go;window.mode=mode;window.signOut=signOut;window.openTask=openTask;window.acceptOffer=acceptOffer;window.startTask=startTask;window.requestTaskCompletion=requestTaskCompletion;window.requestTaskCompletionNow=requestTaskCompletionNow;window.confirmTaskCompletion=confirmTaskCompletion;window.setTaskStatus=setTaskStatus;window.openChat=openChat;window.openMessagesHome=openMessagesHome;window.sendMessage=sendMessage;window.backFromChat=backFromChat;window.toggleVehicleOptions=toggleVehicleOptions;window.updateVehiclePreview=updateVehiclePreview;window.updateCategoryPreview=updateCategoryPreview;window.openWorkerProfile=openWorkerProfile;window.openWorkerPhoto=openWorkerPhoto;window.closeWorkerPhoto=closeWorkerPhoto;window.openConversationFromList=openConversationFromList;window.bindConversationSwipes=bindConversationSwipes;window.selectTaskRating=selectTaskRating;window.clearTaskRating=clearTaskRating;window.deleteConversation=deleteConversation;window.openNotificationsCenter=openNotificationsCenter;window.openNotification=openNotification;window.markAllNotificationsRead=markAllNotificationsRead;window.openCancelTaskSheet=openCancelTaskSheet;window.submitCancelTask=submitCancelTask;window.openCompletionProblemSheet=openCompletionProblemSheet;window.submitCompletionProblem=submitCompletionProblem;window.openUserReportSheet=openUserReportSheet;window.submitUserReport=submitUserReport;window.blockOtherUser=blockOtherUser;window.toggleFavoriteWorker=toggleFavoriteWorker;window.openFavorites=openFavorites;window.saveRatingReview=saveRatingReview;
 window.openWorkerMap=openWorkerMap;window.showMapTask=showMapTask;window.setWorkerAvailability=setWorkerAvailability;window.acceptDirectInvite=acceptDirectInvite;window.declineDirectInvite=declineDirectInvite;window.openInviteWorker=openInviteWorker;window.sendWorkerInvite=sendWorkerInvite;window.askTaskQuestion=askTaskQuestion;window.answerTaskQuestion=answerTaskQuestion;window.openPortfolioManager=openPortfolioManager;window.savePortfolioPhoto=savePortfolioPhoto;window.deletePortfolioPhoto=deletePortfolioPhoto;window.loadPriceSuggestion=loadPriceSuggestion;window.openAdminBanners=openAdminBanners;window.createAdminBanner=createAdminBanner;window.toggleAdminBanner=toggleAdminBanner;
 window.filterWorkerTasks=filterWorkerTasks;window.setWorkerFilter=setWorkerFilter;window.resetWorkerFilters=resetWorkerFilters;window.saveSearchPreferences=saveSearchPreferences;window.openWorkerCategory=openWorkerCategory;window.requestDiscoveryLocation=requestDiscoveryLocation;window.enablePushNotifications=enablePushNotifications;window.disablePushNotifications=disablePushNotifications;window.openSupportCenter=openSupportCenter;window.newSupportCase=newSupportCase;window.selectSupportFiles=selectSupportFiles;window.removeSupportFile=removeSupportFile;window.submitSupportCase=submitSupportCase;window.openSupportCase=openSupportCase;window.editSupportDraft=editSupportDraft;window.replySupportCase=replySupportCase;
 window.addEventListener('online',()=>{state.online=true;state.notice='Conexión restablecida.';render();resumeApp('online');setTimeout(()=>{state.notice='';render()},1200)});
