@@ -1402,6 +1402,12 @@ html[data-theme="dark"] body .selected-worker-card .secondary-soft{background:#1
 html[data-theme="dark"] body .completion-card .danger-outline{background:#28191c!important;color:#ff9b8f!important;border-color:#713b3b!important}
 html[data-theme="dark"] body .completion-inline-error-v504{background:#321d20;color:#ffb1a7;border-color:#6f3639}
 
+
+/* 5.0.5 — stability + completed-service polish */
+.completed-service-v505{display:flex;align-items:center;gap:12px;margin:14px 0;padding:14px 15px;border-radius:18px;background:#edf9f3;border:1px solid #ccebdc;color:#166847}.completed-service-v505>.svg-icon{width:30px;height:30px;flex:0 0 auto}.completed-service-v505 div{display:grid;gap:2px}.completed-service-v505 small{font-size:8px;font-weight:950;letter-spacing:1px}.completed-service-v505 b{font-size:15px}.completed-service-v505 p{margin:0;font-size:10px;color:#557266}.rating-card{scroll-margin-top:90px}.rating-card:focus-within{box-shadow:0 0 0 3px rgba(18,103,232,.10),var(--soft)}
+html[data-theme="dark"] .completed-service-v505{background:#102820!important;border-color:#245a48!important;color:#dff7ee!important}html[data-theme="dark"] .completed-service-v505 p{color:#9fc8b7!important}
+button:disabled{touch-action:none}.client-task-card,.nav button,.simple-home-actions button,.work-center-v50 button{touch-action:manipulation}
+
 </style>
 <link rel="manifest" href="./manifest.webmanifest?v=1.9.4"><link rel="apple-touch-icon" href="./icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default">
 </head>
@@ -1789,7 +1795,8 @@ async function openFavorites(){const {data,error}=await sb.from('favorite_worker
 function favoritesScreen(){const list=state.favoriteWorkers||[];return shell(`<section class="screen"><div class="top"><button class="icon" aria-label="Volver al perfil" onclick="go('profile')">←</button><div><b>Favoritos</b><div class="small">Trabajadores que guardaste</div></div><span></span></div><h1>Trabajadores favoritos</h1><div class="favorite-list">${list.length?list.map(p=>`<button class="favorite-worker-card" onclick="state.selectedTask=null;openWorkerProfile('${p.id}','favorites')">${avatarMarkup(p)}<div><h3>${escapeHtml(profileDisplayName(p))}</h3><p>${Number(p.completed_tasks||0)} trabajos · ${prettyRating(p.rating)} ★</p></div><span>›</span></button>`).join(''):`${emptyState("heart","Aún no tienes favoritos","Cuando encuentres un trabajador que te guste, guárdalo para contratarlo otra vez.","go(\'clientHome\')","Ver mis tareas")}`}</div></section>`,true)}
 function coarseLocationForOpenTask(t){const d=taskDistanceKm(t);return `<span class="privacy-location">${iconSvg('location')}${d!=null?`${distanceLabel(d)} · `:''}Ubicación aproximada</span>`}
 async function saveRatingReview(taskId){const comment=(document.getElementById('ratingReviewText')?.value||state.currentTaskReview||'').trim();const score=Math.max(0,Math.min(5,Number(state.currentTaskRating)||0));const {error}=await sb.rpc('rate_task_with_review',{p_task_id:taskId,p_score:score,p_comment:comment||null});if(error){state.error='No pudimos guardar tu opinión: '+error.message;render();return}state.currentTaskReview=comment;const wid=state.selectedTask?.worker_id;if(wid){await refreshWorkerProfile(wid);await loadWorkerExtras(wid)}state.notice='Calificación y opinión guardadas.';render()}
-function ratingEditorHtml(taskId,rating){return `<div class="rating-card"><h3>Califica tu experiencia</h3><p>Selecciona de 0 a 5 estrellas y, si quieres, deja una opinión.</p>${ratingButtons(taskId,rating)}<div class="rating-saved-note">Calificación actual: ${rating} de 5</div><div class="review-editor"><textarea id="ratingReviewText" maxlength="500" oninput="state.currentTaskReview=this.value" placeholder="Cuenta brevemente cómo fue tu experiencia (opcional)">${escapeHtml(state.currentTaskReview||'')}</textarea><button class="btn orange" onclick="saveRatingReview('${taskId}')">Guardar calificación y opinión</button></div><button type="button" class="tiny-link-btn" style="margin-top:12px" onclick="clearTaskRating('${taskId}')">Dejar en 0 estrellas</button></div>`}
+function scrollToTaskRating(taskId){const el=document.getElementById("ratingCard-"+taskId);if(el){el.scrollIntoView({behavior:"smooth",block:"center"});setTimeout(()=>document.getElementById("ratingReviewText")?.focus(),350)}}
+function ratingEditorHtml(taskId,rating){return `<div id="ratingCard-${taskId}" class="rating-card"><h3>Califica tu experiencia</h3><p>Selecciona de 0 a 5 estrellas y, si quieres, deja una opinión.</p>${ratingButtons(taskId,rating)}<div class="rating-saved-note">Calificación actual: ${rating} de 5</div><div class="review-editor"><textarea id="ratingReviewText" maxlength="500" oninput="state.currentTaskReview=this.value" placeholder="Cuenta brevemente cómo fue tu experiencia (opcional)">${escapeHtml(state.currentTaskReview||'')}</textarea><button class="btn orange" onclick="saveRatingReview('${taskId}')">Guardar calificación y opinión</button></div><button type="button" class="tiny-link-btn" style="margin-top:12px" onclick="clearTaskRating('${taskId}')">Dejar en 0 estrellas</button></div>`}
 function welcome(){
 return shell(`<section class="hero">
 <div>${logo()}<div class="tag">Lo necesitas. Alguien lo hace.</div></div>
@@ -1882,6 +1889,7 @@ function setClientTaskFilter(v){
 }
 async function clientHome(){
  await Promise.all([loadMyTasks(),loadNotificationSummary(),loadClientTaskStats()]);
+ if(state.route!=="clientHome")return;
  const b=clientTaskBuckets(),current=b.current,posted=b.posted,withOffers=b.proposals;
  const attention=current.find(t=>t.completion_requested_at)||current[0]||withOffers[0]||null;
  let action={title:"¿Qué necesitas?",label:"Publicar una tarea",icon:"plus",run:"go('createTask')",hint:"Cuéntanos qué necesitas resolver"};
@@ -1903,6 +1911,7 @@ async function clientHome(){
 
 async function clientTasks(){
  await Promise.all([loadMyTasks(),loadClientTaskStats()]);
+ if(state.route!=="clientTasks")return;
  const b=clientTaskBuckets();
  let tab=["posted","current","proposals","history"].includes(state.clientTaskFilter)?state.clientTaskFilter:"posted";
  state.clientTaskFilter=tab;
@@ -1968,7 +1977,9 @@ function workerTaskCard(t){
 }
 
 async function workerHome(){
+ const __routeAtStart="workerHome";
  await Promise.all([loadOpenTasks(),loadWorkerActivity(),loadNotificationSummary(),loadSearchPreferences(),loadFeatureStatus(),loadWorkerAvailability(),loadWorkerInvitations()]);
+ if(state.route!==__routeAtStart)return;
  const visible=filteredWorkerTasks();
  const active=activeWorkerJobs().length,proposals=pendingWorkerProposals().length;
  const serviceCats=categories.slice(0,5);
@@ -2104,7 +2115,8 @@ function renderWorkerJobsTab(){
 }
 function setWorkerTaskTab(tab){state.workerTaskTab=tab;renderWorkerJobsTab()}
 async function workerJobs(){
- await loadWorkerJobs();const lists=workerJobsLists();if(!["active","proposals","history"].includes(state.workerTaskTab))state.workerTaskTab="active";
+ await loadWorkerJobs();
+ if(state.route!=="workerJobs")return;const lists=workerJobsLists();if(!["active","proposals","history"].includes(state.workerTaskTab))state.workerTaskTab="active";
  root.innerHTML=shell(`<section class="jobs-screen jobs-v3">
    <div class="jobs-head"><div><div class="kicker">Modo trabajador</div><h1>Trabajos</h1><p>En curso, propuestas e historial.</p></div>${logo(true)}</div>
    <div class="jobs-summary-v3">
@@ -2370,6 +2382,7 @@ function taskMoreDetailsHtml(t,isOwner){
 
 async function taskDetail(){
 const t=state.selectedTask;if(!t)return go(state.mode==="client"?"clientHome":"workerHome");
+const __detailTaskId=t.id;
 const isOwner=t.client_id===state.user.id;
 await loadPrivateTaskLocation(t);
 await loadTaskMedia(t.id);
@@ -2378,6 +2391,7 @@ if(isOwner)await loadOffers(t.id);else{await loadMyOffer(t.id);await loadClientP
 if(t.worker_id&&(t.client_id===state.user.id||t.worker_id===state.user.id))await loadTaskPayment(t.id);else state.currentPayment=null;
 if(isOwner&&t.status==="completed")await loadTaskRating(t.id);else state.currentTaskRating=0;
 if(!isOwner&&t.worker_id===state.user.id&&t.status==="completed"&&state.clientRatingTaskId!==t.id)await loadClientRating(t.id);else if(t.status!=="completed"){state.clientRatingTaskId=null;state.currentClientRating=0;state.currentClientReview=""}
+if(state.route!=="taskDetail"||state.selectedTask?.id!==__detailTaskId)return;
 const assignedOffer=currentWorkerFromOffers(t),selectedProfile=assignedOffer?.profiles||null,closed=taskChatClosed(t);
 let body="";
 if(!isOwner&&t.status==="open"){const d=taskDistanceKm(t),score=smartMatchScore(t);body+=`<section class="opportunity-intel"><div><span class="match-score big">${score}% compatible contigo</span>${opportunityTags(t)}</div><div class="opportunity-intel-grid"><span><small>Pago</small><b>${money(t.offered_price)}</b></span><span><small>Distancia</small><b>${d!=null?distanceLabel(d):"Por calcular"}</b></span><span><small>Cuándo</small><b>${t.scheduled_for?timeText(t.scheduled_for):"Flexible"}</b></span></div></section>`}
@@ -2388,11 +2402,11 @@ if(!isOwner&&state.clientProfile){
 if(isOwner&&t.worker_id&&selectedProfile){
  const savedRating=state.currentTaskRating||0;
  body+=paymentActionHtml(t,assignedOffer);
- body+=`<div class="task-section-title"><div><h2>Trabajador seleccionado</h2><div class="sub">Foto, experiencia y calificación real.</div></div></div><div class="selected-worker-card"><div class="selected-worker-head">${avatarMarkup(selectedProfile)}${workerSummaryHtml(selectedProfile)}<div class="worker-price">${moneyExact(agreedTaskAmount(t,assignedOffer))}</div></div><div class="worker-card-actions"><button class="secondary-soft" onclick="openWorkerProfile('${selectedProfile.id||t.worker_id}','taskDetail')">Ver perfil</button>${t.status==="completed"?`<button class="accent-soft" onclick="openWorkerProfile('${selectedProfile.id||t.worker_id}','taskDetail')">Calificar</button>`:`<button class="accent-soft" onclick="openChat('${t.id}')">Chat</button>`}</div></div>`;
+ body+=`<div class="task-section-title"><div><h2>Trabajador seleccionado</h2><div class="sub">Foto, experiencia y calificación real.</div></div></div><div class="selected-worker-card"><div class="selected-worker-head">${avatarMarkup(selectedProfile)}${workerSummaryHtml(selectedProfile)}<div class="worker-price">${moneyExact(agreedTaskAmount(t,assignedOffer))}</div></div><div class="worker-card-actions"><button class="secondary-soft" onclick="openWorkerProfile('${selectedProfile.id||t.worker_id}','taskDetail')">Ver perfil</button>${t.status==="completed"?`<button class="accent-soft" onclick="scrollToTaskRating('${t.id}')">${savedRating?'Editar calificación':'Calificar'}</button>`:`<button class="accent-soft" onclick="openChat('${t.id}')">Chat</button>`}</div></div>`;
 
  if(t.status==="in_progress"&&!t.completion_requested_at)body+=`<div class="completion-card"><h3>Tarea en curso</h3><p>Cuando el trabajador indique que terminó, podrás revisar su evidencia antes de confirmar.</p></div>`;
  if(t.status==="in_progress"&&t.completion_requested_at)body+=`<div class="completion-card"><h3>El trabajador indicó que terminó</h3><p>Revisa la evidencia antes de confirmar.</p>${taskMediaGallery("completion","Evidencia de finalización")}<div class="completion-actions"><button id="confirmTask-${t.id}" class="btn orange" onclick="confirmTaskCompletion('${t.id}',this)">Confirmar trabajo</button><button class="danger-outline" onclick="openCompletionProblemSheet('${t.id}')">Reportar problema</button></div><div id="completionError-${t.id}" class="completion-inline-error-v504" hidden></div></div>`;
- if(t.status==="completed")body+=`${taskMediaGallery("completion","Evidencia de finalización")}${ratingEditorHtml(t.id,savedRating)}`;
+ if(t.status==="completed")body+=`<div class="completed-service-v505">${iconSvg("verify")}<div><small>SERVICIO CERRADO</small><b>Trabajo terminado</b><p>El pago y la finalización quedaron registrados.</p></div></div>${taskMediaGallery("completion","Evidencia de finalización")}${ratingEditorHtml(t.id,savedRating)}`;
 }
 if(isOwner&&t.status==="open"){
  body+=`<div class="task-section-title"><div><h2>Ofertas recibidas</h2><div class="sub">Acepta una propuesta o negocia un monto distinto.</div></div></div>`;
@@ -2604,7 +2618,7 @@ async function profile(){
     ${adminAllowed()?`<details><summary><span>${iconSvg("crown")}<b>Administración</b></span><em>⌄</em></summary><div><button class="settings-row" onclick="openAdmin()"><span class="row-ico">${iconSvg("crown")}</span><span><span class="row-main">Panel administrativo</span><span class="row-sub">Operación de DOHOY</span></span><span class="chev">›</span></button></div></details>`:""}
   </div>
   <div class="account-actions"><button class="logout-btn" onclick="signOutCurrent()">${iconSvg("logout")} Cerrar sesión</button></div>
-  <div class="version-note">DOHOY · Versión 5.0.4 · DIRECT COMPLETION FIX</div>
+  <div class="version-note">DOHOY · Versión 5.0.5 · STABILITY PASS</div>
  </section>`,true)
 }
 function settingsRow(title,route,icon,sub=""){
@@ -3241,7 +3255,7 @@ async function confirmTaskCompletion(id,sourceButton=null){
   if(error)throw error;
   state.selectedTask=Array.isArray(data)?data[0]:data;
   state.notice='Trabajo finalizado correctamente.';state.error='';
-  await Promise.allSettled([trackEvent("task_completed",{},id),loadOffers(id),loadTaskRating(id),loadTaskPayment(id),loadTaskMedia(id)]);
+  await Promise.allSettled([trackEvent("task_completed",{},id),loadOffers(id),loadTaskRating(id),loadTaskPayment(id),loadTaskMedia(id),loadMyTasks(),loadNotificationSummary(),loadClientTaskStats()]);
   render();
   setTimeout(()=>showSuccessMoment("¡Trabajo terminado!","El servicio quedó cerrado. Ahora pueden calificarse.","orange"),80);
  }catch(err){
@@ -3304,7 +3318,7 @@ sb.auth.onAuthStateChange((_event,session)=>{
  },0)
 })
 }
-window.DOHoyBuild="5.0.4";
+window.DOHoyBuild="5.0.5";
 const DOHOY_VAPID_PUBLIC="BIqp0MxIqy8rJPGj8mCRF-P_FwaMWgRMKSR_x6AazRKylHNhyT3NEPjNODKzvsSyIpt6OE3BUQXEz8-OkV-k14E";
 // DOHOY 4.4.0 — pago obligatorio antes del trabajo, rendimiento, layout móvil y barras sin solaparse.
 const DEFAULT_FILTERS={query:'',category:'',minPrice:0,maxDistance:null,todayOnly:false,vehicleOnly:false,notifyMatching:true};
@@ -3505,7 +3519,7 @@ function onboardingStep(i){state.onboardingStep=Math.min(2,Math.max(0,i));go('on
 function finishOnboarding(){try{localStorage.setItem('dohoy_onboarding_v1','1')}catch{}go('mode')}
 function suspendedScreen(){return shell(`<section class="screen"><div class="top">${logo(true)}</div><div class="setting-empty">${iconSvg('shield')}<h1>Cuenta suspendida</h1><p>Contacta a soporte para revisar tu situación. Puedes consultar tus casos y enviar información.</p></div>${authMsg()}<button class="btn primary" onclick="openSupportCenter()">Soporte y disputas</button><button class="btn ghost" onclick="signOutCurrent()">Cerrar sesión</button></section>`)}
 
-window.setNotificationFilter=setNotificationFilter;window.setTheme=setTheme;window.publishWizardNext=publishWizardNext;window.sendQuickReply=sendQuickReply;window.sendChatImage=sendChatImage;window.retryCurrentView=retryCurrentView;window.saveTrustedContact=saveTrustedContact;window.contactTrustedPerson=contactTrustedPerson;window.removePendingTaskPhoto=removePendingTaskPhoto;window.removeCompletionEvidence=removeCompletionEvidence;window.selectCompletionEvidence=selectCompletionEvidence;window.openMediaPhoto=openMediaPhoto;window.openClientProfile=openClientProfile;window.saveClientRating=saveClientRating;window.openSafetyCenter=openSafetyCenter;window.openBlockedUsers=openBlockedUsers;window.unblockUser=unblockUser;window.openMyReports=openMyReports;window.shareCurrentTask=shareCurrentTask;window.selectTaskPhotos=selectTaskPhotos;window.openCounterOfferSheet=openCounterOfferSheet;window.submitCounterOffer=submitCounterOffer;window.respondCounterOffer=respondCounterOffer;window.markTaskEnRoute=markTaskEnRoute;window.markTaskArrived=markTaskArrived;window.saveEditTask=saveEditTask;window.state=state;window.openProfileField=openProfileField;window.openPhotoChoiceSheet=openPhotoChoiceSheet;window.openGalleryPicker=openGalleryPicker;window.handleGalleryPhoto=handleGalleryPhoto;window.closeProfileSheet=closeProfileSheet;window.saveProfileField=saveProfileField;window.saveSocialNetworks=saveSocialNetworks;window.requestAccountDeletion=requestAccountDeletion;window.go=go;window.mode=mode;window.signOut=signOut;window.openTask=openTask;window.acceptOffer=acceptOffer;window.startTask=startTask;window.requestTaskCompletion=requestTaskCompletion;window.requestTaskCompletionNow=requestTaskCompletionNow;window.confirmTaskCompletion=confirmTaskCompletion;window.setTaskStatus=setTaskStatus;window.openChat=openChat;window.openMessagesHome=openMessagesHome;window.sendMessage=sendMessage;window.backFromChat=backFromChat;window.toggleVehicleOptions=toggleVehicleOptions;window.updateVehiclePreview=updateVehiclePreview;window.updateCategoryPreview=updateCategoryPreview;window.openWorkerProfile=openWorkerProfile;window.openWorkerPhoto=openWorkerPhoto;window.closeWorkerPhoto=closeWorkerPhoto;window.openConversationFromList=openConversationFromList;window.bindConversationSwipes=bindConversationSwipes;window.selectTaskRating=selectTaskRating;window.clearTaskRating=clearTaskRating;window.deleteConversation=deleteConversation;window.openNotificationsCenter=openNotificationsCenter;window.openNotification=openNotification;window.markAllNotificationsRead=markAllNotificationsRead;window.openCancelTaskSheet=openCancelTaskSheet;window.submitCancelTask=submitCancelTask;window.openCompletionProblemSheet=openCompletionProblemSheet;window.submitCompletionProblem=submitCompletionProblem;window.openUserReportSheet=openUserReportSheet;window.submitUserReport=submitUserReport;window.blockOtherUser=blockOtherUser;window.toggleFavoriteWorker=toggleFavoriteWorker;window.openFavorites=openFavorites;window.saveRatingReview=saveRatingReview;
+window.setNotificationFilter=setNotificationFilter;window.setTheme=setTheme;window.publishWizardNext=publishWizardNext;window.sendQuickReply=sendQuickReply;window.sendChatImage=sendChatImage;window.retryCurrentView=retryCurrentView;window.saveTrustedContact=saveTrustedContact;window.contactTrustedPerson=contactTrustedPerson;window.removePendingTaskPhoto=removePendingTaskPhoto;window.removeCompletionEvidence=removeCompletionEvidence;window.selectCompletionEvidence=selectCompletionEvidence;window.openMediaPhoto=openMediaPhoto;window.openClientProfile=openClientProfile;window.saveClientRating=saveClientRating;window.openSafetyCenter=openSafetyCenter;window.openBlockedUsers=openBlockedUsers;window.unblockUser=unblockUser;window.openMyReports=openMyReports;window.shareCurrentTask=shareCurrentTask;window.selectTaskPhotos=selectTaskPhotos;window.openCounterOfferSheet=openCounterOfferSheet;window.submitCounterOffer=submitCounterOffer;window.respondCounterOffer=respondCounterOffer;window.markTaskEnRoute=markTaskEnRoute;window.markTaskArrived=markTaskArrived;window.saveEditTask=saveEditTask;window.state=state;window.openProfileField=openProfileField;window.openPhotoChoiceSheet=openPhotoChoiceSheet;window.openGalleryPicker=openGalleryPicker;window.handleGalleryPhoto=handleGalleryPhoto;window.closeProfileSheet=closeProfileSheet;window.saveProfileField=saveProfileField;window.saveSocialNetworks=saveSocialNetworks;window.requestAccountDeletion=requestAccountDeletion;window.go=go;window.mode=mode;window.signOut=signOut;window.openTask=openTask;window.acceptOffer=acceptOffer;window.startTask=startTask;window.requestTaskCompletion=requestTaskCompletion;window.requestTaskCompletionNow=requestTaskCompletionNow;window.confirmTaskCompletion=confirmTaskCompletion;window.setTaskStatus=setTaskStatus;window.openChat=openChat;window.openMessagesHome=openMessagesHome;window.sendMessage=sendMessage;window.backFromChat=backFromChat;window.toggleVehicleOptions=toggleVehicleOptions;window.updateVehiclePreview=updateVehiclePreview;window.updateCategoryPreview=updateCategoryPreview;window.openWorkerProfile=openWorkerProfile;window.openWorkerPhoto=openWorkerPhoto;window.closeWorkerPhoto=closeWorkerPhoto;window.openConversationFromList=openConversationFromList;window.bindConversationSwipes=bindConversationSwipes;window.scrollToTaskRating=scrollToTaskRating;window.selectTaskRating=selectTaskRating;window.clearTaskRating=clearTaskRating;window.deleteConversation=deleteConversation;window.openNotificationsCenter=openNotificationsCenter;window.openNotification=openNotification;window.markAllNotificationsRead=markAllNotificationsRead;window.openCancelTaskSheet=openCancelTaskSheet;window.submitCancelTask=submitCancelTask;window.openCompletionProblemSheet=openCompletionProblemSheet;window.submitCompletionProblem=submitCompletionProblem;window.openUserReportSheet=openUserReportSheet;window.submitUserReport=submitUserReport;window.blockOtherUser=blockOtherUser;window.toggleFavoriteWorker=toggleFavoriteWorker;window.openFavorites=openFavorites;window.saveRatingReview=saveRatingReview;
 window.openWorkerMap=openWorkerMap;window.showMapTask=showMapTask;window.setWorkerAvailability=setWorkerAvailability;window.acceptDirectInvite=acceptDirectInvite;window.declineDirectInvite=declineDirectInvite;window.openInviteWorker=openInviteWorker;window.sendWorkerInvite=sendWorkerInvite;window.askTaskQuestion=askTaskQuestion;window.answerTaskQuestion=answerTaskQuestion;window.openPortfolioManager=openPortfolioManager;window.savePortfolioPhoto=savePortfolioPhoto;window.deletePortfolioPhoto=deletePortfolioPhoto;window.loadPriceSuggestion=loadPriceSuggestion;window.openAdminBanners=openAdminBanners;window.createAdminBanner=createAdminBanner;window.toggleAdminBanner=toggleAdminBanner;
 window.filterWorkerTasks=filterWorkerTasks;window.setWorkerFilter=setWorkerFilter;window.resetWorkerFilters=resetWorkerFilters;window.saveSearchPreferences=saveSearchPreferences;window.openWorkerCategory=openWorkerCategory;window.requestDiscoveryLocation=requestDiscoveryLocation;window.enablePushNotifications=enablePushNotifications;window.disablePushNotifications=disablePushNotifications;window.openSupportCenter=openSupportCenter;window.newSupportCase=newSupportCase;window.selectSupportFiles=selectSupportFiles;window.removeSupportFile=removeSupportFile;window.submitSupportCase=submitSupportCase;window.openSupportCase=openSupportCase;window.editSupportDraft=editSupportDraft;window.replySupportCase=replySupportCase;
 window.addEventListener('online',()=>{state.online=true;state.notice='Conexión restablecida.';render();resumeApp('online');setTimeout(()=>{state.notice='';render()},1200)});
