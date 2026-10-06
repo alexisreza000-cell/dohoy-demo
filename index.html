@@ -1418,6 +1418,7 @@ html[data-theme="dark"] .alternate-offer-v506{background:#102238;border-color:#2
 .worker-completed-v507{display:grid;grid-template-columns:auto minmax(0,1fr);gap:11px 12px;align-items:center;margin:14px 0;padding:14px;border-radius:18px;background:#edf9f3;border:1px solid #ccebdc;color:#166847}.worker-completed-v507>.svg-icon{width:30px;height:30px;grid-row:1}.worker-completed-v507>div{display:grid;gap:2px}.worker-completed-v507 small{font-size:8px;font-weight:950;letter-spacing:1px}.worker-completed-v507 b{font-size:15px}.worker-completed-v507 p{margin:0;font-size:10px;color:#557266;line-height:1.35}.worker-completed-v507 button{grid-column:1/-1;border:0;border-radius:13px;min-height:42px;background:#dff3e9;color:#146344;font-size:11px;font-weight:900;touch-action:manipulation}.client-rating-box{scroll-margin-top:90px;transition:box-shadow .2s ease,transform .2s ease}.client-rating-box.rating-highlight-v507{box-shadow:0 0 0 4px rgba(18,103,232,.14),0 12px 30px rgba(7,27,59,.08);transform:translateY(-2px)}
 html[data-theme="dark"] .worker-completed-v507{background:#102820!important;border-color:#245a48!important;color:#dff7ee!important}html[data-theme="dark"] .worker-completed-v507 p{color:#9fc8b7!important}html[data-theme="dark"] .worker-completed-v507 button{background:#183b30!important;color:#dff7ee!important}
 
+.payout-setup-card button:disabled{opacity:.5;cursor:not-allowed}
 </style>
 <link rel="manifest" href="./manifest.webmanifest?v=1.9.4"><link rel="apple-touch-icon" href="./icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default">
 </head>
@@ -2418,7 +2419,7 @@ if(isOwner&&t.worker_id&&selectedProfile){
 
  if(t.status==="in_progress"&&!t.completion_requested_at)body+=`<div class="completion-card"><h3>Tarea en curso</h3><p>Cuando el trabajador indique que terminó, podrás revisar su evidencia antes de confirmar.</p></div>`;
  if(t.status==="in_progress"&&t.completion_requested_at)body+=`<div class="completion-card"><h3>El trabajador indicó que terminó</h3><p>Revisa la evidencia antes de confirmar.</p>${taskMediaGallery("completion","Evidencia de finalización")}<div class="completion-actions"><button id="confirmTask-${t.id}" class="btn orange" onclick="confirmTaskCompletion('${t.id}',this)">Confirmar trabajo</button><button class="danger-outline" onclick="openCompletionProblemSheet('${t.id}')">Reportar problema</button></div><div id="completionError-${t.id}" class="completion-inline-error-v504" hidden></div></div>`;
- if(t.status==="completed")body+=`<div class="completed-service-v505">${iconSvg("verify")}<div><small>SERVICIO CERRADO</small><b>Trabajo terminado</b><p>El pago y la finalización quedaron registrados.</p></div></div>${taskMediaGallery("completion","Evidencia de finalización")}${ratingEditorHtml(t.id,savedRating)}`;
+ if(t.status==="completed")body+=`<div class="completed-service-v505">${iconSvg("verify")}<div><small>SERVICIO CERRADO</small><b>Trabajo terminado</b><p>La finalización quedó registrada. El trabajador puede consultar el envío de su ganancia en Mis ganancias.</p></div></div>${taskMediaGallery("completion","Evidencia de finalización")}${ratingEditorHtml(t.id,savedRating)}`;
 }
 if(isOwner&&t.status==="open"){
  body+=`<div class="task-section-title"><div><h2>Ofertas recibidas</h2><div class="sub">Acepta una propuesta o negocia un monto distinto.</div></div></div>`;
@@ -2535,36 +2536,63 @@ function agendaTaskCard(t){
  return `<button class="agenda-task" onclick="openTask('${t.id}')"><span class="agenda-task-time">${dt?dt.toLocaleTimeString("es-MX",{hour:"2-digit",minute:"2-digit"}):"Flexible"}</span><span class="agenda-task-icon">${taskIcon(t)}</span><span><b>${escapeHtml(t.title)}</b><small>${money(t.offered_price)} · ${escapeHtml(baseCategory(t.category))}</small></span><em>›</em></button>`
 }
 
+function earningsMoney(value){return new Intl.NumberFormat("es-MX",{style:"currency",currency:"MXN",minimumFractionDigits:2}).format(Number(value||0))}
+async function transferRequest(body){
+ const {data,error}=await sb.functions.invoke("dohoy-release-payment",{body});
+ if(error){let message=error.message;try{const p=await error.context?.json?.();message=p?.error||message}catch{}throw Error(message||"No se pudo consultar Stripe.")}
+ if(data?.error)throw Error(data.error);return data
+}
 async function openEarnings(){
- if(state.mode!=="worker"){state.notice="Cambia a modo Trabajador para consultar tus ganancias.";go("profile");return}
- state.route="earnings";state.earningsLoading=true;render();
- const {data,error}=await sb.from("task_payments").select("id,task_id,amount_total,commission_amount,worker_net_amount,payment_status,paid_at,created_at").eq("worker_id",state.user.id).order("created_at",{ascending:false}).limit(100);
- state.earningsPayments=error?[]:(data||[]);
- state.earningsTasks={};
+ if(state.mode!=="worker"){go("profile");state.notice="Cambia a modo Trabajador para consultar tus ganancias.";render();return}
+ state.route="earnings";state.earningsLoading=true;state.earningsLoadError="";state.connectStatus=null;render();
+ const results=await Promise.allSettled([
+  sb.from("task_payments").select("id,task_id,amount_total,commission_amount,worker_net_amount,payment_status,paid_at,created_at").eq("worker_id",state.user.id).order("created_at",{ascending:false}).limit(100),
+  sb.from("worker_transfers").select("payment_id,task_id,amount_cents,status,stripe_transfer_id,reversed_amount_cents,last_error").eq("worker_id",state.user.id),
+  transferRequest({action:"status"})
+ ]);
+ state.earningsPayments=[];state.earningsTransfers={};state.earningsTasks={};
+ const pr=results[0],tr=results[1],cs=results[2];
+ if(pr.status==="fulfilled"&&!pr.value.error)state.earningsPayments=pr.value.data||[];else state.earningsLoadError="No pudimos consultar tus pagos. Vuelve a actualizar.";
+ if(tr.status==="fulfilled"&&!tr.value.error){for(const t of tr.value.data||[])state.earningsTransfers[t.payment_id]=t}else state.earningsLoadError="No pudimos consultar los envíos a Stripe. Vuelve a actualizar.";
+ if(cs.status==="fulfilled")state.connectStatus=cs.value;
  const ids=[...new Set(state.earningsPayments.map(p=>p.task_id).filter(Boolean))];
- if(ids.length){const {data:tasks}=await sb.from("tasks").select("id,title,category,status,completed_at").in("id",ids);for(const t of tasks||[])state.earningsTasks[t.id]=t}
+ if(ids.length){const {data,error}=await sb.from("tasks").select("id,title,category,status,completed_at").in("id",ids);if(error)state.earningsLoadError="No pudimos consultar los trabajos. Vuelve a actualizar.";for(const t of data||[])state.earningsTasks[t.id]=t}
  state.earningsLoading=false;render()
 }
+function pendingEarnings(){return (state.earningsPayments||[]).filter(p=>p.payment_status==="paid"&&state.earningsTasks?.[p.task_id]?.status==="completed"&&!state.earningsTransfers?.[p.id]?.stripe_transfer_id)}
+async function sendPendingEarnings(){
+ if(state.transferBusy||state.earningsLoadError)return;
+ const tasks=[...new Set(pendingEarnings().map(p=>p.task_id))];if(!tasks.length)return;
+ state.transferBusy=true;state.error="";state.notice="";render();
+ let sent=0;const errors=[];
+ try{for(const id of tasks){try{const r=await transferRequest({task_id:id});if(r.ok&&r.status==="transferred")sent++}catch(e){errors.push(String(e.message||e))}}
+  if(sent)state.notice=`${sent} trabajo(s) enviados a tu cuenta Stripe. La llegada al banco depende de Stripe.`;
+  if(errors.length)state.error=[...new Set(errors)].join(" · ");
+ }finally{state.transferBusy=false;await openEarnings()}
+}
 function earningsScreen(){
- const rows=state.earningsPayments||[];
- const paid=rows.filter(x=>x.payment_status==="paid");
- const total=paid.reduce((s,x)=>s+Number(x.worker_net_amount||0),0);
- const gross=paid.reduce((s,x)=>s+Number(x.amount_total||0),0);
- const commission=paid.reduce((s,x)=>s+Number(x.commission_amount||0),0);
+ const rows=state.earningsPayments||[],paid=rows.filter(x=>x.payment_status==="paid");
+ const total=paid.reduce((s,x)=>s+Number(x.worker_net_amount||0),0),gross=paid.reduce((s,x)=>s+Number(x.amount_total||0),0),commission=paid.reduce((s,x)=>s+Number(x.commission_amount||0),0);
  const monthKey=new Date().toISOString().slice(0,7);
  const month=paid.filter(x=>String(x.paid_at||x.created_at||"").slice(0,7)===monthKey).reduce((s,x)=>s+Number(x.worker_net_amount||0),0);
- const connectStarted=!!state.profile?.stripe_connect_account_id;
+ const sent=Object.values(state.earningsTransfers||{}).reduce((s,t)=>s+(t.stripe_transfer_id?(Number(t.amount_cents)-Number(t.reversed_amount_cents||0))/100:0),0);
+ const pending=pendingEarnings().reduce((s,p)=>s+Number(p.worker_net_amount||0),0);
+ const waiting=paid.filter(p=>state.earningsTasks?.[p.task_id]?.status!=="completed").reduce((s,p)=>s+Number(p.worker_net_amount||0),0);
+ const connected=!!state.profile?.stripe_connect_account_id,active=state.connectStatus?.transfers_active===true;
+ const valid=!state.earningsLoadError&&!state.earningsLoading;
  return shell(`<section class="earnings-page">
    <div class="earnings-head"><button class="icon" onclick="go('profile')">←</button><div><span>DOHOY TRABAJADOR</span><h1>Mis ganancias</h1></div><button class="earnings-help" onclick="openEarningsInfo()">${iconSvg("help")}</button></div>
-   ${authMsg()}
-   <section class="earnings-hero"><span class="earnings-kicker">Total registrado</span><h2>${money(total)}</h2><p>Ganancia neta después de la comisión DOHOY.</p><div class="earnings-month"><span>Este mes</span><b>${money(month)}</b></div></section>
-   <div class="earnings-metrics"><div><span>${iconSvg("wallet")}</span><small>Trabajos pagados</small><b>${paid.length}</b></div><div><span>${iconSvg("trend")}</span><small>Total cobrado</small><b>${money(gross)}</b></div><div><span>${iconSvg("receipt")}</span><small>Comisión DOHOY</small><b>${money(commission)}</b></div></div>
-   <section class="payout-setup-card"><span class="payout-icon">${iconSvg(connectStarted?"verify":"payment")}</span><div><b>${connectStarted?"Cuenta de cobro iniciada":"Activa tus cobros"}</b><p>${connectStarted?"Continúa o actualiza tus datos de cobro de forma segura con Stripe.":"Conecta tu cuenta con Stripe para preparar la recepción del 85% de tus trabajos."}</p></div><button onclick="openPayoutSetup()">${connectStarted?"Continuar configuración":"Activar con Stripe"}</button></section>
+   ${authMsg()}${state.earningsLoadError?`<p class="private-note">${escapeHtml(state.earningsLoadError)}</p>`:""}
+   ${state.connectStatus?.test_mode?`<div class="private-note">Entorno de prueba · Los movimientos no son dinero real.</div>`:""}
+   <section class="earnings-hero"><span class="earnings-kicker">Total registrado</span><h2>${earningsMoney(total)}</h2><p>Ganancia neta después de la comisión DOHOY. Incluye trabajos pendientes de finalizar.</p><div class="earnings-month"><span>Este mes</span><b>${earningsMoney(month)}</b></div></section>
+   <div class="earnings-metrics"><div><span>${iconSvg("wallet")}</span><small>Trabajos pagados</small><b>${paid.length}</b></div><div><span>${iconSvg("trend")}</span><small>Total cobrado</small><b>${earningsMoney(gross)}</b></div><div><span>${iconSvg("receipt")}</span><small>Comisión DOHOY</small><b>${earningsMoney(commission)}</b></div></div>
+   <section class="payout-setup-card"><span class="payout-icon">${iconSvg(active?"verify":"payment")}</span><div><b>${active?"Cuenta Stripe habilitada":connected?"Cuenta vinculada a Stripe":"Activa tus cobros"}</b><p>${active?"Stripe permite recibir transferencias. Consulta tus datos de cobro cuando lo necesites.":connected?"Completa tu configuración o actualiza para consultar su estado.":"Conecta tu cuenta para recibir el 85% de tus trabajos terminados."}</p></div><button onclick="openPayoutSetup()">${active?"Datos de cobro":connected?"Continuar configuración":"Activar con Stripe"}</button></section>
+   <section class="payout-setup-card"><span class="payout-icon">${iconSvg("wallet")}</span><div><b>Envíos a Stripe</b><p>Enviado: <strong>${valid?earningsMoney(sent):"—"}</strong><br>Listo para enviar: <strong>${valid?earningsMoney(pending):"—"}</strong><br>Esperando finalización: ${valid?earningsMoney(waiting):"—"}</p><p>Enviar a Stripe mueve tus ganancias a tu cuenta Stripe. Las transferencias al banco siguen el calendario de Stripe.</p></div><button onclick="sendPendingEarnings()" ${!valid||!active||pending<=0||state.transferBusy?"disabled":""}>${state.transferBusy?"Enviando…":"Enviar ganancias a Stripe"}</button><button onclick="openEarnings()" ${state.transferBusy?"disabled":""}>Actualizar</button></section>
    <div class="earnings-section-head"><div><span>Movimientos</span><h2>Historial</h2></div></div>
-   ${state.earningsLoading?`<div class="empty">Cargando ganancias…</div>`:rows.length?`<div class="earnings-list">${rows.map(p=>{const t=state.earningsTasks[p.task_id]||{};return `<article class="earning-row"><span class="earning-row-icon">${taskIcon(t.category||"Otro")}</span><div><b>${escapeHtml(t.title||"Trabajo DOHOY")}</b><small>${new Date(p.paid_at||p.created_at).toLocaleDateString("es-MX")} · ${p.payment_status==="paid"?"Pagado":escapeHtml(p.payment_status)}</small></div><strong>${p.payment_status==="paid"?"+":""}${money(p.worker_net_amount)}</strong></article>`}).join("")}</div>`:`<div class="client-empty"><span>${iconSvg("wallet")}</span><h3>Aún no hay ganancias registradas</h3><p>Cuando un cliente pague una tarea asignada a ti, aparecerá aquí.</p><button onclick="go('workerHome')">Buscar trabajos</button></div>`}
+   ${state.earningsLoading?`<div class="empty">Cargando ganancias…</div>`:rows.length?`<div class="earnings-list">${rows.map(p=>{const t=state.earningsTasks[p.task_id]||{},r=state.earningsTransfers[p.id];let label=p.payment_status==="paid"?(r?.stripe_transfer_id?(r.status==="reversed"?"Envío revertido":r.reversed_amount_cents>0?"Enviado · Reembolso parcial":"Enviado a Stripe"):t.status==="completed"?"Listo para enviar":"Esperando finalización"):p.payment_status==="refunded"?"Reembolsado":p.payment_status==="partially_refunded"?"Reembolso parcial":p.payment_status==="failed"?"Pago fallido":p.payment_status==="cancelled"?"Cancelado":"Pago pendiente";return `<article class="earning-row"><span class="earning-row-icon">${taskIcon(t.category||"Otro")}</span><div><b>${escapeHtml(t.title||"Trabajo DOHOY")}</b><small>${new Date(p.paid_at||p.created_at).toLocaleDateString("es-MX")} · ${label}</small>${r?.last_error?`<small>Envío pendiente de revisión o reintento.</small>`:""}</div><strong>${p.payment_status==="paid"?"+":""}${earningsMoney(p.worker_net_amount)}</strong></article>`}).join("")}</div>`:`<div class="client-empty"><span>${iconSvg("wallet")}</span><h3>Aún no hay ganancias registradas</h3><p>Cuando un cliente pague una tarea asignada a ti, aparecerá aquí.</p><button onclick="go('workerHome')">Buscar trabajos</button></div>`}
  </section>`,true)
 }
-function openEarningsInfo(){openProfileSheet("Cómo se calculan tus ganancias","DOHOY cobra una comisión del 15% sobre el monto acordado.",`<div class="earnings-info-example"><span>Ejemplo</span><div><b>Cliente paga</b><strong>$1,000</strong></div><div><b>Comisión DOHOY (15%)</b><strong>−$150</strong></div><div class="net"><b>Tu ganancia</b><strong>$850</strong></div></div>`)}
+function openEarningsInfo(){openProfileSheet("Cómo se calculan tus ganancias","DOHOY cobra una comisión del 15% sobre el monto acordado.",`<div class="earnings-info-example"><span>Ejemplo</span><div><b>Cliente paga</b><strong>$1,000</strong></div><div><b>Comisión DOHOY (15%)</b><strong>−$150</strong></div><div class="net"><b>Tu ganancia</b><strong>$850</strong></div></div><p>Cuando el cliente confirma el trabajo, DOHOY intenta enviar tu ganancia a Stripe. Si falta configurar tu cuenta o hay un error, puedes reintentar desde Mis ganancias. El total enviado no equivale al saldo disponible de Stripe ni a un depósito bancario.</p>`)}
 function openPayoutSetup(){
  const started=!!state.profile?.stripe_connect_account_id;
  openProfileSheet(started?"Continuar configuración de cobros":"Activar cobros","Tus datos bancarios e identidad se capturan directamente en Stripe, no dentro de DOHOY.",`<div class="private-note">${iconSvg("shield")}<span>Stripe abrirá un formulario seguro para configurar tu cuenta de cobro. Puedes regresar a DOHOY al terminar.</span></div><button class="btn primary" onclick="startStripeConnectOnboarding(this)">${started?"Continuar con Stripe":"Activar con Stripe"}</button>`)
@@ -2663,7 +2691,7 @@ async function profile(){
     ${adminAllowed()?`<details><summary><span>${iconSvg("crown")}<b>Administración</b></span><em>⌄</em></summary><div><button class="settings-row" onclick="openAdmin()"><span class="row-ico">${iconSvg("crown")}</span><span><span class="row-main">Panel administrativo</span><span class="row-sub">Operación de DOHOY</span></span><span class="chev">›</span></button></div></details>`:""}
   </div>
   <div class="account-actions"><button class="logout-btn" onclick="signOutCurrent()">${iconSvg("logout")} Cerrar sesión</button></div>
-  <div class="version-note">DOHOY · Versión 5.0.8 · STRIPE CONNECT</div>
+  <div class="version-note">DOHOY · Versión 5.0.9 · STRIPE CONNECT</div>
  </section>`,true)
 }
 function settingsRow(title,route,icon,sub=""){
@@ -3321,6 +3349,9 @@ async function confirmTaskCompletion(id,sourceButton=null){
   if(error)throw error;
   state.selectedTask=Array.isArray(data)?data[0]:data;
   state.notice='Trabajo finalizado correctamente.';state.error='';
+  try{const transfer=await transferRequest({task_id:id});if(transfer.ok)state.notice='Trabajo finalizado. La ganancia se envió a Stripe.'}
+  catch(transferError){state.notice='Trabajo finalizado. El envío de la ganancia sigue pendiente; el trabajador puede reintentar desde Mis ganancias.';logClientError(transferError,{kind:'release_payment',task_id:id})}
+
   await Promise.allSettled([trackEvent("task_completed",{},id),loadOffers(id),loadTaskRating(id),loadTaskPayment(id),loadTaskMedia(id),loadMyTasks(),loadNotificationSummary(),loadClientTaskStats()]);
   render();
   setTimeout(()=>showSuccessMoment("¡Trabajo terminado!","El servicio quedó cerrado. Ahora pueden calificarse.","orange"),80);
@@ -3384,7 +3415,7 @@ sb.auth.onAuthStateChange((_event,session)=>{
  },0)
 })
 }
-window.DOHoyBuild="5.0.8";
+window.DOHoyBuild="5.0.9";
 const DOHOY_VAPID_PUBLIC="BIqp0MxIqy8rJPGj8mCRF-P_FwaMWgRMKSR_x6AazRKylHNhyT3NEPjNODKzvsSyIpt6OE3BUQXEz8-OkV-k14E";
 // DOHOY 4.4.0 — pago obligatorio antes del trabajo, rendimiento, layout móvil y barras sin solaparse.
 const DEFAULT_FILTERS={query:'',category:'',minPrice:0,maxDistance:null,todayOnly:false,vehicleOnly:false,notifyMatching:true};
