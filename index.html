@@ -1432,7 +1432,7 @@ const root=document.getElementById("root");
 let state={
   route:"loading", mode:localStorage.getItem("dohoy_mode")||"client",
   session:null,user:null,profile:null,privateProfile:null,tasks:[],selectedTask:null,offers:[],messages:[],conversations:[],chatBack:"taskDetail",chatDraft:"",notice:"",error:"",
-  workerLocation:null, workerLocationError:"", workerAddress:"", workerCategory:"", workerTaskTab:"pending", taskBackRoute:"", showContactDetails:false, workerProfile:null, workerProfileBack:"taskDetail", swipeConversationId:null, currentTaskRating:0, currentTaskReview:"", taskMedia:[], pendingTaskFiles:[], pendingCompletionFiles:[], currentClientRating:0, currentClientReview:"", clientProfile:null, clientReviews:[], workerCategories:[], blockedUsers:[], myReports:[], notifications:[], unreadNotifications:0, unreadMessages:0, workerReviews:[], workerFavorite:false, workerBlocked:false, online:navigator.onLine, currentPayment:null, publishBusy:false, offerBusy:false, checkoutBusy:false, savedCards:null, paymentMethodsBusy:false, splash:true, clientOfferCounts:{}, clientTaskFilter:'active', earningsPayments:[], earningsTasks:{}, earningsLoading:false, installPrompt:null, recentSearches:(()=>{try{return JSON.parse(localStorage.getItem('dohoy_recent_searches')||'[]')}catch{return []}})(), agendaView:'upcoming', workerAvailability:null, workerInvitations:[], workerActivity:[], taskQuestions:[], workerPortfolio:[], banners:[], adminBusinessMetrics:null, adminBanners:[], priceSuggestion:null, pendingPortfolioFile:null, viewedWorkerAvailability:null, notificationFilter:'all', adminProductFunnel:null, trustedContact:(()=>{try{return JSON.parse(localStorage.getItem('dohoy_trusted_contact')||'null')}catch{return null}})(), actionBusy:false, publishStep:1, workerReputation:null, chatImageBusy:false, otherTyping:false, typingStopTimer:null, theme:localStorage.getItem('dohoy_theme')||'auto', adminAttention:null, lastClientErrorAt:0
+  workerLocation:null, workerLocationError:"", workerAddress:"", workerCategory:"", workerTaskTab:"pending", taskBackRoute:"", showContactDetails:false, workerProfile:null, workerProfileBack:"taskDetail", swipeConversationId:null, currentTaskRating:0, currentTaskReview:"", taskMedia:[], pendingTaskFiles:[], pendingCompletionFiles:[], currentClientRating:0, currentClientReview:"", clientProfile:null, clientReviews:[], workerCategories:[], blockedUsers:[], myReports:[], notifications:[], unreadNotifications:0, unreadMessages:0, workerReviews:[], workerFavorite:false, workerBlocked:false, online:navigator.onLine, currentPayment:null, publishBusy:false, offerBusy:false, checkoutBusy:false, savedCards:null, paymentMethodsBusy:false, splash:true, clientOfferCounts:{}, clientTaskFilter:'active', earningsPayments:[], earningsTasks:{}, earningsLoading:false, installPrompt:null, recentSearches:(()=>{try{return JSON.parse(localStorage.getItem('dohoy_recent_searches')||'[]')}catch{return []}})(), agendaView:'upcoming', workerAvailability:null, workerInvitations:[], workerActivity:[], taskQuestions:[], workerPortfolio:[], banners:[], adminBusinessMetrics:null, adminBanners:[], priceSuggestion:null, pendingPortfolioFile:null, viewedWorkerAvailability:null, notificationFilter:'all', adminProductFunnel:null, trustedContact:(()=>{try{return JSON.parse(localStorage.getItem('dohoy_trusted_contact')||'null')}catch{return null}})(), actionBusy:false, publishStep:1, workerReputation:null, chatImageBusy:false, otherTyping:false, typingStopTimer:null, theme:localStorage.getItem('dohoy_theme')||'auto', adminAttention:null, lastClientErrorAt:0, connectBusy:false
 };
 let poller=null;
 let deliveryPoller=null;
@@ -2553,18 +2553,51 @@ function earningsScreen(){
  const commission=paid.reduce((s,x)=>s+Number(x.commission_amount||0),0);
  const monthKey=new Date().toISOString().slice(0,7);
  const month=paid.filter(x=>String(x.paid_at||x.created_at||"").slice(0,7)===monthKey).reduce((s,x)=>s+Number(x.worker_net_amount||0),0);
+ const connectStarted=!!state.profile?.stripe_connect_account_id;
  return shell(`<section class="earnings-page">
    <div class="earnings-head"><button class="icon" onclick="go('profile')">←</button><div><span>DOHOY TRABAJADOR</span><h1>Mis ganancias</h1></div><button class="earnings-help" onclick="openEarningsInfo()">${iconSvg("help")}</button></div>
    ${authMsg()}
    <section class="earnings-hero"><span class="earnings-kicker">Total registrado</span><h2>${money(total)}</h2><p>Ganancia neta después de la comisión DOHOY.</p><div class="earnings-month"><span>Este mes</span><b>${money(month)}</b></div></section>
    <div class="earnings-metrics"><div><span>${iconSvg("wallet")}</span><small>Trabajos pagados</small><b>${paid.length}</b></div><div><span>${iconSvg("trend")}</span><small>Total cobrado</small><b>${money(gross)}</b></div><div><span>${iconSvg("receipt")}</span><small>Comisión DOHOY</small><b>${money(commission)}</b></div></div>
-   <section class="payout-setup-card"><span class="payout-icon">${iconSvg("payment")}</span><div><b>Configura cómo recibirás tus pagos</b><p>El historial ya usa pagos reales de DOHOY. La transferencia automática al trabajador se activará con Stripe Connect.</p></div><button onclick="openPayoutSetup()">Configurar cobros</button></section>
+   <section class="payout-setup-card"><span class="payout-icon">${iconSvg(connectStarted?"verify":"payment")}</span><div><b>${connectStarted?"Cuenta de cobro iniciada":"Activa tus cobros"}</b><p>${connectStarted?"Continúa o actualiza tus datos de cobro de forma segura con Stripe.":"Conecta tu cuenta con Stripe para preparar la recepción del 85% de tus trabajos."}</p></div><button onclick="openPayoutSetup()">${connectStarted?"Continuar configuración":"Activar con Stripe"}</button></section>
    <div class="earnings-section-head"><div><span>Movimientos</span><h2>Historial</h2></div></div>
    ${state.earningsLoading?`<div class="empty">Cargando ganancias…</div>`:rows.length?`<div class="earnings-list">${rows.map(p=>{const t=state.earningsTasks[p.task_id]||{};return `<article class="earning-row"><span class="earning-row-icon">${taskIcon(t.category||"Otro")}</span><div><b>${escapeHtml(t.title||"Trabajo DOHOY")}</b><small>${new Date(p.paid_at||p.created_at).toLocaleDateString("es-MX")} · ${p.payment_status==="paid"?"Pagado":escapeHtml(p.payment_status)}</small></div><strong>${p.payment_status==="paid"?"+":""}${money(p.worker_net_amount)}</strong></article>`}).join("")}</div>`:`<div class="client-empty"><span>${iconSvg("wallet")}</span><h3>Aún no hay ganancias registradas</h3><p>Cuando un cliente pague una tarea asignada a ti, aparecerá aquí.</p><button onclick="go('workerHome')">Buscar trabajos</button></div>`}
  </section>`,true)
 }
 function openEarningsInfo(){openProfileSheet("Cómo se calculan tus ganancias","DOHOY cobra una comisión del 15% sobre el monto acordado.",`<div class="earnings-info-example"><span>Ejemplo</span><div><b>Cliente paga</b><strong>$1,000</strong></div><div><b>Comisión DOHOY (15%)</b><strong>−$150</strong></div><div class="net"><b>Tu ganancia</b><strong>$850</strong></div></div>`)}
-function openPayoutSetup(){openProfileSheet("Cobros al trabajador","El historial de ganancias ya funciona. Para enviar automáticamente el dinero a tu banco debemos activar Stripe Connect en la cuenta de DOHOY.",`<div class="private-note">${iconSvg("shield")}<span>No te pediremos datos bancarios dentro de esta pantalla hasta que el flujo seguro de Stripe Connect esté habilitado.</span></div><button class="btn primary" onclick="closeProfileSheet()">Entendido</button>`)}
+function openPayoutSetup(){
+ const started=!!state.profile?.stripe_connect_account_id;
+ openProfileSheet(started?"Continuar configuración de cobros":"Activar cobros","Tus datos bancarios e identidad se capturan directamente en Stripe, no dentro de DOHOY.",`<div class="private-note">${iconSvg("shield")}<span>Stripe abrirá un formulario seguro para configurar tu cuenta de cobro. Puedes regresar a DOHOY al terminar.</span></div><button class="btn primary" onclick="startStripeConnectOnboarding(this)">${started?"Continuar con Stripe":"Activar con Stripe"}</button>`)
+}
+async function startStripeConnectOnboarding(btn=null){
+ if(state.connectBusy)return;
+ state.connectBusy=true;state.error="";
+ const original=btn?.textContent||"Continuar con Stripe";
+ if(btn){btn.disabled=true;btn.textContent="ABRIENDO STRIPE…"}
+ try{
+   const returnUrl=new URL(REDIRECT_URL);returnUrl.searchParams.set("connect","return");
+   const {data,error}=await sb.functions.invoke("dohoy-connect-onboarding",{body:{return_url:returnUrl.toString()}});
+   if(error){
+     let detail=error.message||"No se pudo iniciar Stripe Connect.";
+     try{const payload=await error.context?.json?.();if(payload?.error)detail=payload.error;if(payload?.detail)detail+=" · "+payload.detail}catch{}
+     throw Error(detail)
+   }
+   if(data?.onboarding_url){
+     window.location.assign(data.onboarding_url);
+     return
+   }
+   if(data?.onboarding_required===false){
+     closeProfileSheet();await loadProfile();state.notice="Tu cuenta de cobro ya está configurada.";await openEarnings();return
+   }
+   throw Error(data?.error||"Stripe no devolvió una liga de configuración.")
+ }catch(err){
+   state.error="No pudimos abrir Stripe Connect: "+String(err?.message||err).replaceAll("_"," ");
+   closeProfileSheet();render()
+ }finally{
+   state.connectBusy=false;
+   if(btn&&document.body.contains(btn)){btn.disabled=false;btn.textContent=original}
+ }
+}
 
 function profileDisplayName(p){
  const first=String(p?.full_name||"").trim(),last=String(p?.last_name||"").trim();
@@ -2630,7 +2663,7 @@ async function profile(){
     ${adminAllowed()?`<details><summary><span>${iconSvg("crown")}<b>Administración</b></span><em>⌄</em></summary><div><button class="settings-row" onclick="openAdmin()"><span class="row-ico">${iconSvg("crown")}</span><span><span class="row-main">Panel administrativo</span><span class="row-sub">Operación de DOHOY</span></span><span class="chev">›</span></button></div></details>`:""}
   </div>
   <div class="account-actions"><button class="logout-btn" onclick="signOutCurrent()">${iconSvg("logout")} Cerrar sesión</button></div>
-  <div class="version-note">DOHOY · Versión 5.0.7 · QA POLISH</div>
+  <div class="version-note">DOHOY · Versión 5.0.8 · STRIPE CONNECT</div>
  </section>`,true)
 }
 function settingsRow(title,route,icon,sub=""){
@@ -3167,7 +3200,7 @@ if(error)return setMsg("error",error.message);state.session=data.session;state.u
 }
 async function signOut(){return signOutCurrent()}
 async function loadProfile(){
-if(!state.user)return;const {data,error}=await sb.from("profiles").select("id,full_name,last_name,avatar_url,bio,phone,rating,completed_tasks,identity_verified,phone_verified,driver_license_verified,is_admin,is_suspended,created_at").eq("id",state.user.id).single();
+if(!state.user)return;const {data,error}=await sb.from("profiles").select("id,full_name,last_name,avatar_url,bio,phone,rating,completed_tasks,identity_verified,phone_verified,driver_license_verified,is_admin,is_suspended,stripe_connect_account_id,created_at").eq("id",state.user.id).single();
 if(error){state.error=state.error||("No pudimos cargar tu perfil: "+error.message);return}state.profile=await resolveAvatar(data)
 }
 async function saveProfile(e){
@@ -3351,7 +3384,7 @@ sb.auth.onAuthStateChange((_event,session)=>{
  },0)
 })
 }
-window.DOHoyBuild="5.0.7";
+window.DOHoyBuild="5.0.8";
 const DOHOY_VAPID_PUBLIC="BIqp0MxIqy8rJPGj8mCRF-P_FwaMWgRMKSR_x6AazRKylHNhyT3NEPjNODKzvsSyIpt6OE3BUQXEz8-OkV-k14E";
 // DOHOY 4.4.0 — pago obligatorio antes del trabajo, rendimiento, layout móvil y barras sin solaparse.
 const DEFAULT_FILTERS={query:'',category:'',minPrice:0,maxDistance:null,todayOnly:false,vehicleOnly:false,notifyMatching:true};
