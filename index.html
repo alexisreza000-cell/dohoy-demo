@@ -1427,7 +1427,7 @@ html[data-theme="dark"] .worker-completed-v507{background:#102820!important;bord
 const SUPABASE_URL="https://qakhqnuigpjbeeahuyct.supabase.co";
 const SUPABASE_KEY="sb_publishable_g6FMgju9Lv2mtJCn2heXCw_YhRjweyL";
 const REDIRECT_URL="https://alexisreza000-cell.github.io/dohoy-demo/";
-const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{global:{headers:{"x-dohoy-version":"5.1.0"}}});
 const root=document.getElementById("root");
 
 let state={
@@ -2460,7 +2460,8 @@ function agreedTaskAmount(t,offer){
  return Number(offer.amount||t?.offered_price||0)
 }
 async function loadTaskPayment(taskId){
- const {data,error}=await sb.from("task_payments").select("id,task_id,amount_total,commission_amount,worker_net_amount,payment_status,stripe_checkout_session_id,paid_at").eq("task_id",taskId).order("created_at",{ascending:false}).limit(1);
+ await loadPaymentEnvironment();
+ const {data,error}=await sb.from("task_payments").select("id,task_id,amount_total,commission_amount,worker_net_amount,payment_status,stripe_checkout_session_id,paid_at").eq("task_id",taskId).eq("stripe_livemode",state.paymentLive).order("created_at",{ascending:false}).limit(1);
  state.currentPayment=error?null:(data?.[0]||null)
 }
 function paymentActionHtml(t,offer){
@@ -2537,6 +2538,20 @@ function agendaTaskCard(t){
 }
 
 function earningsMoney(value){return new Intl.NumberFormat("es-MX",{style:"currency",currency:"MXN",minimumFractionDigits:2}).format(Number(value||0))}
+async function loadPaymentEnvironment(){
+ const res=await fetch(SUPABASE_URL+"/functions/v1/dohoy-payment-config",{cache:"no-store"});
+ if(!res.ok)throw Error("No pudimos verificar el entorno de pagos. Actualiza DOHOY.");
+ const config=await res.json();if(typeof config.test_mode!=="boolean")throw Error("Entorno de pagos inválido.");
+ state.paymentLive=!config.test_mode;
+}
+async function checkProductionStripe(btn){
+ btn.disabled=true;btn.textContent="Verificando…";
+ try{const {data,error}=await sb.functions.invoke("dohoy-payment-config",{body:{action:"check"}});
+ if(error){let message=error.message;try{message=(await error.context.json()).error||message}catch{}throw Error(message)}
+ openProfileSheet("Conexión de producción",data.message,`<div class="private-note">Clave real: verificada. Firma: configurada.<br>La prueba completa del cobro y envío de ganancias sigue pendiente.</div>`);
+ }catch(e){state.error=String(e.message||e);render()}finally{btn.disabled=false;btn.textContent="Revisar conexión de pagos reales"}
+}
+
 async function transferRequest(body){
  const {data,error}=await sb.functions.invoke("dohoy-release-payment",{body});
  if(error){let message=error.message;try{const p=await error.context?.json?.();message=p?.error||message}catch{}throw Error(message||"No se pudo consultar Stripe.")}
@@ -2544,17 +2559,18 @@ async function transferRequest(body){
 }
 async function openEarnings(){
  if(state.mode!=="worker"){go("profile");state.notice="Cambia a modo Trabajador para consultar tus ganancias.";render();return}
+ await loadPaymentEnvironment();
  state.route="earnings";state.earningsLoading=true;state.earningsLoadError="";state.connectStatus=null;render();
  const results=await Promise.allSettled([
-  sb.from("task_payments").select("id,task_id,amount_total,commission_amount,worker_net_amount,payment_status,paid_at,created_at").eq("worker_id",state.user.id).order("created_at",{ascending:false}).limit(100),
-  sb.from("worker_transfers").select("payment_id,task_id,amount_cents,status,stripe_transfer_id,reversed_amount_cents,last_error").eq("worker_id",state.user.id),
+  sb.from("task_payments").select("id,task_id,amount_total,commission_amount,worker_net_amount,payment_status,paid_at,created_at").eq("worker_id",state.user.id).eq("stripe_livemode",state.paymentLive).order("created_at",{ascending:false}).limit(100),
+  sb.from("worker_transfers").select("payment_id,task_id,amount_cents,status,stripe_transfer_id,reversed_amount_cents,last_error").eq("worker_id",state.user.id).eq("stripe_livemode",state.paymentLive),
   transferRequest({action:"status"})
  ]);
  state.earningsPayments=[];state.earningsTransfers={};state.earningsTasks={};
  const pr=results[0],tr=results[1],cs=results[2];
  if(pr.status==="fulfilled"&&!pr.value.error)state.earningsPayments=pr.value.data||[];else state.earningsLoadError="No pudimos consultar tus pagos. Vuelve a actualizar.";
  if(tr.status==="fulfilled"&&!tr.value.error){for(const t of tr.value.data||[])state.earningsTransfers[t.payment_id]=t}else state.earningsLoadError="No pudimos consultar los envíos a Stripe. Vuelve a actualizar.";
- if(cs.status==="fulfilled")state.connectStatus=cs.value;
+ if(cs.status==="fulfilled")state.connectStatus=cs.value;else state.earningsLoadError="No pudimos verificar Stripe. Actualiza para continuar.";
  const ids=[...new Set(state.earningsPayments.map(p=>p.task_id).filter(Boolean))];
  if(ids.length){const {data,error}=await sb.from("tasks").select("id,title,category,status,completed_at").in("id",ids);if(error)state.earningsLoadError="No pudimos consultar los trabajos. Vuelve a actualizar.";for(const t of data||[])state.earningsTasks[t.id]=t}
  state.earningsLoading=false;render()
@@ -2578,12 +2594,12 @@ function earningsScreen(){
  const sent=Object.values(state.earningsTransfers||{}).reduce((s,t)=>s+(t.stripe_transfer_id?(Number(t.amount_cents)-Number(t.reversed_amount_cents||0))/100:0),0);
  const pending=pendingEarnings().reduce((s,p)=>s+Number(p.worker_net_amount||0),0);
  const waiting=paid.filter(p=>state.earningsTasks?.[p.task_id]?.status!=="completed").reduce((s,p)=>s+Number(p.worker_net_amount||0),0);
- const connected=!!state.profile?.stripe_connect_account_id,active=state.connectStatus?.transfers_active===true;
+ const connected=!!state.profile?.[state.paymentLive?"stripe_connect_live_account_id":"stripe_connect_account_id"],active=state.connectStatus?.transfers_active===true;
  const valid=!state.earningsLoadError&&!state.earningsLoading;
  return shell(`<section class="earnings-page">
    <div class="earnings-head"><button class="icon" onclick="go('profile')">←</button><div><span>DOHOY TRABAJADOR</span><h1>Mis ganancias</h1></div><button class="earnings-help" onclick="openEarningsInfo()">${iconSvg("help")}</button></div>
-   ${authMsg()}${state.earningsLoadError?`<p class="private-note">${escapeHtml(state.earningsLoadError)}</p>`:""}
-   ${state.connectStatus?.test_mode?`<div class="private-note">Entorno de prueba · Los movimientos no son dinero real.</div>`:""}
+   ${authMsg()}${state.profile?.is_admin?`<button class="btn" onclick="checkProductionStripe(this)">Revisar conexión de pagos reales</button>`:""}${state.earningsLoadError?`<p class="private-note">${escapeHtml(state.earningsLoadError)}</p>`:""}
+   ${!state.paymentLive?`<div class="private-note">Entorno de prueba · Los movimientos no son dinero real.</div>`:""}
    <section class="earnings-hero"><span class="earnings-kicker">Total registrado</span><h2>${earningsMoney(total)}</h2><p>Ganancia neta después de la comisión DOHOY. Incluye trabajos pendientes de finalizar.</p><div class="earnings-month"><span>Este mes</span><b>${earningsMoney(month)}</b></div></section>
    <div class="earnings-metrics"><div><span>${iconSvg("wallet")}</span><small>Trabajos pagados</small><b>${paid.length}</b></div><div><span>${iconSvg("trend")}</span><small>Total cobrado</small><b>${earningsMoney(gross)}</b></div><div><span>${iconSvg("receipt")}</span><small>Comisión DOHOY</small><b>${earningsMoney(commission)}</b></div></div>
    <section class="payout-setup-card"><span class="payout-icon">${iconSvg(active?"verify":"payment")}</span><div><b>${active?"Cuenta Stripe habilitada":connected?"Cuenta vinculada a Stripe":"Activa tus cobros"}</b><p>${active?"Stripe permite recibir transferencias. Consulta tus datos de cobro cuando lo necesites.":connected?"Completa tu configuración o actualiza para consultar su estado.":"Conecta tu cuenta para recibir el 85% de tus trabajos terminados."}</p></div><button onclick="openPayoutSetup()">${active?"Datos de cobro":connected?"Continuar configuración":"Activar con Stripe"}</button></section>
@@ -2594,7 +2610,7 @@ function earningsScreen(){
 }
 function openEarningsInfo(){openProfileSheet("Cómo se calculan tus ganancias","DOHOY cobra una comisión del 15% sobre el monto acordado.",`<div class="earnings-info-example"><span>Ejemplo</span><div><b>Cliente paga</b><strong>$1,000</strong></div><div><b>Comisión DOHOY (15%)</b><strong>−$150</strong></div><div class="net"><b>Tu ganancia</b><strong>$850</strong></div></div><p>Cuando el cliente confirma el trabajo, DOHOY intenta enviar tu ganancia a Stripe. Si falta configurar tu cuenta o hay un error, puedes reintentar desde Mis ganancias. El total enviado no equivale al saldo disponible de Stripe ni a un depósito bancario.</p>`)}
 function openPayoutSetup(){
- const started=!!state.profile?.stripe_connect_account_id;
+ const started=!!state.profile?.[state.paymentLive?"stripe_connect_live_account_id":"stripe_connect_account_id"];
  openProfileSheet(started?"Continuar configuración de cobros":"Activar cobros","Tus datos bancarios e identidad se capturan directamente en Stripe, no dentro de DOHOY.",`<div class="private-note">${iconSvg("shield")}<span>Stripe abrirá un formulario seguro para configurar tu cuenta de cobro. Puedes regresar a DOHOY al terminar.</span></div><button class="btn primary" onclick="startStripeConnectOnboarding(this)">${started?"Continuar con Stripe":"Activar con Stripe"}</button>`)
 }
 async function startStripeConnectOnboarding(btn=null){
@@ -2691,7 +2707,7 @@ async function profile(){
     ${adminAllowed()?`<details><summary><span>${iconSvg("crown")}<b>Administración</b></span><em>⌄</em></summary><div><button class="settings-row" onclick="openAdmin()"><span class="row-ico">${iconSvg("crown")}</span><span><span class="row-main">Panel administrativo</span><span class="row-sub">Operación de DOHOY</span></span><span class="chev">›</span></button></div></details>`:""}
   </div>
   <div class="account-actions"><button class="logout-btn" onclick="signOutCurrent()">${iconSvg("logout")} Cerrar sesión</button></div>
-  <div class="version-note">DOHOY · Versión 5.0.9 · STRIPE CONNECT</div>
+  <div class="version-note">DOHOY · Versión 5.1.0 · STRIPE CONNECT</div>
  </section>`,true)
 }
 function settingsRow(title,route,icon,sub=""){
@@ -2816,7 +2832,7 @@ async function loadSavedCards(){
  if(!state.session?.access_token)return;
  state.paymentMethodsBusy=true;
  try{
-  const res=await fetch(SUPABASE_URL+"/functions/v1/dohoy-payment-methods",{method:"GET",headers:{Authorization:"Bearer "+state.session.access_token,apikey:SUPABASE_KEY}});
+  const res=await fetch(SUPABASE_URL+"/functions/v1/dohoy-payment-methods",{method:"GET",headers:{Authorization:"Bearer "+state.session.access_token,apikey:SUPABASE_KEY,"x-dohoy-version":"5.1.0"}});
   const data=await res.json();
   if(!res.ok)throw new Error(data?.error||"No pudimos cargar tus tarjetas.");
   state.savedCards=data.cards||[];
@@ -2827,7 +2843,7 @@ async function addPaymentMethod(){
  if(state.paymentMethodsBusy||!state.session?.access_token)return;
  state.paymentMethodsBusy=true;state.error='';render();
  try{
-  const res=await fetch(SUPABASE_URL+"/functions/v1/dohoy-payment-methods",{method:"POST",headers:{Authorization:"Bearer "+state.session.access_token,apikey:SUPABASE_KEY,"Content-Type":"application/json"},body:JSON.stringify({return_url:REDIRECT_URL})});
+  const res=await fetch(SUPABASE_URL+"/functions/v1/dohoy-payment-methods",{method:"POST",headers:{Authorization:"Bearer "+state.session.access_token,apikey:SUPABASE_KEY,"x-dohoy-version":"5.1.0","Content-Type":"application/json"},body:JSON.stringify({return_url:REDIRECT_URL})});
   const data=await res.json();
   if(!res.ok||!data.checkout_url)throw new Error(data?.error||"No pudimos abrir Stripe.");
   window.location.href=data.checkout_url;
@@ -3228,7 +3244,7 @@ if(error)return setMsg("error",error.message);state.session=data.session;state.u
 }
 async function signOut(){return signOutCurrent()}
 async function loadProfile(){
-if(!state.user)return;const {data,error}=await sb.from("profiles").select("id,full_name,last_name,avatar_url,bio,phone,rating,completed_tasks,identity_verified,phone_verified,driver_license_verified,is_admin,is_suspended,stripe_connect_account_id,created_at").eq("id",state.user.id).single();
+if(!state.user)return;const {data,error}=await sb.from("profiles").select("id,full_name,last_name,avatar_url,bio,phone,rating,completed_tasks,identity_verified,phone_verified,driver_license_verified,is_admin,is_suspended,stripe_connect_account_id,stripe_connect_live_account_id,created_at").eq("id",state.user.id).single();
 if(error){state.error=state.error||("No pudimos cargar tu perfil: "+error.message);return}state.profile=await resolveAvatar(data)
 }
 async function saveProfile(e){
@@ -3415,7 +3431,7 @@ sb.auth.onAuthStateChange((_event,session)=>{
  },0)
 })
 }
-window.DOHoyBuild="5.0.9";
+window.DOHoyBuild="5.1.0";
 const DOHOY_VAPID_PUBLIC="BIqp0MxIqy8rJPGj8mCRF-P_FwaMWgRMKSR_x6AazRKylHNhyT3NEPjNODKzvsSyIpt6OE3BUQXEz8-OkV-k14E";
 // DOHOY 4.4.0 — pago obligatorio antes del trabajo, rendimiento, layout móvil y barras sin solaparse.
 const DEFAULT_FILTERS={query:'',category:'',minPrice:0,maxDistance:null,todayOnly:false,vehicleOnly:false,notifyMatching:true};
