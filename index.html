@@ -2552,6 +2552,35 @@ async function checkProductionStripe(btn){
  }catch(e){state.error=String(e.message||e);render()}finally{btn.disabled=false;btn.textContent="Revisar conexión de pagos reales"}
 }
 
+function openLiveConnectPreparation(){
+ if(!state.profile?.is_admin)return;
+ openProfileSheet("Preparar Stripe Connect real","Solo prepararás tu cuenta real de trabajador. DOHOY continuará cobrando exclusivamente en modo de prueba.",`<div class="private-note">${iconSvg("shield")}<span>Stripe solicitará tus datos legales y bancarios mediante su formulario seguro. Esta acción puede crear una cuenta real de Stripe Connect, pero NO activa cobros, envíos de ganancias ni retiros de DOHOY.</span></div><button class="btn primary" onclick="beginLiveConnectOnboarding(this)">Continuar a Stripe real</button>`);
+}
+async function beginLiveConnectOnboarding(btn=null){
+ if(!state.profile?.is_admin||state.connectBusy)return;
+ state.connectBusy=true;state.error="";
+ const original=btn?.textContent||"Continuar a Stripe real";
+ if(btn){btn.disabled=true;btn.textContent="ABRIENDO STRIPE…"}
+ try {
+  const {data,error}=await sb.functions.invoke("dohoy-connect-onboarding",{body:{action:"prepare_live"}});
+  if(error){
+   let message=error.message||"No se pudo abrir Stripe.";
+   try{const payload=await error.context?.json?.();if(payload?.error)message=payload.error}catch{}
+   throw Error(message)
+  }
+  if(!data?.ok||data?.test_mode!==false||!data?.onboarding_url)throw Error(data?.error||"Stripe no devolvió un enlace de producción válido.");
+  const destination=new URL(data.onboarding_url);
+  if(destination.protocol!=="https:"||!(destination.hostname==="stripe.com"||destination.hostname.endsWith(".stripe.com")))throw Error("El enlace de registro no pertenece a Stripe.");
+  window.location.assign(destination.href);
+ }catch(err){
+  state.error="No pudimos preparar Stripe real: "+String(err?.message||err);
+  closeProfileSheet();render();
+ }finally{
+  state.connectBusy=false;
+  if(btn&&document.body.contains(btn)){btn.disabled=false;btn.textContent=original}
+ }
+}
+
 async function transferRequest(body){
  const {data,error}=await sb.functions.invoke("dohoy-release-payment",{body});
  if(error){let message=error.message;try{const p=await error.context?.json?.();message=p?.error||message}catch{}throw Error(message||"No se pudo consultar Stripe.")}
@@ -2625,7 +2654,7 @@ function earningsScreen(){
  const valid=state.paymentEnvironmentVerified===true&&!state.earningsLoadError&&!state.earningsLoading;
  return shell(`<section class="earnings-page">
    <div class="earnings-head"><button class="icon" onclick="go('profile')">←</button><div><span>DOHOY TRABAJADOR</span><h1>Mis ganancias</h1></div><button class="earnings-help" onclick="openEarningsInfo()">${iconSvg("help")}</button></div>
-   ${authMsg()}${state.profile?.is_admin?`<button class="btn" onclick="checkProductionStripe(this)">Revisar conexión de pagos reales</button>`:""}${state.earningsLoadError?`<p class="private-note">${escapeHtml(state.earningsLoadError)}</p>`:""}
+   ${authMsg()}${state.profile?.is_admin?`<button class="btn" onclick="checkProductionStripe(this)">Revisar conexión de pagos reales</button><button class="btn" onclick="openLiveConnectPreparation()">Preparar mi cuenta Stripe real (sin cobros)</button>`:""}${state.earningsLoadError?`<p class="private-note">${escapeHtml(state.earningsLoadError)}</p>`:""}
    ${!state.paymentLive?`<div class="private-note">Entorno de prueba · Los movimientos no son dinero real.</div>`:""}
    <section class="earnings-hero"><span class="earnings-kicker">Ganancia neta ajustada</span><h2>${earningsMoney(total)}</h2><p>Ganancias después de comisiones y reembolsos. Incluye importes enviados, pendientes y retenidos; no es saldo disponible.</p><div class="earnings-month"><span>Este mes</span><b>${earningsMoney(month)}</b></div></section>
    <div class="earnings-metrics"><div><span>${iconSvg("wallet")}</span><small>Trabajos cobrados</small><b>${paid.length}</b></div><div><span>${iconSvg("trend")}</span><small>Total cobrado</small><b>${earningsMoney(gross)}</b></div><div><span>${iconSvg("receipt")}</span><small>Comisión DOHOY</small><b>${earningsMoney(commission)}</b></div></div>
