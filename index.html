@@ -2572,7 +2572,7 @@ async function openEarnings(){
   return;
  }
  const results=await Promise.allSettled([
-  sb.from("task_payments").select("id,task_id,amount_total,commission_amount,worker_net_amount,payment_status,paid_at,created_at").eq("worker_id",state.user.id).eq("stripe_livemode",state.paymentLive).order("created_at",{ascending:false}).limit(100),
+  sb.from("task_payments").select("id,task_id,amount_total,commission_amount,worker_net_amount,refunded_amount,payment_status,paid_at,created_at").eq("worker_id",state.user.id).eq("stripe_livemode",state.paymentLive).order("created_at",{ascending:false}).limit(100),
   sb.from("worker_transfers").select("payment_id,task_id,amount_cents,status,stripe_transfer_id,reversed_amount_cents,last_error").eq("worker_id",state.user.id).eq("stripe_livemode",state.paymentLive),
   transferRequest({action:"status"})
  ]);
