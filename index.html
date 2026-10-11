@@ -1629,6 +1629,345 @@ html[data-theme="dark"] .worker-active-v4>button:first-child b{
   }
 }
 
+
+/* DOHOY 5.2 — Cuenta minimalista: inspiracion en listas limpias, sin tarjetas saturadas.
+   Exclusivamente la vista Cuenta; no modifica lógica, backend ni pagos. */
+html[data-theme="light"] .account-screen.account-v4 {
+  --ac-bg:#f8f9fb; --ac-surface:#ffffff; --ac-ink:#1c2533;
+  --ac-muted:#697586; --ac-stroke:#edf0f3; --ac-icon:#3a495b;
+  --ac-soft:#f0f3f7;
+}
+html[data-theme="dark"] .account-screen.account-v4 {
+  --ac-bg:#101620; --ac-surface:#1a2432; --ac-ink:#f2f5fa;
+  --ac-muted:#b8c3d0; --ac-stroke:#2e3b4c; --ac-icon:#cfdbeb;
+  --ac-soft:#243349;
+}
+html[data-theme] .account-screen.account-v4 {
+  background:var(--ac-bg)!important;
+  background-image:none!important;
+  color:var(--ac-ink)!important;
+  padding:18px 20px 132px!important;
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+  overflow-wrap:break-word;
+}
+/* No marco alrededor de "Cuenta": encabezado tipográfico sencillo. */
+html[data-theme] .account-screen.account-v4 .account-top {
+  background:none!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  border:0!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  display:grid!important;
+  grid-template-columns:40px minmax(0,1fr)!important;
+  gap:12px!important;
+  align-items:center!important;
+  margin:0 0 23px!important;
+  padding:0!important;
+  min-height:46px;
+}
+html[data-theme] .account-screen.account-v4 .account-top>span:last-child {
+  display:none!important;
+}
+html[data-theme] .account-screen.account-v4 .account-top h1 {
+  color:var(--ac-ink)!important;
+  text-align:left!important;
+  font-size:26px!important;
+  font-weight:780!important;
+  letter-spacing:-.8px!important;
+  line-height:1.18!important;
+  margin:0!important;
+}
+html[data-theme] .account-screen.account-v4 .account-top>.icon {
+  background:var(--ac-surface)!important;
+  border:1px solid var(--ac-stroke)!important;
+  border-radius:50%!important;
+  box-shadow:none!important;
+  color:var(--ac-ink)!important;
+  width:40px!important;
+  height:40px!important;
+  font-size:21px!important;
+}
+/* Identidad como fila, no tarjeta de colores. */
+html[data-theme] .account-screen.account-v4 .account-profile-v4 {
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  display:grid!important;
+  grid-template-columns:60px minmax(0,1fr) 18px!important;
+  align-items:center!important;
+  gap:14px!important;
+  text-align:left!important;
+  padding:10px 0 20px!important;
+  margin:0 0 12px!important;
+  width:100%!important;
+}
+html[data-theme] .account-screen.account-v4 .account-profile-v4 .avatar {
+  width:60px!important;
+  height:60px!important;
+  min-width:60px!important;
+  border-radius:18px!important;
+}
+html[data-theme] .account-screen.account-v4 .account-profile-v4>span:nth-child(2) {
+  min-width:0!important;
+}
+html[data-theme] .account-screen.account-v4 .account-profile-v4 h2 {
+  color:var(--ac-ink)!important;
+  font-size:20px!important;
+  font-weight:740!important;
+  line-height:1.25!important;
+  letter-spacing:-.55px!important;
+  margin:0 0 5px!important;
+  overflow-wrap:anywhere;
+}
+html[data-theme] .account-screen.account-v4 .account-profile-v4 small {
+  color:var(--ac-muted)!important;
+  font-size:12px!important;
+  line-height:1.35!important;
+  font-weight:500!important;
+}
+html[data-theme] .account-screen.account-v4 .account-profile-v4 em {
+  color:var(--ac-muted)!important;
+  font-size:23px!important;
+  font-weight:400!important;
+}
+/* Accesos frecuentes ligeros, con superficies planas y micro-acento azul. */
+html[data-theme] .account-screen.account-v4 .account-primary-v4 {
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:9px!important;
+  margin:0 0 27px!important;
+}
+html[data-theme] .account-screen.account-v4 .account-primary-v4 button {
+  background:var(--ac-surface)!important;
+  background-image:none!important;
+  border:1px solid var(--ac-stroke)!important;
+  box-shadow:none!important;
+  border-radius:16px!important;
+  min-width:0!important;
+  min-height:83px!important;
+  padding:13px 7px!important;
+  color:var(--ac-ink)!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:8px!important;
+}
+html[data-theme] .account-screen.account-v4 .account-primary-v4 button>span {
+  width:28px!important;
+  height:28px!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:var(--ac-icon)!important;
+  display:grid!important;
+  place-items:center!important;
+}
+html[data-theme] .account-screen.account-v4 .account-primary-v4 button .svg-icon {
+  width:23px!important;
+  height:23px!important;
+}
+html[data-theme] .account-screen.account-v4 .account-primary-v4 button b {
+  color:var(--ac-ink)!important;
+  font-size:12px!important;
+  font-weight:650!important;
+  line-height:1.25!important;
+}
+/* Secciones en estilo lista: título fuera, filas dentro de un solo panel. */
+html[data-theme] .account-screen.account-v4 .account-groups-v4 {
+  display:grid!important;
+  gap:19px!important;
+}
+html[data-theme] .account-screen.account-v4 .account-groups-v4 details {
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+  border-radius:0!important;
+  min-width:0;
+}
+html[data-theme] .account-screen.account-v4 .account-groups-v4 details>summary {
+  background:transparent!important;
+  border:0!important;
+  color:var(--ac-ink)!important;
+  padding:0 2px 10px!important;
+  font-size:16px!important;
+  cursor:pointer;
+  min-height:34px;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+}
+html[data-theme] .account-screen.account-v4 .account-groups-v4 details>summary>span {
+  gap:0!important;
+  color:var(--ac-ink)!important;
+}
+html[data-theme] .account-screen.account-v4 .account-groups-v4 details>summary .svg-icon {
+  display:none!important;
+}
+html[data-theme] .account-screen.account-v4 .account-groups-v4 details>summary b {
+  color:var(--ac-ink)!important;
+  font-size:17px!important;
+  font-weight:740!important;
+  letter-spacing:-.3px!important;
+}
+html[data-theme] .account-screen.account-v4 .account-groups-v4 details>summary em {
+  color:var(--ac-muted)!important;
+  font-size:17px!important;
+}
+html[data-theme] .account-screen.account-v4 .account-groups-v4 details>div {
+  background:var(--ac-surface)!important;
+  border:1px solid var(--ac-stroke)!important;
+  border-radius:15px!important;
+  overflow:hidden!important;
+  padding:0!important;
+}
+html[data-theme] .account-screen.account-v4 .account-groups-v4 details>div>.settings-row {
+  display:grid!important;
+  grid-template-columns:27px minmax(0,1fr) 14px!important;
+  gap:15px!important;
+  align-items:center!important;
+  width:100%!important;
+  min-width:0!important;
+  min-height:59px!important;
+  margin:0!important;
+  padding:13px 16px!important;
+  border:0!important;
+  border-radius:0!important;
+  background:var(--ac-surface)!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  transform:none!important;
+  text-align:left!important;
+}
+html[data-theme] .account-screen.account-v4 .account-groups-v4 details>div>.settings-row+.settings-row {
+  border-top:1px solid var(--ac-stroke)!important;
+}
+html[data-theme] .account-screen.account-v4 .account-groups-v4 .settings-row .row-ico,
+html[data-theme] .account-screen.account-v4 .account-groups-v4 .settings-row:nth-of-type(n) .row-ico,
+html[data-theme] .account-screen.account-v4 .account-groups-v4 .setting-payments .row-ico {
+  width:27px!important;
+  height:27px!important;
+  min-width:27px!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  background-image:none!important;
+  color:var(--ac-icon)!important;
+  box-shadow:none!important;
+  display:grid!important;
+  place-items:center!important;
+}
+html[data-theme] .account-screen.account-v4 .account-groups-v4 .settings-row .row-ico .svg-icon {
+  width:22px!important;
+  height:22px!important;
+}
+html[data-theme] .account-screen.account-v4 .account-groups-v4 .settings-row>span:nth-child(2) {
+  min-width:0!important;
+  display:block!important;
+  align-self:center!important;
+}
+html[data-theme] .account-screen.account-v4 .account-groups-v4 .settings-row .row-main {
+  color:var(--ac-ink)!important;
+  font-size:14px!important;
+  line-height:1.35!important;
+  font-weight:610!important;
+  letter-spacing:-.06px!important;
+  white-space:normal!important;
+}
+html[data-theme] .account-screen.account-v4 .account-groups-v4 .settings-row .row-sub {
+  display:none!important;
+}
+html[data-theme] .account-screen.account-v4 .account-groups-v4 .settings-row .chev,
+html[data-theme] .account-screen.account-v4 .account-groups-v4 .payment-settings-row .chev {
+  position:static!important;
+  transform:none!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  background-image:none!important;
+  color:var(--ac-muted)!important;
+  width:14px!important;
+  height:auto!important;
+  font-size:23px!important;
+  line-height:1!important;
+  box-shadow:none!important;
+  padding:0!important;
+}
+html[data-theme] .account-screen.account-v4 .account-groups-v4 .settings-row:before,
+html[data-theme] .account-screen.account-v4 .account-groups-v4 .settings-row:after {
+  content:none!important;
+  display:none!important;
+}
+html[data-theme] .account-screen.account-v4 .account-groups-v4 .settings-row:active {
+  background:var(--ac-soft)!important;
+}
+/* Evita que las antiguas tarjetas grandes vuelvan a alterar el listado. */
+html[data-theme] .account-screen.account-v4 .account-groups-v4 .payment-settings-row,
+html[data-theme] .account-screen.account-v4 .account-groups-v4 .settings-row:last-child,
+html[data-theme] .account-screen.account-v4 .account-groups-v4 .settings-row:first-child {
+  grid-column:auto!important;
+  grid-template-rows:auto!important;
+  min-height:59px!important;
+}
+html[data-theme] .account-screen.account-v4 .account-groups-v4 .payment-settings-row .payment-row-ico {
+  background:transparent!important;
+  color:var(--ac-icon)!important;
+}
+/* Pie discreto */
+html[data-theme] .account-screen.account-v4 .account-actions {
+  margin-top:24px!important;
+}
+html[data-theme] .account-screen.account-v4 .logout-btn {
+  background:transparent!important;
+  background-image:none!important;
+  border:0!important;
+  box-shadow:none!important;
+  color:#bf4b4b!important;
+  font-size:14px!important;
+  font-weight:660!important;
+  min-height:47px!important;
+}
+html[data-theme] .account-screen.account-v4 .version-note {
+  color:var(--ac-muted)!important;
+  font-size:11px!important;
+  text-align:center!important;
+  opacity:.75;
+}
+@media(max-width:390px) {
+  html[data-theme] .account-screen.account-v4 {padding-left:16px!important;padding-right:16px!important}
+  html[data-theme] .account-screen.account-v4 .account-profile-v4 h2 {font-size:18px!important}
+  html[data-theme] .account-screen.account-v4 .account-primary-v4 button {min-height:77px!important;padding:11px 4px!important}
+  html[data-theme] .account-screen.account-v4 .account-primary-v4 button b {font-size:11px!important}
+  html[data-theme] .account-screen.account-v4 .account-groups-v4 details>div>.settings-row {padding:13px 12px!important}
+}
+/* Menos ruido en la barra inferior solamente en la pantalla Cuenta. */
+html[data-theme] .app:has(>.account-v4)>.nav {
+  border-radius:23px!important;
+  background:var(--ac-surface, #fff)!important;
+  border:1px solid var(--ac-stroke, #e9edf2)!important;
+  box-shadow:0 10px 25px rgba(0,0,0,.08)!important;
+}
+html[data-theme="dark"] .app:has(>.account-v4)>.nav {
+  background:#1a2432!important;
+  border-color:#344052!important;
+}
+html[data-theme] .app:has(>.account-v4)>.nav button.active {
+  background:transparent!important;
+  box-shadow:none!important;
+  color:#1766db!important;
+}
+html[data-theme="dark"] .app:has(>.account-v4)>.nav button.active {color:#9fc0ff!important}
+html[data-theme] .app:has(>.account-v4)>.nav button.active b {
+  background:transparent!important;
+  color:inherit!important;
+}
+html[data-theme] .app:has(>.account-v4)>.nav button.active:after {
+  width:22px!important;
+  background:#ff7a16!important;
+}
+
 </style>
 <link rel="manifest" href="./manifest.webmanifest?v=1.9.4"><link rel="apple-touch-icon" href="./icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default">
 </head>
@@ -2926,11 +3265,9 @@ async function profile(){
  const first=profileDisplayName(state.profile);
  const modeText=state.mode==="client"?"Cliente":"Trabajador";
  root.innerHTML=shell(`<section class="account-screen account-v4">
-  <div class="account-top"><button class="icon" onclick="go('${state.mode==="client"?"clientHome":"workerHome"}')">←</button><h1>Cuenta</h1><span></span></div>
+  <div class="account-top account-top-clean"><button class="icon" aria-label="Volver al inicio" onclick="go('${state.mode==="client"?"clientHome":"workerHome"}')">←</button><h1>Cuenta</h1><span></span></div>
   ${authMsg()}
   <button class="account-profile-v4" onclick="go('editProfile')">${avatarMarkup(state.profile)}<span><h2>${escapeHtml(first)}</h2><small>${modeText} · Editar perfil</small></span><em>›</em></button>
-  ${profileTrustCard(state.profile)}
-
   <div class="account-primary-v4">
     <button onclick="go('${state.mode==="client"?"clientTasks":"workerJobs"}')"><span>${iconSvg("tasks")}</span><b>${state.mode==="client"?"Mis tareas":"Mis trabajos"}</b></button>
     ${state.mode==="worker"?`<button onclick="openEarnings()"><span>${iconSvg("wallet")}</span><b>Ganancias</b></button>`:`<button onclick="go('payments')"><span>${iconSvg("payment")}</span><b>Pagos</b></button>`}
@@ -2951,7 +3288,7 @@ async function profile(){
       </div>
     </details>
 
-    <details>
+    <details open>
       <summary><span>${iconSvg("gear")}<b>Preferencias</b></span><em>⌄</em></summary>
       <div>
         ${settingsRow("Notificaciones","notifications","bell","Avisos y preferencias")}
@@ -2960,7 +3297,7 @@ async function profile(){
       </div>
     </details>
 
-    <details>
+    <details open>
       <summary><span>${iconSvg("help")}<b>Ayuda y soporte</b></span><em>⌄</em></summary>
       <div>
         <button class="settings-row" onclick="openSupportCenter()"><span class="row-ico">${iconSvg("gear")}</span><span><span class="row-main">Soporte y disputas</span><span class="row-sub">Casos y seguimiento</span></span><span class="chev">›</span></button>
@@ -2973,7 +3310,7 @@ async function profile(){
     ${adminAllowed()?`<details><summary><span>${iconSvg("crown")}<b>Administración</b></span><em>⌄</em></summary><div><button class="settings-row" onclick="openAdmin()"><span class="row-ico">${iconSvg("crown")}</span><span><span class="row-main">Panel administrativo</span><span class="row-sub">Operación de DOHOY</span></span><span class="chev">›</span></button></div></details>`:""}
   </div>
   <div class="account-actions"><button class="logout-btn" onclick="signOutCurrent()">${iconSvg("logout")} Cerrar sesión</button></div>
-  <div class="version-note">DOHOY · Versión 5.1.0 · STRIPE CONNECT</div>
+  <div class="version-note">DOHOY · Versión 5.2.0</div>
  </section>`,true)
 }
 function settingsRow(title,route,icon,sub=""){
