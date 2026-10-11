@@ -8,6 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="DOHOY">
 <title>DOHOY</title>
+<meta name="dohoy-build" content="5.6.1">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20128%20128%22%3E%3Crect%20width%3D%22128%22%20height%3D%22128%22%20rx%3D%2228%22%20fill%3D%22%23071B3B%22%2F%3E%3Cpath%20d%3D%22M15%2031C45%2020%2082%2020%20103%2034c15%2010%2020%2025%2016%2042-7-17-22-27-42-33-22-7-43-10-62-12Z%22%20fill%3D%22%23FF7A00%22%2F%3E%3Cpath%20d%3D%22M31%2049c18-1%2037%200%2051%207%2016%208%2024%2019%2023%2031-1%2013-10%2022-24%2024H18c17-12%2032-24%2043-35%208-8%207-14-1-19-7-4-18-7-29-8Z%22%20fill%3D%22%230066FF%22%2F%3E%3Cpath%20d%3D%22M57%2076c8-8%207-14-1-19%208%200%2016%202%2022%206%209%205%2013%2011%2012%2018-1%208-7%2015-19%2023h14c10-2%2016-8%2017-17%201-10-7-19-20-25%209%204%2016%2011%2018%2019%203%2012-4%2023-17%2028H42c7-7%2012-13%2015-18%205-7%206-11%200-15Z%22%20fill%3D%22%230B3D91%22%2F%3E%3C%2Fsvg%3E">
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20128%20128%22%3E%3Crect%20width%3D%22128%22%20height%3D%22128%22%20rx%3D%2228%22%20fill%3D%22%23071B3B%22%2F%3E%3Cpath%20d%3D%22M15%2031C45%2020%2082%2020%20103%2034c15%2010%2020%2025%2016%2042-7-17-22-27-42-33-22-7-43-10-62-12Z%22%20fill%3D%22%23FF7A00%22%2F%3E%3Cpath%20d%3D%22M31%2049c18-1%2037%200%2051%207%2016%208%2024%2019%2023%2031-1%2013-10%2022-24%2024H18c17-12%2032-24%2043-35%208-8%207-14-1-19-7-4-18-7-29-8Z%22%20fill%3D%22%230066FF%22%2F%3E%3Cpath%20d%3D%22M57%2076c8-8%207-14-1-19%208%200%2016%202%2022%206%209%205%2013%2011%2012%2018-1%208-7%2015-19%2023h14c10-2%2016-8%2017-17%201-10-7-19-20-25%209%204%2016%2011%2018%2019%203%2012-4%2023-17%2028H42c7-7%2012-13%2015-18%205-7%206-11%200-15Z%22%20fill%3D%22%230B3D91%22%2F%3E%3C%2Fsvg%3E">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4"></script>
@@ -313,7 +314,7 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;background:lin
 .btn:active,.primary:active,.chat-cta-btn:active,.publish-submit:active,.login-btn:active,.signup-btn:active,.save-btn:active,.payment-cta:active{transform:translateY(1px) scale(.992)!important}
 .btn:hover,.primary:hover,.chat-cta-btn:hover,.publish-submit:hover,.login-btn:hover,.signup-btn:hover,.save-btn:hover{filter:brightness(1.03);box-shadow:0 16px 30px rgba(22,93,255,.29)!important}
 .secondary,.secondary-soft,.edit-task-btn{background:#EDF4FF!important;color:var(--blue-2)!important;border:1px solid #D5E4FA!important;box-shadow:none!important}
-.accent,.accent-soft,.orange-btn{background:linear-gradient(135deg,var(--orange),var(--orange-2))!important;color:#fff!important;border:0!important;box-shadow:0 12px 25px rgba(255,122,0,.23)!important}
+.btn.accent,.accent-soft,.orange-btn{background:linear-gradient(135deg,var(--orange),var(--orange-2))!important;color:#fff!important;border:0!important;box-shadow:0 12px 25px rgba(255,122,0,.23)!important}
 .payment-cta{background:linear-gradient(105deg,#FF7A00 0%,#FF922E 48%,#165DFF 100%)!important;min-height:62px!important;border-radius:20px!important;font-size:20px!important;letter-spacing:.8px!important;box-shadow:0 16px 34px rgba(255,122,0,.30),0 8px 24px rgba(22,93,255,.18)!important}
 .payment-card{background:linear-gradient(145deg,#0F3D91 0%,#165DFF 62%,#FF7A00 150%)!important;border:1px solid rgba(255,255,255,.22)!important;box-shadow:0 20px 44px rgba(15,61,145,.24)!important;border-radius:26px!important}
 .payment-card,.payment-card *{color:#fff}
@@ -3112,14 +3113,41 @@ html[data-theme="dark"] .task-sharing-banner-v56{background:#17446e;color:#e4f1f
 .task-tracking-notice-v56{display:flex;align-items:center;gap:9px;background:#f0f6ff;border:1px solid #d7e7fa;border-radius:14px;color:#23527e;font-size:12px;line-height:1.45;padding:12px;margin:10px 0}
 .task-tracking-notice-v56 .svg-icon{width:20px;height:20px;flex:0 0 20px;color:#126ce9}
 html[data-theme="dark"] .task-tracking-notice-v56{background:#1b324c;color:#bedcf8;border-color:#365573}
+/* DOHOY 5.6.1 — isolate the wordmark and keep failed media readable. */
+html[data-theme] .brand-word .accent{background:none!important;box-shadow:none!important;border:0!important;color:#c85108!important}
+html[data-theme="dark"] .brand-word .accent,.hero .brand-word .accent,.splash-logo .brand-word .accent{color:#ff963d!important}
+.image-fallback{display:grid;place-content:center;justify-items:center;gap:8px;min-height:100px;padding:18px;background:#eaf2fc;color:#375675;font-size:12px;line-height:1.4;text-align:center}
+.image-fallback .svg-icon{width:30px;height:30px}
+.avatar .avatar-fallback{min-height:0;padding:0;width:100%;height:100%;background:#eaf2fc;color:#1467e8}
+.task-gallery .image-fallback,.portfolio-grid .image-fallback,.portfolio-manage-grid .image-fallback{width:100%;aspect-ratio:1;min-height:0}
+.media-modal-card .image-fallback,.camera-frame .image-fallback{min-height:240px}
+html[data-theme="dark"] .image-fallback,html[data-theme="dark"] .avatar .avatar-fallback{background:#203a58;color:#c9dff8}
+.form-feedback:empty{display:none}
+.form-feedback .smart-alert{margin:12px 0;overflow-wrap:anywhere}
+.connection-banner small{line-height:1.4}
+html[data-theme="light"] .onboarding-badge,html[data-theme="light"] .onboarding .kicker,html[data-theme="light"] .mode-choice-copy>.kicker{color:#a84a06!important}
+html[data-theme="dark"] .onboarding-badge,html[data-theme="dark"] .onboarding .kicker,html[data-theme="dark"] .mode-choice-copy>.kicker{color:#ffb469!important}
+html[data-theme="light"] .screen .kicker{color:#a84a06!important}
+html[data-theme="dark"] .screen .kicker{color:#ffb469!important}
+html[data-theme="dark"] .onboarding{background-color:#0b1422!important;background-image:radial-gradient(circle at 90% 30%,#12375f 0,transparent 55%)!important;color:#eaf1fb}
+html[data-theme="dark"] .onboarding-badge{background:#172b43!important;border-color:#314c6a!important}
+html[data-theme="dark"] .onboarding-content>p:last-child,html[data-theme="dark"] .onboarding-skip,html[data-theme="dark"] .onboarding-back{color:#bdcde1!important}
+html[data-theme="dark"] .onboarding-orbit{border-color:#314c6a!important}
+html[data-theme="dark"] .screen .brand-word,html[data-theme="dark"] .onboarding .brand-word{color:#edf5ff!important}
+html[data-theme="dark"] .auth-card{background:#111f32!important;border-color:#2c3f5a!important;color:#eaf1fb!important}
+html[data-theme="dark"] .auth-card label{color:#c6d5e7!important}
+html[data-theme="light"] .beta-note{color:#626f80!important}
+html[data-theme="dark"] .beta-note{color:#a7b9d0!important}
+[hidden]{display:none!important}
 </style>
-<link rel="manifest" href="./manifest.webmanifest?v=1.9.4"><link rel="apple-touch-icon" href="./icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="./manifest.webmanifest?v=5.6.1"><link rel="apple-touch-icon" href="./icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default">
 </head>
 <body><div id="root"></div>
 <script>
 const SUPABASE_URL="https://qakhqnuigpjbeeahuyct.supabase.co";
 const SUPABASE_KEY="sb_publishable_g6FMgju9Lv2mtJCn2heXCw_YhRjweyL";
-const REDIRECT_URL="https://alexisreza000-cell.github.io/dohoy-demo/";
+const REDIRECT_URL="https://www.dohoy.com.mx/";
+const DOHOY_VERSION="5.6.1";
 const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{global:{headers:{"x-dohoy-version":"5.1.0"}}});
 const root=document.getElementById("root");
 
@@ -3159,7 +3187,7 @@ function iconSvg(name,opts={}){
  if(name==="Mandados")return svgWrap(`<path ${s} d="M6.5 8.2h11l-.65 10.2H7.15L6.5 8.2Z"/><path ${s} d="M9 8.2V6.9a3 3 0 0 1 6 0v1.3"/>`);
  if(name==="Paquetería")return svgWrap(`<path ${s} d="m4.5 7.2 7.5-3.7 7.5 3.7v9.5L12 20.5l-7.5-3.8V7.2Z"/><path ${s} d="m4.5 7.2 7.5 3.9 7.5-3.9M12 11.1v9.4"/>`);
  if(name==="Hogar")return svgWrap(`<path ${s} d="m4 10.6 8-6.3 8 6.3v8.1h-5.3v-5.1H9.3v5.1H4v-8.1Z"/>`);
- if(name==="Mascotas")return svgWrap(`<path ${s} d="M8.2 10.1c1.15 0 2.05-.95 2.05-2.12S9.35 5.8 8.2 5.8s-2.05.98-2.05 2.18.9 2.12 2.05 2.12Zm7.6 0c1.15 0 2.05-.95 2.05-2.12S16.95 5.8 15.8 5.8s-2.05.98-2.05 2.18.9 2.12 2.05 2.12ZM12 18.8c2.45 0 4.45-1.45 4.45-3.35 0-1.78-1.73-3.15-4.45-3.15s-4.45 1.37-4.45 3.15c0 1.9 2 3.35 4.45 3.35Z"/><path ${s} d="M5.5 13.2c.9.1 1.65-.55 1.75-1.48.1-.9-.5-1.72-1.4-1.82-.9-.1-1.68.58-1.78 1.5-.1.9.53 1.7 1.43 1.8Zm13 0c-.9.1-1.65-.55-1.75-1.48-.1-.9.5-1.72 1.4-1.82.9-.1 1.68.58 1.78 1.7.0.9-.53 1.7-1.43 1.8Z"/>`);
+ if(name==="Mascotas")return svgWrap(`<path ${s} d="M8.2 10.1c1.15 0 2.05-.95 2.05-2.12S9.35 5.8 8.2 5.8s-2.05.98-2.05 2.18.9 2.12 2.05 2.12Zm7.6 0c1.15 0 2.05-.95 2.05-2.12S16.95 5.8 15.8 5.8s-2.05.98-2.05 2.18.9 2.12 2.05 2.12ZM12 18.8c2.45 0 4.45-1.45 4.45-3.35 0-1.78-1.73-3.15-4.45-3.15s-4.45 1.37-4.45 3.15c0 1.9 2 3.35 4.45 3.35Z"/><path ${s} d="M5.5 13.2c.9.1 1.65-.55 1.75-1.48.1-.9-.5-1.72-1.4-1.82-.9-.1-1.68.58-1.78 1.5-.1.9.53 1.7 1.43 1.8Zm13 0c-.9.1-1.65-.55-1.75-1.48-.1-.9.5-1.72 1.4-1.82.9-.1 1.68.58 1.78 1.5-.1.9-.53 1.7-1.43 1.8Z"/>`);
  if(name==="Trámites")return svgWrap(`<path ${s} d="M7 3.8h7l3 3v13.4H7V3.8Z"/><path ${s} d="M14 3.8v3.4h3M9.5 11h5M9.5 14h5M9.5 17h3.2"/>`);
  if(name==="Eventos")return svgWrap(`<rect ${s} x="4" y="6.2" width="16" height="13.2" rx="2.2"/><path ${s} d="M8 3.8v4.4M16 3.8v4.4M4 10h16"/>`);
  if(name==="Tecnología")return svgWrap(`<rect ${s} x="4" y="4.5" width="16" height="11.2" rx="1.8"/><path ${s} d="M9 19.5h6M12 15.7v3.8"/>`);
@@ -3333,10 +3361,23 @@ function encodeCategory(base,variant,colorKey){return base==="Vehículo"?`${base
 
 function brandSymbol(){return `<svg class="brand-mark" viewBox="0 0 128 96" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 18C48 8 86 10 105 28c11 10 15 24 11 40-7-17-23-26-44-32-22-6-42-11-60-18Z" fill="#FF7A00"/><path d="M29 39c18-1 37 0 51 6 16 7 24 18 23 29-1 12-10 20-23 22H14c17-12 32-24 43-35 8-8 7-14-1-18-7-3-17-4-27-4Z" fill="#0066FF"/><path d="M57 61c8-8 7-14-1-18 8 0 16 2 22 6 9 5 13 11 12 18-1 8-7 15-19 23h14c10-2 16-8 17-17 1-10-7-19-20-25 9 4 16 11 18 19 3 12-4 23-17 28H42c7-7 12-13 15-18 5-7 6-11 0-16Z" fill="#0B3D91"/></svg>`}
 function logo(sm=false){return `<div class="brand-lockup ${sm?"sm":""}">${brandSymbol()}<div class="brand-word">DOH<span class="accent">O</span>Y</div></div>`}
+function jsArg(value){return escapeAttr(JSON.stringify(String(value??"")))}
+function handleAppImageError(event){
+ const img=event.target;
+ if(!(img instanceof HTMLImageElement)||!img.closest('.app,.media-modal,.camera-modal')||img.dataset.failed)return;
+ img.dataset.failed='1';img.hidden=true;
+ const avatar=img.closest('.avatar'),fallback=document.createElement('span');
+ fallback.className=avatar?'avatar-fallback':'image-fallback';
+ fallback.setAttribute('role','img');fallback.setAttribute('aria-label','Foto no disponible');
+ fallback.innerHTML=iconSvg(avatar?'user':'gallery')+(avatar?'':'<span>Foto no disponible</span>');
+ img.insertAdjacentElement('afterend',fallback);
+ const zoom=img.closest('.photo-zoom-btn');if(zoom)zoom.disabled=true;
+}
+document.addEventListener('error',handleAppImageError,true);
 function avatarMarkup(profile,extra=""){const url=profile?.avatar_display_url||(/^https?:/i.test(profile?.avatar_url||"")?profile.avatar_url:"");return `<div class="avatar ${extra}">${url?`<img src="${escapeAttr(url)}" alt="Foto de ${escapeAttr(profile?.full_name||"usuario")}" referrerpolicy="no-referrer" loading="lazy" decoding="async">`:`<div class="avatar-fallback">${iconSvg("user")}</div>`}</div>`}
 async function resolveAvatar(profile){if(!profile?.avatar_url)return profile;if(/^https?:/i.test(profile.avatar_url)){profile.avatar_display_url=profile.avatar_url;return profile}const {data,error}=await sb.storage.from("avatars").createSignedUrl(profile.avatar_url,3600);if(!error&&data?.signedUrl)profile.avatar_display_url=data.signedUrl;return profile}
 function splashScreen(){return `<div class="dohoy-splash" role="status" aria-label="Bienvenido a DOHOY"><div class="splash-inner"><div class="splash-logo">${brandSymbol()}<div class="brand-word">DOH<span class="accent">O</span>Y</div></div><div class="splash-welcome">Bienvenido a DOHOY</div><p class="splash-tagline">Lo que necesitas, cuando lo necesitas.</p><div class="splash-loader" aria-hidden="true"><i></i><i></i><i></i></div></div></div>`}
-function shell(content,nav=false){return `<main class="app app-enter">${taskSharingId&&state.user?.id===taskSharingWorkerId?`<aside class="task-sharing-banner-v56"><span>${iconSvg("location")} Compartiendo ubicación del trabajo</span><button onclick="stopTaskLiveSharing()">Detener</button></aside>`:""}${!state.online?`<div class="connection-banner">${iconSvg("info")}<span><b>Sin conexión</b><small>Podrás seguir viendo algunas pantallas. Los cambios se enviarán al reconectarte.</small></span></div>`:""}${content}${nav?navBar():""}</main>`}
+function shell(content,nav=false){return `<main class="app app-enter">${taskSharingId&&state.user?.id===taskSharingWorkerId?`<aside class="task-sharing-banner-v56"><span>${iconSvg("location")} Compartiendo ubicación del trabajo</span><button onclick="stopTaskLiveSharing()">Detener</button></aside>`:""}${!state.online?`<div class="connection-banner">${iconSvg("info")}<span><b>Sin conexión</b><small>Podrás seguir viendo algunas pantallas. Reconéctate para publicar, enviar mensajes o guardar cambios.</small></span></div>`:""}${content}${nav?navBar():""}</main>`}
 function navBar(){
  const home=state.mode==="client"?"clientHome":"workerHome";
  const second=state.mode==="client"?"clientTasks":"workerJobs";
@@ -3353,9 +3394,14 @@ if(chatChannel){sb.removeChannel(chatChannel);chatChannel=null}
 }
 function friendlyError(msg){
  const raw=String(msg||"").toLowerCase();
+ if(raw.includes('invalid login credentials'))return 'El correo o la contraseña son incorrectos.';
+ if(raw.includes('email not confirmed'))return 'Confirma tu correo antes de iniciar sesión. Revisa también la carpeta de spam.';
+ if(raw.includes('already registered')||raw.includes('already exists'))return 'Este correo ya tiene una cuenta. Usa Iniciar sesión.';
+ if(raw.includes('rate limit')||raw.includes('too many requests'))return 'Se hicieron demasiados intentos. Espera unos minutos y vuelve a intentar.';
+ if(raw.includes('password')&&(/weak|short|least|minimum/.test(raw)))return 'La contraseña debe tener al menos 8 caracteres y cumplir los requisitos indicados.';
  if(!raw)return "Algo no salió como esperábamos. Intenta de nuevo.";
  if(raw.includes("jwt")||raw.includes("token")||raw.includes("session")||raw.includes("auth"))return "Tu sesión necesita actualizarse. Vuelve a iniciar sesión e inténtalo de nuevo.";
- if(raw.includes("network")||raw.includes("fetch")||raw.includes("offline")||raw.includes("failed to fetch"))return "No pudimos conectarnos. Revisa tu internet e intenta nuevamente.";
+ if(raw.includes("network")||raw.includes("fetch")||raw.includes("offline")||raw.includes("failed to fetch")||raw.includes("load failed"))return "No pudimos conectarnos. Revisa tu internet e intenta nuevamente.";
  if(raw.includes("stripe")||raw.includes("checkout")||raw.includes("payment"))return "No pudimos completar el pago. Tu tarjeta no fue cobrada si no viste la confirmación de Stripe.";
  if(raw.includes("duplicate")||raw.includes("unique"))return "Esto ya fue registrado. Actualiza la pantalla para ver el estado más reciente.";
  if(raw.includes("permission")||raw.includes("policy")||raw.includes("rls")||raw.includes("denied"))return "No tienes permiso para realizar esta acción en este momento.";
@@ -3387,7 +3433,9 @@ function skeletonScreen(label="Cargando"){
  return shell(`<section class="screen skeleton-screen" aria-busy="true" aria-label="${escapeAttr(label)}"><div class="skeleton-line short"></div><div class="skeleton-line title"></div><div class="skeleton-card"></div><div class="skeleton-card"></div><div class="skeleton-card small"></div></section>`)
 }
 async function retryCurrentView(){
- const r=state.route;state.error="";if(r==="clientHome")return clientHome();if(r==="workerHome")return workerHome();if(r==="taskDetail"&&state.selectedTask)return openTask(state.selectedTask.id);if(r==="profile")return profile();if(r==="admin")return openAdmin(state.adminSection||"users",state.adminOffset||0);render()
+ const r=state.route;state.error="";
+ const feedback=document.getElementById('formFeedback');if(feedback){feedback.innerHTML='';return}
+ if(r==="clientHome")return clientHome();if(r==="workerHome")return workerHome();if(r==="taskDetail"&&state.selectedTask)return openTask(state.selectedTask.id);if(r==="profile")return profile();if(r==="admin")return openAdmin(state.adminSection||"users",state.adminOffset||0);render()
 }
 function emptyState(icon,title,copy,action="",label=""){
  return `<div class="polish-empty"><span>${iconSvg(icon)}</span><h3>${escapeHtml(title)}</h3><p>${escapeHtml(copy)}</p>${action&&label?`<button onclick="${action}">${escapeHtml(label)}</button>`:""}</div>`
@@ -3514,7 +3562,7 @@ return shell(`<section class="hero">
 function signup(){
 return shell(`<section class="screen">
 <div class="top"><button class="icon" onclick="go('welcome')">←</button>${logo(true)}<span></span></div>
-<div class="kicker">Crear cuenta</div><h1>Empieza en minutos.</h1><p class="sub">Crea tu perfil y elige si hoy necesitas ayuda o quieres trabajar.</p>${authMsg()}
+<div class="kicker">Crear cuenta</div><h1>Empieza en minutos.</h1><p class="sub">Crea tu perfil y elige si hoy necesitas ayuda o quieres trabajar.</p><div id="formFeedback" class="form-feedback">${authMsg()}</div>
 <div class="auth-card"><form id="signupForm">
 <div class="field"><label>Nombre</label><input class="input" name="name" required autocomplete="name"></div>
 <div class="field"><label>Correo</label><input class="input" name="email" type="email" required autocomplete="email"></div>
@@ -3526,7 +3574,7 @@ return shell(`<section class="screen">
 function login(){
 return shell(`<section class="screen">
 <div class="top"><button class="icon" onclick="go('welcome')">←</button>${logo(true)}<span></span></div>
-<div class="kicker">Iniciar sesión</div><h1>Qué bueno verte.</h1><p class="sub">Continúa donde te quedaste.</p>${authMsg()}
+<div class="kicker">Iniciar sesión</div><h1>Qué bueno verte.</h1><p class="sub">Continúa donde te quedaste.</p><div id="formFeedback" class="form-feedback">${authMsg()}</div>
 <div class="auth-card"><form id="loginForm">
 <div class="field"><label>Correo</label><input class="input" name="email" type="email" required autocomplete="email"></div>
 <div class="field"><label>Contraseña</label><input class="input" name="password" type="password" required autocomplete="current-password"></div>
@@ -3848,10 +3896,14 @@ function selectPublishCategory(cat,btn){document.getElementById("taskCategoryHid
 function publishStepMeta(){return [["Qué necesitas","Describe la tarea"],["Dónde","Indica la zona"],["Cuándo","Elige fecha y prioridad"],["Presupuesto","Precio y fotos"],["Revisar","Confirma y publica"]]}
 function publishWizardProgress(){const steps=publishStepMeta();return `<div class="publish-wizard-progress"><div class="publish-progress-track"><i style="width:${state.publishStep/steps.length*100}%"></i></div><div class="publish-progress-copy"><span>Paso ${state.publishStep} de ${steps.length}</span><b>${steps[state.publishStep-1][0]}</b></div></div>`}
 function publishStepValid(step){
- const f=document.getElementById("taskForm");if(!f)return false;
- const required=step===1?["title","description"]:step===2?["location"]:step===4?["price"]:[];
- for(const n of required){const el=f.elements[n];if(!String(el?.value||"").trim()){el?.focus();el?.reportValidity?.();return false}}
- return true
+ const f=document.getElementById('taskForm');if(!f)return false;
+ const required=step===1?['title','description']:step===2?['location']:step===4?['price']:[];
+ for(const name of required){
+  const el=f.elements[name];if(!el)return false;
+  el.setCustomValidity(String(el.value||'').trim()?'':'Completa este campo.');
+  if(!el.checkValidity()){el.focus();el.reportValidity();return false}
+ }
+ return true;
 }
 function publishWizardNext(delta=1){
  if(delta>0&&state.publishStep<5&&!publishStepValid(state.publishStep))return;
@@ -3874,8 +3926,8 @@ function refreshPublishReview(){
 }
 function createTask(){
  const defaultCat=categories.includes(state.publishPrefillCategory)?state.publishPrefillCategory:"Vehículo";state.pendingTaskFiles=[];state.pendingTaskPhotoLimit=5;state.taskPhotoSelectionNote="";state.publishStep=1;
- root.innerHTML=shell(`<section class="publish-screen publish-wizard publish-v46"><div class="publish-head v46"><button class="icon" onclick="go('clientHome')">←</button><h2>Nueva tarea</h2><span></span></div><div id="publishWizardProgress">${publishWizardProgress()}</div>${authMsg()}
- <form id="taskForm"><input id="taskCategoryHidden" type="hidden" name="category" value="${defaultCat}">
+ root.innerHTML=shell(`<section class="publish-screen publish-wizard publish-v46"><div class="publish-head v46"><button class="icon" onclick="go('clientHome')">←</button><h2>Nueva tarea</h2><span></span></div><div id="publishWizardProgress">${publishWizardProgress()}</div><div id="formFeedback" class="form-feedback">${authMsg()}</div>
+ <form id="taskForm" novalidate><input id="taskCategoryHidden" type="hidden" name="category" value="${defaultCat}">
   <section class="publish-wizard-step active" data-step="1"><div class="publish-eyebrow">Publicar tarea</div><h1 class="publish-title">¿Qué necesitas resolver?</h1><p class="publish-step-copy">Cuéntalo de forma sencilla. Mientras más claro sea, mejores propuestas recibirás.</p><div class="publish-category-grid">${categories.map(c=>`<button type="button" class="publish-category ${c===defaultCat?"selected":""}" onclick="selectPublishCategory('${escapeAttr(c)}',this)">${iconSvg(c)}<span>${escapeHtml(c)}</span></button>`).join("")}</div><div class="publish-card"><div class="pc-icon">${iconSvg("tasks")}</div><div><label>Título</label><input name="title" required maxlength="90" placeholder="Ej. Lavar mi carro"></div></div><div class="publish-card"><div class="pc-icon">${iconSvg("document")}</div><div><label>Descripción</label><textarea name="description" required maxlength="1200" placeholder="Explica qué necesitas, tamaño, condiciones y cualquier detalle importante"></textarea></div></div></section>
   <section class="publish-wizard-step" data-step="2"><div class="publish-eyebrow">Ubicación</div><h1 class="publish-title">¿Dónde se realizará?</h1><p class="publish-step-copy">Antes de contratar mostramos una zona aproximada. Los detalles completos quedan para los participantes.</p><input id="taskLatitude" type="hidden" name="latitude"><input id="taskLongitude" type="hidden" name="longitude"><div class="publish-card publish-location-big"><div class="pc-icon">${iconSvg("location")}</div><div><label>Ciudad, colonia o zona</label><input name="location" required maxlength="160" placeholder="Ej. Centro, Torreón"><button type="button" class="location-use-btn" onclick="useTaskCurrentLocation(this)">${iconSvg("location")} Usar mi ubicación actual</button><div class="geo-note">Tu navegador pedirá permiso. La ubicación ayuda a calcular distancias y no se muestra completa a trabajadores antes de contratar.</div></div></div><label class="wizard-check task-tracking-choice-v56"><input name="tracking_requested" type="checkbox"><span>${iconSvg("route")}</span><span><b>¿Este trabajo requiere ubicación en vivo?</b><small>Úsalo para llevar un automóvil, traslados o entregas. Solo el cliente podrá ver al trabajador mientras él comparta su GPS y la tarea esté activa. No se guarda el recorrido.</small></span></label><div class="wizard-privacy-card">${iconSvg("shield")}<div><b>Privacidad primero</b><p>No escribas números de casa, accesos o instrucciones sensibles si todavía no son necesarias.</p></div></div></section>
   <section class="publish-wizard-step" data-step="3"><div class="publish-eyebrow">Momento</div><h1 class="publish-title">¿Cuándo lo necesitas?</h1><p class="publish-step-copy">Puedes dejarlo flexible o elegir fecha y hora.</p><div class="publish-two"><div class="publish-card"><div class="pc-icon">${iconSvg("calendar")}</div><div><label>Fecha</label><input name="task_date" type="date"></div></div><div class="publish-card"><div class="pc-icon">${iconSvg("clock")}</div><div><label>Hora</label><input name="task_time" type="time"></div></div></div><label class="urgent-publish-card"><input name="urgent" type="checkbox"><span>${iconSvg("fire")}</span><span><b>Lo necesito ahora</b><small>Destaca la tarea como urgente para trabajadores disponibles.</small></span></label><label class="wizard-check"><input name="license" type="checkbox"><span>${iconSvg("Vehículo")}</span><span><b>Requiere licencia de conducir</b><small>Actívalo solo si la tarea realmente implica conducir.</small></span></label></section>
@@ -3919,7 +3971,7 @@ async function imageFileToJpeg(file,max=1400){return new Promise((resolve,reject
 async function uploadTaskMedia(taskId,files,kind="request"){for(const file of files||[]){const blob=await imageFileToJpeg(file),path=`${taskId}/${state.user.id}/${kind}/${crypto.randomUUID()}.jpg`;const {error:up}=await sb.storage.from("task-media").upload(path,blob,{contentType:"image/jpeg",cacheControl:"3600"});if(up)throw up;const {error:row}=await sb.from("task_media").insert({task_id:taskId,uploader_id:state.user.id,kind,storage_path:path});if(row){await sb.storage.from("task-media").remove([path]);throw row}}}
 async function loadTaskMedia(taskId){state.taskMedia=[];const {data,error}=await sb.from("task_media").select("id,storage_path,kind,created_at,uploader_id").eq("task_id",taskId).order("created_at",{ascending:true});if(error)return;state.taskMedia=await Promise.all((data||[]).map(async m=>{const {data:u}=await sb.storage.from("task-media").createSignedUrl(m.storage_path,3600);return {...m,url:u?.signedUrl||""}}))}
 function openMediaPhoto(url,title="Foto"){document.getElementById("mediaPhotoModal")?.remove();const modal=document.createElement("div");modal.id="mediaPhotoModal";modal.className="media-modal";modal.onclick=e=>{if(e.target===modal)modal.remove()};modal.innerHTML=`<div class="media-modal-card"><div class="media-modal-head"><b>${escapeHtml(title)}</b><button onclick="document.getElementById('mediaPhotoModal')?.remove()">×</button></div><img src="${escapeAttr(url)}" alt="${escapeAttr(title)}"><div class="media-modal-note">Toca fuera de la imagen para cerrar.</div></div>`;document.body.appendChild(modal)}
-function taskMediaGallery(kind="request",title="Fotos de la tarea"){const list=(state.taskMedia||[]).filter(m=>m.kind===kind&&m.url);if(!list.length)return "";return `<div class="media-picker"><h3>${escapeHtml(title)}</h3><div class="task-gallery">${list.map(m=>`<button type="button" onclick="openMediaPhoto('${escapeAttr(m.url)}','${escapeAttr(title)}')"><img src="${escapeAttr(m.url)}" alt="${escapeAttr(title)}"></button>`).join("")}</div></div>`}
+function taskMediaGallery(kind="request",title="Fotos de la tarea"){const list=(state.taskMedia||[]).filter(m=>m.kind===kind&&m.url);if(!list.length)return "";return `<div class="media-picker"><h3>${escapeHtml(title)}</h3><div class="task-gallery">${list.map(m=>`<button type="button" onclick="openMediaPhoto(${jsArg(m.url)},${jsArg(title)})"><img src="${escapeAttr(m.url)}" alt="${escapeAttr(title)}"></button>`).join("")}</div></div>`}
 function timelineHtml(t){if(t.status==="cancelled")return "";let idx=0;if(t.status==="open")idx=0;else if(t.status==="assigned")idx=t.arrived_at?3:(t.en_route_at?2:1);else if(t.status==="in_progress")idx=t.completion_requested_at?5:4;else if(t.status==="completed")idx=6;const labels=["Publicada","Asignada","En camino","Llegó","En curso","Confirmación","Finalizada"];return `<div class="timeline"><div class="timeline-row">${labels.map((x,i)=>`<div class="timeline-step ${i<idx?"done":i===idx?"current":""}">${x}</div>`).join("")}</div></div>`}
 function localDateValue(v){if(!v)return "";const d=new Date(v),off=d.getTimezoneOffset()*60000;return new Date(d.getTime()-off).toISOString().slice(0,10)}
 function localDayKey(v=new Date()){const d=v instanceof Date?v:new Date(v);if(Number.isNaN(d.getTime()))return "";return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`}
@@ -3969,7 +4021,11 @@ async function selectTaskRating(taskId,value){
 }
 function clearTaskRating(taskId){return selectTaskRating(taskId,0)}
 function prettyRating(v){const n=Number(v||0);return Number.isFinite(n)&&n>0?n.toFixed(1):'0.0'}
-function workerPhotoTrigger(profile,extra=''){const url=profile?.avatar_display_url||(/^https?:/i.test(profile?.avatar_url||'')?profile.avatar_url:'');if(!url)return avatarMarkup(profile,extra);const label=escapeAttr(profileDisplayName(profile)||'trabajador');return `<button type="button" class="photo-zoom-btn ${extra}" onclick="openWorkerPhoto('${escapeAttr(url)}','${label}')">${avatarMarkup(profile,extra)}</button>`}
+function workerPhotoTrigger(profile,extra=''){
+ const url=profile?.avatar_display_url||(/^https?:/i.test(profile?.avatar_url||'')?profile.avatar_url:'');
+ if(!url)return avatarMarkup(profile,extra);
+ return `<button type="button" class="photo-zoom-btn ${extra}" aria-label="Ampliar foto de ${escapeAttr(profileDisplayName(profile)||'trabajador')}" onclick="openWorkerPhoto(${jsArg(url)},${jsArg(profileDisplayName(profile)||'trabajador')})">${avatarMarkup(profile,extra)}</button>`
+}
 function closeWorkerPhoto(){document.getElementById('workerPhotoModal')?.remove()}
 function openWorkerPhoto(url,name=''){closeWorkerPhoto();const modal=document.createElement('div');modal.id='workerPhotoModal';modal.className='camera-modal';modal.addEventListener('click',e=>{if(e.target===modal)closeWorkerPhoto()});modal.innerHTML=`<div class="camera-sheet"><div class="camera-head"><div><b>${escapeHtml(name||'Foto del trabajador')}</b><div class="small" style="color:#C9D8EB">Foto ampliada del perfil</div></div><button class="camera-close" onclick="closeWorkerPhoto()">×</button></div><div class="camera-frame"><img src="${escapeAttr(url)}" alt="Foto de ${escapeAttr(name||'trabajador')}" style="display:block"></div><div class="photo-view-note">Toca fuera de la imagen para cerrar.</div></div>`;document.body.appendChild(modal)}
 function currentWorkerFromOffers(task){if(!task?.worker_id)return null;return state.offers.find(o=>o.worker_id===task.worker_id||o.status==='accepted')||null}
@@ -3997,7 +4053,7 @@ function rehireFromWorker(workerId){state.publishPrefillCategory=state.workerCat
 
 async function openInviteWorker(workerId){const {data,error}=await sb.from("tasks").select("id,title,offered_price,category,scheduled_for").eq("client_id",state.user.id).eq("status","open").is("worker_id",null).order("created_at",{ascending:false});if(error)return setMsg("error",error.message);const list=data||[];openProfileSheet("Invitar a un trabajo","El trabajador recibirá una invitación directa.",list.length?`<div class="invite-task-list">${list.map(t=>`<button onclick="sendWorkerInvite('${workerId}','${t.id}',${Number(t.offered_price)})"><span>${taskIcon(t)}</span><span><b>${escapeHtml(t.title)}</b><small>${money(t.offered_price)}</small></span><em>Invitar</em></button>`).join("")}</div>`:`<div class="simple-empty">Primero publica una tarea abierta para poder invitar a este trabajador.</div>`)}
 async function sendWorkerInvite(workerId,taskId,amount){const {error}=await sb.from("task_invitations").upsert({task_id:taskId,client_id:state.user.id,worker_id:workerId,status:"pending",proposed_amount:Number(amount),message:"Me gustaría invitarte a realizar esta tarea.",updated_at:new Date().toISOString()},{onConflict:"task_id,worker_id"});if(error)return setMsg("error",error.message);closeProfileSheet();state.notice="Invitación enviada al trabajador.";render()}
-function workerPortfolioHtml(){if(!state.workerPortfolio?.length)return "";return `<section class="public-portfolio"><div class="task-section-title"><div><h2>Portafolio</h2><div class="sub">Trabajos y resultados compartidos por este trabajador.</div></div></div><div class="portfolio-grid">${state.workerPortfolio.map(x=>`<button onclick="openMediaPhoto('${escapeAttr(x.url)}','${escapeAttr(x.caption||"Trabajo realizado")}')"><img src="${escapeAttr(x.url)}" alt="Trabajo"><span><b>${escapeHtml((x.kind||"resultado").toUpperCase())}</b>${escapeHtml(x.caption||"Trabajo realizado")}</span></button>`).join("")}</div></section>`}
+function workerPortfolioHtml(){if(!state.workerPortfolio?.length)return "";return `<section class="public-portfolio"><div class="task-section-title"><div><h2>Portafolio</h2><div class="sub">Trabajos y resultados compartidos por este trabajador.</div></div></div><div class="portfolio-grid">${state.workerPortfolio.map(x=>`<button onclick="openMediaPhoto(${jsArg(x.url)},${jsArg(x.caption||"Trabajo realizado")})"><img src="${escapeAttr(x.url)}" alt="Trabajo"><span><b>${escapeHtml((x.kind||"resultado").toUpperCase())}</b>${escapeHtml(x.caption||"Trabajo realizado")}</span></button>`).join("")}</div></section>`}
 
 function openScoreInfo(){openProfileSheet("DOHOY Score","Resume señales de experiencia y cumplimiento. No garantiza el resultado de un trabajo.",`<div class="score-explain">Se consideran calificación, trabajos completados, verificaciones, finalización y cancelaciones. El puntaje sirve como orientación y puede cambiar con nueva actividad.</div>`)}
 function workerProfileScreen(){
@@ -4243,6 +4299,7 @@ function clearTaskLiveMap(){
 }
 function updateTaskLiveMarker(data){
  if(!data||!taskLiveViewingId)return;
+ if(data.latitude==null||data.longitude==null||!Number.isFinite(Number(data.latitude))||!Number.isFinite(Number(data.longitude))||Math.abs(Number(data.latitude))>90||Math.abs(Number(data.longitude))>180){taskLiveStatus('La señal GPS no es válida. Esperando una nueva posición…');return}
  const el=document.getElementById("taskLiveMap");
  if(!el||!window.L)return;
  el.hidden=false;
@@ -4266,16 +4323,18 @@ function updateTaskLiveMarker(data){
  taskLiveStatus(`Ubicación reciente · ${time}${data.accuracy_m!=null&&Number.isFinite(Number(data.accuracy_m))?" · precisión aprox. "+Math.round(Number(data.accuracy_m))+" m":""}`);
 }
 async function refreshTaskLiveMap(taskId){
- if(taskLiveViewingId!==taskId || state.route!=="taskDetail"||state.selectedTask?.id!==taskId||document.hidden)return;
- const {data,error}=await sb.from("task_live_locations").select("latitude,longitude,accuracy_m,updated_at").eq("task_id",taskId).maybeSingle();
- if(taskLiveViewingId!==taskId)return;
- if(error){taskLiveStatus("No pudimos consultar la ubicación actual.");return}
- if(data){updateTaskLiveMarker(data)}
- else{
-  if(taskLiveMap){taskLiveMap.remove();taskLiveMap=null;taskLiveMarker=null;taskLiveDestMarker=null}
-  const el=document.getElementById("taskLiveMap");if(el)el.hidden=true;
-  taskLiveStatus(taskSharingId===taskId?"Esperando nueva señal GPS…":"En espera: el trabajador aún no está compartiendo o su señal caducó.");
- }
+ if(taskLiveViewingId!==taskId||state.route!=='taskDetail'||state.selectedTask?.id!==taskId||document.hidden)return;
+ try{
+  const {data,error}=await sb.from('task_live_locations').select('latitude,longitude,accuracy_m,updated_at').eq('task_id',taskId).maybeSingle();
+  if(taskLiveViewingId!==taskId||state.route!=='taskDetail')return;
+  if(error)throw error;
+  if(data)updateTaskLiveMarker(data);
+  else{
+   if(taskLiveMap){taskLiveMap.remove();taskLiveMap=null;taskLiveMarker=null;taskLiveDestMarker=null}
+   const el=document.getElementById('taskLiveMap');if(el)el.hidden=true;
+   taskLiveStatus(taskSharingId===taskId?'Esperando nueva señal GPS…':'En espera: el trabajador aún no está compartiendo o su señal caducó.');
+  }
+ }catch(err){if(taskLiveViewingId===taskId)taskLiveStatus('No pudimos actualizar la ubicación. Revisa tu conexión; la posición mostrada puede ser anterior.')}
 }
 function initTaskLiveMap(taskId){
  if(state.route!=="taskDetail"||state.selectedTask?.id!==taskId)return;
@@ -4361,11 +4420,22 @@ async function submitCounterOffer(e,offerId){e.preventDefault();const f=new Form
 async function respondCounterOffer(offerId,accept){const {data,error}=await sb.rpc("respond_counter_offer",{p_offer_id:offerId,p_accept:!!accept});if(error)return setMsg("error",error.message);state.selectedTask=Array.isArray(data)?data[0]:data;await loadMyOffer(state.selectedTask.id);if(accept)state.workerTaskTab="active";state.notice=accept?"Contraoferta aceptada. El trabajo ya está en Trabajos > Activos.":"Contraoferta rechazada.";render()}
 async function markTaskEnRoute(id){return runOnce("route:"+id,async()=>{const {data,error}=await sb.rpc("mark_task_en_route",{p_task_id:id});if(error)return setMsg("error",error.message);state.selectedTask=Array.isArray(data)?data[0]:data;state.notice="Avisamos al cliente que vas en camino.";render();setTimeout(()=>showSuccessMoment('¡Vas en camino!','El cliente ya recibió el cambio de estado.'),100)})}
 async function markTaskArrived(id){return runOnce("arrived:"+id,async()=>{const {data,error}=await sb.rpc("mark_task_arrived",{p_task_id:id});if(error)return setMsg("error",error.message);state.selectedTask=Array.isArray(data)?data[0]:data;state.notice="Avisamos al cliente que llegaste.";render();setTimeout(()=>showSuccessMoment('Llegada registrada','Ya pueden comenzar cuando estén listos.','orange'),100)})}
-async function editTaskScreen(){const t=state.selectedTask;if(!t||t.client_id!==state.user.id||t.status!=="open"||t.worker_id){state.notice="Esta tarea ya no se puede editar.";go("taskDetail");return}await loadPrivateTaskLocation(t);await loadTaskMedia(t.id);state.pendingTaskFiles=[];state.pendingTaskPhotoLimit=Math.max(0,5-state.taskMedia.filter(m=>m.kind==="request").length);state.taskPhotoSelectionNote="";root.innerHTML=shell(`<section class="publish-screen"><div class="publish-head"><button class="icon" onclick="go('taskDetail')">←</button>${logo(true)}<span></span></div><div class="publish-eyebrow">Editar tarea</div><h1 class="publish-title">Actualiza los detalles</h1>${authMsg()}<form id="editTaskForm"><div class="publish-card"><div class="pc-icon">${iconSvg("tasks")}</div><div><label>Título</label><input name="title" value="${escapeAttr(t.title)}" required></div></div><div class="publish-card"><div class="pc-icon">${iconSvg("tasks")}</div><div><label>Descripción</label><textarea name="description" required>${escapeHtml(t.description)}</textarea></div></div><div class="publish-card" style="grid-template-columns:42px 1fr"><div class="pc-icon">${iconSvg("tasks")}</div><div><label>Categoría</label><select name="category">${categories.map(c=>`<option value="${escapeAttr(c)}" ${c===baseCategory(t.category)?"selected":""}>${escapeHtml(c)}</option>`).join("")}</select></div></div><input id="taskLatitude" type="hidden" name="latitude" value="${t.latitude??""}"><input id="taskLongitude" type="hidden" name="longitude" value="${t.longitude??""}"><div class="publish-two"><div class="publish-card" style="grid-template-columns:42px 1fr"><div class="pc-icon">${iconSvg("location")}</div><div><label>Ubicación</label><input name="location" value="${escapeAttr(t.location_label||"")}" required><button type="button" class="location-use-btn" onclick="useTaskCurrentLocation(this)">${iconSvg("location")} Usar mi ubicación actual</button></div></div><div class="publish-card" style="grid-template-columns:42px 1fr"><div class="pc-icon">$</div><div><label>Presupuesto</label><input name="price" type="number" min="1" value="${Number(t.offered_price)}" required></div></div></div><div class="publish-two"><div class="publish-card" style="grid-template-columns:42px 1fr"><div class="pc-icon">${iconSvg("calendar")}</div><div><label>Fecha</label><input name="task_date" type="date" value="${localDateValue(t.scheduled_for)}"></div></div><div class="publish-card" style="grid-template-columns:42px 1fr"><div class="pc-icon">${iconSvg("clock")}</div><div><label>Hora</label><input name="task_time" type="time" value="${localTimeValue(t.scheduled_for)}"></div></div></div><label class="card" style="display:flex;gap:10px;align-items:center;margin:10px 0"><input name="license" type="checkbox" ${t.requires_driver_license?"checked":""}> Requiere licencia de conducir</label><div class="media-picker"><h3>Agregar más fotos</h3><p>${state.pendingTaskPhotoLimit?`Puedes agregar hasta ${state.pendingTaskPhotoLimit} fotos nuevas (máximo 5 por tarea).`:"Esta tarea ya tiene las 5 fotos permitidas."}</p><input id="taskPhotosInput" class="media-input" type="file" accept="image/*" multiple onchange="selectTaskPhotos(event)"><button type="button" class="media-add-btn" onclick="document.getElementById('taskPhotosInput').click()">${iconSvg("camera")} Agregar fotos</button><div id="taskPhotoPreview" class="media-preview-list"></div></div><button class="publish-submit">Guardar cambios</button></form></section>`,true);bindForms()}
-async function saveEditTask(e){e.preventDefault();const t=state.selectedTask,f=new FormData(e.target),d=f.get("task_date"),tm=f.get("task_time"),scheduled=d?new Date(`${d}T${tm||"12:00"}:00`).toISOString():null,base=f.get("category"),category=base==="Vehículo"?encodeCategory("Vehículo",taskMeta(t.category).variant,taskMeta(t.category).colorKey):base;const {data,error}=await sb.rpc("edit_open_task",{p_task_id:t.id,p_title:f.get("title"),p_description:f.get("description"),p_category:category,p_offered_price:Number(f.get("price")),p_location_label:f.get("location"),p_latitude:f.get("latitude")?Number(f.get("latitude")):null,p_longitude:f.get("longitude")?Number(f.get("longitude")):null,p_scheduled_for:scheduled,p_requires_driver_license:f.get("license")==="on"});if(error)return setMsg("error",error.message);state.selectedTask=Array.isArray(data)?data[0]:data;try{if(state.pendingTaskFiles.length)await uploadTaskMedia(t.id,state.pendingTaskFiles)}catch(err){state.notice="Los cambios se guardaron, pero alguna foto no pudo subirse."}state.pendingTaskFiles=[];go("taskDetail")}
-
-
-
+async function editTaskScreen(){const t=state.selectedTask;if(!t||t.client_id!==state.user.id||t.status!=="open"||t.worker_id){state.notice="Esta tarea ya no se puede editar.";go("taskDetail");return}await loadPrivateTaskLocation(t);await loadTaskMedia(t.id);if(state.route!=='editTask'||state.selectedTask?.id!==t.id)return;state.pendingTaskFiles=[];state.pendingTaskPhotoLimit=Math.max(0,5-state.taskMedia.filter(m=>m.kind==="request").length);state.taskPhotoSelectionNote="";root.innerHTML=shell(`<section class="publish-screen"><div class="publish-head"><button class="icon" onclick="go('taskDetail')">←</button>${logo(true)}<span></span></div><div class="publish-eyebrow">Editar tarea</div><h1 class="publish-title">Actualiza los detalles</h1>${authMsg()}<div id="formFeedback" class="form-feedback"></div><form id="editTaskForm"><div class="publish-card"><div class="pc-icon">${iconSvg("tasks")}</div><div><label>Título</label><input name="title" value="${escapeAttr(t.title)}" required></div></div><div class="publish-card"><div class="pc-icon">${iconSvg("tasks")}</div><div><label>Descripción</label><textarea name="description" required>${escapeHtml(t.description)}</textarea></div></div><div class="publish-card" style="grid-template-columns:42px 1fr"><div class="pc-icon">${iconSvg("tasks")}</div><div><label>Categoría</label><select name="category">${categories.map(c=>`<option value="${escapeAttr(c)}" ${c===baseCategory(t.category)?"selected":""}>${escapeHtml(c)}</option>`).join("")}</select></div></div><input id="taskLatitude" type="hidden" name="latitude" value="${t.latitude??""}"><input id="taskLongitude" type="hidden" name="longitude" value="${t.longitude??""}"><div class="publish-two"><div class="publish-card" style="grid-template-columns:42px 1fr"><div class="pc-icon">${iconSvg("location")}</div><div><label>Ubicación</label><input name="location" value="${escapeAttr(t.location_label||"")}" required><button type="button" class="location-use-btn" onclick="useTaskCurrentLocation(this)">${iconSvg("location")} Usar mi ubicación actual</button></div></div><div class="publish-card" style="grid-template-columns:42px 1fr"><div class="pc-icon">$</div><div><label>Presupuesto</label><input name="price" type="number" min="1" value="${Number(t.offered_price)}" required></div></div></div><div class="publish-two"><div class="publish-card" style="grid-template-columns:42px 1fr"><div class="pc-icon">${iconSvg("calendar")}</div><div><label>Fecha</label><input name="task_date" type="date" value="${localDateValue(t.scheduled_for)}"></div></div><div class="publish-card" style="grid-template-columns:42px 1fr"><div class="pc-icon">${iconSvg("clock")}</div><div><label>Hora</label><input name="task_time" type="time" value="${localTimeValue(t.scheduled_for)}"></div></div></div><label class="card" style="display:flex;gap:10px;align-items:center;margin:10px 0"><input name="license" type="checkbox" ${t.requires_driver_license?"checked":""}> Requiere licencia de conducir</label><div class="media-picker"><h3>Agregar más fotos</h3><p>${state.pendingTaskPhotoLimit?`Puedes agregar hasta ${state.pendingTaskPhotoLimit} fotos nuevas (máximo 5 por tarea).`:"Esta tarea ya tiene las 5 fotos permitidas."}</p><input id="taskPhotosInput" class="media-input" type="file" accept="image/*" multiple onchange="selectTaskPhotos(event)"><button type="button" class="media-add-btn" onclick="document.getElementById('taskPhotosInput').click()">${iconSvg("camera")} Agregar fotos</button><div id="taskPhotoPreview" class="media-preview-list"></div></div><button class="publish-submit">Guardar cambios</button></form></section>`,true);bindForms()}
+async function saveEditTask(e){
+ e.preventDefault();if(state.editTaskBusy)return;
+ const form=e.target,t=state.selectedTask,btn=form.querySelector('.publish-submit');
+ if(!t||t.client_id!==state.user?.id||t.status!=='open')return;
+ state.editTaskBusy=true;if(btn){btn.disabled=true;btn.textContent='Guardando…'}
+ try{
+  const f=new FormData(form),d=f.get('task_date'),tm=f.get('task_time'),scheduled=d?new Date(`${d}T${tm||'12:00'}:00`).toISOString():null,base=f.get('category'),category=base==='Vehículo'?encodeCategory('Vehículo',taskMeta(t.category).variant,taskMeta(t.category).colorKey):base;
+  const {data,error}=await sb.rpc('edit_open_task',{p_task_id:t.id,p_title:f.get('title'),p_description:f.get('description'),p_category:category,p_offered_price:Number(f.get('price')),p_location_label:f.get('location'),p_latitude:f.get('latitude')?Number(f.get('latitude')):null,p_longitude:f.get('longitude')?Number(f.get('longitude')):null,p_scheduled_for:scheduled,p_requires_driver_license:f.get('license')==='on'});
+  if(error)throw error;
+  state.selectedTask=Array.isArray(data)?data[0]:data;
+  let notice='';try{if(state.pendingTaskFiles.length)await uploadTaskMedia(t.id,state.pendingTaskFiles)}catch(err){notice='Los cambios se guardaron, pero alguna foto no pudo subirse.'}
+  state.pendingTaskFiles=[];if(state.route==='editTask')go('taskDetail');state.notice=notice;
+ }catch(err){if(state.route==='editTask')formFeedback(form,'error',friendlyError(err?.message||err))}
+ finally{state.editTaskBusy=false;if(btn?.isConnected){btn.disabled=false;btn.textContent='Guardar cambios'}}
+}
 async function openAgenda(){
  state.route="agenda";await loadWorkerJobs();render()
 }
@@ -4562,7 +4632,9 @@ function profileTrustCard(p){
  return `<button class="profile-trust-card" onclick="go('verification')"><span class="trust-ring" style="--trust:${score}"><b>${score}%</b></span><span><small>CONFIANZA DEL PERFIL</small><strong>${label}</strong><em>${Number(p?.completed_tasks||0)} trabajos · ${prettyRating(p?.rating)} ★</em></span><i>›</i></button>`
 }
 async function profile(){
+ const userId=state.user?.id;
  await loadProfile();
+ if(state.route!=='profile'||state.user?.id!==userId)return;
  const first=profileDisplayName(state.profile);
  const modeText=state.mode==="client"?"Cliente":"Trabajador";
  root.innerHTML=shell(`<section class="account-screen account-v4">
@@ -4611,7 +4683,7 @@ async function profile(){
     ${adminAllowed()?`<details><summary><span>${iconSvg("crown")}<b>Administración</b></span><em>⌄</em></summary><div><button class="settings-row" onclick="openAdmin()"><span class="row-ico">${iconSvg("crown")}</span><span><span class="row-main">Panel administrativo</span><span class="row-sub">Operación de DOHOY</span></span><span class="chev">›</span></button></div></details>`:""}
   </div>
   <div class="account-actions"><button class="logout-btn" onclick="signOutCurrent()">${iconSvg("logout")} Cerrar sesión</button></div>
-  <div class="version-note">DOHOY · Versión 5.2.0</div>
+  <div class="version-note">DOHOY · Versión ${DOHOY_VERSION}</div>
  </section>`,true)
 }
 function settingsRow(title,route,icon,sub=""){
@@ -4632,7 +4704,9 @@ function contactEyeIcon(open=false){return open?`<svg viewBox="0 0 24 24" fill="
 function toggleContactDetails(){state.showContactDetails=!state.showContactDetails;render()}
 function profileEditRow(label,value,action,opts={}){return `<button class="profile-edit-row" onclick="${action}"><span class="label ${opts.danger?"profile-danger":""}">${escapeHtml(label)}</span><span class="value ${opts.danger?"profile-danger":""}">${escapeHtml(value||"Agregar")}</span><span class="chev">›</span></button>`}
 async function editProfile(){
+ const userId=state.user?.id;
  await loadProfile();await loadPrivateProfile();
+ if(state.route!=='editProfile'||state.user?.id!==userId)return;
  const p=state.profile||{},q=state.privateProfile||{};
  root.innerHTML=shell(`<section class="profile-edit-page"><div class="profile-edit-head"><button class="icon" aria-label="Volver al perfil" onclick="go('profile')">←</button><h1>Mi perfil</h1><span></span></div>
  ${authMsg()}
@@ -4973,7 +5047,7 @@ function messagesHtml(){
  return state.messages.length?state.messages.map(m=>{
   const mine=m.sender_id===state.user.id,system=m.message_type==="system";
   if(system)return `<div class="chat-system-event">${iconSvg("info")}<span>${escapeHtml(m.body)}</span></div>`;
-  return `<div class="bubble ${mine?"me":"other"} ${m.message_type==="image"?"image-bubble":""}">${m.attachment_url?`<button class="chat-photo" onclick="openMediaPhoto('${escapeAttr(m.attachment_url)}','Foto del chat')"><img src="${escapeAttr(m.attachment_url)}" alt="Foto enviada en el chat"></button>`:""}${m.body&&m.body!=="Foto"?`<div>${escapeHtml(m.body)}</div>`:""}<div class="bubble-meta"><span>${timeText(m.created_at)}</span>${mine?receiptMarkup(m):""}</div></div>`
+  return `<div class="bubble ${mine?"me":"other"} ${m.message_type==="image"?"image-bubble":""}">${m.attachment_url?`<button class="chat-photo" onclick="openMediaPhoto(${jsArg(m.attachment_url)},${jsArg("Foto del chat")})"><img src="${escapeAttr(m.attachment_url)}" alt="Foto enviada en el chat"></button>`:""}${m.body&&m.body!=="Foto"?`<div>${escapeHtml(m.body)}</div>`:""}<div class="bubble-meta"><span>${timeText(m.created_at)}</span>${mine?receiptMarkup(m):""}</div></div>`
  }).join(""):emptyState("chat","Empieza la conversación","Coordinen horario, llegada y detalles de la tarea dentro de DOHOY.")
 }
 function chatQuickReplies(){const rows=state.mode==="worker"?["Ya voy en camino","Estoy afuera","Terminé, puedes revisar"]:["Perfecto, gracias","Avísame cuando llegues","Voy a revisar el trabajo"];return `<div class="chat-quick-replies">${rows.map(x=>`<button onclick="sendQuickReply('${escapeAttr(x)}')">${escapeHtml(x)}</button>`).join("")}</div>`}
@@ -5043,6 +5117,21 @@ function releaseTransientUiLocks(){
  state.publishBusy=false;state.completionBusy=false;state.paymentMethodsBusy=false;
  state.adminBusy=false;
 }
+function formFeedback(form,type,message){
+ if(!form?.isConnected)return;
+ state.error=type==='error'?message:'';state.notice=type==='ok'?message:'';
+ const feedback=document.getElementById('formFeedback');
+ if(feedback)feedback.innerHTML=`<div class="${type==='error'?'error':'ok'} smart-alert" role="${type==='error'?'alert':'status'}"><span>${iconSvg(type==='error'?'info':'verify')}</span><div>${escapeHtml(message)}</div></div>`;
+}
+function renderAsyncView(work){
+ const route=state.route,userId=state.user?.id;
+ Promise.resolve().then(work).then(()=>{if(state.route===route)bindForms()}).catch(err=>{
+  logClientError(err,{kind:'view_load',route});
+  if(state.route!==route||state.user?.id!==userId)return;
+  state.error=friendlyError(err?.message||err);
+  root.innerHTML=shell(`<section class="screen"><div class="top"><button class="icon" aria-label="Volver" onclick="go('${state.mode==='client'?'clientHome':'workerHome'}')">←</button>${logo(true)}<span></span></div>${authMsg()}<div class="polish-empty"><h3>No pudimos cargar esta pantalla</h3><p>Revisa tu conexión y vuelve a intentar.</p></div></section>`,!!state.session);
+ })
+}
 function render(){
 if(state.splash){root.innerHTML=splashScreen();return}
 if(state.route==="loading"){root.innerHTML=skeletonScreen("Cargando DOHOY");return}
@@ -5051,17 +5140,17 @@ if(!state.session&&!['welcome','signup','login','onboarding','mode'].includes(st
 if(state.route==='suspended'){root.innerHTML=suspendedScreen();return}
 if(state.route==='onboarding'){root.innerHTML=onboardingScreen();return}
 if(state.route==='admin'){root.innerHTML=adminScreen();return}
-if(state.route==="clientHome"){clientHome();return}
-if(state.route==="clientTasks"){clientTasks();return}
-if(state.route==="workerHome"){workerHome();return}
-if(state.route==="workerJobs"){workerJobs();return}
+if(state.route==="clientHome"){renderAsyncView(clientHome);return}
+if(state.route==="clientTasks"){renderAsyncView(clientTasks);return}
+if(state.route==="workerHome"){renderAsyncView(workerHome);return}
+if(state.route==="workerJobs"){renderAsyncView(workerJobs);return}
 if(state.route==="workerMap"){root.innerHTML=workerMapScreen();setTimeout(initWorkerMap,80);return}
-if(state.route==="workerCategory"){workerCategory();return}
+if(state.route==="workerCategory"){renderAsyncView(workerCategory);return}
 if(state.route==="createTask"){createTask();bindForms();return}
-if(state.route==="editTask"){editTaskScreen();return}
-if(state.route==="taskDetail"){taskDetail().then(bindForms);return}
-if(state.route==="profile"){profile().then(bindForms);return}
-if(state.route==="editProfile"){editProfile().then(bindForms);return}
+if(state.route==="editTask"){renderAsyncView(editTaskScreen);return}
+if(state.route==="taskDetail"){renderAsyncView(taskDetail);return}
+if(state.route==="profile"){renderAsyncView(profile);return}
+if(state.route==="editProfile"){renderAsyncView(editProfile);return}
 if(state.route==="workerProfile"){root.innerHTML=workerProfileScreen();bindForms();return}
 if(state.route==="clientProfile"){root.innerHTML=clientProfileScreen();return}
 if(state.route==="supportCenter"){root.innerHTML=supportCenterScreen();return}
@@ -5116,13 +5205,12 @@ try{
  const {data,error}=await sb.auth.signUp({email,password,options:{data:{full_name:name},emailRedirectTo:REDIRECT_URL}});
  if(error){
    const msg=String(error.message||"");
-   if(/Database error saving new user|unexpected_failure|duplicate key|already registered|already exists/i.test(msg)){
+   if(/already registered|already exists|user_already_exists/i.test(msg)){
      state.error="";
-     state.notice="Si acabas de crear esta cuenta, el registro ya fue enviado. Revisa tu correo de confirmación. Si ya tenías cuenta, usa “Ya tengo cuenta”.";
-     render();
+     formFeedback(form,"error","Este correo ya tiene una cuenta. Usa Iniciar sesión.");
      return;
    }
-   setMsg("error",msg||"No pudimos crear la cuenta. Intenta de nuevo.");
+   formFeedback(form,"error",friendlyError(msg));
    return;
  }
  if(data.session){
@@ -5130,11 +5218,10 @@ try{
    if(state.initialMode){const m=state.initialMode;state.initialMode=null;mode(m)}
    else go(onboardingDone()?'mode':'onboarding')
  }else{
-   state.notice="Cuenta creada. Revisa tu correo y confirma tu cuenta; después vuelve a DOHOY e inicia sesión.";
-   state.error="";
-   render()
+   formFeedback(form,"ok","Cuenta creada. Revisa tu correo y confirma tu cuenta; después vuelve a DOHOY e inicia sesión.")
  }
-}finally{
+}catch(err){formFeedback(form,"error",friendlyError(err?.message||err))}
+finally{
  state.signupBusy=false;
  const currentBtn=document.getElementById('signupBtn');
  const currentText=document.getElementById('signupBtnText');
@@ -5143,31 +5230,71 @@ try{
 }
 }
 async function signIn(e){
-e.preventDefault();const f=new FormData(e.target);const {data,error}=await sb.auth.signInWithPassword({email:f.get("email"),password:f.get("password")});
-if(error)return setMsg("error",error.message);state.session=data.session;state.user=data.user;await loadProfile();await markAllIncomingDelivered();await loadNotificationSummary();startDeliveryPoll();subscribeNotifications();await loadFeatureStatus();await refreshPushStatus();if(state.initialMode){const m=state.initialMode;state.initialMode=null;mode(m)}else go(onboardingDone()?'mode':'onboarding');consumePushTask()
+ e.preventDefault();if(state.loginBusy)return;
+ const form=e.target,btn=form.querySelector('button[type="submit"]')||form.querySelector('button'),f=new FormData(form),route=state.route;
+ state.loginBusy=true;
+ if(btn){btn.disabled=true;btn.setAttribute('aria-busy','true');btn.textContent='Entrando…'}
+ try{
+  const {data,error}=await sb.auth.signInWithPassword({email:String(f.get('email')||'').trim().toLowerCase(),password:String(f.get('password')||'')});
+  if(error)throw error;
+  state.session=data.session;state.user=data.user;
+  await loadProfile();
+  const setup=await Promise.allSettled([markAllIncomingDelivered(),loadNotificationSummary(),loadFeatureStatus(),refreshPushStatus()]);
+  for(const result of setup)if(result.status==='rejected')logClientError(result.reason,{kind:'login_setup'});
+  startDeliveryPoll();subscribeNotifications();
+  if(state.route!==route)return;
+  if(state.initialMode){const m=state.initialMode;state.initialMode=null;mode(m)}else go(onboardingDone()?'mode':'onboarding');
+  consumePushTask();
+ }catch(err){if(state.route===route)formFeedback(form,'error',friendlyError(err?.message||err))}
+ finally{state.loginBusy=false;if(btn?.isConnected){btn.disabled=false;btn.removeAttribute('aria-busy');btn.textContent='Entrar'}}
 }
 async function signOut(){return signOutCurrent()}
 async function loadProfile(){
-if(!state.user)return;const {data,error}=await sb.from("profiles").select("id,full_name,last_name,avatar_url,bio,phone,rating,completed_tasks,identity_verified,phone_verified,driver_license_verified,is_admin,is_suspended,stripe_connect_account_id,stripe_connect_live_account_id,created_at").eq("id",state.user.id).single();
-if(error){state.error=state.error||("No pudimos cargar tu perfil: "+error.message);return}state.profile=await resolveAvatar(data)
+ const userId=state.user?.id;if(!userId)return;
+ try{
+  const {data,error}=await sb.from("profiles").select("id,full_name,last_name,avatar_url,bio,phone,rating,completed_tasks,identity_verified,phone_verified,driver_license_verified,is_admin,is_suspended,stripe_connect_account_id,stripe_connect_live_account_id,created_at").eq("id",userId).single();
+  if(state.user?.id!==userId)return;
+  if(error)throw error;
+  const profile=await resolveAvatar(data);
+  if(state.user?.id===userId)state.profile=profile;
+ }catch(err){if(state.user?.id===userId)state.error=state.error||friendlyError(err?.message||err)}
 }
 async function saveProfile(e){
 e.preventDefault();const f=new FormData(e.target);const {error}=await sb.from("profiles").update({full_name:f.get("name"),phone:(f.get("phone")||"").trim()||null,bio:f.get("bio")}).eq("id",state.user.id);
 if(error)return setMsg("error",error.message);await loadProfile();state.notice="Perfil guardado.";render()
 }
 async function publishTask(e){
- e.preventDefault();if(state.publishBusy)return;state.publishBusy=true;
- const btn=document.getElementById("publishTaskButton")||e.submitter;if(btn){btn.disabled=true;btn.textContent="Publicando…"}
+ e.preventDefault();if(state.publishBusy)return;
+ if(state.publishStep<5){publishWizardNext(1);return}
+ for(const step of [1,2,4]){
+  state.publishStep=step;renderPublishWizardStep();
+  if(!publishStepValid(step))return;
+ }
+ state.publishStep=5;renderPublishWizardStep();
+ const form=e.target,btn=document.getElementById('publishTaskButton')||e.submitter;
+ state.publishBusy=true;state.error='';formFeedback(form,'ok','Publicando tu tarea…');
+ if(btn){btn.disabled=true;btn.textContent='Publicando…'}
+ let createdTask=null;
  try{
-  const f=new FormData(e.target),d=f.get('task_date'),tm=f.get('task_time');
-  const args={p_title:f.get('title'),p_description:f.get('description'),p_category:encodeCategory(f.get('category'),f.get('vehicle_variant'),f.get('vehicle_color')),p_offered_price:Number(f.get('price')),p_location_label:f.get('location'),p_latitude:f.get('latitude')?Number(f.get('latitude')):null,p_longitude:f.get('longitude')?Number(f.get('longitude')):null,p_scheduled_for:d?new Date(`${d}T${tm||'12:00'}:00`).toISOString():null,p_requires_driver_license:f.get('license')==='on',p_tracking_requested:f.get('tracking_requested')==='on'};
+  const f=new FormData(form),d=f.get('task_date'),tm=f.get('task_time');
+  const args={p_title:String(f.get('title')||'').trim(),p_description:String(f.get('description')||'').trim(),p_category:encodeCategory(f.get('category'),f.get('vehicle_variant'),f.get('vehicle_color')),p_offered_price:Number(f.get('price')),p_location_label:String(f.get('location')||'').trim(),p_latitude:f.get('latitude')?Number(f.get('latitude')):null,p_longitude:f.get('longitude')?Number(f.get('longitude')):null,p_scheduled_for:d?new Date(`${d}T${tm||'12:00'}:00`).toISOString():null,p_requires_driver_license:f.get('license')==='on',p_tracking_requested:f.get('tracking_requested')==='on'};
   const {data,error}=await sb.rpc('create_task_with_tracking',args);if(error)throw error;
-  state.selectedTask=Array.isArray(data)?data[0]:data;await loadPrivateTaskLocation(state.selectedTask);
-  if(f.get('urgent')==='on')await sb.from('task_priority').upsert({task_id:state.selectedTask.id,client_id:state.user.id,is_urgent:true});
-  let notice='';try{if(state.pendingTaskFiles.length)await uploadTaskMedia(state.selectedTask.id,state.pendingTaskFiles)}catch(err){notice='La tarea se publicó, pero alguna foto no pudo subirse.'}
-  state.pendingTaskFiles=[];state.publishPrefillCategory="";state.notice=notice;state.error="";await trackEvent("task_published",{category:baseCategory(state.selectedTask.category),urgent:f.get("urgent")==="on"},state.selectedTask.id);go('taskDetail');setTimeout(()=>showSuccessMoment("¡Tarea publicada!","Ahora los trabajadores pueden enviarte propuestas.","orange"),120)
- }catch(err){state.error="No pudimos publicar la tarea: "+(err?.message||err);render()}
- finally{state.publishBusy=false}
+  createdTask=Array.isArray(data)?data[0]:data;if(!createdTask?.id)throw Error('No recibimos la confirmación de la tarea.');
+  state.selectedTask=createdTask;
+  let notice='';
+  try{
+   await loadPrivateTaskLocation(createdTask);
+   if(f.get('urgent')==='on'){const {error:priorityError}=await sb.from('task_priority').upsert({task_id:createdTask.id,client_id:state.user.id,is_urgent:true});if(priorityError)throw priorityError}
+   if(state.pendingTaskFiles.length)await uploadTaskMedia(createdTask.id,state.pendingTaskFiles);
+  }catch(err){notice='La tarea ya está publicada. Revisa sus detalles: alguna foto o dato adicional no pudo guardarse.'}
+  state.pendingTaskFiles=[];state.publishPrefillCategory='';
+  trackEvent('task_published',{category:baseCategory(createdTask.category),urgent:f.get('urgent')==='on'},createdTask.id);
+  if(state.route==='createTask')go('taskDetail');
+  state.notice=notice;state.error='';
+  setTimeout(()=>showSuccessMoment('¡Tarea publicada!','Ahora los trabajadores pueden enviarte propuestas.','orange'),120);
+ }catch(err){
+  if(state.route==='createTask')formFeedback(form,'error','No pudimos publicar la tarea. '+friendlyError(err?.message||err));
+ }finally{state.publishBusy=false;if(btn?.isConnected){btn.disabled=false;btn.textContent='Publicar tarea'}}
 }
 async function loadMyTasks(){const {data,error}=await sb.from("tasks").select("*").eq("client_id",state.user.id).order("created_at",{ascending:false});state.tasks=error?[]:(data||[]);await hydrateTaskPriorities(state.tasks)}
 async function loadOpenTasks(){const {data,error}=await sb.rpc('browse_open_tasks');state.tasks=error?[]:(data||[]);if(!error)await hydrateTaskPriorities(state.tasks);if(error)state.error='No pudimos cargar las tareas: '+error.message}
@@ -5335,7 +5462,7 @@ sb.auth.onAuthStateChange((_event,session)=>{
  },0)
 })
 }
-window.DOHoyBuild="5.1.0";
+window.DOHoyBuild=DOHOY_VERSION;
 const DOHOY_VAPID_PUBLIC="BIqp0MxIqy8rJPGj8mCRF-P_FwaMWgRMKSR_x6AazRKylHNhyT3NEPjNODKzvsSyIpt6OE3BUQXEz8-OkV-k14E";
 // DOHOY 4.4.0 — pago obligatorio antes del trabajo, rendimiento, layout móvil y barras sin solaparse.
 const DEFAULT_FILTERS={query:'',category:'',minPrice:0,maxDistance:null,todayOnly:false,vehicleOnly:false,notifyMatching:true};
@@ -5392,6 +5519,7 @@ function openWorkerCategory(category){
 }
 async function workerCategory(){
  await loadOpenTasks();
+ if(state.route!=='workerCategory')return;
  const category=state.workerCategory||workerFilterState().category||"";
  const all=filteredWorkerTasks(state.tasks,{...workerFilterState(),category});
  const title=category||"Todos los trabajos";
@@ -5488,7 +5616,7 @@ async function submitSupportCase(event){event.preventDefault();if(state.supportS
  }catch(err){state.error=(state.supportPendingCase?'El caso fue creado, pero falta subir alguna foto. Reintenta para completar la evidencia: ':'No pudimos guardar el caso: ')+err.message;render();renderSupportPreview()}finally{state.supportSending=false;if(btn)btn.disabled=false}
 }
 async function openSupportCase(id){const [{data:c,error},{data:evidence}]=await Promise.all([sb.from('support_tickets').select('*').eq('id',id).single(),sb.from('support_evidence').select('*').eq('ticket_id',id).order('created_at')]);if(error||!c)return setMsg('error',error?.message||'Caso no disponible');state.selectedSupportCase=normalizeSupportTicket(c);state.supportMessages=c.response?[{is_staff:true,body:c.response,created_at:c.updated_at}]:[];state.supportEvidence=await Promise.all((evidence||[]).map(async e=>{const {data:u}=await sb.storage.from('support-evidence').createSignedUrl(e.storage_path,3600);return {...e,url:u?.signedUrl}}));go('supportCase')}
-function supportCaseScreen(){const c=state.selectedSupportCase;if(!c)return '';const staff=state.profile?.is_admin===true;return shell(`<section class="settings-page">${state.supportBackRoute==='admin'?`<div class="account-top"><button class="icon" aria-label="Volver al panel" onclick="openAdmin('disputes')">←</button><h1>Detalle del caso</h1><span></span></div>`:settingsHeader('Detalle del caso')}${authMsg()}<div class="support-detail"><span class="profile-chip">${supportStatusLabel(c.status)}</span><h1>${escapeHtml(c.subject)}</h1><p>${escapeHtml(c.description)}</p><small>Folio ${escapeHtml(c.id.slice(0,8).toUpperCase())}</small>${state.supportEvidence?.length?`<h3>Evidencia</h3><div class="task-gallery">${state.supportEvidence.filter(e=>e.url).map(e=>`<button onclick="openMediaPhoto('${escapeAttr(e.url)}','Evidencia del caso')"><img src="${escapeAttr(e.url)}" alt="Evidencia"></button>`).join('')}</div>`:''}</div><h2>Seguimiento</h2>${(state.supportMessages||[]).map(m=>`<div class="support-message"><b>${m.is_staff?'Soporte':'Mensaje del usuario'}</b><p>${escapeHtml(m.body)}</p><small>${new Date(m.created_at).toLocaleString('es-MX')}</small></div>`).join('')||'<p class="small">Todavía no hay respuestas.</p>'}${staff?`<form class="support-form" onsubmit="replySupportCase(event,'${c.id}')"><label>Agregar información<textarea name="body" maxlength="2000" required></textarea></label>${staff?`<label>Estado<select name="status">${['pending','reviewing','resolved'].map(s=>`<option value="${s}" ${s===c.status?'selected':''}>${supportStatusLabel(s)}</option>`).join('')}</select></label>`:''}<button class="btn orange">Enviar respuesta</button></form>`:''}</section>`,true)}
+function supportCaseScreen(){const c=state.selectedSupportCase;if(!c)return '';const staff=state.profile?.is_admin===true;return shell(`<section class="settings-page">${state.supportBackRoute==='admin'?`<div class="account-top"><button class="icon" aria-label="Volver al panel" onclick="openAdmin('disputes')">←</button><h1>Detalle del caso</h1><span></span></div>`:settingsHeader('Detalle del caso')}${authMsg()}<div class="support-detail"><span class="profile-chip">${supportStatusLabel(c.status)}</span><h1>${escapeHtml(c.subject)}</h1><p>${escapeHtml(c.description)}</p><small>Folio ${escapeHtml(c.id.slice(0,8).toUpperCase())}</small>${state.supportEvidence?.length?`<h3>Evidencia</h3><div class="task-gallery">${state.supportEvidence.filter(e=>e.url).map(e=>`<button onclick="openMediaPhoto(${jsArg(e.url)},${jsArg("Evidencia del caso")})"><img src="${escapeAttr(e.url)}" alt="Evidencia"></button>`).join('')}</div>`:''}</div><h2>Seguimiento</h2>${(state.supportMessages||[]).map(m=>`<div class="support-message"><b>${m.is_staff?'Soporte':'Mensaje del usuario'}</b><p>${escapeHtml(m.body)}</p><small>${new Date(m.created_at).toLocaleString('es-MX')}</small></div>`).join('')||'<p class="small">Todavía no hay respuestas.</p>'}${staff?`<form class="support-form" onsubmit="replySupportCase(event,'${c.id}')"><label>Agregar información<textarea name="body" maxlength="2000" required></textarea></label>${staff?`<label>Estado<select name="status">${['pending','reviewing','resolved'].map(s=>`<option value="${s}" ${s===c.status?'selected':''}>${supportStatusLabel(s)}</option>`).join('')}</select></label>`:''}<button class="btn orange">Enviar respuesta</button></form>`:''}</section>`,true)}
 async function replySupportCase(event,id){event.preventDefault();if(state.profile?.is_admin!==true)return setMsg('error','Solo soporte puede responder a los casos.');const f=new FormData(event.target),{error}=await sb.from('support_tickets').update({response:f.get('body'),status:f.get('status'),updated_at:new Date().toISOString()}).eq('id',id).select('id').single();if(error)return setMsg('error',error.message);await openSupportCase(id)}
 
 const ADMIN_SECTIONS={users:'Usuarios',tasks:'Tareas activas',reports:'Reportes',blocks:'Bloqueos',disputes:'Disputas',ratings:'Calificaciones'};
@@ -5539,8 +5667,17 @@ function suspendedScreen(){return shell(`<section class="screen"><div class="top
 window.setNotificationFilter=setNotificationFilter;window.setTheme=setTheme;window.publishWizardNext=publishWizardNext;window.sendQuickReply=sendQuickReply;window.sendChatImage=sendChatImage;window.retryCurrentView=retryCurrentView;window.saveTrustedContact=saveTrustedContact;window.contactTrustedPerson=contactTrustedPerson;window.removePendingTaskPhoto=removePendingTaskPhoto;window.removeCompletionEvidence=removeCompletionEvidence;window.selectCompletionEvidence=selectCompletionEvidence;window.openMediaPhoto=openMediaPhoto;window.openClientProfile=openClientProfile;window.scrollToClientRating=scrollToClientRating;window.saveClientRating=saveClientRating;window.openSafetyCenter=openSafetyCenter;window.openBlockedUsers=openBlockedUsers;window.unblockUser=unblockUser;window.openMyReports=openMyReports;window.shareCurrentTask=shareCurrentTask;window.selectTaskPhotos=selectTaskPhotos;window.openCounterOfferSheet=openCounterOfferSheet;window.submitCounterOffer=submitCounterOffer;window.respondCounterOffer=respondCounterOffer;window.markTaskEnRoute=markTaskEnRoute;window.markTaskArrived=markTaskArrived;window.saveEditTask=saveEditTask;window.state=state;window.openProfileField=openProfileField;window.openPhotoChoiceSheet=openPhotoChoiceSheet;window.openGalleryPicker=openGalleryPicker;window.handleGalleryPhoto=handleGalleryPhoto;window.closeProfileSheet=closeProfileSheet;window.saveProfileField=saveProfileField;window.saveSocialNetworks=saveSocialNetworks;window.requestAccountDeletion=requestAccountDeletion;window.go=go;window.mode=mode;window.signOut=signOut;window.openTask=openTask;window.acceptPostedPrice=acceptPostedPrice;window.acceptOffer=acceptOffer;window.startTask=startTask;window.requestTaskCompletion=requestTaskCompletion;window.requestTaskCompletionNow=requestTaskCompletionNow;window.confirmTaskCompletion=confirmTaskCompletion;window.setTaskStatus=setTaskStatus;window.openChat=openChat;window.openMessagesHome=openMessagesHome;window.sendMessage=sendMessage;window.backFromChat=backFromChat;window.toggleVehicleOptions=toggleVehicleOptions;window.updateVehiclePreview=updateVehiclePreview;window.updateCategoryPreview=updateCategoryPreview;window.openWorkerProfile=openWorkerProfile;window.openWorkerPhoto=openWorkerPhoto;window.closeWorkerPhoto=closeWorkerPhoto;window.openConversationFromList=openConversationFromList;window.bindConversationSwipes=bindConversationSwipes;window.scrollToTaskRating=scrollToTaskRating;window.selectTaskRating=selectTaskRating;window.clearTaskRating=clearTaskRating;window.deleteConversation=deleteConversation;window.openNotificationsCenter=openNotificationsCenter;window.openNotification=openNotification;window.markAllNotificationsRead=markAllNotificationsRead;window.openCancelTaskSheet=openCancelTaskSheet;window.submitCancelTask=submitCancelTask;window.openCompletionProblemSheet=openCompletionProblemSheet;window.submitCompletionProblem=submitCompletionProblem;window.openUserReportSheet=openUserReportSheet;window.submitUserReport=submitUserReport;window.blockOtherUser=blockOtherUser;window.toggleFavoriteWorker=toggleFavoriteWorker;window.openFavorites=openFavorites;window.saveRatingReview=saveRatingReview;
 window.openWorkerMap=openWorkerMap;window.showMapTask=showMapTask;window.setWorkerAvailability=setWorkerAvailability;window.acceptDirectInvite=acceptDirectInvite;window.declineDirectInvite=declineDirectInvite;window.openInviteWorker=openInviteWorker;window.sendWorkerInvite=sendWorkerInvite;window.askTaskQuestion=askTaskQuestion;window.answerTaskQuestion=answerTaskQuestion;window.openPortfolioManager=openPortfolioManager;window.savePortfolioPhoto=savePortfolioPhoto;window.deletePortfolioPhoto=deletePortfolioPhoto;window.loadPriceSuggestion=loadPriceSuggestion;window.openAdminBanners=openAdminBanners;window.createAdminBanner=createAdminBanner;window.toggleAdminBanner=toggleAdminBanner;
 window.filterWorkerTasks=filterWorkerTasks;window.setWorkerFilter=setWorkerFilter;window.resetWorkerFilters=resetWorkerFilters;window.saveSearchPreferences=saveSearchPreferences;window.openWorkerCategory=openWorkerCategory;window.requestDiscoveryLocation=requestDiscoveryLocation;window.enablePushNotifications=enablePushNotifications;window.disablePushNotifications=disablePushNotifications;window.openSupportCenter=openSupportCenter;window.newSupportCase=newSupportCase;window.selectSupportFiles=selectSupportFiles;window.removeSupportFile=removeSupportFile;window.submitSupportCase=submitSupportCase;window.openSupportCase=openSupportCase;window.editSupportDraft=editSupportDraft;window.replySupportCase=replySupportCase;
-window.addEventListener('online',()=>{state.online=true;state.notice='Conexión restablecida.';render();resumeApp('online');setTimeout(()=>{state.notice='';render()},1200)});
-window.addEventListener('offline',()=>{state.online=false;render()});
+function refreshConnectionBanner(){
+ const app=root.querySelector('main.app');if(!app)return;
+ app.querySelector('.connection-banner')?.remove();
+ if(!state.online){
+  const banner=document.createElement('div');banner.className='connection-banner';banner.setAttribute('role','status');
+  banner.innerHTML=`${iconSvg('info')}<span><b>Sin conexión</b><small>Podrás seguir viendo algunas pantallas. Reconéctate para publicar, enviar mensajes o guardar cambios.</small></span>`;
+  app.prepend(banner);
+ }
+}
+window.addEventListener('online',()=>{state.online=true;refreshConnectionBanner();resumeApp('online')});
+window.addEventListener('offline',()=>{state.online=false;refreshConnectionBanner()});
 let lastForegroundRefresh=0;
 let foregroundRefreshPromise=null;
 let resumeTimer=null;
