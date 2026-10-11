@@ -2559,8 +2559,18 @@ async function transferRequest(body){
 }
 async function openEarnings(){
  if(state.mode!=="worker"){go("profile");state.notice="Cambia a modo Trabajador para consultar tus ganancias.";render();return}
- await loadPaymentEnvironment();
- state.route="earnings";state.earningsLoading=true;state.earningsLoadError="";state.connectStatus=null;render();
+ state.route="earnings";state.earningsLoading=true;state.earningsLoadError="";state.connectStatus=null;state.paymentEnvironmentVerified=false;render();
+ try {
+  await loadPaymentEnvironment();
+  state.paymentEnvironmentVerified=true;
+ } catch (err) {
+  state.earningsPayments=[];state.earningsTransfers={};state.earningsTasks={};
+  state.earningsLoading=false;
+  state.earningsLoadError="No se pudo verificar el entorno de pagos. Revisa la conexión con Supabase y pulsa Actualizar. No se permitirán transferencias hasta verificarlo.";
+  console.error("DOHOY Ganancias: error al verificar entorno de pagos",err);
+  render();
+  return;
+ }
  const results=await Promise.allSettled([
   sb.from("task_payments").select("id,task_id,amount_total,commission_amount,worker_net_amount,payment_status,paid_at,created_at").eq("worker_id",state.user.id).eq("stripe_livemode",state.paymentLive).order("created_at",{ascending:false}).limit(100),
   sb.from("worker_transfers").select("payment_id,task_id,amount_cents,status,stripe_transfer_id,reversed_amount_cents,last_error").eq("worker_id",state.user.id).eq("stripe_livemode",state.paymentLive),
@@ -2577,7 +2587,7 @@ async function openEarnings(){
 }
 function pendingEarnings(){return (state.earningsPayments||[]).filter(p=>p.payment_status==="paid"&&state.earningsTasks?.[p.task_id]?.status==="completed"&&!state.earningsTransfers?.[p.id]?.stripe_transfer_id)}
 async function sendPendingEarnings(){
- if(state.transferBusy||state.earningsLoadError)return;
+ if(state.transferBusy||state.earningsLoadError||!state.paymentEnvironmentVerified)return;
  const tasks=[...new Set(pendingEarnings().map(p=>p.task_id))];if(!tasks.length)return;
  state.transferBusy=true;state.error="";state.notice="";render();
  let sent=0;const errors=[];
@@ -2595,7 +2605,7 @@ function earningsScreen(){
  const pending=pendingEarnings().reduce((s,p)=>s+Number(p.worker_net_amount||0),0);
  const waiting=paid.filter(p=>state.earningsTasks?.[p.task_id]?.status!=="completed").reduce((s,p)=>s+Number(p.worker_net_amount||0),0);
  const connected=!!state.profile?.[state.paymentLive?"stripe_connect_live_account_id":"stripe_connect_account_id"],active=state.connectStatus?.transfers_active===true;
- const valid=!state.earningsLoadError&&!state.earningsLoading;
+ const valid=state.paymentEnvironmentVerified===true&&!state.earningsLoadError&&!state.earningsLoading;
  return shell(`<section class="earnings-page">
    <div class="earnings-head"><button class="icon" onclick="go('profile')">←</button><div><span>DOHOY TRABAJADOR</span><h1>Mis ganancias</h1></div><button class="earnings-help" onclick="openEarningsInfo()">${iconSvg("help")}</button></div>
    ${authMsg()}${state.profile?.is_admin?`<button class="btn" onclick="checkProductionStripe(this)">Revisar conexión de pagos reales</button>`:""}${state.earningsLoadError?`<p class="private-note">${escapeHtml(state.earningsLoadError)}</p>`:""}
