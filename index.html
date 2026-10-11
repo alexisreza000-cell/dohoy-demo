@@ -3057,6 +3057,57 @@ html[data-theme] .app:has(>.worker-home-v46)>.nav button.active:after{
  }
 }
 
+
+/* DOHOY 5.6 — privacy-first dynamic tracking */
+.task-tracking-choice-v56{
+ border:1px solid #cfe1fb!important;background:#f2f7ff!important;
+ border-radius:16px!important;margin:13px 0!important;padding:16px 13px!important;
+ color:#182a43!important;align-items:flex-start!important;
+}
+.task-tracking-choice-v56 b{color:#182a43!important}
+.task-tracking-choice-v56 small{display:block!important;color:#576c89!important;line-height:1.5!important;margin-top:5px!important}
+.task-tracking-choice-v56 input{accent-color:#166ef1!important;width:20px!important;height:20px!important;flex:0 0 20px}
+html[data-theme="dark"] .task-tracking-choice-v56{
+ background:#172c4a!important;border-color:#2e527e!important;
+ color:#f0f6ff!important;
+}
+html[data-theme="dark"] .task-tracking-choice-v56 b{color:#f0f6ff!important}
+html[data-theme="dark"] .task-tracking-choice-v56 small{color:#b8cee8!important}
+.task-live-wrap-v56{
+ background:#fff!important;border:1px solid #e0e8f1!important;
+ border-radius:21px;padding:16px;margin:15px 0;color:#1b2c42!important;
+ box-shadow:none;
+}
+.task-live-heading-v56{display:flex;gap:12px;align-items:flex-start}
+.task-live-heading-v56>span{background:#eaf3ff;color:#126fe9;border-radius:13px;width:43px;height:43px;display:grid;place-items:center;flex:0 0 43px}
+.task-live-heading-v56>span .svg-icon{width:24px;height:24px}
+.task-live-heading-v56>div{min-width:0}
+.task-live-heading-v56 b{color:#192943!important;font-size:16px;font-weight:760}
+.task-live-heading-v56 small{display:block;margin:5px 0 12px;color:#60728b!important;font-size:12px;line-height:1.5}
+.task-live-actions-v56 button{
+ background:#126ce9;color:#fff;border:0;border-radius:13px;
+ font-size:13px;font-weight:730;padding:12px 18px;min-height:45px;
+}
+.task-live-actions-v56 button.stop{background:#fff2ef;color:#ab3b2c;border:1px solid #f0c7bf}
+.task-live-actions-v56 p{color:#60728b!important;font-size:11px;line-height:1.45;margin:10px 0 5px}
+.task-live-status-v56{background:#f4f7fc;border-radius:12px;padding:11px 12px;font-size:12px;line-height:1.4;color:#46617f!important;margin-top:11px}
+.task-live-map-v56{height:245px;width:100%;border-radius:16px;overflow:hidden;margin:11px 0}
+.task-live-map-v56[hidden]{display:none!important}
+.task-live-marker-v56{border:none;background:transparent}
+.task-live-marker-v56 span{display:grid;place-items:center;width:43px;height:43px;border:3px solid white;border-radius:999px;background:#1272ea;box-shadow:0 3px 14px #08294d55;font-size:24px}
+.task-live-note-v56{color:#8290a0!important;font-size:10px;line-height:1.5;margin:10px 2px 0!important}
+.task-sharing-banner-v56{position:relative;z-index:70;background:#eaf5ff;color:#0d3e7b;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 14px;font-size:11px;font-weight:650}
+.task-sharing-banner-v56 span{display:flex;align-items:center;gap:5px}
+.task-sharing-banner-v56 svg{width:15px;height:15px}
+.task-sharing-banner-v56 button{border:0;border-radius:9px;background:#126ce9;color:white;padding:7px 10px;font-size:11px;font-weight:750}
+html[data-theme="dark"] .task-live-wrap-v56{background:#17263a!important;border-color:#334b64!important;color:#edf3fb!important}
+html[data-theme="dark"] .task-live-heading-v56 b{color:#edf3fb!important}
+html[data-theme="dark"] .task-live-heading-v56 small,html[data-theme="dark"] .task-live-actions-v56 p{color:#b1c4d8!important}
+html[data-theme="dark"] .task-live-status-v56{background:#233951!important;color:#d0e2f6!important}
+html[data-theme="dark"] .task-live-note-v56{color:#a9bcd1!important}
+html[data-theme="dark"] .task-sharing-banner-v56{background:#17446e;color:#e4f1ff}
+@media(min-width:800px){.task-live-map-v56{height:320px}}
+
 </style>
 <link rel="manifest" href="./manifest.webmanifest?v=1.9.4"><link rel="apple-touch-icon" href="./icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default">
 </head>
@@ -3080,6 +3131,8 @@ let notificationChannel=null;
 let cameraStream=null;
 let pendingAvatarBlob=null;
 let workerGeoWatchId=null;
+let taskSharingId=null,taskSharingWorkerId=null,taskLiveWatchId=null,taskLiveHeartbeat=null,taskLiveLastPos=null,taskLiveLastSentAt=0,taskLiveWriteBusy=false,taskLiveStopPromise=null;
+let taskLiveMap=null,taskLiveMarker=null,taskLiveDestMarker=null,taskLiveViewTimer=null,taskLiveViewingId=null,taskLiveMapTask=null;
 let workerAddressUpdatedAt=0;
 let swipeSuppressUntil=0;
 const categories=["Vehículo","Mandados","Paquetería","Hogar","Mascotas","Trámites","Eventos","Tecnología","Otro"];
@@ -3279,7 +3332,7 @@ function logo(sm=false){return `<div class="brand-lockup ${sm?"sm":""}">${brandS
 function avatarMarkup(profile,extra=""){const url=profile?.avatar_display_url||(/^https?:/i.test(profile?.avatar_url||"")?profile.avatar_url:"");return `<div class="avatar ${extra}">${url?`<img src="${escapeAttr(url)}" alt="Foto de ${escapeAttr(profile?.full_name||"usuario")}" referrerpolicy="no-referrer" loading="lazy" decoding="async">`:`<div class="avatar-fallback">${iconSvg("user")}</div>`}</div>`}
 async function resolveAvatar(profile){if(!profile?.avatar_url)return profile;if(/^https?:/i.test(profile.avatar_url)){profile.avatar_display_url=profile.avatar_url;return profile}const {data,error}=await sb.storage.from("avatars").createSignedUrl(profile.avatar_url,3600);if(!error&&data?.signedUrl)profile.avatar_display_url=data.signedUrl;return profile}
 function splashScreen(){return `<div class="dohoy-splash" role="status" aria-label="Bienvenido a DOHOY"><div class="splash-inner"><div class="splash-logo">${brandSymbol()}<div class="brand-word">DOH<span class="accent">O</span>Y</div></div><div class="splash-welcome">Bienvenido a DOHOY</div><p class="splash-tagline">Lo que necesitas, cuando lo necesitas.</p><div class="splash-loader" aria-hidden="true"><i></i><i></i><i></i></div></div></div>`}
-function shell(content,nav=false){return `<main class="app app-enter">${!state.online?`<div class="connection-banner">${iconSvg("info")}<span><b>Sin conexión</b><small>Podrás seguir viendo algunas pantallas. Los cambios se enviarán al reconectarte.</small></span></div>`:""}${content}${nav?navBar():""}</main>`}
+function shell(content,nav=false){return `<main class="app app-enter">${taskSharingId&&state.user?.id===taskSharingWorkerId?`<aside class="task-sharing-banner-v56"><span>${iconSvg("location")} Compartiendo ubicación del trabajo</span><button onclick="stopTaskLiveSharing()">Detener</button></aside>`:""}${!state.online?`<div class="connection-banner">${iconSvg("info")}<span><b>Sin conexión</b><small>Podrás seguir viendo algunas pantallas. Los cambios se enviarán al reconectarte.</small></span></div>`:""}${content}${nav?navBar():""}</main>`}
 function navBar(){
  const home=state.mode==="client"?"clientHome":"workerHome";
  const second=state.mode==="client"?"clientTasks":"workerJobs";
@@ -3306,7 +3359,7 @@ function friendlyError(msg){
  return "No pudimos completar la acción. Intenta nuevamente.";
 }
 function setMsg(type,msg){state.error=type==="error"?friendlyError(msg):"";state.notice=type==="ok"?msg:"";render()}
-function go(r){releaseTransientUiLocks();clearPoll();if(r!=="profile")state.showContactDetails=false;state.route=r;state.error="";state.notice="";render();window.scrollTo({top:0,behavior:"auto"});trackEvent(r==="clientHome"||r==="workerHome"?"home_view":r==="createTask"?"publish_started":"route_view",{route:r})}
+function go(r){releaseTransientUiLocks();clearPoll();clearTaskLiveMap();if(r!=="profile")state.showContactDetails=false;state.route=r;state.error="";state.notice="";render();window.scrollTo({top:0,behavior:"auto"});trackEvent(r==="clientHome"||r==="workerHome"?"home_view":r==="createTask"?"publish_started":"route_view",{route:r})}
 function haptic(kind="light"){try{if(navigator.vibrate)navigator.vibrate(kind==="success"?[18,35,28]:12)}catch{}}
 function applyTheme(){
  const pref=state.theme||"auto",dark=pref==="dark"||(pref==="auto"&&window.matchMedia?.("(prefers-color-scheme: dark)").matches);
@@ -3813,14 +3866,14 @@ function renderPublishWizardStep(){
 function refreshPublishReview(){
  const f=document.getElementById("taskForm"),host=document.getElementById("publishReview");if(!f||!host)return;
  const fd=new FormData(f),cat=fd.get("category")||"Otro",urgent=fd.get("urgent")==="on";
- host.innerHTML=`<div class="review-main"><span>${iconSvg(cat)}</span><div><small>${escapeHtml(cat)}${urgent?" · URGENTE":""}</small><h2>${escapeHtml(fd.get("title")||"Tu tarea")}</h2><p>${escapeHtml(fd.get("description")||"")}</p></div></div><div class="review-grid"><span><small>Ubicación</small><b>${escapeHtml(fd.get("location")||"Pendiente")}</b></span><span><small>Cuándo</small><b>${fd.get("task_date")?escapeHtml(fd.get("task_date")):"Flexible"} ${fd.get("task_time")?`· ${escapeHtml(fd.get("task_time"))}`:""}</b></span><span><small>Presupuesto</small><b>${money(fd.get("price")||0)}</b></span><span><small>Fotos</small><b>${state.pendingTaskFiles.length}</b></span></div><div class="review-protection">${iconSvg("shield")} <span>Antes de publicar revisa que no hayas incluido contraseñas, datos bancarios ni información innecesariamente sensible.</span></div>`
+ host.innerHTML=`<div class="review-main"><span>${iconSvg(cat)}</span><div><small>${escapeHtml(cat)}${urgent?" · URGENTE":""}</small><h2>${escapeHtml(fd.get("title")||"Tu tarea")}</h2><p>${escapeHtml(fd.get("description")||"")}</p></div></div><div class="review-grid"><span><small>Ubicación</small><b>${escapeHtml(fd.get("location")||"Pendiente")}</b></span><span><small>Cuándo</small><b>${fd.get("task_date")?escapeHtml(fd.get("task_date")):"Flexible"} ${fd.get("task_time")?`· ${escapeHtml(fd.get("task_time"))}`:""}</b></span><span><small>Presupuesto</small><b>${money(fd.get("price")||0)}</b></span><span><small>Fotos</small><b>${state.pendingTaskFiles.length}</b></span></div><div class="review-protection">${iconSvg("shield")} <span>${fd.get("tracking_requested")==="on"?"Seguimiento solicitado: el trabajador decidirá cuándo activar o detener el GPS durante la tarea.":"Esta tarea no solicita seguimiento en vivo."} Antes de publicar evita compartir información sensible.</span></div>`
 }
 function createTask(){
  const defaultCat=categories.includes(state.publishPrefillCategory)?state.publishPrefillCategory:"Vehículo";state.pendingTaskFiles=[];state.pendingTaskPhotoLimit=5;state.taskPhotoSelectionNote="";state.publishStep=1;
  root.innerHTML=shell(`<section class="publish-screen publish-wizard publish-v46"><div class="publish-head v46"><button class="icon" onclick="go('clientHome')">←</button><h2>Nueva tarea</h2><span></span></div><div id="publishWizardProgress">${publishWizardProgress()}</div>${authMsg()}
  <form id="taskForm"><input id="taskCategoryHidden" type="hidden" name="category" value="${defaultCat}">
   <section class="publish-wizard-step active" data-step="1"><div class="publish-eyebrow">Publicar tarea</div><h1 class="publish-title">¿Qué necesitas resolver?</h1><p class="publish-step-copy">Cuéntalo de forma sencilla. Mientras más claro sea, mejores propuestas recibirás.</p><div class="publish-category-grid">${categories.map(c=>`<button type="button" class="publish-category ${c===defaultCat?"selected":""}" onclick="selectPublishCategory('${escapeAttr(c)}',this)">${iconSvg(c)}<span>${escapeHtml(c)}</span></button>`).join("")}</div><div class="publish-card"><div class="pc-icon">${iconSvg("tasks")}</div><div><label>Título</label><input name="title" required maxlength="90" placeholder="Ej. Lavar mi carro"></div></div><div class="publish-card"><div class="pc-icon">${iconSvg("document")}</div><div><label>Descripción</label><textarea name="description" required maxlength="1200" placeholder="Explica qué necesitas, tamaño, condiciones y cualquier detalle importante"></textarea></div></div></section>
-  <section class="publish-wizard-step" data-step="2"><div class="publish-eyebrow">Ubicación</div><h1 class="publish-title">¿Dónde se realizará?</h1><p class="publish-step-copy">Antes de contratar mostramos una zona aproximada. Los detalles completos quedan para los participantes.</p><input id="taskLatitude" type="hidden" name="latitude"><input id="taskLongitude" type="hidden" name="longitude"><div class="publish-card publish-location-big"><div class="pc-icon">${iconSvg("location")}</div><div><label>Ciudad, colonia o zona</label><input name="location" required maxlength="160" placeholder="Ej. Centro, Torreón"><button type="button" class="location-use-btn" onclick="useTaskCurrentLocation(this)">${iconSvg("location")} Usar mi ubicación actual</button><div class="geo-note">Tu navegador pedirá permiso. La ubicación ayuda a calcular distancias y no se muestra completa a trabajadores antes de contratar.</div></div></div><div class="wizard-privacy-card">${iconSvg("shield")}<div><b>Privacidad primero</b><p>No escribas números de casa, accesos o instrucciones sensibles si todavía no son necesarias.</p></div></div></section>
+  <section class="publish-wizard-step" data-step="2"><div class="publish-eyebrow">Ubicación</div><h1 class="publish-title">¿Dónde se realizará?</h1><p class="publish-step-copy">Antes de contratar mostramos una zona aproximada. Los detalles completos quedan para los participantes.</p><input id="taskLatitude" type="hidden" name="latitude"><input id="taskLongitude" type="hidden" name="longitude"><div class="publish-card publish-location-big"><div class="pc-icon">${iconSvg("location")}</div><div><label>Ciudad, colonia o zona</label><input name="location" required maxlength="160" placeholder="Ej. Centro, Torreón"><button type="button" class="location-use-btn" onclick="useTaskCurrentLocation(this)">${iconSvg("location")} Usar mi ubicación actual</button><div class="geo-note">Tu navegador pedirá permiso. La ubicación ayuda a calcular distancias y no se muestra completa a trabajadores antes de contratar.</div></div></div><label class="wizard-check task-tracking-choice-v56"><input name="tracking_requested" type="checkbox"><span>${iconSvg("route")}</span><span><b>¿Este trabajo requiere ubicación en vivo?</b><small>Úsalo para llevar un automóvil, traslados o entregas. Solo el cliente podrá ver al trabajador mientras él comparta su GPS y la tarea esté activa. No se guarda el recorrido.</small></span></label><div class="wizard-privacy-card">${iconSvg("shield")}<div><b>Privacidad primero</b><p>No escribas números de casa, accesos o instrucciones sensibles si todavía no son necesarias.</p></div></div></section>
   <section class="publish-wizard-step" data-step="3"><div class="publish-eyebrow">Momento</div><h1 class="publish-title">¿Cuándo lo necesitas?</h1><p class="publish-step-copy">Puedes dejarlo flexible o elegir fecha y hora.</p><div class="publish-two"><div class="publish-card"><div class="pc-icon">${iconSvg("calendar")}</div><div><label>Fecha</label><input name="task_date" type="date"></div></div><div class="publish-card"><div class="pc-icon">${iconSvg("clock")}</div><div><label>Hora</label><input name="task_time" type="time"></div></div></div><label class="urgent-publish-card"><input name="urgent" type="checkbox"><span>${iconSvg("fire")}</span><span><b>Lo necesito ahora</b><small>Destaca la tarea como urgente para trabajadores disponibles.</small></span></label><label class="wizard-check"><input name="license" type="checkbox"><span>${iconSvg("Vehículo")}</span><span><b>Requiere licencia de conducir</b><small>Actívalo solo si la tarea realmente implica conducir.</small></span></label></section>
   <section class="publish-wizard-step" data-step="4"><div class="publish-eyebrow">Presupuesto</div><h1 class="publish-title">¿Cuánto quieres ofrecer?</h1><p class="publish-step-copy">Los trabajadores todavía pueden enviarte otra propuesta.</p><div class="publish-card budget-focus"><div class="pc-icon">$</div><div><label>Presupuesto</label><input id="taskPriceInput" name="price" type="number" min="1" step="1" required placeholder="180"><div id="priceSuggestion" class="price-suggestion">Calculando precio sugerido…</div></div></div><details class="publish-optional-v50"><summary>Agregar fotos <span>Opcional</span></summary><div class="media-picker"><h3>Fotos de la tarea</h3><p>Agrega fotos solo si ayudan a entender el trabajo.</p><input id="taskPhotosInput" class="media-input" type="file" accept="image/*" multiple onchange="selectTaskPhotos(event)"><button type="button" class="media-add-btn" onclick="document.getElementById('taskPhotosInput').click()">${iconSvg("camera")} Agregar fotos</button><div id="taskPhotoPreview" class="media-preview-list"></div></div></details><details id="vehicleOptions" class="vehicle-custom compact publish-optional-v50"><summary>Personalizar vehículo <span>Opcional</span></summary><div class="vehicle-custom-head"><div><b>Personaliza el vehículo</b><div class="small">Elige tipo y color del icono</div></div><div id="vehiclePreview" class="vehicle-preview">${vehicleSvg("sedan",vehicleColors.graphite)}</div></div><div class="vehicle-style-grid"><label class="vehicle-choice"><input type="radio" name="vehicle_variant" value="sedan" checked onchange="updateVehiclePreview()"><span class="vehicle-style-card">${vehicleSvg("sedan",vehicleColors.graphite)}<b>Auto</b></span></label><label class="vehicle-choice"><input type="radio" name="vehicle_variant" value="suv" onchange="updateVehiclePreview()"><span class="vehicle-style-card">${vehicleSvg("suv",vehicleColors.graphite)}<b>SUV</b></span></label></div><div class="field"><label>Color</label><div class="color-row">${Object.entries(vehicleColors).map(([k,v],i)=>`<label class="color-choice"><input type="radio" name="vehicle_color" value="${k}" ${i===0?"checked":""} onchange="updateVehiclePreview()"><span class="color-dot" style="background:${v}"></span></label>`).join("")}</div></div></details></section>
   <section class="publish-wizard-step" data-step="5"><div class="publish-eyebrow">Último paso</div><h1 class="publish-title">Revisa antes de publicar</h1><p class="publish-step-copy">Puedes volver a cualquier paso si quieres cambiar algo.</p><div id="publishReview" class="publish-review"></div><div class="publish-final-note">${iconSvg("verify")} <span>Al publicar, los trabajadores podrán ver la descripción, presupuesto, horario y ubicación aproximada de la tarea.</span></div></section>
@@ -4038,6 +4091,7 @@ function taskMoreDetailsHtml(t,isOwner){
 
 async function taskDetail(){
 const t=state.selectedTask;if(!t)return go(state.mode==="client"?"clientHome":"workerHome");
+clearTaskLiveMap();
 const __detailTaskId=t.id;
 const isOwner=t.client_id===state.user.id;
 await loadPrivateTaskLocation(t);
@@ -4080,9 +4134,158 @@ if(isOwner&&t.status==="open"){
 if((t.client_id===state.user.id||t.worker_id===state.user.id)&&t.worker_id&&closed)body+=`<div class="task-mini-actions"><button class="task-inline-delete" onclick="deleteConversation('${t.id}',true)">${iconSvg("trash")} Borrar conversación</button></div>`;
 const statusCls=t.status==="open"?"pending":(t.status==="in_progress"&&t.completion_requested_at?"awaiting":"");
 const assignedCompact=!!t.worker_id&&!["open","cancelled"].includes(t.status);
-root.innerHTML=shell(`<section class="screen"><div class="detail-shell"><div class="detail-topline"><button class="icon" onclick="go('${state.taskBackRoute||(isOwner?"clientHome":"workerHome")}')">←</button><span class="detail-category-pill">${taskIcon(t)} ${escapeHtml(baseCategory(t.category))}</span><span></span></div>${authMsg()}<div class="detail-card detail-card-compact"><div class="detail-icon-box">${taskIcon(t)}</div><div class="detail-money">${money(t.offered_price)}</div><h1 class="detail-title">${escapeHtml(t.title)}</h1><p class="detail-copy">${escapeHtml(t.description)}</p><span class="detail-location">${iconSvg("location")}<span>${(!isOwner&&t.status==="open")?"Ubicación aproximada":escapeHtml(t.location_label||"Sin ubicación")}${!isOwner&&taskDistanceKm(t)!=null?` · ${distanceLabel(taskDistanceKm(t))} de ti`:""}</span></span>${taskMediaGallery("request","Fotos de la tarea")}</div>${assignedCompact?workCenterHtml(t,isOwner)+taskOperationalLocationHtml(t):taskLocationCard(t)}${assignedCompact?"":`<div class="status-banner ${statusCls}"><span class="dot"></span><span>${taskStatusLabel(t)}</span></div>${taskJourneyCard(t,isOwner)}${timelineHtml(t)}${taskQuestionsHtml(t,isOwner)}`}${isOwner&&t.status==="open"&&!t.worker_id?`<button class="edit-task-btn" onclick="go('editTask')">Editar tarea</button>`:""}${!assignedCompact&&t.status==="cancelled"&&t.cancellation_reason?`<div class="policy-note"><b>Motivo de cancelación:</b> ${escapeHtml(t.cancellation_reason)}</div>`:""}${!assignedCompact&&(t.client_id===state.user.id||t.worker_id===state.user.id)&&t.worker_id&&!closed?`<button class="chat-cta-btn" onclick="openChat('${t.id}')"><span class="left">${iconSvg("chat")}<span>Abrir chat</span></span><span>›</span></button>`:""}${body}${assignedCompact?taskMoreDetailsHtml(t,isOwner):""}${participantCanCancel(t)?`<button class="cancel-task-btn compact-cancel" onclick="openCancelTaskSheet('${t.id}')">Cancelar tarea</button>`:""}${!assignedCompact&&t.worker_id&&otherParticipantId(t)?`<div class="safety-card"><h3>Seguridad</h3><p>Reporta conductas inapropiadas o bloquea a la otra persona si es necesario.</p><div class="safety-actions"><button class="safety-btn" onclick="openUserReportSheet('${t.id}')">${iconSvg("flag")} Reportar</button><button class="safety-btn danger" onclick="blockOtherUser('${t.id}')">${iconSvg("shield")} Bloquear</button></div></div>`:""}</div></section>`,true);renderCompletionEvidencePreview()
+root.innerHTML=shell(`<section class="screen"><div class="detail-shell"><div class="detail-topline"><button class="icon" onclick="go('${state.taskBackRoute||(isOwner?"clientHome":"workerHome")}')">←</button><span class="detail-category-pill">${taskIcon(t)} ${escapeHtml(baseCategory(t.category))}</span><span></span></div>${authMsg()}<div class="detail-card detail-card-compact"><div class="detail-icon-box">${taskIcon(t)}</div><div class="detail-money">${money(t.offered_price)}</div><h1 class="detail-title">${escapeHtml(t.title)}</h1><p class="detail-copy">${escapeHtml(t.description)}</p><span class="detail-location">${iconSvg("location")}<span>${(!isOwner&&t.status==="open")?"Ubicación aproximada":escapeHtml(t.location_label||"Sin ubicación")}${!isOwner&&taskDistanceKm(t)!=null?` · ${distanceLabel(taskDistanceKm(t))} de ti`:""}</span></span>${taskMediaGallery("request","Fotos de la tarea")}</div>${assignedCompact?workCenterHtml(t,isOwner)+taskOperationalLocationHtml(t):taskLocationCard(t)}${taskLiveSectionHtml(t,isOwner)}${assignedCompact?"":`<div class="status-banner ${statusCls}"><span class="dot"></span><span>${taskStatusLabel(t)}</span></div>${taskJourneyCard(t,isOwner)}${timelineHtml(t)}${taskQuestionsHtml(t,isOwner)}`}${isOwner&&t.status==="open"&&!t.worker_id?`<button class="edit-task-btn" onclick="go('editTask')">Editar tarea</button>`:""}${!assignedCompact&&t.status==="cancelled"&&t.cancellation_reason?`<div class="policy-note"><b>Motivo de cancelación:</b> ${escapeHtml(t.cancellation_reason)}</div>`:""}${!assignedCompact&&(t.client_id===state.user.id||t.worker_id===state.user.id)&&t.worker_id&&!closed?`<button class="chat-cta-btn" onclick="openChat('${t.id}')"><span class="left">${iconSvg("chat")}<span>Abrir chat</span></span><span>›</span></button>`:""}${body}${assignedCompact?taskMoreDetailsHtml(t,isOwner):""}${participantCanCancel(t)?`<button class="cancel-task-btn compact-cancel" onclick="openCancelTaskSheet('${t.id}')">Cancelar tarea</button>`:""}${!assignedCompact&&t.worker_id&&otherParticipantId(t)?`<div class="safety-card"><h3>Seguridad</h3><p>Reporta conductas inapropiadas o bloquea a la otra persona si es necesario.</p><div class="safety-actions"><button class="safety-btn" onclick="openUserReportSheet('${t.id}')">${iconSvg("flag")} Reportar</button><button class="safety-btn danger" onclick="blockOtherUser('${t.id}')">${iconSvg("shield")} Bloquear</button></div></div>`:""}</div></section>`,true);renderCompletionEvidencePreview();if(t.tracking_requested&&t.worker_id&&["assigned","in_progress"].includes(t.status))setTimeout(()=>initTaskLiveMap(t.id),80)
 }
 
+
+
+/* DOHOY 5.6 — Per-task foreground live tracking, worker explicit opt-in.
+ * No background sharing, no stored routes. Server RLS limits viewers to task participants.
+ */
+function taskLiveSectionHtml(t,isOwner){
+ if(!t.tracking_requested)return "";
+ if(!t.worker_id || !["assigned","in_progress"].includes(t.status)){
+  return `<section class="task-live-wrap-v56"><div class="task-live-heading-v56"><span>${iconSvg("location")}</span><div><b>Seguimiento solicitado</b><small>Se habilitará cuando haya un trabajador asignado. Él podrá aceptar o detener el GPS.</small></div></div></section>`;
+ }
+ const worker=t.worker_id===state.user?.id;
+ if(!isOwner&&!worker)return "";
+ const sharing=worker&&taskSharingId===t.id;
+ return `<section class="task-live-wrap-v56">
+   <div class="task-live-heading-v56"><span>${iconSvg("location")}</span><div><b>Seguimiento de esta tarea</b><small>${isOwner?"Solo tú y el trabajador pueden consultar la ubicación mientras se comparte.":"El cliente verá tu posición mientras compartas, únicamente durante esta tarea."}</small></div></div>
+   ${worker?`<div class="task-live-actions-v56"><button id="taskLiveSharingButton" class="${sharing?"stop":""}" onclick="${sharing?"stopTaskLiveSharing()":`startTaskLiveSharing('${t.id}')`}">${sharing?"Detener ubicación":"Compartir mi ubicación"}</button><p>Solo funciona con DOHOY abierto y visible. Puedes detenerlo cuando quieras. Se elimina el último punto al detener o finalizar.</p></div>`:""}
+   <div id="taskLiveStatus" class="task-live-status-v56" role="status">${sharing?"Compartiendo ubicación mientras DOHOY esté abierto.":"Esperando ubicación del trabajador…"}</div>
+   <div id="taskLiveMap" class="task-live-map-v56" hidden></div>
+   <p class="task-live-note-v56">Posición aproximada según GPS y señal. No es una ruta vial ni una hora de llegada estimada. No se guarda historial.</p>
+ </section>`;
+}
+function taskLiveStatus(text){
+ const e=document.getElementById("taskLiveStatus");
+ if(e)e.textContent=String(text||"");
+}
+async function startTaskLiveSharing(taskId){
+ if(taskSharingId || !navigator.geolocation || !window.isSecureContext){
+  taskLiveStatus(taskSharingId?"Ya compartes otra tarea. Detén esa ubicación primero.":"Se necesita HTTPS y permitir ubicación en el navegador.");
+  return;
+ }
+ const t=state.selectedTask;
+ if(!t||t.id!==taskId||t.worker_id!==state.user?.id||!t.tracking_requested||!["assigned","in_progress"].includes(t.status))return;
+ taskLiveStatus("Solicitando permiso de ubicación…");
+ // iOS Safari and PWA do not guarantee location updates with the app backgrounded.
+ taskSharingId=taskId;taskSharingWorkerId=state.user.id;
+ taskLiveLastPos=null;taskLiveLastSentAt=0;
+ const btn=document.getElementById("taskLiveSharingButton");
+ if(btn){btn.textContent="Detener ubicación";btn.classList.add("stop");btn.setAttribute("onclick","stopTaskLiveSharing()")}
+ try{
+  taskLiveWatchId=navigator.geolocation.watchPosition(
+    pos=>{
+      if(taskSharingId!==taskId||document.hidden)return;
+      const a=pos.coords;
+      if(!Number.isFinite(a.latitude)||!Number.isFinite(a.longitude))return;
+      taskLiveLastPos={latitude:a.latitude,longitude:a.longitude,accuracy:Number.isFinite(a.accuracy)?a.accuracy:null};
+      sendTaskLivePoint(taskId);
+    },
+    err=>{
+      taskLiveStatus(err.code===1?"Permiso de ubicación rechazado. Actívalo en los ajustes del navegador.":"No se pudo mantener la señal de GPS. Se detuvo el seguimiento.");
+      stopTaskLiveSharing(false);
+    },
+    {enableHighAccuracy:true,maximumAge:3000,timeout:18000}
+  );
+  taskLiveHeartbeat=setInterval(()=>{if(taskSharingId===taskId&&!document.hidden&&taskLiveLastPos)sendTaskLivePoint(taskId)},15000);
+  taskLiveStatus("Esperando la primera posición del GPS…");
+ }catch(err){
+  taskLiveStatus("No se pudo iniciar GPS: "+String(err?.message||err));
+  stopTaskLiveSharing(false);
+ }
+}
+async function sendTaskLivePoint(taskId){
+ if(taskSharingId!==taskId||document.hidden||!taskLiveLastPos||taskLiveWriteBusy)return;
+ if(Date.now()-taskLiveLastSentAt<6500)return;
+ taskLiveWriteBusy=true;taskLiveLastSentAt=Date.now();
+ const point={...taskLiveLastPos};
+ try{
+  const {error}=await sb.rpc("report_task_live_location",{p_task_id:taskId,p_latitude:point.latitude,p_longitude:point.longitude,p_accuracy_m:point.accuracy});
+  if(error)throw error;
+  if(taskSharingId===taskId)taskLiveStatus("Ubicación compartida · actualización reciente");
+ }catch(err){
+  if(taskSharingId===taskId){
+   taskLiveStatus("Se detuvo el seguimiento: "+String(err?.message||err));
+   stopTaskLiveSharing(false);
+  }
+ }finally{taskLiveWriteBusy=false}
+}
+async function stopTaskLiveSharing(refresh=true){
+ const taskId=taskSharingId;
+ if(!taskId)return;
+ taskSharingId=null;taskSharingWorkerId=null;taskLiveLastPos=null;
+ if(taskLiveWatchId!=null){navigator.geolocation?.clearWatch(taskLiveWatchId);taskLiveWatchId=null}
+ if(taskLiveHeartbeat!=null){clearInterval(taskLiveHeartbeat);taskLiveHeartbeat=null}
+ taskLiveStatus("Ya no estás compartiendo tu ubicación.");
+ const btn=document.getElementById("taskLiveSharingButton");
+ if(btn){btn.textContent="Compartir mi ubicación";btn.classList.remove("stop");btn.setAttribute("onclick",`startTaskLiveSharing('${taskId}')`)}
+ const pending=taskLiveStopPromise;
+ taskLiveStopPromise=(async()=>{
+  if(pending)await pending.catch(()=>{});
+  // Wait briefly for the last pending write before removing its row.
+  const t0=Date.now();while(taskLiveWriteBusy && Date.now()-t0<5000)await new Promise(resolve=>setTimeout(resolve,80));
+  await sb.rpc("stop_task_live_location",{p_task_id:taskId});
+ })();
+ if(refresh && state.route!=="taskDetail")render();
+ await taskLiveStopPromise.catch(()=>{});
+}
+function clearTaskLiveMap(){
+ if(taskLiveViewTimer!=null){clearInterval(taskLiveViewTimer);taskLiveViewTimer=null}
+ if(taskLiveMap){try{taskLiveMap.remove()}catch{}taskLiveMap=null}
+ taskLiveMarker=null;taskLiveDestMarker=null;taskLiveViewingId=null;taskLiveMapTask=null;
+}
+function updateTaskLiveMarker(data){
+ if(!data||!taskLiveViewingId)return;
+ const el=document.getElementById("taskLiveMap");
+ if(!el||!window.L)return;
+ el.hidden=false;
+ const point=[Number(data.latitude),Number(data.longitude)];
+ if(!taskLiveMap){
+  taskLiveMap=L.map(el,{zoomControl:true,scrollWheelZoom:false}).setView(point,15);
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"© OpenStreetMap"}).addTo(taskLiveMap);
+  taskLiveMarker=L.marker(point,{icon:L.divIcon({className:"task-live-marker-v56",html:'<span aria-label="Trabajador en movimiento">🚗</span>',iconSize:[44,44],iconAnchor:[22,22]})}).addTo(taskLiveMap);
+  const t=taskLiveMapTask;
+  if(t?.latitude!=null&&t?.longitude!=null&&Number.isFinite(Number(t.latitude))&&Number.isFinite(Number(t.longitude))){
+   const dest=[Number(t.latitude),Number(t.longitude)];
+   taskLiveDestMarker=L.circleMarker(dest,{radius:8,color:"#f78122",weight:3,fillOpacity:.9}).addTo(taskLiveMap).bindTooltip("Ubicación de la tarea");
+   taskLiveMap.fitBounds([point,dest],{padding:[36,36],maxZoom:15});
+  }
+  setTimeout(()=>taskLiveMap?.invalidateSize(),100);
+ }else {
+  taskLiveMarker?.setLatLng(point);
+  taskLiveMap.panTo(point,{animate:true,duration:.75});
+ }
+ const time=new Date(data.updated_at).toLocaleTimeString("es-MX",{hour:"2-digit",minute:"2-digit"});
+ taskLiveStatus(`Ubicación reciente · ${time}${Number.isFinite(Number(data.accuracy_m))?" · precisión aprox. "+Math.round(Number(data.accuracy_m))+" m":""}`);
+}
+async function refreshTaskLiveMap(taskId){
+ if(taskLiveViewingId!==taskId || state.route!=="taskDetail"||state.selectedTask?.id!==taskId||document.hidden)return;
+ const {data,error}=await sb.from("task_live_locations").select("latitude,longitude,accuracy_m,updated_at").eq("task_id",taskId).maybeSingle();
+ if(taskLiveViewingId!==taskId)return;
+ if(error){taskLiveStatus("No pudimos consultar la ubicación actual.");return}
+ if(data){updateTaskLiveMarker(data)}
+ else{
+  if(taskLiveMap){taskLiveMap.remove();taskLiveMap=null;taskLiveMarker=null;taskLiveDestMarker=null}
+  const el=document.getElementById("taskLiveMap");if(el)el.hidden=true;
+  taskLiveStatus(taskSharingId===taskId?"Esperando nueva señal GPS…":"En espera: el trabajador aún no está compartiendo o su señal caducó.");
+ }
+}
+function initTaskLiveMap(taskId){
+ if(state.route!=="taskDetail"||state.selectedTask?.id!==taskId)return;
+ clearTaskLiveMap();
+ taskLiveViewingId=taskId;taskLiveMapTask={...state.selectedTask};
+ refreshTaskLiveMap(taskId);
+ taskLiveViewTimer=setInterval(()=>refreshTaskLiveMap(taskId),8000);
+}
+document.addEventListener("visibilitychange",()=>{
+ if(document.hidden && taskSharingId)stopTaskLiveSharing(false);
+ if(document.hidden)clearTaskLiveMap();
+ else if(state.route==="taskDetail"&&state.selectedTask?.tracking_requested&&state.selectedTask?.worker_id)setTimeout(()=>initTaskLiveMap(state.selectedTask.id),150);
+});
+window.addEventListener("pagehide",()=>{if(taskSharingId)stopTaskLiveSharing(false);clearTaskLiveMap()});
 
 function taskJourneyCard(t,isOwner){
  if(!t.worker_id||t.status==="open"||t.status==="cancelled")return "";
@@ -4953,8 +5156,8 @@ async function publishTask(e){
  const btn=document.getElementById("publishTaskButton")||e.submitter;if(btn){btn.disabled=true;btn.textContent="Publicando…"}
  try{
   const f=new FormData(e.target),d=f.get('task_date'),tm=f.get('task_time');
-  const args={p_title:f.get('title'),p_description:f.get('description'),p_category:encodeCategory(f.get('category'),f.get('vehicle_variant'),f.get('vehicle_color')),p_offered_price:Number(f.get('price')),p_location_label:f.get('location'),p_latitude:f.get('latitude')?Number(f.get('latitude')):null,p_longitude:f.get('longitude')?Number(f.get('longitude')):null,p_scheduled_for:d?new Date(`${d}T${tm||'12:00'}:00`).toISOString():null,p_requires_driver_license:f.get('license')==='on'};
-  const {data,error}=await sb.rpc('create_task_secure',args);if(error)throw error;
+  const args={p_title:f.get('title'),p_description:f.get('description'),p_category:encodeCategory(f.get('category'),f.get('vehicle_variant'),f.get('vehicle_color')),p_offered_price:Number(f.get('price')),p_location_label:f.get('location'),p_latitude:f.get('latitude')?Number(f.get('latitude')):null,p_longitude:f.get('longitude')?Number(f.get('longitude')):null,p_scheduled_for:d?new Date(`${d}T${tm||'12:00'}:00`).toISOString():null,p_requires_driver_license:f.get('license')==='on',p_tracking_requested:f.get('tracking_requested')==='on'};
+  const {data,error}=await sb.rpc('create_task_with_tracking',args);if(error)throw error;
   state.selectedTask=Array.isArray(data)?data[0]:data;await loadPrivateTaskLocation(state.selectedTask);
   if(f.get('urgent')==='on')await sb.from('task_priority').upsert({task_id:state.selectedTask.id,client_id:state.user.id,is_urgent:true});
   let notice='';try{if(state.pendingTaskFiles.length)await uploadTaskMedia(state.selectedTask.id,state.pendingTaskFiles)}catch(err){notice='La tarea se publicó, pero alguna foto no pudo subirse.'}
