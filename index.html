@@ -2738,6 +2738,325 @@ html[data-theme] .worker-home-v46 .worker-feed-v46 .activity-empty-v46 p {color:
   html[data-theme] .worker-home-v46 .worker-welcome-v54 h1 {font-size:24px!important}
 }
 
+
+/* DOHOY 5.5 — Premium worker dashboard.
+   The same design language in light/dark modes; no payment code is touched. */
+html[data-theme="light"] .worker-home-v46{
+ --v55-bg:#f9fbfe;--v55-surface:#fff;--v55-ink:#111d30;--v55-muted:#63738c;
+ --v55-line:#e7edf6;--v55-blue:#1768eb;--v55-soft:#edf4ff;--v55-shadow:0 8px 28px rgba(21,55,103,.045);
+}
+html[data-theme="dark"] .worker-home-v46{
+ --v55-bg:#09121f;--v55-surface:#122137;--v55-ink:#f4f7fd;--v55-muted:#b5c4da;
+ --v55-line:#263d59;--v55-blue:#64a3ff;--v55-soft:#1b385e;--v55-shadow:0 8px 28px rgba(0,0,0,.07);
+}
+html[data-theme] .worker-home-v46{
+ background:var(--v55-bg)!important;
+ padding:19px 18px 142px!important;
+ color:var(--v55-ink)!important;
+}
+html[data-theme] .worker-home-v46 .simple-home-head{
+ margin:0 0 26px!important;min-height:49px;
+}
+html[data-theme] .worker-home-v46 .simple-location small{
+ font-size:11px!important;font-weight:550!important;color:var(--v55-muted)!important;
+}
+html[data-theme] .worker-home-v46 .simple-location b{
+ font-size:15px!important;color:var(--v55-ink)!important;font-weight:730!important;
+}
+html[data-theme] .worker-home-v46 .simple-home-actions .icon{
+ border-radius:16px!important;background:var(--v55-surface)!important;
+ border:1px solid var(--v55-line)!important;
+}
+html[data-theme] .worker-home-v46 .worker-welcome-v54{
+ margin:0 0 22px!important;
+}
+html[data-theme] .worker-home-v46 .worker-welcome-v54 h1{
+ font-size:29px!important;line-height:1.18!important;font-weight:790!important;
+ color:var(--v55-ink)!important;letter-spacing:-.95px!important;
+ margin:0 0 5px!important;
+}
+html[data-theme] .worker-home-v46 .worker-welcome-v54 h1 span{color:var(--v55-blue)!important}
+html[data-theme] .worker-home-v46 .worker-welcome-v54 p{
+ font-size:14px!important;color:var(--v55-muted)!important;font-weight:470!important;
+ margin:0!important;
+}
+html[data-theme] .worker-home-v46 .worker-focus-title{
+ font-size:15px!important;font-weight:710!important;
+ margin:0 0 10px!important;color:var(--v55-ink)!important;
+}
+/* Elegant active job card: clear hierarchy and a real-looking primary CTA. */
+html[data-theme] .worker-home-v46 .worker-active-premium-v55{
+ margin:0 0 17px!important;
+}
+html[data-theme] .worker-home-v46 .worker-active-premium-v55>button:first-child{
+ position:relative;isolation:isolate;overflow:hidden;
+ display:grid!important;
+ grid-template-columns:57px minmax(0,1fr)!important;
+ gap:15px!important;align-items:start!important;
+ padding:20px 16px 18px!important;
+ min-height:153px!important;
+ background:var(--v55-surface)!important;
+ background-image:radial-gradient(ellipse at 91% 12%,rgba(61,144,255,.08),transparent 51%)!important;
+ border:1px solid var(--v55-line)!important;
+ border-radius:23px!important;
+ box-shadow:var(--v55-shadow)!important;
+ color:var(--v55-ink)!important;
+}
+html[data-theme] .worker-home-v46 .worker-active-premium-v55>button:first-child::before{
+ content:"";position:absolute;width:0;height:0;background:transparent!important;
+}
+html[data-theme] .worker-home-v46 .worker-active-premium-v55 .active-v4-icon{
+ width:56px!important;height:56px!important;border-radius:17px!important;
+ background:var(--v55-soft)!important;color:var(--v55-blue)!important;
+ margin-top:7px!important;
+}
+html[data-theme] .worker-home-v46 .worker-active-premium-v55 .active-v4-icon .svg-icon{
+ width:29px!important;height:29px!important;
+}
+html[data-theme] .worker-home-v46 .worker-active-premium-v55 .active-v4-copy small{
+ width:max-content;max-width:100%;white-space:normal;
+ font-size:10px!important;letter-spacing:.01em!important;line-height:1.35!important;
+ padding:4px 9px!important;border-radius:999px!important;
+ background:var(--v55-soft)!important;
+ color:var(--v55-blue)!important;font-weight:770!important;
+ margin:0 0 8px!important;
+}
+html[data-theme] .worker-home-v46 .worker-active-premium-v55 .active-v4-copy b{
+ color:var(--v55-ink)!important;font-size:18px!important;font-weight:775!important;
+ letter-spacing:-.45px!important;line-height:1.24!important;margin-bottom:5px;
+}
+html[data-theme] .worker-home-v46 .worker-active-premium-v55 .active-v4-location-v55{
+ display:block;font-size:11px!important;color:var(--v55-muted)!important;line-height:1.4;
+}
+html[data-theme] .worker-home-v46 .worker-active-premium-v55 .active-v4-location-v55 .svg-icon{
+ width:13px!important;height:13px!important;color:var(--v55-blue)!important;
+}
+html[data-theme] .worker-home-v46 .worker-active-premium-v55 .active-v4-bottom-v55{
+ display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:11px;
+ margin-top:13px!important;
+}
+html[data-theme] .worker-home-v46 .worker-active-premium-v55 .active-v4-bottom-v55 strong{
+ color:var(--v55-blue)!important;font-size:19px!important;font-weight:800!important;
+ line-height:1.2!important;white-space:nowrap;
+}
+html[data-theme] .worker-home-v46 .worker-active-premium-v55 .active-v4-go{
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;
+ padding:11px 13px!important;min-height:40px!important;
+ border-radius:999px!important;background:#146af3!important;color:#fff!important;
+ font-size:12px!important;font-weight:740!important;letter-spacing:0!important;
+ box-shadow:0 5px 12px rgba(18,100,226,.15)!important;
+ white-space:nowrap!important;
+}
+html[data-theme] .worker-home-v46 .worker-active-v4 .active-v4-more{
+ color:var(--v55-blue)!important;font-size:11px!important;margin-top:5px!important;
+}
+/* Availability: elevated but low-saturation status area with native duration select. */
+html[data-theme] .worker-home-v46 .worker-status-v46{
+ padding:15px 13px!important;margin:0 0 24px!important;
+ min-height:76px!important;background:var(--v55-surface)!important;
+ border:1px solid var(--v55-line)!important;border-radius:19px!important;
+ box-shadow:var(--v55-shadow)!important;
+}
+html[data-theme] .worker-home-v46 .worker-status-v46>div{gap:10px!important}
+html[data-theme] .worker-home-v46 .worker-status-v46 b{
+ font-size:13px!important;font-weight:735!important;line-height:1.25!important;
+ color:var(--v55-ink)!important;
+}
+html[data-theme] .worker-home-v46 .worker-status-v46 small{
+ margin-top:5px!important;font-size:10px!important;font-weight:500!important;
+ color:var(--v55-muted)!important;line-height:1.35!important;
+}
+html[data-theme] .worker-home-v46 .worker-status-v46 select,
+html[data-theme] .worker-home-v46 .worker-status-v46>button{
+ min-width:92px!important;max-width:112px!important;min-height:39px!important;
+ border-radius:12px!important;
+ background:var(--v55-soft)!important;
+ color:var(--v55-ink)!important;border:1px solid var(--v55-line)!important;
+ font-size:11px!important;font-weight:720!important;
+}
+/* Airier search without nested saturated rectangles. */
+html[data-theme] .worker-home-v46 .worker-search-v46{
+ min-height:58px!important;margin:0 0 13px!important;
+ background:var(--v55-surface)!important;
+ border:1px solid var(--v55-line)!important;border-radius:21px!important;
+ box-shadow:var(--v55-shadow)!important;
+}
+html[data-theme] .worker-home-v46 .worker-search-v46 input{
+ color:var(--v55-ink)!important;font-size:13px!important;
+}
+html[data-theme] .worker-home-v46 .worker-search-v46 input::placeholder{
+ color:var(--v55-muted)!important;opacity:1!important;
+}
+html[data-theme] .worker-home-v46 .worker-search-v46 button{
+ border-radius:12px!important;background:var(--v55-soft)!important;
+ color:var(--v55-ink)!important;
+}
+/* Category tiles with matching icons, restrained colour and generous hit targets. */
+html[data-theme] .worker-home-v46 .worker-cats-premium-v55{
+ margin:0 -18px 29px!important;padding:0 18px 5px!important;gap:7px!important;
+}
+html[data-theme] .worker-home-v46 .worker-cats-premium-v55 button{
+ width:77px!important;min-width:77px!important;height:89px!important;min-height:89px!important;
+ display:flex!important;flex-direction:column!important;align-items:center!important;
+ justify-content:center!important;gap:9px!important;
+ padding:9px 5px!important;
+ background:transparent!important;border:1px solid transparent!important;
+ box-shadow:none!important;border-radius:17px!important;
+ color:var(--v55-ink)!important;font-size:10px!important;font-weight:650!important;
+}
+html[data-theme] .worker-home-v46 .worker-cats-premium-v55 button .category-icon-v55{
+ display:grid;place-items:center;
+ width:51px!important;height:51px!important;flex:0 0 51px;
+ border-radius:17px!important;background:var(--v55-soft)!important;
+ color:var(--v55-blue)!important;
+}
+html[data-theme] .worker-home-v46 .worker-cats-premium-v55 button .category-icon-v55 .svg-icon{
+ width:25px!important;height:25px!important;
+}
+html[data-theme] .worker-home-v46 .worker-cats-premium-v55 button:nth-child(2) .category-icon-v55{
+ background:#fff0f1!important;color:#db5366!important;
+}
+html[data-theme] .worker-home-v46 .worker-cats-premium-v55 button:nth-child(3) .category-icon-v55{
+ background:#fff2e7!important;color:#e78432!important;
+}
+html[data-theme] .worker-home-v46 .worker-cats-premium-v55 button:nth-child(4) .category-icon-v55{
+ background:#f1edff!important;color:#795bdb!important;
+}
+html[data-theme] .worker-home-v46 .worker-cats-premium-v55 button:nth-child(5) .category-icon-v55{
+ background:#e8f8ef!important;color:#1fa86c!important;
+}
+html[data-theme] .worker-home-v46 .worker-cats-premium-v55 button:nth-child(6) .category-icon-v55{
+ background:#fbeeff!important;color:#ae70c5!important;
+}
+html[data-theme="dark"] .worker-home-v46 .worker-cats-premium-v55 button:nth-child(n+2) .category-icon-v55{
+ filter:brightness(.85) saturate(.85);
+}
+html[data-theme] .worker-home-v46 .worker-cats-premium-v55 button.active{
+ background:var(--v55-soft)!important;border-color:var(--v55-line)!important;
+ color:var(--v55-blue)!important;
+}
+html[data-theme] .worker-home-v46 .worker-cats-premium-v55 button.active .category-icon-v55{
+ background:#166af1!important;color:#fff!important;filter:none!important;
+}
+html[data-theme] .worker-home-v46 .worker-cats-premium-v55 button.active .category-icon-v55 svg{
+ color:#fff!important;
+}
+/* Intentionally designed illustration-like empty state, not a massive empty hole. */
+html[data-theme] .worker-home-v46 .worker-feed-v46 .simple-section-head{
+ margin-bottom:5px!important;
+}
+html[data-theme] .worker-home-v46 .worker-feed-v46 .simple-section-head h2{
+ font-size:20px!important;font-weight:775!important;letter-spacing:-.65px!important;
+ color:var(--v55-ink)!important;
+}
+html[data-theme] .worker-home-v46 .worker-feed-v46 .activity-empty-v46{
+ padding:23px 8px 38px!important;background:transparent!important;
+ border:0!important;box-shadow:none!important;
+}
+html[data-theme] .worker-home-v46 .worker-feed-v46 .activity-empty-v46 .worker-empty-art-v55{
+ position:relative;display:block;width:205px;height:133px;margin:0 auto 8px!important;
+ background:radial-gradient(ellipse at 50% 60%,rgba(39,125,245,.095),transparent 70%)!important;
+}
+html[data-theme] .worker-home-v46 .worker-empty-art-v55 .art-map-v55{
+ position:absolute;left:27px;right:27px;bottom:0;height:89px;
+ display:grid;place-items:center;color:var(--v55-blue)!important;opacity:.30;
+ transform:scale(1.22);
+}
+html[data-theme] .worker-home-v46 .worker-empty-art-v55 .art-map-v55 .svg-icon{
+ width:95px!important;height:95px!important;
+}
+html[data-theme] .worker-home-v46 .worker-empty-art-v55 .art-pin-v55{
+ position:absolute;left:76px;top:18px;display:grid;place-items:center;
+ width:56px;height:65px;z-index:2;
+ color:#267ffa!important;filter:drop-shadow(0 5px 9px rgba(25,102,219,.24));
+}
+html[data-theme] .worker-home-v46 .worker-empty-art-v55 .art-pin-v55 .svg-icon{
+ width:54px!important;height:54px!important;
+}
+html[data-theme] .worker-home-v46 .worker-empty-art-v55 .art-orbit-v55{
+ position:absolute;z-index:3;width:33px;height:33px;border-radius:999px;
+ display:grid;place-items:center;background:var(--v55-surface)!important;
+ border:1px solid var(--v55-line)!important;box-shadow:var(--v55-shadow)!important;
+ color:var(--v55-blue)!important;
+}
+html[data-theme] .worker-home-v46 .worker-empty-art-v55 .art-orbit-v55.one{left:18px;top:29px}
+html[data-theme] .worker-home-v46 .worker-empty-art-v55 .art-orbit-v55.two{right:12px;top:42px}
+html[data-theme] .worker-home-v46 .worker-empty-art-v55 .art-orbit-v55.three{left:39px;bottom:12px}
+html[data-theme] .worker-home-v46 .worker-empty-art-v55 .art-orbit-v55 .svg-icon{
+ width:18px!important;height:18px!important;
+}
+html[data-theme] .worker-home-v46 .worker-feed-v46 .activity-empty-v46 h3{
+ color:var(--v55-ink)!important;font-size:20px!important;font-weight:765!important;
+ letter-spacing:-.6px!important;margin:5px auto 8px!important;
+}
+html[data-theme] .worker-home-v46 .worker-feed-v46 .activity-empty-v46 p{
+ color:var(--v55-muted)!important;font-size:12px!important;max-width:245px!important;
+ line-height:1.55!important;margin:0 auto 15px!important;
+}
+html[data-theme] .worker-home-v46 .worker-feed-v46 .activity-empty-v46 button{
+ min-width:174px!important;min-height:43px!important;padding:10px 18px!important;
+ background:#166ff2!important;color:#fff!important;
+ border-radius:999px!important;
+ font-size:12px!important;display:inline-flex;align-items:center;justify-content:center;gap:8px!important;
+}
+html[data-theme] .worker-home-v46 .worker-feed-v46 .activity-empty-v46 button .svg-icon{
+ width:16px!important;height:16px!important;color:#fff!important;
+}
+/* Globally responsive nav positioning is preserved; visual restraint on worker screens. */
+html[data-theme="light"] .app:has(>.worker-home-v46)>.nav{
+ background:rgba(255,255,255,.97)!important;border:1px solid #e8edf5!important;
+ box-shadow:0 10px 29px rgba(40,67,104,.10)!important;
+}
+html[data-theme="dark"] .app:has(>.worker-home-v46)>.nav{
+ background:rgba(17,32,51,.96)!important;border:1px solid #344963!important;
+ box-shadow:0 12px 32px rgba(0,0,0,.19)!important;
+}
+html[data-theme] .app:has(>.worker-home-v46)>.nav{
+ padding:7px 7px max(7px,env(safe-area-inset-bottom))!important;
+ border-radius:25px!important;min-height:70px!important;
+ backdrop-filter:blur(22px)!important;
+}
+html[data-theme] .app:has(>.worker-home-v46)>.nav button{
+ min-height:52px!important;background:transparent!important;
+ box-shadow:none!important;border:0!important;
+ color:#7a8aa1!important;font-size:10px!important;font-weight:670!important;
+}
+html[data-theme="dark"] .app:has(>.worker-home-v46)>.nav button{color:#c3cfe0!important}
+html[data-theme] .app:has(>.worker-home-v46)>.nav button.active{
+ background:transparent!important;box-shadow:none!important;
+ color:#196df1!important;
+}
+html[data-theme="dark"] .app:has(>.worker-home-v46)>.nav button.active{color:#89b9ff!important}
+html[data-theme] .app:has(>.worker-home-v46)>.nav button.active b{
+ width:30px!important;height:29px!important;background:transparent!important;
+ color:inherit!important;border:0!important;
+}
+html[data-theme] .app:has(>.worker-home-v46)>.nav button.active .svg-icon{
+ color:inherit!important;
+}
+html[data-theme] .app:has(>.worker-home-v46)>.nav button.active:after{
+ width:20px!important;height:3px!important;
+ background:#ff7f25!important;
+}
+@media(max-width:390px){
+ html[data-theme] .worker-home-v46{padding-left:14px!important;padding-right:14px!important}
+ html[data-theme] .worker-home-v46 .worker-cats-premium-v55{
+   margin-left:-14px!important;margin-right:-14px!important;padding-left:14px!important
+ }
+ html[data-theme] .worker-home-v46 .worker-active-premium-v55>button:first-child{
+   grid-template-columns:46px minmax(0,1fr)!important;gap:10px!important;padding:16px 11px!important;
+ }
+ html[data-theme] .worker-home-v46 .worker-active-premium-v55 .active-v4-icon{
+  width:46px!important;height:46px!important;
+ }
+ html[data-theme] .worker-home-v46 .worker-active-premium-v55 .active-v4-bottom-v55 strong{
+  font-size:17px!important;
+ }
+ html[data-theme] .worker-home-v46 .worker-active-premium-v55 .active-v4-go{
+  font-size:10px!important;padding:9px 10px!important;
+ }
+}
+
 </style>
 <link rel="manifest" href="./manifest.webmanifest?v=1.9.4"><link rel="apple-touch-icon" href="./icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default">
 </head>
@@ -3323,39 +3642,38 @@ async function workerHome(){
   ${state.workerLocationError?`<div class="geo-note market-v2-error">${escapeHtml(state.workerLocationError)}</div>`:""}
   ${authMsg()}
   <div class="worker-welcome-v54">
-    <small>DOHOY PARA TRABAJADORES</small>
-    <h1>${active?"Tu jornada, en orden":"Encuentra tu próximo trabajo"}</h1>
-    <p>${active?"Continúa tus trabajos y descubre nuevas oportunidades.":"Elige tu zona para explorar trabajos a tu ritmo."}</p>
+    <h1>Hola, <span>${escapeHtml(profileDisplayName(state.profile).trim().split(/\s+/)[0]||"bienvenido")}</span></h1>
+    <p>Encuentra trabajos cerca de ti</p>
   </div>
 
-  ${active||proposals?'<div class="worker-focus-title">En curso</div>':""}
+  ${active||proposals?'<div class="worker-focus-title">Tu actividad</div>':""}
   ${workerActiveHomeCard()}
 
   ${invitationsHtml()}
 
   ${(()=>{const available=state.workerAvailability&&new Date(state.workerAvailability.available_until)>new Date();return `<section class="worker-status-v46">
-    <div><span class="status-dot-v46 ${available?"online":""}"></span><span><b>${available?"Disponible":"No disponible"}</b><small>${available?`Hasta ${new Date(state.workerAvailability.available_until).toLocaleTimeString("es-MX",{hour:"2-digit",minute:"2-digit"})}`:"Actívate cuando quieras trabajar"}</small></span></div>
+    <div><span class="status-dot-v46 ${available?"online":""}"></span><span><b>${available?"Disponible para trabajar":"Activa tu disponibilidad"}</b><small>${available?`Disponible hasta las ${new Date(state.workerAvailability.available_until).toLocaleTimeString("es-MX",{hour:"2-digit",minute:"2-digit"})}`:"Recibe oportunidades cuando tú quieras"}</small></span></div>
     ${available?`<button onclick="setWorkerAvailability(0)">Desactivar</button>`:`<select onchange="if(this.value)setWorkerAvailability(Number(this.value));this.value=''" aria-label="Activar disponibilidad"><option value="">Activar</option><option value="1">1 hora</option><option value="2">2 horas</option><option value="4">4 horas</option></select>`}
   </section>`})()}
 
   ${proposals?`<button class="proposal-alert-v46 worker" onclick="state.workerTaskTab='proposals';go('workerJobs')"><span>${iconSvg("briefcase")}</span><span><b>${proposals} propuesta${proposals===1?"":"s"} enviada${proposals===1?"":"s"}</b><small>Consulta si el cliente ya respondió.</small></span><em>›</em></button>`:""}
 
   <div class="worker-search-v46">
-    ${iconSvg("search")}<input id="workerSearch" oninput="filterWorkerTasks()" onkeydown="workerSearchKey(event)" value="${escapeAttr(workerFilterState().query)}" placeholder="Buscar trabajos">
+    ${iconSvg("search")}<input id="workerSearch" oninput="filterWorkerTasks()" onkeydown="workerSearchKey(event)" value="${escapeAttr(workerFilterState().query)}" placeholder="Buscar trabajos o categorías">
     <button onclick="toggleWorkerFilters()" aria-label="Filtros">${iconSvg("mode")}</button>
   </div>
   <div id="workerFiltersPanel" class="worker-filters-panel">${workerFilterControls()}</div>
 
-  <div class="worker-cats-v46">
-    <button class="${!workerFilterState().category?"active":""}" onclick="clearWorkerFiltersInPlace()">Todos</button>
-    ${serviceCats.map(cat=>`<button class="${workerFilterState().category===cat?"active":""}" onclick="openWorkerCategory('${escapeAttr(cat)}')">${escapeHtml(cat)}</button>`).join("")}
-    <button onclick="toggleWorkerFilters()">Más</button>
+  <div class="worker-cats-v46 worker-cats-premium-v55">
+    <button class="${!workerFilterState().category?"active":""}" onclick="clearWorkerFiltersInPlace()" aria-label="Mostrar todas las categorías"><span class="category-icon-v55">${iconSvg("tasks")}</span><span>Todos</span></button>
+    ${serviceCats.map(cat=>`<button class="${workerFilterState().category===cat?"active":""}" onclick="openWorkerCategory('${escapeAttr(cat)}')"><span class="category-icon-v55">${iconSvg(cat)}</span><span>${escapeHtml(cat)}</span></button>`).join("")}
+    <button onclick="toggleWorkerFilters()"><span class="category-icon-v55">${iconSvg("mode")}</span><span>Más</span></button>
   </div>
 
   <section class="worker-feed-v46">
     <div class="simple-section-head"><h2>Trabajos cerca de ti</h2><button onclick="openWorkerMap()">${iconSvg("map")} Mapa</button></div>
     <div id="workerTaskList" class="worker-list worker-list-v3">
-      ${visible.length?visible.slice(0,10).map(workerTaskCard).join(""):(workerFilterState().query||workerFilterState().category||workerFilterState().minPrice||workerFilterState().todayOnly?`<div class="activity-empty-v46">${iconSvg("search")}<h3>Sin resultados con estos filtros</h3><p>Prueba otra búsqueda o muestra todos los trabajos.</p><button onclick="clearWorkerFiltersInPlace()">Quitar filtros</button></div>`:!state.workerLocation?`<div class="activity-empty-v46">${iconSvg("location")}<h3>Elige tu zona</h3><p>Activa tu ubicación para encontrar trabajos cercanos.</p><button onclick="toggleWorkerLocation()">Elegir zona</button></div>`:`<div class="activity-empty-v46">${iconSvg("briefcase")}<h3>No hay trabajos disponibles ahora</h3><p>Las nuevas oportunidades aparecerán aquí automáticamente.</p></div>`)}
+      ${visible.length?visible.slice(0,10).map(workerTaskCard).join(""):(workerFilterState().query||workerFilterState().category||workerFilterState().minPrice||workerFilterState().todayOnly?`<div class="activity-empty-v46">${iconSvg("search")}<h3>Sin resultados con estos filtros</h3><p>Prueba otra búsqueda o muestra todos los trabajos.</p><button onclick="clearWorkerFiltersInPlace()">Quitar filtros</button></div>`:!state.workerLocation?`<div class="activity-empty-v46"><div class="worker-empty-art-v55" aria-hidden="true"><span class="art-orbit-v55 one">${iconSvg("Vehículo")}</span><span class="art-orbit-v55 two">${iconSvg("Mandados")}</span><span class="art-orbit-v55 three">${iconSvg("Hogar")}</span><span class="art-pin-v55">${iconSvg("location")}</span><span class="art-map-v55">${iconSvg("map")}</span></div><h3>Elige tu zona</h3><p>Activa tu ubicación para descubrir tareas y mandados cerca de ti.</p><button onclick="toggleWorkerLocation()">${iconSvg("location")} Elegir zona</button></div>`:`<div class="activity-empty-v46">${iconSvg("briefcase")}<h3>No hay trabajos disponibles ahora</h3><p>Las nuevas oportunidades aparecerán aquí automáticamente.</p></div>`)}
     </div>
   </section>
  </section>`,true)
@@ -3415,7 +3733,7 @@ function workerActiveHomeCard(){
  if(!active.length&&!proposals.length)return "";
  if(active.length){
    const t=active[0],stage=t.status==="in_progress"?(t.completion_requested_at?"Esperando al cliente":"Trabajo en curso"):(t.arrived_at?"Ya llegaste":t.en_route_at?"Vas en camino":"Listo para comenzar");
-   return `<section class="worker-active-v4"><button onclick="openTask('${t.id}')"><span class="active-v4-icon">${taskIcon(t)}</span><span class="active-v4-copy"><small>EN CURSO · ${escapeHtml(stage)}</small><b>${escapeHtml(t.title)}</b><em>${moneyExact(t.offer?.amount||t.offered_price)} · ${locationMarkup(t.location_label||"Zona aproximada")}</em></span><span class="active-v4-go">Continuar ›</span></button>${active.length>1?`<button class="active-v4-more" onclick="state.workerTaskTab='active';go('workerJobs')">+${active.length-1} trabajo${active.length-1===1?"":"s"} activo${active.length-1===1?"":"s"}</button>`:""}</section>`
+   return `<section class="worker-active-v4 worker-active-premium-v55"><button onclick="openTask('${t.id}')"><span class="active-v4-icon">${taskIcon(t)}</span><span class="active-v4-copy"><small>EN CURSO · ${escapeHtml(stage)}</small><b>${escapeHtml(t.title)}</b><span class="active-v4-location-v55">${locationMarkup(t.location_label||"Zona aproximada")}</span><span class="active-v4-bottom-v55"><strong>${moneyExact(t.offer?.amount||t.offered_price)}</strong><span class="active-v4-go">Continuar ›</span></span></span></button>${active.length>1?`<button class="active-v4-more" onclick="state.workerTaskTab='active';go('workerJobs')">+${active.length-1} trabajo${active.length-1===1?"":"s"} activo${active.length-1===1?"":"s"}</button>`:""}</section>`
  }
  return `<button class="worker-proposal-v4" onclick="state.workerTaskTab='proposals';go('workerJobs')"><span>${iconSvg("briefcase")}</span><span><small>PROPUESTAS</small><b>${proposals} esperando respuesta</b></span><em>Ver ›</em></button>`
 }
