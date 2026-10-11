@@ -751,7 +751,7 @@ body{background:#edf3fb}
 
 /* DOHOY 3.3 POLISH — motion, loading, trust and resilience */
 .app-enter{animation:pageIn .32s cubic-bezier(.2,.75,.25,1) both}
-@keyframes pageIn{from{opacity:.35;transform:translateY(7px)}to{opacity:1;transform:none}}
+@keyframes pageIn{from{opacity:.35}to{opacity:1}}
 button,.btn,.worker-task,.client-task-card,.settings-row{transition:transform .16s ease,box-shadow .18s ease,background .18s ease}
 button:active,.btn:active{transform:scale(.975)}
 .mode-choice-card{animation:cardLift .48s cubic-bezier(.2,.8,.2,1) both}
@@ -792,8 +792,8 @@ button:active,.btn:active{transform:scale(.975)}
 html[data-theme="dark"] body{background:#0b1422;color:#eaf1fb}
 html[data-theme="dark"] .app,html[data-theme="dark"] .screen,html[data-theme="dark"] .settings-page,html[data-theme="dark"] .account-screen,html[data-theme="dark"] .publish-screen,html[data-theme="dark"] .agenda-page,html[data-theme="dark"] .growth-page,html[data-theme="dark"] .verification-v2{background:#0b1422!important;color:#eaf1fb}
 html[data-theme="dark"] .card,html[data-theme="dark"] .publish-card,html[data-theme="dark"] .worker-task,html[data-theme="dark"] .client-task-card,html[data-theme="dark"] .settings-card,html[data-theme="dark"] .settings-row,html[data-theme="dark"] .important-card,html[data-theme="dark"] .worker-profile-card,html[data-theme="dark"] .task-questions article,html[data-theme="dark"] .work-center,html[data-theme="dark"] .publish-review,html[data-theme="dark"] .appearance-list>button,html[data-theme="dark"] .launch-readiness{background:#111f32!important;border-color:#21334b!important;color:#eaf1fb}
-html[data-theme="dark"] h1,html[data-theme="dark"] h2,html[data-theme="dark"] h3,html[data-theme="dark"] b,html[data-theme="dark"] strong,html[data-theme="dark"] .detail-title,html[data-theme="dark"] .publish-title{color:#f4f8ff!important}
-html[data-theme="dark"] p,html[data-theme="dark"] .sub,html[data-theme="dark"] small,html[data-theme="dark"] .row-sub,html[data-theme="dark"] .works-count{color:#9fb0c6!important}
+html[data-theme="dark"] h1,html[data-theme="dark"] h2,html[data-theme="dark"] h3,html[data-theme="dark"] .detail-title,html[data-theme="dark"] .publish-title{color:#f4f8ff!important}
+html[data-theme="dark"] .sub,html[data-theme="dark"] .row-sub,html[data-theme="dark"] .works-count{color:#9fb0c6!important}
 html[data-theme="dark"] input,html[data-theme="dark"] textarea,html[data-theme="dark"] select{background:#0d1929!important;color:#eef5ff!important;border-color:#263950!important}
 html[data-theme="dark"] .chat-top-v4,html[data-theme="dark"] .publish-wizard-progress{background:rgba(11,20,34,.9)}
 html[data-theme="dark"] .chat-compose-shell{background:linear-gradient(180deg,rgba(11,20,34,0),rgba(11,20,34,.98) 20%)}
@@ -1419,6 +1419,216 @@ html[data-theme="dark"] .alternate-offer-v506{background:#102238;border-color:#2
 html[data-theme="dark"] .worker-completed-v507{background:#102820!important;border-color:#245a48!important;color:#dff7ee!important}html[data-theme="dark"] .worker-completed-v507 p{color:#9fc8b7!important}html[data-theme="dark"] .worker-completed-v507 button{background:#183b30!important;color:#dff7ee!important}
 
 .payout-setup-card button:disabled{opacity:.5;cursor:not-allowed}
+
+/* DOHOY 5.1.1 — theme-aware contrast and centered, responsive bottom navigation */
+/* Theme tokens apply to both explicit dark and operating-system automatic dark. */
+html[data-theme="light"]{
+  --ui-text-contrast:#17243b;
+  --ui-secondary-contrast:#59697f;
+  --ui-surface-contrast:#ffffff;
+  --ui-stroke-contrast:#dfe7f2;
+}
+html[data-theme="dark"]{
+  --ink:#edf4ff;
+  --mut:#a9bad1;
+  --surface:#14243a;
+  --line:#31435c;
+  --v4-line:#31435c;
+  --ui-text-contrast:#eff5ff;
+  --ui-secondary-contrast:#bbcadf;
+  --ui-surface-contrast:#14253b;
+  --ui-stroke-contrast:#31445e;
+}
+
+/* Fixed navigation is anchored to the viewport, NOT the narrow app frame.
+   Override the old max-width:520px left:10px/right:10px rule. */
+.app > .nav,
+.app > .nav.nav-v46{
+  position:fixed!important;
+  left:50%!important;
+  right:auto!important;
+  transform:translateX(-50%)!important;
+  width:min(430px,calc(100vw - 24px))!important;
+  max-width:calc(100vw - 24px)!important;
+  bottom:max(10px,env(safe-area-inset-bottom))!important;
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  align-items:center;
+  gap:0;
+  box-sizing:border-box;
+  margin:0!important;
+  z-index:60;
+}
+.app > .nav button{
+  min-width:0!important;
+  max-width:100%;
+  overflow:visible;
+  text-align:center;
+  white-space:nowrap;
+  font-size:10px;
+}
+.app > .nav button b{display:grid;place-items:center}
+html[data-theme="light"] .app > .nav{
+  background:rgba(255,255,255,.97)!important;
+  border-color:#d9e4f3!important;
+}
+html[data-theme="light"] .app > .nav button{color:#55657b!important}
+html[data-theme="light"] .app > .nav button.active{color:#0b58bd!important}
+html[data-theme="dark"] .app > .nav{
+  background:rgba(16,31,50,.97)!important;
+  border-color:#334965!important;
+  box-shadow:0 15px 36px rgba(0,0,0,.42)!important;
+}
+html[data-theme="dark"] .app > .nav button{color:#bdcee4!important}
+html[data-theme="dark"] .app > .nav button.active{color:#fff!important;background:rgba(36,73,125,.42)!important}
+html[data-theme="dark"] .app > .nav button.active b{color:#fff!important;background:#145fc9!important}
+
+/* Explicit light surfaces must ALWAYS have dark text in light mode. */
+html[data-theme="light"] .account-v4 .account-top h1,
+html[data-theme="light"] .account-v4 .account-profile-v4 h2,
+html[data-theme="light"] .account-v4 .account-primary-v4 button,
+html[data-theme="light"] .account-v4 .account-primary-v4 button b,
+html[data-theme="light"] .account-v4 .account-groups-v4 summary b,
+html[data-theme="light"] .account-v4 .settings-row .row-main,
+html[data-theme="light"] .activity-empty-v46 h3,
+html[data-theme="light"] .simple-section-head h2,
+html[data-theme="light"] .earnings-metrics b,
+html[data-theme="light"] .payout-setup-card b,
+html[data-theme="light"] .earning-row b{
+  color:#15243a!important;
+}
+html[data-theme="light"] .account-v4 .account-profile-v4 small,
+html[data-theme="light"] .account-v4 .account-groups-v4 .row-sub,
+html[data-theme="light"] .activity-empty-v46 p,
+html[data-theme="light"] .earnings-metrics small,
+html[data-theme="light"] .payout-setup-card p,
+html[data-theme="light"] .earning-row small{
+  color:#617187!important;
+}
+html[data-theme="light"] .earnings-hero,
+html[data-theme="light"] .earnings-hero h2,
+html[data-theme="light"] .earnings-hero .earnings-month b,
+html[data-theme="light"] .worker-active-v4>button:first-child,
+html[data-theme="light"] .worker-active-v4>button:first-child b{color:#fff!important}
+
+/* In dark mode, backgrounds and text switch TOGETHER; no white text on white cards. */
+html[data-theme="dark"] .account-v4,
+html[data-theme="dark"] .worker-home-v46,
+html[data-theme="dark"] .client-home-v46,
+html[data-theme="dark"] .client-home-v50,
+html[data-theme="dark"] .client-tasks-v46,
+html[data-theme="dark"] .worker-results-screen,
+html[data-theme="dark"] .settings-page,
+html[data-theme="dark"] .earnings-page{
+  background:#0b1627!important;
+  color:#edf4ff!important;
+}
+html[data-theme="dark"] .account-v4 .account-top{
+  background:#14263d!important;
+  border-color:#324962!important;
+}
+html[data-theme="dark"] .account-v4 .account-top h1,
+html[data-theme="dark"] .account-v4 .account-profile-v4 h2,
+html[data-theme="dark"] .account-v4 .account-groups-v4 summary b,
+html[data-theme="dark"] .account-v4 .account-primary-v4 button b,
+html[data-theme="dark"] .account-v4 .settings-row .row-main,
+html[data-theme="dark"] .simple-section-head h2,
+html[data-theme="dark"] .activity-empty-v46 h3,
+html[data-theme="dark"] .worker-status-v46 b,
+html[data-theme="dark"] .worker-results-head h1{
+  color:#f0f6ff!important;
+}
+html[data-theme="dark"] .account-v4 .account-profile-v4 small,
+html[data-theme="dark"] .account-v4 .account-groups-v4 .row-sub,
+html[data-theme="dark"] .account-v4 .account-groups-v4 summary em,
+html[data-theme="dark"] .activity-empty-v46 p,
+html[data-theme="dark"] .worker-status-v46 small,
+html[data-theme="dark"] .worker-home-v46 .simple-location small,
+html[data-theme="dark"] .earnings-metrics small{
+  color:#b2c2d7!important;
+}
+html[data-theme="dark"] .account-v4 .account-primary-v4 button,
+html[data-theme="dark"] .account-v4 .account-groups-v4 details,
+html[data-theme="dark"] .account-v4 .settings-row,
+html[data-theme="dark"] .profile-trust-card,
+html[data-theme="dark"] .worker-search-v46,
+html[data-theme="dark"] .worker-status-v46,
+html[data-theme="dark"] .worker-cats-v46 button:not(.active),
+html[data-theme="dark"] .worker-feed-v46 .worker-task,
+html[data-theme="dark"] .client-task-card,
+html[data-theme="dark"] .activity-tabs-v46 button:not(.active),
+html[data-theme="dark"] .earnings-metrics>div,
+html[data-theme="dark"] .payout-setup-card,
+html[data-theme="dark"] .earning-row,
+html[data-theme="dark"] .earnings-info-example{
+  background:#14263d!important;
+  background-image:none!important;
+  border-color:#304962!important;
+  color:#edf4ff!important;
+}
+html[data-theme="dark"] .account-v4 .account-groups-v4 details>div,
+html[data-theme="dark"] .account-v4 .settings-row+.settings-row{
+  border-color:#304962!important;
+}
+html[data-theme="dark"] .account-v4 .account-primary-v4 button span,
+html[data-theme="dark"] .worker-search-v46 button,
+html[data-theme="dark"] .earnings-metrics span{
+  background:#203b5b!important;
+  color:#9cc4ff!important;
+}
+html[data-theme="dark"] .worker-cats-v46 button.active,
+html[data-theme="dark"] .activity-tabs-v46 button.active{
+  background:#edf4ff!important;
+  color:#10223b!important;
+  border-color:#edf4ff!important;
+}
+html[data-theme="dark"] .worker-cats-v46 button.active b,
+html[data-theme="dark"] .activity-tabs-v46 button.active b{
+  color:#10223b!important;
+}
+html[data-theme="dark"] .worker-home-v46 .simple-location,
+html[data-theme="dark"] .worker-search-v46 input,
+html[data-theme="dark"] .worker-status-v46,
+html[data-theme="dark"] .account-v4 .account-primary-v4 button,
+html[data-theme="dark"] .account-v4 .account-groups-v4 summary{
+  color:#eef5ff!important;
+}
+html[data-theme="dark"] .activity-empty-v46{color:#b7c7d8!important}
+html[data-theme="dark"] .earnings-metrics b,
+html[data-theme="dark"] .payout-setup-card b,
+html[data-theme="dark"] .earning-row b{
+  color:#eef5ff!important;
+}
+html[data-theme="dark"] .payout-setup-card p,
+html[data-theme="dark"] .earning-row small,
+html[data-theme="dark"] .earnings-head>div span{
+  color:#b6c6da!important;
+}
+html[data-theme="dark"] .earning-row strong{color:#60e1b0!important}
+html[data-theme="dark"] .earnings-info-example>span{background:#203450!important;color:#c6d6e8!important}
+html[data-theme="dark"] .earnings-info-example>div{border-color:#304962!important}
+html[data-theme="dark"] label{color:#dce9f9!important}
+html[data-theme="dark"] input::placeholder,
+html[data-theme="dark"] textarea::placeholder{color:#a7b9cf!important;opacity:1}
+html[data-theme="dark"] .account-v4 .icon,
+html[data-theme="dark"] .earnings-help{background:#1e3653!important;border-color:#36536f!important;color:#bcd6ff!important}
+
+/* Keep white text over saturated action and financial cards in either theme. */
+html[data-theme="dark"] .earnings-hero,
+html[data-theme="dark"] .earnings-hero h2,
+html[data-theme="dark"] .earnings-hero p,
+html[data-theme="dark"] .earnings-hero .earnings-kicker,
+html[data-theme="dark"] .earnings-hero .earnings-month b,
+html[data-theme="dark"] .worker-active-v4>button:first-child,
+html[data-theme="dark"] .worker-active-v4>button:first-child b{
+  color:#fff!important;
+}
+@media(min-width:700px){
+  .app > .nav,.app > .nav.nav-v46{
+    bottom:26px!important;
+  }
+}
+
 </style>
 <link rel="manifest" href="./manifest.webmanifest?v=1.9.4"><link rel="apple-touch-icon" href="./icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default">
 </head>
