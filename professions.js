@@ -31,30 +31,33 @@ function professionIcon(p){
 function professionalHeader(title,back){return `<div class="top professional-top"><button class="icon" aria-label="Volver" onclick="go('${back}')">←</button><b>${escapeHtml(title)}</b><button class="icon" aria-label="Mi perfil profesional" onclick="go('professionalEditor')">${iconSvg('user')}</button></div>`}
 function openProfessionCatalog(){state.professionQuery='';state.professionGroup='Todas';go('professionCatalog')}
 async function professionCatalog(){
- const uid=state.user?.id,city=state.professionCity||'',request=state.professionLoadToken=(state.professionLoadToken||0)+1;
- root.innerHTML=shell(`<section class="screen professional-screen">${professionalHeader('Servicios y proyectos','clientHome')}<p role="status">Cargando profesiones…</p></section>`,true);
- let response;try{response=await sb.rpc('professional_directory_counts',{p_city:city||null})}catch(err){response={error:err}}
- if(state.route!=='professionCatalog'||state.user?.id!==uid||request!==state.professionLoadToken)return;
- state.professionCounts=response.error?null:{...Object.fromEntries(PROFESSIONS.map(p=>[p.id,0])),...Object.fromEntries((response.data||[]).map(x=>[x.profession_id,Number(x.available_count)]))};
- const failure=response.error?`<div class="professional-feedback" role="alert">No pudimos consultar los disponibles. Revisa tu conexión. <button type="button" onclick="go('professionCatalog')">Reintentar</button></div>`:'';
- root.innerHTML=shell(`<section class="screen professional-screen">${professionalHeader('Servicios y proyectos','clientHome')}${authMsg()}
- <div class="professional-intro"><span class="professional-eyebrow">ENCUENTRA A QUIEN SABE</span><h1>¿Qué profesional necesitas?</h1><p>Explora por profesión, conoce su trabajo y solicita una cotización.</p></div>
- <form class="professional-city-filter" onsubmit="setProfessionCity(event)"><label for="professionCity">Ciudad o zona de atención</label><div><input id="professionCity" name="city" maxlength="80" value="${escapeAttr(city)}" placeholder="Ej. Torreón" autocomplete="address-level2"><button type="submit">Buscar</button></div></form>
+ const uid=state.user?.id,isWorker=state.mode==='worker',city=state.professionCity||'',request=state.professionLoadToken=(state.professionLoadToken||0)+1;
+ state.professionCounts=null;
+ root.innerHTML=shell(`<section class="screen professional-screen">${professionalHeader('Servicios y proyectos',isWorker?'workerHome':'clientHome')}${authMsg()}
+ <div class="professional-intro"><span class="professional-eyebrow">${isWorker?'TU PROFESIÓN, TUS OPORTUNIDADES':'ENCUENTRA A QUIEN SABE'}</span><h1>${isWorker?'¿En qué profesión buscas trabajo?':'¿Qué profesional necesitas?'}</h1><p>${isWorker?'Elige tu profesión para ver solicitudes y enviar cotizaciones.':'Explora por profesión, conoce su trabajo y solicita una cotización.'}</p></div>
+ ${isWorker?'':`<form class="professional-city-filter" onsubmit="setProfessionCity(event)"><label for="professionCity">Ciudad o zona de atención</label><div><input id="professionCity" name="city" maxlength="80" value="${escapeAttr(city)}" placeholder="Ej. Torreón" autocomplete="address-level2"><button type="submit">Buscar</button></div></form>`}
  <div class="professional-search">${iconSvg('search')}<input id="professionSearch" aria-label="Buscar profesión" placeholder="Médico, enfermería, arquitecto…" value="${escapeAttr(state.professionQuery||'')}" oninput="filterProfessionCatalog(this.value)"></div>
  <div class="profession-groups" aria-label="Filtrar profesiones">${['Todas','Salud','Construcción','Hogar','Otros'].map(g=>`<button type="button" aria-pressed="${(state.professionGroup||'Todas')===g}" onclick="selectProfessionGroup(${jsArg(g)})">${g}</button>`).join('')}</div>
- ${failure}<div id="professionCards" class="profession-grid"></div>
- <button class="professional-general-request" onclick="startServicePublication('project')">${iconSvg('plus')} Publicar un proyecto para recibir cotizaciones <span>›</span></button>
+ <div id="professionalDirectoryFeedback" class="professional-feedback" role="alert" hidden></div><div id="professionCards" class="profession-grid"></div>
+ ${isWorker?`<button class="professional-general-request" onclick="go('professionalEditor')">${iconSvg('briefcase')} Completar mi perfil profesional <span>›</span></button>`:`<button class="professional-general-request" onclick="startServicePublication('project')">${iconSvg('plus')} Publicar un proyecto para recibir cotizaciones <span>›</span></button>`}
  <div class="professional-register"><span>${iconSvg('briefcase')}</span><div><b>¿Ofreces un servicio?</b><p>Crea tu perfil y elige cuándo recibir solicitudes.</p></div><button onclick="go('professionalEditor')">Crear perfil</button></div>
  </section>`,true);filterProfessionCatalog(state.professionQuery||'');
+ let response;try{response=await (isWorker?sb.rpc('browse_open_tasks'):sb.rpc('professional_directory_counts',{p_city:city||null}))}catch(err){response={error:err}}
+ if(state.route!=='professionCatalog'||state.user?.id!==uid||state.mode!==(isWorker?'worker':'client')||request!==state.professionLoadToken)return;
+ if(response.error){const failure=document.getElementById('professionalDirectoryFeedback');if(failure){failure.hidden=false;failure.innerHTML=`No pudimos consultar ${isWorker?'las solicitudes':'los disponibles'}. Revisa tu conexión. <button type="button" onclick="go('professionCatalog')">Reintentar</button>`}return}
+ state.professionCounts=Object.fromEntries(PROFESSIONS.map(p=>[p.id,0]));
+ if(isWorker){state.tasks=response.data||[];for(const task of state.tasks){if(serviceKind(task)!=='project'||task.status!=='open')continue;const p=PROFESSIONS.find(p=>p.category===baseCategory(task.category));if(p)state.professionCounts[p.id]++}}
+ else for(const count of response.data||[])state.professionCounts[count.profession_id]=Number(count.available_count);
+ filterProfessionCatalog(state.professionQuery||'');
 }
 function setProfessionCity(e){e.preventDefault();state.professionCity=String(new FormData(e.target).get('city')||'').trim();go('professionCatalog')}
 function selectProfessionGroup(group){state.professionGroup=group;document.querySelectorAll('.profession-groups button').forEach(b=>b.setAttribute('aria-pressed',String(b.textContent===group)));filterProfessionCatalog(state.professionQuery||'')}
 function filterProfessionCatalog(query){
  state.professionQuery=query;const folded=professionFold(query),group=state.professionGroup||'Todas',host=document.getElementById('professionCards');if(!host)return;
  const list=PROFESSIONS.filter(p=>(group==='Todas'||p.group===group)&&professionFold(`${p.title} ${p.person}`).includes(folded));
- host.innerHTML=list.length?list.map(p=>{const count=state.professionCounts?.[p.id];return `<button class="profession-card" onclick="openProfession(${jsArg(p.id)})"><span class="profession-card-icon group-${p.group==='Salud'?'health':p.group==='Hogar'?'home':'build'}">${professionIcon(p)}</span><b>${escapeHtml(p.title)}</b><small>${count==null?'Consultar disponibles':`${count} disponible${count===1?'':'s'}`}</small><span class="profession-card-arrow">↗</span></button>`}).join(''):`<p class="profession-no-match" role="status">No encontramos esa profesión. Puedes publicar una solicitud general.</p>`;
+ host.innerHTML=list.length?list.map(p=>{const count=state.professionCounts?.[p.id],worker=state.mode==='worker',label=count==null?(worker?'Ver solicitudes':'Consultar disponibles'):(worker?`${count} solicitud${count===1?'':'es'}`:`${count} disponible${count===1?'':'s'}`);return `<button class="profession-card" onclick="openProfession(${jsArg(p.id)})"><span class="profession-card-icon group-${p.group==='Salud'?'health':p.group==='Hogar'?'home':'build'}">${professionIcon(p)}</span><b>${escapeHtml(p.title)}</b><small>${label}</small><span class="profession-card-arrow">↗</span></button>`}).join(''):`<p class="profession-no-match" role="status">No encontramos esa profesión. Prueba otra búsqueda.</p>`;
 }
-function openProfession(id){if(!professionById(id))return;state.selectedProfession=id;state.professionalList=[];state.professionalPage=0;state.professionalSearch='';state.professionAvailableOnly=true;go('professionalList')}
+function openProfession(id){const p=professionById(id);if(!p)return;if(state.mode==='worker'){const f=workerFilterState();f.serviceKind='project';f.category=p.category;f.query='';state.workerServiceKinds=[...new Set([...(state.workerServiceKinds||Object.keys(SERVICE_TYPES)),'project'])];state.workerCategory=p.category;state.workerCategoryBack='professionCatalog';go('workerCategory');return}state.selectedProfession=id;state.professionalList=[];state.professionalPage=0;state.professionalSearch='';state.professionAvailableOnly=true;go('professionalList')}
 async function professionalList(){
  const uid=state.user?.id,id=state.selectedProfession,p=professionById(id);if(!p){go('professionCatalog');return}
  const page=Number(state.professionalPage||0),token=state.professionLoadToken=(state.professionLoadToken||0)+1;

@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="DOHOY">
 <title>DOHOY</title>
-<meta name="dohoy-build" content="5.8.0">
+<meta name="dohoy-build" content="5.8.1">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20128%20128%22%3E%3Crect%20width%3D%22128%22%20height%3D%22128%22%20rx%3D%2228%22%20fill%3D%22%23071B3B%22%2F%3E%3Cpath%20d%3D%22M15%2031C45%2020%2082%2020%20103%2034c15%2010%2020%2025%2016%2042-7-17-22-27-42-33-22-7-43-10-62-12Z%22%20fill%3D%22%23FF7A00%22%2F%3E%3Cpath%20d%3D%22M31%2049c18-1%2037%200%2051%207%2016%208%2024%2019%2023%2031-1%2013-10%2022-24%2024H18c17-12%2032-24%2043-35%208-8%207-14-1-19-7-4-18-7-29-8Z%22%20fill%3D%22%230066FF%22%2F%3E%3Cpath%20d%3D%22M57%2076c8-8%207-14-1-19%208%200%2016%202%2022%206%209%205%2013%2011%2012%2018-1%208-7%2015-19%2023h14c10-2%2016-8%2017-17%201-10-7-19-20-25%209%204%2016%2011%2018%2019%203%2012-4%2023-17%2028H42c7-7%2012-13%2015-18%205-7%206-11%200-15Z%22%20fill%3D%22%230B3D91%22%2F%3E%3C%2Fsvg%3E">
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20128%20128%22%3E%3Crect%20width%3D%22128%22%20height%3D%22128%22%20rx%3D%2228%22%20fill%3D%22%23071B3B%22%2F%3E%3Cpath%20d%3D%22M15%2031C45%2020%2082%2020%20103%2034c15%2010%2020%2025%2016%2042-7-17-22-27-42-33-22-7-43-10-62-12Z%22%20fill%3D%22%23FF7A00%22%2F%3E%3Cpath%20d%3D%22M31%2049c18-1%2037%200%2051%207%2016%208%2024%2019%2023%2031-1%2013-10%2022-24%2024H18c17-12%2032-24%2043-35%208-8%207-14-1-19-7-4-18-7-29-8Z%22%20fill%3D%22%230066FF%22%2F%3E%3Cpath%20d%3D%22M57%2076c8-8%207-14-1-19%208%200%2016%202%2022%206%209%205%2013%2011%2012%2018-1%208-7%2015-19%2023h14c10-2%2016-8%2017-17%201-10-7-19-20-25%209%204%2016%2011%2018%2019%203%2012-4%2023-17%2028H42c7-7%2012-13%2015-18%205-7%206-11%200-15Z%22%20fill%3D%22%230B3D91%22%2F%3E%3C%2Fsvg%3E">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4"></script>
@@ -3140,18 +3140,18 @@ html[data-theme="light"] .beta-note{color:#626f80!important}
 html[data-theme="dark"] .beta-note{color:#a7b9d0!important}
 [hidden]{display:none!important}
 </style>
-<link rel="stylesheet" href="./services.css?v=5.8.0">
-<link rel="stylesheet" href="./professions.css?v=5.8.0">
-<link rel="manifest" href="./manifest.webmanifest?v=5.8.0"><link rel="apple-touch-icon" href="./icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="stylesheet" href="./services.css?v=5.8.1">
+<link rel="stylesheet" href="./professions.css?v=5.8.1">
+<link rel="manifest" href="./manifest.webmanifest?v=5.8.1"><link rel="apple-touch-icon" href="./icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default">
 </head>
 <body><div id="root"></div>
-<script src="./services.js?v=5.8.0"></script>
-<script src="./professions.js?v=5.8.0"></script>
+<script src="./services.js?v=5.8.1"></script>
+<script src="./professions.js?v=5.8.1"></script>
 <script>
 const SUPABASE_URL="https://qakhqnuigpjbeeahuyct.supabase.co";
 const SUPABASE_KEY="sb_publishable_g6FMgju9Lv2mtJCn2heXCw_YhRjweyL";
 const REDIRECT_URL="https://www.dohoy.com.mx/";
-const DOHOY_VERSION="5.8.0";
+const DOHOY_VERSION="5.8.1";
 const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{global:{headers:{"x-dohoy-version":"5.1.0"}}});
 const root=document.getElementById("root");
 
@@ -5538,6 +5538,7 @@ function openAllWorkerOpportunities(){
  go("workerCategory")
 }
 function openWorkerCategory(category){
+ if(state.route!=='workerCategory')state.workerCategoryBack='workerHome';
  state.workerCategory=category;
  workerFilterState().category=category;
  go("workerCategory")
@@ -5550,7 +5551,7 @@ async function workerCategory(){
  const title=category||"Todos los trabajos";
  root.innerHTML=shell(`<section class="worker-results-screen">
    <header class="worker-results-head">
-     <button class="icon" onclick="go('workerHome')">←</button>
+     <button class="icon" onclick="go('${state.workerCategoryBack||'workerHome'}')">←</button>
      <div><small>${category?"CATEGORÍA":"OPORTUNIDADES"}</small><h1>${escapeHtml(title)}</h1></div>
      <button class="icon" onclick="openWorkerMap()">${iconSvg("map")}</button>
    </header>

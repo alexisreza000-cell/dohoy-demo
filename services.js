@@ -25,6 +25,7 @@ function workerServiceSections(){
  return `<section class="worker-service-sections-v57"><div class="simple-section-head"><h2>¿Dónde quieres trabajar?</h2><button onclick="openServicePreferences()">Elegir</button></div><div class="worker-service-tabs-v57">${Object.entries(SERVICE_TYPES).map(([kind,s])=>`<button class="${current===kind?'selected':''}" aria-pressed="${current===kind}" onclick="selectWorkerService('${kind}')"><span>${iconSvg(s.icon)}</span><b>${s.title}</b><small>${allowed.includes(kind)?'Ver oportunidades':'Activar sección'}</small></button>`).join('')}</div><button class="all-services-v57 ${!current?'selected':''}" onclick="selectWorkerService('')">Ver mis secciones juntas</button></section>`;
 }
 function selectWorkerService(kind){
+ if(kind==='project'){openProfessionCatalog();return}
  if(kind&&!(state.workerServiceKinds||Object.keys(SERVICE_TYPES)).includes(kind)){openServicePreferences();return}
  const f=workerFilterState();f.serviceKind=SERVICE_TYPES[kind]?kind:'';f.category='';state.workerCategory='';go('workerHome');
 }
