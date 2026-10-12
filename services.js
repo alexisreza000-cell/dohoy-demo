@@ -17,9 +17,9 @@ function taskPriceText(t){
 }
 function serviceBadge(t){const kind=serviceKind(t);return `<span class="service-badge-v57 ${kind}">${iconSvg(SERVICE_TYPES[kind].icon)} ${SERVICE_TYPES[kind].title}${kind==='recurring'&&SERVICE_FREQUENCIES[t?.recurrence_frequency]?` · ${SERVICE_FREQUENCIES[t.recurrence_frequency]}`:''}</span>`}
 function startServicePublication(kind='daily',category=''){
- state.publishServiceKind=SERVICE_TYPES[kind]?kind:'daily';state.publishPrefillCategory=category;state.nextVisitDraft=null;go('createTask');
+ state.professionRequest=null;state.publishServiceKind=SERVICE_TYPES[kind]?kind:'daily';state.publishPrefillCategory=category;state.nextVisitDraft=null;go('createTask');
 }
-function clientServiceSections(){return `<section class="service-sections-v57" aria-label="Elige un tipo de servicio">${Object.entries(SERVICE_TYPES).map(([kind,s])=>`<button class="service-entry-v57 ${kind}" onclick="startServicePublication('${kind}')"><span class="service-entry-icon-v57">${iconSvg(s.icon)}</span><span class="service-entry-copy-v57"><b>${s.title}</b><span>${s.copy}</span><small>${s.note}</small></span><span class="service-entry-arrow-v57">›</span></button>`).join('')}<p class="service-purchase-note-v57">En mandados, el precio del servicio no incluye el costo de las compras.</p></section>`}
+function clientServiceSections(){return `<section class="service-sections-v57" aria-label="Elige un tipo de servicio">${Object.entries(SERVICE_TYPES).map(([kind,s])=>`<button class="service-entry-v57 ${kind}" onclick="${kind==='project'?'openProfessionCatalog()':`startServicePublication('${kind}')`}"><span class="service-entry-icon-v57">${iconSvg(s.icon)}</span><span class="service-entry-copy-v57"><b>${s.title}</b><span>${kind==='project'?'Encuentra profesionales y oficios por categoría.':s.copy}</span><small>${kind==='project'?'Ver perfiles y solicitar cotización':s.note}</small></span><span class="service-entry-arrow-v57">›</span></button>`).join('')}<p class="service-purchase-note-v57">En mandados, el precio del servicio no incluye el costo de las compras.</p></section>`}
 function workerServiceSections(){
  const current=workerFilterState().serviceKind||'',allowed=state.workerServiceKinds||Object.keys(SERVICE_TYPES);
  return `<section class="worker-service-sections-v57"><div class="simple-section-head"><h2>¿Dónde quieres trabajar?</h2><button onclick="openServicePreferences()">Elegir</button></div><div class="worker-service-tabs-v57">${Object.entries(SERVICE_TYPES).map(([kind,s])=>`<button class="${current===kind?'selected':''}" aria-pressed="${current===kind}" onclick="selectWorkerService('${kind}')"><span>${iconSvg(s.icon)}</span><b>${s.title}</b><small>${allowed.includes(kind)?'Ver oportunidades':'Activar sección'}</small></button>`).join('')}</div><button class="all-services-v57 ${!current?'selected':''}" onclick="selectWorkerService('')">Ver mis secciones juntas</button></section>`;
@@ -67,6 +67,7 @@ function restoreNextVisitDraft(){
 }
 function planNextServiceVisit(){
  const t=state.selectedTask;if(!t||serviceKind(t)!=='recurring'||t.status!=='completed'||t.client_id!==state.user?.id)return;
+ state.professionRequest=null;
  const date=new Date(t.scheduled_for||Date.now());if(t.recurrence_frequency==='monthly')date.setMonth(date.getMonth()+1);else date.setDate(date.getDate()+({daily:1,weekly:7,biweekly:15}[t.recurrence_frequency]||7));if(date<new Date())date.setTime(Date.now()+86400000);
  state.publishServiceKind='recurring';state.publishPrefillCategory=baseCategory(t.category);state.nextVisitDraft={title:t.title,description:t.description,location:t.location_label,latitude:t.latitude,longitude:t.longitude,price:t.offered_price,task_date:localDateValue(date.toISOString()),task_time:localTimeValue(t.scheduled_for),recurrence_frequency:t.recurrence_frequency,recurrence_parent_id:t.recurrence_parent_id||t.id,license:t.requires_driver_license,tracking_requested:t.tracking_requested};go('createTask');
 }
