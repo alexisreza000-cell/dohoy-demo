@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="DOHOY">
 <title>DOHOY</title>
-<meta name="dohoy-build" content="5.6.1">
+<meta name="dohoy-build" content="5.7.0">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20128%20128%22%3E%3Crect%20width%3D%22128%22%20height%3D%22128%22%20rx%3D%2228%22%20fill%3D%22%23071B3B%22%2F%3E%3Cpath%20d%3D%22M15%2031C45%2020%2082%2020%20103%2034c15%2010%2020%2025%2016%2042-7-17-22-27-42-33-22-7-43-10-62-12Z%22%20fill%3D%22%23FF7A00%22%2F%3E%3Cpath%20d%3D%22M31%2049c18-1%2037%200%2051%207%2016%208%2024%2019%2023%2031-1%2013-10%2022-24%2024H18c17-12%2032-24%2043-35%208-8%207-14-1-19-7-4-18-7-29-8Z%22%20fill%3D%22%230066FF%22%2F%3E%3Cpath%20d%3D%22M57%2076c8-8%207-14-1-19%208%200%2016%202%2022%206%209%205%2013%2011%2012%2018-1%208-7%2015-19%2023h14c10-2%2016-8%2017-17%201-10-7-19-20-25%209%204%2016%2011%2018%2019%203%2012-4%2023-17%2028H42c7-7%2012-13%2015-18%205-7%206-11%200-15Z%22%20fill%3D%22%230B3D91%22%2F%3E%3C%2Fsvg%3E">
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20128%20128%22%3E%3Crect%20width%3D%22128%22%20height%3D%22128%22%20rx%3D%2228%22%20fill%3D%22%23071B3B%22%2F%3E%3Cpath%20d%3D%22M15%2031C45%2020%2082%2020%20103%2034c15%2010%2020%2025%2016%2042-7-17-22-27-42-33-22-7-43-10-62-12Z%22%20fill%3D%22%23FF7A00%22%2F%3E%3Cpath%20d%3D%22M31%2049c18-1%2037%200%2051%207%2016%208%2024%2019%2023%2031-1%2013-10%2022-24%2024H18c17-12%2032-24%2043-35%208-8%207-14-1-19-7-4-18-7-29-8Z%22%20fill%3D%22%230066FF%22%2F%3E%3Cpath%20d%3D%22M57%2076c8-8%207-14-1-19%208%200%2016%202%2022%206%209%205%2013%2011%2012%2018-1%208-7%2015-19%2023h14c10-2%2016-8%2017-17%201-10-7-19-20-25%209%204%2016%2011%2018%2019%203%2012-4%2023-17%2028H42c7-7%2012-13%2015-18%205-7%206-11%200-15Z%22%20fill%3D%22%230B3D91%22%2F%3E%3C%2Fsvg%3E">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4"></script>
@@ -3140,14 +3140,16 @@ html[data-theme="light"] .beta-note{color:#626f80!important}
 html[data-theme="dark"] .beta-note{color:#a7b9d0!important}
 [hidden]{display:none!important}
 </style>
-<link rel="manifest" href="./manifest.webmanifest?v=5.6.1"><link rel="apple-touch-icon" href="./icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="stylesheet" href="./services.css?v=5.7.0">
+<link rel="manifest" href="./manifest.webmanifest?v=5.7.0"><link rel="apple-touch-icon" href="./icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default">
 </head>
 <body><div id="root"></div>
+<script src="./services.js?v=5.7.0"></script>
 <script>
 const SUPABASE_URL="https://qakhqnuigpjbeeahuyct.supabase.co";
 const SUPABASE_KEY="sb_publishable_g6FMgju9Lv2mtJCn2heXCw_YhRjweyL";
 const REDIRECT_URL="https://www.dohoy.com.mx/";
-const DOHOY_VERSION="5.6.1";
+const DOHOY_VERSION="5.7.0";
 const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{global:{headers:{"x-dohoy-version":"5.1.0"}}});
 const root=document.getElementById("root");
 
@@ -3167,9 +3169,9 @@ let taskSharingId=null,taskSharingWorkerId=null,taskLiveWatchId=null,taskLiveHea
 let taskLiveMap=null,taskLiveMarker=null,taskLiveDestMarker=null,taskLiveViewTimer=null,taskLiveViewingId=null,taskLiveMapTask=null;
 let workerAddressUpdatedAt=0;
 let swipeSuppressUntil=0;
-const categories=["Vehículo","Mandados","Paquetería","Hogar","Mascotas","Trámites","Eventos","Tecnología","Otro"];
+const categories=[...new Set(Object.values(SERVICE_TYPES).flatMap(s=>s.categories))];
 const vehicleColors={graphite:"#2B2B30",white:"#F4F4F2",red:"#D84B4B",blue:"#3E73C8",green:"#4F8A63",orange:"#F28B3C"};
-const money=n=>new Intl.NumberFormat("es-MX",{style:"currency",currency:"MXN",maximumFractionDigits:0}).format(Number(n||0));
+const money=n=>new Intl.NumberFormat("es-MX",{style:"currency",currency:"MXN",minimumFractionDigits:0,maximumFractionDigits:2}).format(Number(n||0));
 const moneyExact=n=>new Intl.NumberFormat("es-MX",{style:"currency",currency:"MXN",minimumFractionDigits:2,maximumFractionDigits:2}).format(Number(n||0));
 function svgWrap(body,viewBox="0 0 24 24",cls="svg-icon"){return `<svg class="${cls}" viewBox="${viewBox}" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">${body}</svg>`}
 function baseCategory(raw){return String(raw||"Otro").split("|")[0]||"Otro"}
@@ -3180,6 +3182,7 @@ function vehicleSvg(variant="sedan",color=vehicleColors.graphite){
  return svgWrap(`<path d="M4.05 11.3 6.3 7.45c.42-.72 1.2-1.17 2.04-1.17h6.18c.78 0 1.5.38 1.94 1.03l2.55 3.72 1.05.55c.58.3.94.9.94 1.56v2.17H3v-2.36c0-.7.4-1.34 1.05-1.65Z" fill="${color}" stroke="${stroke}" stroke-width="1.25"/><path d="M8.02 6.95 6.7 10.55h10.8l-2.3-3.6H8.02Z" fill="#FFFFFF" fill-opacity=".8" stroke="${stroke}" stroke-width="1"/><circle cx="7" cy="15.5" r="1.55" fill="#fff" stroke="${stroke}" stroke-width="1.2"/><circle cx="17" cy="15.5" r="1.55" fill="#fff" stroke="${stroke}" stroke-width="1.2"/><path d="M4.4 12.65h2M17.65 12.65h1.95" stroke="${stroke}" stroke-width="1.2" stroke-linecap="round"/>`)
 }
 function iconSvg(name,opts={}){
+ name=serviceCategoryIcon(name);
  const s='stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"';
  if(name==="Vehículo")return vehicleSvg(opts.variant||"sedan",opts.color||vehicleColors.graphite);
  if(name==="trash")return svgWrap(`<path ${s} d="M4.8 7.1h14.4"/><path ${s} d="M9.2 3.8h5.6"/><path ${s} d="M7.2 7.1l.8 11.1h8l.8-11.1"/><path ${s} d="M10 10.2v5.2M14 10.2v5.2"/>`);
@@ -3554,8 +3557,8 @@ function ratingEditorHtml(taskId,rating){return `<div id="ratingCard-${taskId}" 
 function welcome(){
 return shell(`<section class="hero">
 <div>${logo()}<div class="tag">Lo necesitas. Alguien lo hace.</div></div>
-<div class="hero-copy"><span class="hero-badge">Tu comunidad, a una tarea de distancia</span><h1>Resuelve lo de hoy, hoy.</h1><p>Publica una tarea, recibe ofertas y coordina todo desde un solo lugar.</p>
-<div class="hero-proof"><div class="proof"><b>${iconSvg("plus")}</b><span>Publica rápido</span></div><div class="proof"><b>${iconSvg("chat")}</b><span>Chat por tarea</span></div><div class="proof"><b>✓✓</b><span>Estados de lectura</span></div></div></div>
+<div class="hero-copy"><span class="hero-badge">Tu comunidad, a una tarea de distancia</span><h1>Resuelve lo de hoy, hoy.</h1><p>Resuelve un pendiente, cotiza un proyecto o agenda un servicio recurrente.</p>
+<div class="hero-proof"><div class="proof"><b>${iconSvg("plus")}</b><span>Tareas diarias</span></div><div class="proof"><b>${iconSvg("briefcase")}</b><span>Proyectos</span></div><div class="proof"><b>${iconSvg("calendar")}</b><span>Recurrentes</span></div></div></div>
 <div><button class="btn light" onclick="go('signup')">Crear cuenta</button><button class="btn outline" onclick="go('login')">Ya tengo cuenta</button></div>
 </section>`)
 }
@@ -3618,7 +3621,7 @@ function taskCard(t,client=false){
  const meta=t.status==="open"?(offers?`${offers} propuesta${offers===1?"":"s"}`:`${when} · Esperando propuestas`):`${when} · ${taskStatusLabel(t)}`;
  return `<button class="client-task-card v50 tone-${tone}" onclick="openTask('${t.id}')">
    <span class="client-task-icon">${taskIcon(t)}</span>
-   <span class="client-task-main"><span class="client-task-top"><b>${escapeHtml(t.title)}</b><em>${money(t.offered_price)}</em></span><span class="client-task-meta">${escapeHtml(meta)}</span></span>
+   <span class="client-task-main"><span class="client-task-top"><b>${escapeHtml(t.title)}</b><em>${escapeHtml(taskPriceText(t))}</em></span><span class="client-task-meta">${SERVICE_TYPES[serviceKind(t)].short} · ${escapeHtml(meta)}</span></span>
    <span class="client-task-arrow">›</span>
  </button>`
 }
@@ -3655,9 +3658,9 @@ async function clientHome(){
  root.innerHTML=shell(`<section class="client-home-v50">
   <header class="simple-home-head"><button class="simple-location" onclick="go('addresses')">${iconSvg("location")}<span><small>Ubicación</small><b>Tu ubicación</b></span><em>⌄</em></button><div class="simple-home-actions">${notificationBell()}<button class="market-avatar" onclick="go('profile')" aria-label="Abrir cuenta">${avatarMarkup(state.profile)}</button></div></header>
   ${authMsg()}
-  <section class="next-action-v50"><small>DOHOY</small><h1>${escapeHtml(action.title)}</h1><button onclick="${action.run}"><span>${iconSvg(action.icon)}</span><span><b>${escapeHtml(action.label)}</b><small>${escapeHtml(action.hint)}</small></span><em>›</em></button></section>
+  ${attention?`<section class="next-action-v50"><small>DOHOY</small><h1>${escapeHtml(action.title)}</h1><button onclick="${action.run}"><span>${iconSvg(action.icon)}</span><span><b>${escapeHtml(action.label)}</b><small>${escapeHtml(action.hint)}</small></span><em>›</em></button></section>`:`<section class="service-home-intro-v57"><div class="kicker">DOHOY</div><h1>¿Qué necesitas resolver?</h1><p>Elige la forma de contratar.</p></section>`}
   ${attention?`<section class="home-focus-v50"><div class="simple-section-head"><h2>${attention.status==="open"?"Requiere tu atención":"Ahora"}</h2><button onclick="state.clientTaskFilter='${attention.status==="open"?'proposals':'current'}';go('clientTasks')">Actividad</button></div>${taskCard(attention,true)}</section>`:""}
-  <section class="services-v46 services-v50"><div class="simple-section-head"><h2>Servicios</h2><button onclick="go('createTask')">Ver todos</button></div><div class="service-grid-v46">${serviceCats.map(cat=>`<button onclick="startClientCategory('${escapeAttr(cat)}')"><span>${iconSvg(cat)}</span><b>${escapeHtml(cat)}</b></button>`).join("")}<button onclick="go('createTask')"><span>${iconSvg("plus")}</span><b>Más</b></button></div></section>
+  ${clientServiceSections()}
   ${recent.length?`<section class="recent-v46"><div class="simple-section-head"><h2>Esperando propuestas</h2><button onclick="state.clientTaskFilter='posted';go('clientTasks')">Ver actividad</button></div><div class="client-task-list compact-v46">${recent.map(t=>taskCard(t,true)).join("")}</div></section>`:""}
   ${!attention&&!posted.length?`<div class="first-task-v46"><span>${iconSvg("tasks")}</span><div><b>Todo tranquilo por aquí</b><small>Cuando publiques una tarea, podrás seguirla desde Inicio y Actividad.</small></div></div>`:""}
  </section>`,true)
@@ -3692,10 +3695,7 @@ async function loadClientTaskStats(){
  if(error)return;
  for(const o of data||[])if(["pending","accepted"].includes(o.status))state.clientOfferCounts[o.task_id]=(state.clientOfferCounts[o.task_id]||0)+1
 }
-function startClientCategory(cat){
- state.publishPrefillCategory=cat;
- go("createTask")
-}
+function startClientCategory(cat){startServicePublication('daily',cat)}
 
 function taskUrgency(t){
  if(!t?.scheduled_for)return false;
@@ -3711,7 +3711,7 @@ function smartMatchScore(t){
  return Math.max(55,Math.min(99,Math.round(score)))
 }
 function opportunityTags(t){
- const d=taskDistanceKm(t),tags=[];
+ const d=taskDistanceKm(t),tags=[serviceBadge(t)];
  if(t?.is_urgent||taskUrgency(t))tags.push(`<span class="op-tag urgent">${iconSvg("fire")} URGENTE</span>`);
  if(d!=null&&d<=5)tags.push(`<span class="op-tag near">Cerca de ti</span>`);
  if(Number(t.offered_price||0)>=500)tags.push(`<span class="op-tag pay">Buen pago</span>`);
@@ -3724,7 +3724,7 @@ function workerTaskCard(t){
    <div class="smart-task-main">
      <div class="smart-task-tags">${opportunityTags(t)}</div>
      <h3>${escapeHtml(t.title)}</h3>
-     <div class="smart-task-price-row"><div class="price">${money(t.offered_price)}</div><span class="match-score">${score}% compatible</span></div>
+     <div class="smart-task-price-row"><div class="price">${escapeHtml(taskPriceText(t))}</div><span class="match-score">${score}% compatible</span></div>
      <div class="worker-meta">${iconSvg("location")}${d!=null?`<span class="distance-badge">${distanceLabel(d)}</span><span>·</span>`:""}<span>Ubicación aproximada</span><span>·</span><span>${t.scheduled_for?timeText(t.scheduled_for):"Flexible"}</span></div>
    </div><span class="worker-arrow">›</span>
  </button>`
@@ -3736,7 +3736,7 @@ async function workerHome(){
  if(state.route!==__routeAtStart)return;
  const visible=filteredWorkerTasks();
  const active=activeWorkerJobs().length,proposals=pendingWorkerProposals().length;
- const serviceCats=categories.slice(0,5);
+ const serviceCats=serviceCategories(workerFilterState().serviceKind||'daily').slice(0,5);
  root.innerHTML=shell(`<section class="worker-home-v46">
   <header class="simple-home-head">
     <button id="workerLocationButton" class="simple-location ${state.workerLocation?"active":""}" onclick="toggleWorkerLocation()">
@@ -3751,6 +3751,7 @@ async function workerHome(){
     <p>Encuentra trabajos cerca de ti</p>
   </div>
 
+  ${workerServiceSections()}
   ${active||proposals?'<div class="worker-focus-title">Tu actividad</div>':""}
   ${workerActiveHomeCard()}
 
@@ -3812,19 +3813,19 @@ async function openWorkerMap(){await loadOpenTasks();state.route="workerMap";ren
 function workerMapScreen(){return shell(`<section class="worker-map-page"><div class="map-page-head"><button class="icon" onclick="go('workerHome')">←</button><div><small>OPORTUNIDADES CERCA</small><h1>Mapa de trabajos</h1></div><button class="map-locate" onclick="requestDiscoveryLocation()">${iconSvg("location")}</button></div><div class="map-privacy-note">${iconSvg("shield")} Las ubicaciones abiertas son aproximadas. La dirección exacta solo se comparte cuando corresponde.</div><div id="workerLeafletMap"></div><div id="mapOpportunityTray" class="map-opportunity-tray"><span>Selecciona un trabajo en el mapa</span></div></section>`,true)}
 function initWorkerMap(){
  const el=document.getElementById("workerLeafletMap");if(!el||!window.L)return;
- const tasks=(state.tasks||[]).filter(t=>t.latitude!=null&&t.longitude!=null),center=state.workerLocation?[state.workerLocation.latitude,state.workerLocation.longitude]:(tasks[0]?[Number(tasks[0].latitude),Number(tasks[0].longitude)]:[23.6345,-102.5528]);
+ const tasks=filteredWorkerTasks().filter(t=>t.latitude!=null&&t.longitude!=null),center=state.workerLocation?[state.workerLocation.latitude,state.workerLocation.longitude]:(tasks[0]?[Number(tasks[0].latitude),Number(tasks[0].longitude)]:[23.6345,-102.5528]);
  const map=L.map(el,{zoomControl:false}).setView(center,state.workerLocation?12:5);L.control.zoom({position:"bottomright"}).addTo(map);L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:18,attribution:"© OpenStreetMap"}).addTo(map);
  if(state.workerLocation)L.circleMarker(center,{radius:8}).addTo(map).bindTooltip("Tu zona");
- const bounds=[];tasks.forEach(t=>{const lat=Number(t.latitude),lng=Number(t.longitude);bounds.push([lat,lng]);const marker=L.marker([lat,lng]).addTo(map);marker.bindTooltip(money(t.offered_price));marker.on("click",()=>showMapTask(t.id))});if(bounds.length>1)map.fitBounds(bounds,{padding:[35,35],maxZoom:13})
+ const bounds=[];tasks.forEach(t=>{const lat=Number(t.latitude),lng=Number(t.longitude);bounds.push([lat,lng]);const marker=L.marker([lat,lng]).addTo(map);marker.bindTooltip(taskPriceText(t));marker.on("click",()=>showMapTask(t.id))});if(bounds.length>1)map.fitBounds(bounds,{padding:[35,35],maxZoom:13})
 }
-function showMapTask(id){const t=(state.tasks||[]).find(x=>x.id===id),host=document.getElementById("mapOpportunityTray");if(!t||!host)return;host.innerHTML=`<span class="map-tray-icon">${taskIcon(t)}</span><div><small>${escapeHtml(baseCategory(t.category))}</small><b>${escapeHtml(t.title)}</b><strong>${money(t.offered_price)}</strong></div><button onclick="openTask('${t.id}')">Ver</button>`}
+function showMapTask(id){const t=(state.tasks||[]).find(x=>x.id===id),host=document.getElementById("mapOpportunityTray");if(!t||!host)return;host.innerHTML=`<span class="map-tray-icon">${taskIcon(t)}</span><div><small>${escapeHtml(baseCategory(t.category))}</small><b>${escapeHtml(t.title)}</b><strong>${escapeHtml(taskPriceText(t))}</strong></div><button onclick="openTask('${t.id}')">Ver</button>`}
 
 async function loadWorkerActivity(){
  if(!state.user){state.workerActivity=[];return}
- const {data,error}=await sb.rpc("worker_activity");
+ const {data,error}=await sb.rpc("worker_activity_services");
  if(error){state.workerActivity=[];state.error=state.error||("No pudimos cargar tus tareas: "+error.message);return}
  state.workerActivity=(data||[]).map(x=>({
-   id:x.task_id,title:x.title,description:x.description,category:x.category,offered_price:x.offered_price,
+   id:x.task_id,title:x.title,description:x.description,category:x.category,offered_price:x.offered_price,service_kind:x.service_kind,recurrence_frequency:x.recurrence_frequency,pricing_rule_version:x.pricing_rule_version,
    location_label:x.location_label,scheduled_for:x.scheduled_for,status:x.task_status,worker_id:x.worker_id,client_id:x.client_id,
    created_at:x.created_at,updated_at:x.updated_at,en_route_at:x.en_route_at,arrived_at:x.arrived_at,
    completion_requested_at:x.completion_requested_at,completed_at:x.completed_at,
@@ -3852,7 +3853,7 @@ function workerJobCard(t,kind="active"){
  return `<button class="worker-job-card ${cls}" onclick="openTask('${t.id}')">
    <div class="worker-job-icon">${taskIcon(t)}</div>
    <div class="worker-job-copy"><div class="worker-job-top"><h3>${escapeHtml(t.title)}</h3><span class="job-status ${cls}">${escapeHtml(label)}</span></div>
-   <div class="worker-job-meta">${locationMarkup(t.location_label||"Zona aproximada")}</div>
+   <div class="worker-job-meta">${serviceBadge(t)} ${locationMarkup(t.location_label||"Zona aproximada")}</div>
    <div class="worker-job-bottom"><span>${money(amount)}</span><small>${proposal?"Propuesta enviada":done?statusText(t.status):taskStatusLabel(t)}</small></div></div>
    <span class="worker-job-arrow">›</span>
  </button>`
@@ -3893,18 +3894,18 @@ async function workerJobs(){
 }
 
 function selectPublishCategory(cat,btn){document.getElementById("taskCategoryHidden").value=cat;document.querySelectorAll(".publish-category").forEach(x=>x.classList.remove("selected"));if(btn)btn.classList.add("selected");toggleVehicleOptions(cat);loadPriceSuggestion(cat)}
-function publishStepMeta(){return [["Qué necesitas","Describe la tarea"],["Dónde","Indica la zona"],["Cuándo","Elige fecha y prioridad"],["Presupuesto","Precio y fotos"],["Revisar","Confirma y publica"]]}
+function publishStepMeta(){return [['Qué necesitas','Elige tipo y describe el servicio'],['Dónde','Indica la zona'],['Cuándo','Fecha y frecuencia'],[publishServiceKind()==='project'?'Cotización':publishServiceKind()==='recurring'?'Precio por visita':'Presupuesto','Precio y fotos'],['Revisar','Confirma y publica']]}
+
 function publishWizardProgress(){const steps=publishStepMeta();return `<div class="publish-wizard-progress"><div class="publish-progress-track"><i style="width:${state.publishStep/steps.length*100}%"></i></div><div class="publish-progress-copy"><span>Paso ${state.publishStep} de ${steps.length}</span><b>${steps[state.publishStep-1][0]}</b></div></div>`}
 function publishStepValid(step){
  const f=document.getElementById('taskForm');if(!f)return false;
- const required=step===1?['title','description']:step===2?['location']:step===4?['price']:[];
- for(const name of required){
-  const el=f.elements[name];if(!el)return false;
-  el.setCustomValidity(String(el.value||'').trim()?'':'Completa este campo.');
-  if(!el.checkValidity()){el.focus();el.reportValidity();return false}
- }
+ const kind=publishServiceKind();
+ const required=step===1?['title','description']:step===2?['location']:step===3&&kind==='recurring'?['recurrence_frequency']:step===4&&kind!=='project'?['price']:[];
+ for(const name of required){const el=f.elements[name];if(!el)return false;el.setCustomValidity(String(el.value||'').trim()?'':'Completa este campo.');if(!el.checkValidity()){el.focus();el.reportValidity();return false}}
+ if(step===4){const el=f.elements.price;el.setCustomValidity('');if(el.value&&!el.checkValidity()){el.focus();el.reportValidity();return false}}
  return true;
 }
+
 function publishWizardNext(delta=1){
  if(delta>0&&state.publishStep<5&&!publishStepValid(state.publishStep))return;
  state.publishStep=Math.max(1,Math.min(5,state.publishStep+delta));renderPublishWizardStep();haptic()
@@ -3921,22 +3922,28 @@ function renderPublishWizardStep(){
 }
 function refreshPublishReview(){
  const f=document.getElementById("taskForm"),host=document.getElementById("publishReview");if(!f||!host)return;
- const fd=new FormData(f),cat=fd.get("category")||"Otro",urgent=fd.get("urgent")==="on";
- host.innerHTML=`<div class="review-main"><span>${iconSvg(cat)}</span><div><small>${escapeHtml(cat)}${urgent?" · URGENTE":""}</small><h2>${escapeHtml(fd.get("title")||"Tu tarea")}</h2><p>${escapeHtml(fd.get("description")||"")}</p></div></div><div class="review-grid"><span><small>Ubicación</small><b>${escapeHtml(fd.get("location")||"Pendiente")}</b></span><span><small>Cuándo</small><b>${fd.get("task_date")?escapeHtml(fd.get("task_date")):"Flexible"} ${fd.get("task_time")?`· ${escapeHtml(fd.get("task_time"))}`:""}</b></span><span><small>Presupuesto</small><b>${money(fd.get("price")||0)}</b></span><span><small>Fotos</small><b>${state.pendingTaskFiles.length}</b></span></div><div class="review-protection">${iconSvg("shield")} <span>${fd.get("tracking_requested")==="on"?"Seguimiento solicitado: el trabajador decidirá cuándo activar o detener el GPS durante la tarea.":"Esta tarea no solicita seguimiento en vivo."} Antes de publicar evita compartir información sensible.</span></div>`
+ const fd=new FormData(f),cat=fd.get("category")||"Otro",urgent=fd.get("urgent")==="on",summary=publishServiceSummary(fd);
+ host.innerHTML=`<div class="review-main"><span>${iconSvg(cat)}</span><div><small>${escapeHtml(summary.type)} · ${escapeHtml(cat)}${urgent?" · URGENTE":""}</small><h2>${escapeHtml(fd.get("title")||"Tu tarea")}</h2><p>${escapeHtml(fd.get("description")||"")}</p></div></div><div class="review-grid"><span><small>Ubicación</small><b>${escapeHtml(fd.get("location")||"Pendiente")}</b></span><span><small>Cuándo</small><b>${fd.get("task_date")?escapeHtml(fd.get("task_date")):"Flexible"} ${fd.get("task_time")?`· ${escapeHtml(fd.get("task_time"))}`:""}</b></span><span><small>${publishServiceKind()==='project'?'Cotización':'Precio del servicio'}</small><b>${escapeHtml(summary.price)}</b></span>${summary.frequency?`<span><small>Frecuencia</small><b>${escapeHtml(summary.frequency)}</b></span>`:""}<span><small>Fotos</small><b>${state.pendingTaskFiles.length}</b></span></div><div class="review-protection">${iconSvg("shield")} <span>${fd.get("tracking_requested")==="on"?"Seguimiento solicitado: el trabajador decidirá cuándo activar o detener el GPS durante la tarea.":"Esta tarea no solicita seguimiento en vivo."} Antes de publicar evita compartir información sensible.</span></div>`
 }
 function createTask(){
- const defaultCat=categories.includes(state.publishPrefillCategory)?state.publishPrefillCategory:"Vehículo";state.pendingTaskFiles=[];state.pendingTaskPhotoLimit=5;state.taskPhotoSelectionNote="";state.publishStep=1;
- root.innerHTML=shell(`<section class="publish-screen publish-wizard publish-v46"><div class="publish-head v46"><button class="icon" onclick="go('clientHome')">←</button><h2>Nueva tarea</h2><span></span></div><div id="publishWizardProgress">${publishWizardProgress()}</div><div id="formFeedback" class="form-feedback">${authMsg()}</div>
- <form id="taskForm" novalidate><input id="taskCategoryHidden" type="hidden" name="category" value="${defaultCat}">
-  <section class="publish-wizard-step active" data-step="1"><div class="publish-eyebrow">Publicar tarea</div><h1 class="publish-title">¿Qué necesitas resolver?</h1><p class="publish-step-copy">Cuéntalo de forma sencilla. Mientras más claro sea, mejores propuestas recibirás.</p><div class="publish-category-grid">${categories.map(c=>`<button type="button" class="publish-category ${c===defaultCat?"selected":""}" onclick="selectPublishCategory('${escapeAttr(c)}',this)">${iconSvg(c)}<span>${escapeHtml(c)}</span></button>`).join("")}</div><div class="publish-card"><div class="pc-icon">${iconSvg("tasks")}</div><div><label>Título</label><input name="title" required maxlength="90" placeholder="Ej. Lavar mi carro"></div></div><div class="publish-card"><div class="pc-icon">${iconSvg("document")}</div><div><label>Descripción</label><textarea name="description" required maxlength="1200" placeholder="Explica qué necesitas, tamaño, condiciones y cualquier detalle importante"></textarea></div></div></section>
+ const kind=SERVICE_TYPES[state.publishServiceKind]?state.publishServiceKind:"daily",defaultCat=serviceCategories(kind).includes(state.publishPrefillCategory)?state.publishPrefillCategory:serviceCategories(kind)[0];state.publishServiceKind=kind;state.pendingTaskFiles=[];state.pendingTaskPhotoLimit=5;state.taskPhotoSelectionNote="";state.publishStep=1;
+ root.innerHTML=shell(`<section class="publish-screen publish-wizard publish-v46"><div class="publish-head v46"><button class="icon" onclick="go('clientHome')">←</button><h2 id="publishTypeTitle">Nueva tarea</h2><span></span></div><div id="publishWizardProgress">${publishWizardProgress()}</div><div id="formFeedback" class="form-feedback">${authMsg()}</div>
+ <form id="taskForm" novalidate><input id="taskCategoryHidden" type="hidden" name="category" value="${escapeAttr(defaultCat)}"><input name="recurrence_parent_id" type="hidden" value="${escapeAttr(state.nextVisitDraft?.recurrence_parent_id||'')}">
+  <section class="publish-wizard-step active" data-step="1"><div class="publish-eyebrow">Publicar tarea</div><h1 class="publish-title">¿Qué necesitas resolver?</h1><p class="publish-step-copy">Cuéntalo de forma sencilla. Mientras más claro sea, mejores propuestas recibirás.</p>${publishServiceSelector(kind)}<div id="publishCategoryGrid" class="publish-category-grid">${publishCategoryButtons(kind,defaultCat)}</div><div class="publish-card"><div class="pc-icon">${iconSvg("tasks")}</div><div><label>Título</label><input name="title" required maxlength="90" placeholder="Ej. Lavar mi carro"></div></div><div class="publish-card"><div class="pc-icon">${iconSvg("document")}</div><div><label>Descripción</label><textarea name="description" required maxlength="1200" placeholder="Explica qué necesitas, tamaño, condiciones y cualquier detalle importante"></textarea></div></div></section>
   <section class="publish-wizard-step" data-step="2"><div class="publish-eyebrow">Ubicación</div><h1 class="publish-title">¿Dónde se realizará?</h1><p class="publish-step-copy">Antes de contratar mostramos una zona aproximada. Los detalles completos quedan para los participantes.</p><input id="taskLatitude" type="hidden" name="latitude"><input id="taskLongitude" type="hidden" name="longitude"><div class="publish-card publish-location-big"><div class="pc-icon">${iconSvg("location")}</div><div><label>Ciudad, colonia o zona</label><input name="location" required maxlength="160" placeholder="Ej. Centro, Torreón"><button type="button" class="location-use-btn" onclick="useTaskCurrentLocation(this)">${iconSvg("location")} Usar mi ubicación actual</button><div class="geo-note">Tu navegador pedirá permiso. La ubicación ayuda a calcular distancias y no se muestra completa a trabajadores antes de contratar.</div></div></div><label class="wizard-check task-tracking-choice-v56"><input name="tracking_requested" type="checkbox"><span>${iconSvg("route")}</span><span><b>¿Este trabajo requiere ubicación en vivo?</b><small>Úsalo para llevar un automóvil, traslados o entregas. Solo el cliente podrá ver al trabajador mientras él comparta su GPS y la tarea esté activa. No se guarda el recorrido.</small></span></label><div class="wizard-privacy-card">${iconSvg("shield")}<div><b>Privacidad primero</b><p>No escribas números de casa, accesos o instrucciones sensibles si todavía no son necesarias.</p></div></div></section>
-  <section class="publish-wizard-step" data-step="3"><div class="publish-eyebrow">Momento</div><h1 class="publish-title">¿Cuándo lo necesitas?</h1><p class="publish-step-copy">Puedes dejarlo flexible o elegir fecha y hora.</p><div class="publish-two"><div class="publish-card"><div class="pc-icon">${iconSvg("calendar")}</div><div><label>Fecha</label><input name="task_date" type="date"></div></div><div class="publish-card"><div class="pc-icon">${iconSvg("clock")}</div><div><label>Hora</label><input name="task_time" type="time"></div></div></div><label class="urgent-publish-card"><input name="urgent" type="checkbox"><span>${iconSvg("fire")}</span><span><b>Lo necesito ahora</b><small>Destaca la tarea como urgente para trabajadores disponibles.</small></span></label><label class="wizard-check"><input name="license" type="checkbox"><span>${iconSvg("Vehículo")}</span><span><b>Requiere licencia de conducir</b><small>Actívalo solo si la tarea realmente implica conducir.</small></span></label></section>
-  <section class="publish-wizard-step" data-step="4"><div class="publish-eyebrow">Presupuesto</div><h1 class="publish-title">¿Cuánto quieres ofrecer?</h1><p class="publish-step-copy">Los trabajadores todavía pueden enviarte otra propuesta.</p><div class="publish-card budget-focus"><div class="pc-icon">$</div><div><label>Presupuesto</label><input id="taskPriceInput" name="price" type="number" min="1" step="1" required placeholder="180"><div id="priceSuggestion" class="price-suggestion">Calculando precio sugerido…</div></div></div><details class="publish-optional-v50"><summary>Agregar fotos <span>Opcional</span></summary><div class="media-picker"><h3>Fotos de la tarea</h3><p>Agrega fotos solo si ayudan a entender el trabajo.</p><input id="taskPhotosInput" class="media-input" type="file" accept="image/*" multiple onchange="selectTaskPhotos(event)"><button type="button" class="media-add-btn" onclick="document.getElementById('taskPhotosInput').click()">${iconSvg("camera")} Agregar fotos</button><div id="taskPhotoPreview" class="media-preview-list"></div></div></details><details id="vehicleOptions" class="vehicle-custom compact publish-optional-v50"><summary>Personalizar vehículo <span>Opcional</span></summary><div class="vehicle-custom-head"><div><b>Personaliza el vehículo</b><div class="small">Elige tipo y color del icono</div></div><div id="vehiclePreview" class="vehicle-preview">${vehicleSvg("sedan",vehicleColors.graphite)}</div></div><div class="vehicle-style-grid"><label class="vehicle-choice"><input type="radio" name="vehicle_variant" value="sedan" checked onchange="updateVehiclePreview()"><span class="vehicle-style-card">${vehicleSvg("sedan",vehicleColors.graphite)}<b>Auto</b></span></label><label class="vehicle-choice"><input type="radio" name="vehicle_variant" value="suv" onchange="updateVehiclePreview()"><span class="vehicle-style-card">${vehicleSvg("suv",vehicleColors.graphite)}<b>SUV</b></span></label></div><div class="field"><label>Color</label><div class="color-row">${Object.entries(vehicleColors).map(([k,v],i)=>`<label class="color-choice"><input type="radio" name="vehicle_color" value="${k}" ${i===0?"checked":""} onchange="updateVehiclePreview()"><span class="color-dot" style="background:${v}"></span></label>`).join("")}</div></div></details></section>
+  <section class="publish-wizard-step" data-step="3"><div class="publish-eyebrow">Momento</div><h1 class="publish-title">¿Cuándo lo necesitas?</h1><p class="publish-step-copy">Puedes dejarlo flexible o elegir fecha y hora.</p>${recurringScheduleFields(state.nextVisitDraft?.recurrence_frequency||'weekly')}<div class="publish-two"><div class="publish-card"><div class="pc-icon">${iconSvg("calendar")}</div><div><label>Fecha</label><input name="task_date" type="date"></div></div><div class="publish-card"><div class="pc-icon">${iconSvg("clock")}</div><div><label>Hora</label><input name="task_time" type="time"></div></div></div><label class="urgent-publish-card"><input name="urgent" type="checkbox"><span>${iconSvg("fire")}</span><span><b>Lo necesito ahora</b><small>Destaca la tarea como urgente para trabajadores disponibles.</small></span></label><label class="wizard-check"><input name="license" type="checkbox"><span>${iconSvg("Vehículo")}</span><span><b>Requiere licencia de conducir</b><small>Actívalo solo si la tarea realmente implica conducir.</small></span></label></section>
+  <section class="publish-wizard-step" data-step="4"><div class="publish-eyebrow">Presupuesto</div><h1 id="serviceBudgetTitle" class="publish-title">¿Cuánto quieres ofrecer?</h1><p id="serviceBudgetCopy" class="publish-step-copy"></p><div class="publish-card budget-focus"><div class="pc-icon">$</div><div><label id="servicePriceLabel" for="taskPriceInput">Precio del servicio</label><input id="taskPriceInput" name="price" type="number" min="1" step="1" required placeholder="180"><div id="priceSuggestion" class="price-suggestion">Calculando precio sugerido…</div></div></div><details class="publish-optional-v50"><summary>Agregar fotos <span>Opcional</span></summary><div class="media-picker"><h3>Fotos de la tarea</h3><p>Agrega fotos solo si ayudan a entender el trabajo.</p><input id="taskPhotosInput" class="media-input" type="file" accept="image/*" multiple onchange="selectTaskPhotos(event)"><button type="button" class="media-add-btn" onclick="document.getElementById('taskPhotosInput').click()">${iconSvg("camera")} Agregar fotos</button><div id="taskPhotoPreview" class="media-preview-list"></div></div></details><details id="vehicleOptions" class="vehicle-custom compact publish-optional-v50"><summary>Personalizar vehículo <span>Opcional</span></summary><div class="vehicle-custom-head"><div><b>Personaliza el vehículo</b><div class="small">Elige tipo y color del icono</div></div><div id="vehiclePreview" class="vehicle-preview">${vehicleSvg("sedan",vehicleColors.graphite)}</div></div><div class="vehicle-style-grid"><label class="vehicle-choice"><input type="radio" name="vehicle_variant" value="sedan" checked onchange="updateVehiclePreview()"><span class="vehicle-style-card">${vehicleSvg("sedan",vehicleColors.graphite)}<b>Auto</b></span></label><label class="vehicle-choice"><input type="radio" name="vehicle_variant" value="suv" onchange="updateVehiclePreview()"><span class="vehicle-style-card">${vehicleSvg("suv",vehicleColors.graphite)}<b>SUV</b></span></label></div><div class="field"><label>Color</label><div class="color-row">${Object.entries(vehicleColors).map(([k,v],i)=>`<label class="color-choice"><input type="radio" name="vehicle_color" value="${k}" ${i===0?"checked":""} onchange="updateVehiclePreview()"><span class="color-dot" style="background:${v}"></span></label>`).join("")}</div></div></details></section>
   <section class="publish-wizard-step" data-step="5"><div class="publish-eyebrow">Último paso</div><h1 class="publish-title">Revisa antes de publicar</h1><p class="publish-step-copy">Puedes volver a cualquier paso si quieres cambiar algo.</p><div id="publishReview" class="publish-review"></div><div class="publish-final-note">${iconSvg("verify")} <span>Al publicar, los trabajadores podrán ver la descripción, presupuesto, horario y ubicación aproximada de la tarea.</span></div></section>
   <div class="publish-wizard-actions"><button id="publishPrev" type="button" class="wizard-back" onclick="publishWizardNext(-1)">← Atrás</button><button id="publishNext" type="button" class="wizard-next" onclick="publishWizardNext(1)">Continuar →</button><button id="publishTaskButton" class="publish-submit" style="display:none">Publicar tarea</button></div>
- </form></section>`,false);toggleVehicleOptions(defaultCat);loadPriceSuggestion(defaultCat);renderPublishWizardStep()
+ </form></section>`,false);configureServicePublication();restoreNextVisitDraft();toggleVehicleOptions(defaultCat);loadPriceSuggestion(defaultCat);renderPublishWizardStep()
 }
-async function loadPriceSuggestion(cat){const host=document.getElementById("priceSuggestion");if(host)host.textContent="Calculando precio sugerido…";const {data,error}=await sb.rpc("price_suggestion",{p_category:cat});state.priceSuggestion=error?null:data;if(!host)return;if(!data||Number(data.count||0)<3){host.innerHTML=`${iconSvg("info")} Aún no hay suficientes trabajos similares para sugerir un precio.`;return}host.innerHTML=`${iconSvg("trend")} Trabajos similares: <b>${money(data.low)}–${money(data.high)}</b> · típico ${money(data.median)} <button type="button" onclick="document.getElementById('taskPriceInput').value=${Number(data.median||0)}">Usar</button>`}
+async function loadPriceSuggestion(cat){
+ const host=document.getElementById('priceSuggestion');if(!host)return;
+ if(publishServiceKind()==='project'){host.textContent='El precio final será el de la cotización que aceptes.';return}
+ host.textContent=publishServiceKind()==='daily'?'Mínimo $100 por el servicio.':'El monto corresponde a una visita.';
+ try{const {data,error}=await sb.rpc('price_suggestion',{p_category:cat});if(error||!host.isConnected||document.getElementById('taskCategoryHidden')?.value!==cat||publishServiceKind()==='project')return;state.priceSuggestion=data;if(Number(data?.count||0)<3)return;const minimum=publishServiceKind()==='daily'?100:0.01,median=Math.max(minimum,Number(data.median||0));host.innerHTML=`${iconSvg('trend')} Referencia: <b>${money(Math.max(minimum,Number(data.low)))}–${money(Math.max(minimum,Number(data.high)))}</b> <button type="button" onclick="document.getElementById('taskPriceInput').value=${median}">Usar ${money(median)}</button>`}catch{}
+}
+
 function toggleVehicleOptions(category){const el=document.getElementById("vehicleOptions");if(el)el.style.display=category==="Vehículo"?"block":"none"}
 function updateCategoryPreview(category){const el=document.getElementById("categoryPreview");if(!el)return;el.innerHTML=`${iconSvg(category)}<span>${escapeHtml(category)}</span>`}
 function updateVehiclePreview(){const variant=document.querySelector('input[name="vehicle_variant"]:checked')?.value||"sedan";const colorKey=document.querySelector('input[name="vehicle_color"]:checked')?.value||"graphite";const el=document.getElementById("vehiclePreview");if(el)el.innerHTML=vehicleSvg(variant,vehicleColors[colorKey]||vehicleColors.graphite);const cp=document.getElementById("categoryPreview");if(cp)cp.innerHTML=`${vehicleSvg(variant,vehicleColors[colorKey]||vehicleColors.graphite)}<span>Vehículo · ${variant==="suv"?"SUV":"Auto"}</span>`}
@@ -4051,7 +4058,7 @@ async function openWorkerProfile(userId,backRoute='taskDetail'){
 }
 function rehireFromWorker(workerId){state.publishPrefillCategory=state.workerCategories?.[0]||"Otro";state.notice="Publica la nueva tarea. Después podrás compartirla con tu trabajador favorito.";go("createTask")}
 
-async function openInviteWorker(workerId){const {data,error}=await sb.from("tasks").select("id,title,offered_price,category,scheduled_for").eq("client_id",state.user.id).eq("status","open").is("worker_id",null).order("created_at",{ascending:false});if(error)return setMsg("error",error.message);const list=data||[];openProfileSheet("Invitar a un trabajo","El trabajador recibirá una invitación directa.",list.length?`<div class="invite-task-list">${list.map(t=>`<button onclick="sendWorkerInvite('${workerId}','${t.id}',${Number(t.offered_price)})"><span>${taskIcon(t)}</span><span><b>${escapeHtml(t.title)}</b><small>${money(t.offered_price)}</small></span><em>Invitar</em></button>`).join("")}</div>`:`<div class="simple-empty">Primero publica una tarea abierta para poder invitar a este trabajador.</div>`)}
+async function openInviteWorker(workerId){const {data,error}=await sb.from("tasks").select("id,title,offered_price,category,scheduled_for").eq("client_id",state.user.id).eq("status","open").is("worker_id",null).order("created_at",{ascending:false});if(error)return setMsg("error",error.message);const list=data||[];openProfileSheet("Invitar a un trabajo","El trabajador recibirá una invitación directa.",list.length?`<div class="invite-task-list">${list.map(t=>`<button onclick="sendWorkerInvite('${workerId}','${t.id}',${Number(t.offered_price)})"><span>${taskIcon(t)}</span><span><b>${escapeHtml(t.title)}</b><small>${escapeHtml(taskPriceText(t))}</small></span><em>Invitar</em></button>`).join("")}</div>`:`<div class="simple-empty">Primero publica una tarea abierta para poder invitar a este trabajador.</div>`)}
 async function sendWorkerInvite(workerId,taskId,amount){const {error}=await sb.from("task_invitations").upsert({task_id:taskId,client_id:state.user.id,worker_id:workerId,status:"pending",proposed_amount:Number(amount),message:"Me gustaría invitarte a realizar esta tarea.",updated_at:new Date().toISOString()},{onConflict:"task_id,worker_id"});if(error)return setMsg("error",error.message);closeProfileSheet();state.notice="Invitación enviada al trabajador.";render()}
 function workerPortfolioHtml(){if(!state.workerPortfolio?.length)return "";return `<section class="public-portfolio"><div class="task-section-title"><div><h2>Portafolio</h2><div class="sub">Trabajos y resultados compartidos por este trabajador.</div></div></div><div class="portfolio-grid">${state.workerPortfolio.map(x=>`<button onclick="openMediaPhoto(${jsArg(x.url)},${jsArg(x.caption||"Trabajo realizado")})"><img src="${escapeAttr(x.url)}" alt="Trabajo"><span><b>${escapeHtml((x.kind||"resultado").toUpperCase())}</b>${escapeHtml(x.caption||"Trabajo realizado")}</span></button>`).join("")}</div></section>`}
 
@@ -4163,8 +4170,8 @@ if(isOwner&&t.status==="completed")await loadTaskRating(t.id);else state.current
 if(!isOwner&&t.worker_id===state.user.id&&t.status==="completed"&&state.clientRatingTaskId!==t.id)await loadClientRating(t.id);else if(t.status!=="completed"){state.clientRatingTaskId=null;state.currentClientRating=0;state.currentClientReview=""}
 if(state.route!=="taskDetail"||state.selectedTask?.id!==__detailTaskId)return;
 const assignedOffer=currentWorkerFromOffers(t),selectedProfile=assignedOffer?.profiles||null,closed=taskChatClosed(t);
-let body="";
-if(!isOwner&&t.status==="open"){const d=taskDistanceKm(t),score=smartMatchScore(t);if(t.tracking_requested)body+=`<div class="task-tracking-notice-v56">${iconSvg("location")} Esta tarea solicita ubicación en vivo. Si te eligen, podrás activar y detener tu GPS voluntariamente durante el servicio.</div>`;body+=`<section class="opportunity-intel"><div><span class="match-score big">${score}% compatible contigo</span>${opportunityTags(t)}</div><div class="opportunity-intel-grid"><span><small>Pago</small><b>${money(t.offered_price)}</b></span><span><small>Distancia</small><b>${d!=null?distanceLabel(d):"Por calcular"}</b></span><span><small>Cuándo</small><b>${t.scheduled_for?timeText(t.scheduled_for):"Flexible"}</b></span></div></section>`}
+let body=serviceAgreementHtml(t,assignedOffer||state.offers[0]);
+if(!isOwner&&t.status==="open"){const d=taskDistanceKm(t),score=smartMatchScore(t);if(t.tracking_requested)body+=`<div class="task-tracking-notice-v56">${iconSvg("location")} Esta tarea solicita ubicación en vivo. Si te eligen, podrás activar y detener tu GPS voluntariamente durante el servicio.</div>`;body+=`<section class="opportunity-intel"><div><span class="match-score big">${score}% compatible contigo</span>${opportunityTags(t)}</div><div class="opportunity-intel-grid"><span><small>Pago</small><b>${escapeHtml(taskPriceText(t))}</b></span><span><small>Distancia</small><b>${d!=null?distanceLabel(d):"Por calcular"}</b></span><span><small>Cuándo</small><b>${t.scheduled_for?timeText(t.scheduled_for):"Flexible"}</b></span></div></section>`}
 if(!isOwner&&state.clientProfile){
  const cp=state.clientProfile;
  body+=`<div class="task-section-title"><div><h2>Cliente</h2><div class="sub">Información básica y reputación real.</div></div></div><div class="client-profile-card">${workerPhotoTrigger(cp)}<div><h3>${escapeHtml(profileDisplayName(cp))}</h3><p>${prettyRating(cp.client_rating)} ★ · ${Number(cp.client_completed_tasks||0)} tareas completadas</p></div><button onclick="openClientProfile('${cp.id}','taskDetail')">Ver perfil</button></div>`;
@@ -4179,13 +4186,13 @@ if(isOwner&&t.worker_id&&selectedProfile){
  if(t.status==="completed")body+=`<div class="completed-service-v505">${iconSvg("verify")}<div><small>SERVICIO CERRADO</small><b>Trabajo terminado</b><p>La finalización quedó registrada. El trabajador puede consultar el envío de su ganancia en Mis ganancias.</p></div></div>${taskMediaGallery("completion","Evidencia de finalización")}${ratingEditorHtml(t.id,savedRating)}`;
 }
 if(isOwner&&t.status==="open"){
- body+=`<div class="task-section-title"><div><h2>Ofertas recibidas</h2><div class="sub">Acepta una propuesta o negocia un monto distinto.</div></div></div>`;
- body+=state.offers.length?`<div class="cards">${state.offers.map(o=>{const p=o.profiles||{};return `<div class="offer-person-card"><div class="offer-person-head">${avatarMarkup(p)}${workerSummaryHtml(p,{offer:true})}<div class="worker-price">${money(o.amount)}</div></div>${o.message?`<div class="offer-message">${escapeHtml(o.message)}</div>`:""}${o.counter_status==="pending"?`<div class="counter-card"><b>Contraoferta enviada: ${money(o.counter_amount)}</b><p>${escapeHtml(o.counter_message||"Esperando respuesta del trabajador.")}</p></div>`:""}<div class="offer-action-row"><button class="secondary-soft" onclick="openWorkerProfile('${o.worker_id}','taskDetail')">Ver perfil</button><button class="secondary-soft" onclick="openCounterOfferSheet('${o.id}',${Number(o.amount)})">Contraoferta</button><button class="accent-soft" onclick="acceptOffer('${o.id}','${o.worker_id}')">Elegir</button></div></div>`}).join("")}</div>`:`<div class="simple-empty">Aún no hay ofertas.</div>`;
+ body+=`<div class="task-section-title"><div><h2>${serviceKind(t)==='daily'?'Ofertas recibidas':'Cotizaciones recibidas'}</h2><div class="sub">Acepta una propuesta o negocia un monto distinto.</div></div></div>`;
+ body+=state.offers.length?`<div class="cards">${state.offers.map(o=>{const p=o.profiles||{};return `<div class="offer-person-card"><div class="offer-person-head">${avatarMarkup(p)}${workerSummaryHtml(p,{offer:true})}<div class="worker-price">${money(o.amount)}</div></div>${quoteDetailsHtml(o)}${o.message?`<div class="offer-message">${escapeHtml(o.message)}</div>`:""}${o.counter_status==="pending"?`<div class="counter-card"><b>Contraoferta enviada: ${money(o.counter_amount)}</b><p>${escapeHtml(o.counter_message||"Esperando respuesta del trabajador.")}</p></div>`:""}<div class="offer-action-row"><button class="secondary-soft" onclick="openWorkerProfile('${o.worker_id}','taskDetail')">Ver perfil</button><button class="secondary-soft" onclick="openCounterOfferSheet('${o.id}',${Number(o.amount)})">Contraoferta</button><button class="accent-soft" onclick="acceptOffer('${o.id}','${o.worker_id}')">Elegir</button></div></div>`}).join("")}</div>`:`<div class="simple-empty">Aún no hay ofertas.</div>`;
 }else if(!isOwner){
  const my=state.offers[0];
  if(t.status==="open"){
-   if(my)body+=`<div class="ok">Ya ofreciste ${money(my.amount)}. Estado: ${escapeHtml(my.status)}.</div>${my.counter_status==="pending"?`<div class="counter-card"><b>El cliente propone ${money(my.counter_amount)}</b><p>${escapeHtml(my.counter_message||"Puedes aceptar o rechazar esta contraoferta.")}</p><div class="counter-actions"><button class="btn orange" onclick="respondCounterOffer('${my.id}',true)">Aceptar</button><button class="danger-outline" onclick="respondCounterOffer('${my.id}',false)">Rechazar</button></div></div>`:""}`;
-   else body+=`<div class="rating-card offer-choice-v506"><h3>¿Te funciona el precio?</h3><p>Si estás de acuerdo con ${money(t.offered_price)}, puedes aceptarlo tal cual. El cliente todavía deberá elegirte para asignarte la tarea.</p><button class="btn primary quick-accept-v506" onclick="acceptPostedPrice('${t.id}',${Number(t.offered_price)},this)">${iconSvg("verify")} Aceptar ${money(t.offered_price)}</button><div class="offer-or-v506"><span></span><b>o</b><span></span></div><details class="alternate-offer-v506"><summary>Proponer otro precio</summary><form id="offerForm"><div class="field"><label>Tu precio</label><input class="input" name="amount" type="number" min="1" value="${Number(t.offered_price)}" required></div><div class="field"><label>Mensaje <small>Opcional</small></label><textarea name="message" placeholder="Ej. Puedo hacerlo hoy por la tarde"></textarea></div><button class="btn ghost">Enviar otra oferta</button></form></details></div>`;
+   if(my)body+=`${quoteDetailsHtml(my)}<div class="ok">Ya ofreciste ${money(my.amount)}. Estado: ${escapeHtml(my.status)}.</div>${my.counter_status==="pending"?`<div class="counter-card"><b>El cliente propone ${money(my.counter_amount)}</b><p>${escapeHtml(my.counter_message||"Puedes aceptar o rechazar esta contraoferta.")}</p><div class="counter-actions"><button class="btn orange" onclick="respondCounterOffer('${my.id}',true)">Aceptar</button><button class="danger-outline" onclick="respondCounterOffer('${my.id}',false)">Rechazar</button></div></div>`:""}`;
+   else body+=serviceOfferChoice(t);
  }else if(t.worker_id===state.user.id){
    body+=taskProgressButtons(t);
    if(t.status==="completed")body+=`<div class="worker-completed-v507">${iconSvg("verify")}<div><small>EL CLIENTE CONFIRMÓ</small><b>Trabajo terminado</b><p>${state.currentClientRating?"Ya calificaste al cliente. Puedes editar tu opinión si lo necesitas.":"Califica al cliente para ayudar a otros trabajadores."}</p></div><button onclick="scrollToClientRating('${t.id}')">${state.currentClientRating?"Editar calificación":"Calificar cliente"}</button></div>`+taskMediaGallery("completion","Evidencia de finalización")+clientRatingEditorHtml(t.id);
@@ -4194,7 +4201,7 @@ if(isOwner&&t.status==="open"){
 if((t.client_id===state.user.id||t.worker_id===state.user.id)&&t.worker_id&&closed)body+=`<div class="task-mini-actions"><button class="task-inline-delete" onclick="deleteConversation('${t.id}',true)">${iconSvg("trash")} Borrar conversación</button></div>`;
 const statusCls=t.status==="open"?"pending":(t.status==="in_progress"&&t.completion_requested_at?"awaiting":"");
 const assignedCompact=!!t.worker_id&&!["open","cancelled"].includes(t.status);
-root.innerHTML=shell(`<section class="screen"><div class="detail-shell"><div class="detail-topline"><button class="icon" onclick="go('${state.taskBackRoute||(isOwner?"clientHome":"workerHome")}')">←</button><span class="detail-category-pill">${taskIcon(t)} ${escapeHtml(baseCategory(t.category))}</span><span></span></div>${authMsg()}<div class="detail-card detail-card-compact"><div class="detail-icon-box">${taskIcon(t)}</div><div class="detail-money">${money(t.offered_price)}</div><h1 class="detail-title">${escapeHtml(t.title)}</h1><p class="detail-copy">${escapeHtml(t.description)}</p><span class="detail-location">${iconSvg("location")}<span>${(!isOwner&&t.status==="open")?"Ubicación aproximada":escapeHtml(t.location_label||"Sin ubicación")}${!isOwner&&taskDistanceKm(t)!=null?` · ${distanceLabel(taskDistanceKm(t))} de ti`:""}</span></span>${taskMediaGallery("request","Fotos de la tarea")}</div>${assignedCompact?workCenterHtml(t,isOwner)+taskOperationalLocationHtml(t):taskLocationCard(t)}${taskLiveSectionHtml(t,isOwner)}${assignedCompact?"":`<div class="status-banner ${statusCls}"><span class="dot"></span><span>${taskStatusLabel(t)}</span></div>${taskJourneyCard(t,isOwner)}${timelineHtml(t)}${taskQuestionsHtml(t,isOwner)}`}${isOwner&&t.status==="open"&&!t.worker_id?`<button class="edit-task-btn" onclick="go('editTask')">Editar tarea</button>`:""}${!assignedCompact&&t.status==="cancelled"&&t.cancellation_reason?`<div class="policy-note"><b>Motivo de cancelación:</b> ${escapeHtml(t.cancellation_reason)}</div>`:""}${!assignedCompact&&(t.client_id===state.user.id||t.worker_id===state.user.id)&&t.worker_id&&!closed?`<button class="chat-cta-btn" onclick="openChat('${t.id}')"><span class="left">${iconSvg("chat")}<span>Abrir chat</span></span><span>›</span></button>`:""}${body}${assignedCompact?taskMoreDetailsHtml(t,isOwner):""}${participantCanCancel(t)?`<button class="cancel-task-btn compact-cancel" onclick="openCancelTaskSheet('${t.id}')">Cancelar tarea</button>`:""}${!assignedCompact&&t.worker_id&&otherParticipantId(t)?`<div class="safety-card"><h3>Seguridad</h3><p>Reporta conductas inapropiadas o bloquea a la otra persona si es necesario.</p><div class="safety-actions"><button class="safety-btn" onclick="openUserReportSheet('${t.id}')">${iconSvg("flag")} Reportar</button><button class="safety-btn danger" onclick="blockOtherUser('${t.id}')">${iconSvg("shield")} Bloquear</button></div></div>`:""}</div></section>`,true);renderCompletionEvidencePreview();if(t.tracking_requested&&t.worker_id&&["assigned","in_progress"].includes(t.status))setTimeout(()=>initTaskLiveMap(t.id),80)
+root.innerHTML=shell(`<section class="screen"><div class="detail-shell"><div class="detail-topline"><button class="icon" onclick="go('${state.taskBackRoute||(isOwner?"clientHome":"workerHome")}')">←</button><span class="detail-category-pill">${taskIcon(t)} ${escapeHtml(baseCategory(t.category))}</span><span></span></div>${authMsg()}<div class="detail-card detail-card-compact"><div class="detail-icon-box">${taskIcon(t)}</div><div class="detail-money">${escapeHtml(taskPriceText(t))}</div><h1 class="detail-title">${escapeHtml(t.title)}</h1><p class="detail-copy">${escapeHtml(t.description)}</p><span class="detail-location">${iconSvg("location")}<span>${(!isOwner&&t.status==="open")?"Ubicación aproximada":escapeHtml(t.location_label||"Sin ubicación")}${!isOwner&&taskDistanceKm(t)!=null?` · ${distanceLabel(taskDistanceKm(t))} de ti`:""}</span></span>${taskMediaGallery("request","Fotos de la tarea")}</div>${assignedCompact?workCenterHtml(t,isOwner)+taskOperationalLocationHtml(t):taskLocationCard(t)}${taskLiveSectionHtml(t,isOwner)}${assignedCompact?"":`<div class="status-banner ${statusCls}"><span class="dot"></span><span>${taskStatusLabel(t)}</span></div>${taskJourneyCard(t,isOwner)}${timelineHtml(t)}${taskQuestionsHtml(t,isOwner)}`}${isOwner&&t.status==="open"&&!t.worker_id?`<button class="edit-task-btn" onclick="go('editTask')">Editar tarea</button>`:""}${!assignedCompact&&t.status==="cancelled"&&t.cancellation_reason?`<div class="policy-note"><b>Motivo de cancelación:</b> ${escapeHtml(t.cancellation_reason)}</div>`:""}${!assignedCompact&&(t.client_id===state.user.id||t.worker_id===state.user.id)&&t.worker_id&&!closed?`<button class="chat-cta-btn" onclick="openChat('${t.id}')"><span class="left">${iconSvg("chat")}<span>Abrir chat</span></span><span>›</span></button>`:""}${body}${assignedCompact?taskMoreDetailsHtml(t,isOwner):""}${participantCanCancel(t)?`<button class="cancel-task-btn compact-cancel" onclick="openCancelTaskSheet('${t.id}')">Cancelar tarea</button>`:""}${!assignedCompact&&t.worker_id&&otherParticipantId(t)?`<div class="safety-card"><h3>Seguridad</h3><p>Reporta conductas inapropiadas o bloquea a la otra persona si es necesario.</p><div class="safety-actions"><button class="safety-btn" onclick="openUserReportSheet('${t.id}')">${iconSvg("flag")} Reportar</button><button class="safety-btn danger" onclick="blockOtherUser('${t.id}')">${iconSvg("shield")} Bloquear</button></div></div>`:""}</div></section>`,true);renderCompletionEvidencePreview();if(t.tracking_requested&&t.worker_id&&["assigned","in_progress"].includes(t.status))setTimeout(()=>initTaskLiveMap(t.id),80)
 }
 
 
@@ -4415,12 +4422,12 @@ function taskProgressButtons(t){
  if(t.status==="in_progress"&&t.completion_requested_at)return taskMediaGallery("completion","Evidencia enviada");
  return `<div class="ok">Trabajo ${statusText(t.status).toLowerCase()}.</div>`
 }
-function openCounterOfferSheet(offerId,amount){openProfileSheet("Enviar contraoferta","Propón un monto diferente al trabajador.",`<form class="profile-inline-form" onsubmit="submitCounterOffer(event,'${offerId}')"><label>Nuevo monto</label><input name="amount" type="number" min="1" value="${Number(amount||0)}" required><label>Mensaje</label><textarea name="message" maxlength="300" placeholder="Ej. ¿Podrías hacerlo por este monto?"></textarea><button class="btn primary">Enviar contraoferta</button></form>`)}
+function openCounterOfferSheet(offerId,amount){openProfileSheet("Enviar contraoferta","Propón un monto diferente al trabajador.",`<form class="profile-inline-form" onsubmit="submitCounterOffer(event,'${offerId}')"><label>Nuevo monto</label><input name="amount" type="number" min="${taskMinimumPrice(state.selectedTask)}" step="0.01" value="${Number(amount||0)}" required><label>Mensaje</label><textarea name="message" maxlength="300" placeholder="Ej. ¿Podrías hacerlo por este monto?"></textarea><button class="btn primary">Enviar contraoferta</button></form>`)}
 async function submitCounterOffer(e,offerId){e.preventDefault();const f=new FormData(e.target),{error}=await sb.rpc("counter_task_offer",{p_offer_id:offerId,p_amount:Number(f.get("amount")),p_message:f.get("message")||null});closeProfileSheet();if(error)return setMsg("error",error.message);await loadOffers(state.selectedTask.id);state.notice="Contraoferta enviada.";render()}
 async function respondCounterOffer(offerId,accept){const {data,error}=await sb.rpc("respond_counter_offer",{p_offer_id:offerId,p_accept:!!accept});if(error)return setMsg("error",error.message);state.selectedTask=Array.isArray(data)?data[0]:data;await loadMyOffer(state.selectedTask.id);if(accept)state.workerTaskTab="active";state.notice=accept?"Contraoferta aceptada. El trabajo ya está en Trabajos > Activos.":"Contraoferta rechazada.";render()}
 async function markTaskEnRoute(id){return runOnce("route:"+id,async()=>{const {data,error}=await sb.rpc("mark_task_en_route",{p_task_id:id});if(error)return setMsg("error",error.message);state.selectedTask=Array.isArray(data)?data[0]:data;state.notice="Avisamos al cliente que vas en camino.";render();setTimeout(()=>showSuccessMoment('¡Vas en camino!','El cliente ya recibió el cambio de estado.'),100)})}
 async function markTaskArrived(id){return runOnce("arrived:"+id,async()=>{const {data,error}=await sb.rpc("mark_task_arrived",{p_task_id:id});if(error)return setMsg("error",error.message);state.selectedTask=Array.isArray(data)?data[0]:data;state.notice="Avisamos al cliente que llegaste.";render();setTimeout(()=>showSuccessMoment('Llegada registrada','Ya pueden comenzar cuando estén listos.','orange'),100)})}
-async function editTaskScreen(){const t=state.selectedTask;if(!t||t.client_id!==state.user.id||t.status!=="open"||t.worker_id){state.notice="Esta tarea ya no se puede editar.";go("taskDetail");return}await loadPrivateTaskLocation(t);await loadTaskMedia(t.id);if(state.route!=='editTask'||state.selectedTask?.id!==t.id)return;state.pendingTaskFiles=[];state.pendingTaskPhotoLimit=Math.max(0,5-state.taskMedia.filter(m=>m.kind==="request").length);state.taskPhotoSelectionNote="";root.innerHTML=shell(`<section class="publish-screen"><div class="publish-head"><button class="icon" onclick="go('taskDetail')">←</button>${logo(true)}<span></span></div><div class="publish-eyebrow">Editar tarea</div><h1 class="publish-title">Actualiza los detalles</h1>${authMsg()}<div id="formFeedback" class="form-feedback"></div><form id="editTaskForm"><div class="publish-card"><div class="pc-icon">${iconSvg("tasks")}</div><div><label>Título</label><input name="title" value="${escapeAttr(t.title)}" required></div></div><div class="publish-card"><div class="pc-icon">${iconSvg("tasks")}</div><div><label>Descripción</label><textarea name="description" required>${escapeHtml(t.description)}</textarea></div></div><div class="publish-card" style="grid-template-columns:42px 1fr"><div class="pc-icon">${iconSvg("tasks")}</div><div><label>Categoría</label><select name="category">${categories.map(c=>`<option value="${escapeAttr(c)}" ${c===baseCategory(t.category)?"selected":""}>${escapeHtml(c)}</option>`).join("")}</select></div></div><input id="taskLatitude" type="hidden" name="latitude" value="${t.latitude??""}"><input id="taskLongitude" type="hidden" name="longitude" value="${t.longitude??""}"><div class="publish-two"><div class="publish-card" style="grid-template-columns:42px 1fr"><div class="pc-icon">${iconSvg("location")}</div><div><label>Ubicación</label><input name="location" value="${escapeAttr(t.location_label||"")}" required><button type="button" class="location-use-btn" onclick="useTaskCurrentLocation(this)">${iconSvg("location")} Usar mi ubicación actual</button></div></div><div class="publish-card" style="grid-template-columns:42px 1fr"><div class="pc-icon">$</div><div><label>Presupuesto</label><input name="price" type="number" min="1" value="${Number(t.offered_price)}" required></div></div></div><div class="publish-two"><div class="publish-card" style="grid-template-columns:42px 1fr"><div class="pc-icon">${iconSvg("calendar")}</div><div><label>Fecha</label><input name="task_date" type="date" value="${localDateValue(t.scheduled_for)}"></div></div><div class="publish-card" style="grid-template-columns:42px 1fr"><div class="pc-icon">${iconSvg("clock")}</div><div><label>Hora</label><input name="task_time" type="time" value="${localTimeValue(t.scheduled_for)}"></div></div></div><label class="card" style="display:flex;gap:10px;align-items:center;margin:10px 0"><input name="license" type="checkbox" ${t.requires_driver_license?"checked":""}> Requiere licencia de conducir</label><div class="media-picker"><h3>Agregar más fotos</h3><p>${state.pendingTaskPhotoLimit?`Puedes agregar hasta ${state.pendingTaskPhotoLimit} fotos nuevas (máximo 5 por tarea).`:"Esta tarea ya tiene las 5 fotos permitidas."}</p><input id="taskPhotosInput" class="media-input" type="file" accept="image/*" multiple onchange="selectTaskPhotos(event)"><button type="button" class="media-add-btn" onclick="document.getElementById('taskPhotosInput').click()">${iconSvg("camera")} Agregar fotos</button><div id="taskPhotoPreview" class="media-preview-list"></div></div><button class="publish-submit">Guardar cambios</button></form></section>`,true);bindForms()}
+async function editTaskScreen(){const t=state.selectedTask;if(!t||t.client_id!==state.user.id||t.status!=="open"||t.worker_id){state.notice="Esta tarea ya no se puede editar.";go("taskDetail");return}await loadPrivateTaskLocation(t);await loadTaskMedia(t.id);if(state.route!=='editTask'||state.selectedTask?.id!==t.id)return;state.pendingTaskFiles=[];state.pendingTaskPhotoLimit=Math.max(0,5-state.taskMedia.filter(m=>m.kind==="request").length);state.taskPhotoSelectionNote="";root.innerHTML=shell(`<section class="publish-screen"><div class="publish-head"><button class="icon" onclick="go('taskDetail')">←</button>${logo(true)}<span></span></div><div class="publish-eyebrow">Editar tarea</div><h1 class="publish-title">Actualiza los detalles</h1>${authMsg()}<div id="formFeedback" class="form-feedback"></div><form id="editTaskForm">${serviceEditFields(t)}<div class="publish-card"><div class="pc-icon">${iconSvg("tasks")}</div><div><label>Título</label><input name="title" value="${escapeAttr(t.title)}" required></div></div><div class="publish-card"><div class="pc-icon">${iconSvg("tasks")}</div><div><label>Descripción</label><textarea name="description" required>${escapeHtml(t.description)}</textarea></div></div><div class="publish-card" style="grid-template-columns:42px 1fr"><div class="pc-icon">${iconSvg("tasks")}</div><div><label>Categoría</label><select name="category">${categories.map(c=>`<option value="${escapeAttr(c)}" ${c===baseCategory(t.category)?"selected":""}>${escapeHtml(c)}</option>`).join("")}</select></div></div><input id="taskLatitude" type="hidden" name="latitude" value="${t.latitude??""}"><input id="taskLongitude" type="hidden" name="longitude" value="${t.longitude??""}"><div class="publish-two"><div class="publish-card" style="grid-template-columns:42px 1fr"><div class="pc-icon">${iconSvg("location")}</div><div><label>Ubicación</label><input name="location" value="${escapeAttr(t.location_label||"")}" required><button type="button" class="location-use-btn" onclick="useTaskCurrentLocation(this)">${iconSvg("location")} Usar mi ubicación actual</button></div></div><div class="publish-card" style="grid-template-columns:42px 1fr"><div class="pc-icon">$</div><div><label>${serviceKind(t)==='project'?'Presupuesto estimado (opcional)':serviceKind(t)==='recurring'?'Precio por visita':'Precio del servicio'}</label><input name="price" type="number" step="0.01" min="${serviceKind(t)==='project'?0:taskMinimumPrice(t)}" value="${Number(t.offered_price)}" ${serviceKind(t)==='project'?'':'required'}></div></div></div><div class="publish-two"><div class="publish-card" style="grid-template-columns:42px 1fr"><div class="pc-icon">${iconSvg("calendar")}</div><div><label>Fecha</label><input name="task_date" type="date" value="${localDateValue(t.scheduled_for)}"></div></div><div class="publish-card" style="grid-template-columns:42px 1fr"><div class="pc-icon">${iconSvg("clock")}</div><div><label>Hora</label><input name="task_time" type="time" value="${localTimeValue(t.scheduled_for)}"></div></div></div><label class="card" style="display:flex;gap:10px;align-items:center;margin:10px 0"><input name="license" type="checkbox" ${t.requires_driver_license?"checked":""}> Requiere licencia de conducir</label><div class="media-picker"><h3>Agregar más fotos</h3><p>${state.pendingTaskPhotoLimit?`Puedes agregar hasta ${state.pendingTaskPhotoLimit} fotos nuevas (máximo 5 por tarea).`:"Esta tarea ya tiene las 5 fotos permitidas."}</p><input id="taskPhotosInput" class="media-input" type="file" accept="image/*" multiple onchange="selectTaskPhotos(event)"><button type="button" class="media-add-btn" onclick="document.getElementById('taskPhotosInput').click()">${iconSvg("camera")} Agregar fotos</button><div id="taskPhotoPreview" class="media-preview-list"></div></div><button class="publish-submit">Guardar cambios</button></form></section>`,true);bindForms()}
 async function saveEditTask(e){
  e.preventDefault();if(state.editTaskBusy)return;
  const form=e.target,t=state.selectedTask,btn=form.querySelector('.publish-submit');
@@ -4428,7 +4435,7 @@ async function saveEditTask(e){
  state.editTaskBusy=true;if(btn){btn.disabled=true;btn.textContent='Guardando…'}
  try{
   const f=new FormData(form),d=f.get('task_date'),tm=f.get('task_time'),scheduled=d?new Date(`${d}T${tm||'12:00'}:00`).toISOString():null,base=f.get('category'),category=base==='Vehículo'?encodeCategory('Vehículo',taskMeta(t.category).variant,taskMeta(t.category).colorKey):base;
-  const {data,error}=await sb.rpc('edit_open_task',{p_task_id:t.id,p_title:f.get('title'),p_description:f.get('description'),p_category:category,p_offered_price:Number(f.get('price')),p_location_label:f.get('location'),p_latitude:f.get('latitude')?Number(f.get('latitude')):null,p_longitude:f.get('longitude')?Number(f.get('longitude')):null,p_scheduled_for:scheduled,p_requires_driver_license:f.get('license')==='on'});
+  const {data,error}=await sb.rpc('edit_service_task',{p_task_id:t.id,p_title:f.get('title'),p_description:f.get('description'),p_category:category,p_offered_price:Number(f.get('price')),p_location_label:f.get('location'),p_latitude:f.get('latitude')?Number(f.get('latitude')):null,p_longitude:f.get('longitude')?Number(f.get('longitude')):null,p_scheduled_for:scheduled,p_requires_driver_license:f.get('license')==='on',p_recurrence_frequency:serviceKind(t)==='recurring'?f.get('recurrence_frequency'):null});
   if(error)throw error;
   state.selectedTask=Array.isArray(data)?data[0]:data;
   let notice='';try{if(state.pendingTaskFiles.length)await uploadTaskMedia(t.id,state.pendingTaskFiles)}catch(err){notice='Los cambios se guardaron, pero alguna foto no pudo subirse.'}
@@ -4454,7 +4461,7 @@ function agendaScreen(){
 }
 function agendaTaskCard(t){
  const dt=t.scheduled_for?new Date(t.scheduled_for):null;
- return `<button class="agenda-task" onclick="openTask('${t.id}')"><span class="agenda-task-time">${dt?dt.toLocaleTimeString("es-MX",{hour:"2-digit",minute:"2-digit"}):"Flexible"}</span><span class="agenda-task-icon">${taskIcon(t)}</span><span><b>${escapeHtml(t.title)}</b><small>${money(t.offered_price)} · ${escapeHtml(baseCategory(t.category))}</small></span><em>›</em></button>`
+ return `<button class="agenda-task" onclick="openTask('${t.id}')"><span class="agenda-task-time">${dt?dt.toLocaleTimeString("es-MX",{hour:"2-digit",minute:"2-digit"}):"Flexible"}</span><span class="agenda-task-icon">${taskIcon(t)}</span><span><b>${escapeHtml(t.title)}</b><small>${escapeHtml(taskPriceText(t))} · ${escapeHtml(baseCategory(t.category))}</small></span><em>›</em></button>`
 }
 
 function earningsMoney(value){return new Intl.NumberFormat("es-MX",{style:"currency",currency:"MXN",minimumFractionDigits:2}).format(Number(value||0))}
@@ -5266,7 +5273,7 @@ if(error)return setMsg("error",error.message);await loadProfile();state.notice="
 async function publishTask(e){
  e.preventDefault();if(state.publishBusy)return;
  if(state.publishStep<5){publishWizardNext(1);return}
- for(const step of [1,2,4]){
+ for(const step of [1,2,3,4]){
   state.publishStep=step;renderPublishWizardStep();
   if(!publishStepValid(step))return;
  }
@@ -5276,9 +5283,9 @@ async function publishTask(e){
  if(btn){btn.disabled=true;btn.textContent='Publicando…'}
  let createdTask=null;
  try{
-  const f=new FormData(form),d=f.get('task_date'),tm=f.get('task_time');
-  const args={p_title:String(f.get('title')||'').trim(),p_description:String(f.get('description')||'').trim(),p_category:encodeCategory(f.get('category'),f.get('vehicle_variant'),f.get('vehicle_color')),p_offered_price:Number(f.get('price')),p_location_label:String(f.get('location')||'').trim(),p_latitude:f.get('latitude')?Number(f.get('latitude')):null,p_longitude:f.get('longitude')?Number(f.get('longitude')):null,p_scheduled_for:d?new Date(`${d}T${tm||'12:00'}:00`).toISOString():null,p_requires_driver_license:f.get('license')==='on',p_tracking_requested:f.get('tracking_requested')==='on'};
-  const {data,error}=await sb.rpc('create_task_with_tracking',args);if(error)throw error;
+  const f=new FormData(form),d=f.get('task_date'),tm=f.get('task_time'),kind=publishServiceKind();
+  const args={p_title:String(f.get('title')||'').trim(),p_description:String(f.get('description')||'').trim(),p_category:encodeCategory(f.get('category'),f.get('vehicle_variant'),f.get('vehicle_color')),p_offered_price:Number(f.get('price')),p_location_label:String(f.get('location')||'').trim(),p_latitude:f.get('latitude')?Number(f.get('latitude')):null,p_longitude:f.get('longitude')?Number(f.get('longitude')):null,p_scheduled_for:d?new Date(`${d}T${tm||'12:00'}:00`).toISOString():null,p_requires_driver_license:f.get('license')==='on',p_tracking_requested:f.get('tracking_requested')==='on',p_service_kind:kind,p_recurrence_frequency:kind==='recurring'?f.get('recurrence_frequency'):null,p_recurrence_parent_id:f.get('recurrence_parent_id')||null};
+  const {data,error}=await sb.rpc('create_service_task',args);if(error)throw error;
   createdTask=Array.isArray(data)?data[0]:data;if(!createdTask?.id)throw Error('No recibimos la confirmación de la tarea.');
   state.selectedTask=createdTask;
   let notice='';
@@ -5287,14 +5294,14 @@ async function publishTask(e){
    if(f.get('urgent')==='on'){const {error:priorityError}=await sb.from('task_priority').upsert({task_id:createdTask.id,client_id:state.user.id,is_urgent:true});if(priorityError)throw priorityError}
    if(state.pendingTaskFiles.length)await uploadTaskMedia(createdTask.id,state.pendingTaskFiles);
   }catch(err){notice='La tarea ya está publicada. Revisa sus detalles: alguna foto o dato adicional no pudo guardarse.'}
-  state.pendingTaskFiles=[];state.publishPrefillCategory='';
+  state.pendingTaskFiles=[];state.publishPrefillCategory='';state.nextVisitDraft=null;
   trackEvent('task_published',{category:baseCategory(createdTask.category),urgent:f.get('urgent')==='on'},createdTask.id);
   if(state.route==='createTask')go('taskDetail');
   state.notice=notice;state.error='';
   setTimeout(()=>showSuccessMoment('¡Tarea publicada!','Ahora los trabajadores pueden enviarte propuestas.','orange'),120);
  }catch(err){
   if(state.route==='createTask')formFeedback(form,'error','No pudimos publicar la tarea. '+friendlyError(err?.message||err));
- }finally{state.publishBusy=false;if(btn?.isConnected){btn.disabled=false;btn.textContent='Publicar tarea'}}
+ }finally{state.publishBusy=false;if(btn?.isConnected){btn.disabled=false;btn.textContent=SERVICE_TYPES[publishServiceKind()].action}}
 }
 async function loadMyTasks(){const {data,error}=await sb.from("tasks").select("*").eq("client_id",state.user.id).order("created_at",{ascending:false});state.tasks=error?[]:(data||[]);await hydrateTaskPriorities(state.tasks)}
 async function loadOpenTasks(){const {data,error}=await sb.rpc('browse_open_tasks');state.tasks=error?[]:(data||[]);if(!error)await hydrateTaskPriorities(state.tasks);if(error)state.error='No pudimos cargar las tareas: '+error.message}
@@ -5317,7 +5324,7 @@ await sb.from('notifications').update({read_at:new Date().toISOString()}).eq('us
 await loadNotificationSummary();go('taskDetail')
 }
 async function loadOffers(taskId){
-const {data,error}=await sb.from("task_offers").select("id,task_id,worker_id,amount,message,status,created_at,counter_amount,counter_message,counter_status,countered_at,profiles!task_offers_worker_id_fkey(id,full_name,last_name,avatar_url,rating,completed_tasks,identity_verified,phone_verified,driver_license_verified)").eq("task_id",taskId).order("created_at",{ascending:true});
+const {data,error}=await sb.from("task_offers").select("id,task_id,worker_id,amount,message,status,created_at,counter_amount,counter_message,counter_status,countered_at,quote_scope,quote_materials,quote_timeline,quote_stages,profiles!task_offers_worker_id_fkey(id,full_name,last_name,avatar_url,rating,completed_tasks,identity_verified,phone_verified,driver_license_verified)").eq("task_id",taskId).order("created_at",{ascending:true});
 if(error){state.offers=[];return}
 state.offers=await Promise.all((data||[]).map(async o=>({...o,profiles:await resolveAvatar(o.profiles)})))
 }
@@ -5346,16 +5353,17 @@ async function acceptPostedPrice(taskId,amount,btn=null){
  })
 }
 async function sendOffer(e){
-e.preventDefault();if(state.offerBusy)return;state.offerBusy=true;
-const btn=e.submitter||e.target.querySelector('button[type="submit"],button:not([type])');if(btn){btn.disabled=true;btn.textContent="Enviando…"}
-try{
- const f=new FormData(e.target);
- const {error}=await sb.rpc("submit_task_offer",{p_task_id:state.selectedTask.id,p_amount:Number(f.get("amount")),p_message:f.get("message")||null});
- if(error)throw error;
- await loadMyOffer(state.selectedTask.id);await trackEvent("offer_sent",{amount:Number(f.get("amount"))},state.selectedTask.id);state.workerTaskTab="proposals";state.notice="Propuesta enviada. La encontrarás en Mis tareas > Propuestas.";state.error="";render();setTimeout(()=>showSuccessMoment("Propuesta guardada","Puedes seguirla en Mis tareas > Propuestas."),100)
-}catch(err){state.error="No pudimos enviar la oferta: "+(err?.message||err);render()}
-finally{state.offerBusy=false}
+ e.preventDefault();if(state.offerBusy)return;
+ const form=e.target,t=state.selectedTask;if(!t||t.status!=='open')return;if(!form.reportValidity())return;
+ const btn=form.querySelector('button[type="submit"],button:not([type])'),note=document.getElementById('offerFeedback');state.offerBusy=true;if(btn){btn.disabled=true;btn.textContent='Enviando…'}
+ try{const f=new FormData(form),amount=Number(f.get('amount'));if(!Number.isFinite(amount)||amount<taskMinimumPrice(t))throw Error(`El mínimo para este servicio es ${moneyExact(taskMinimumPrice(t))}.`);
+ const {error}=await sb.rpc('submit_service_quote',{p_task_id:t.id,p_amount:amount,p_message:f.get('message')||null,p_quote_scope:f.get('quote_scope')||null,p_quote_materials:f.get('quote_materials')||null,p_quote_timeline:f.get('quote_timeline')||null,p_quote_stages:f.get('quote_stages')||null});if(error)throw error;
+ if(state.selectedTask?.id!==t.id||state.route!=='taskDetail')return;
+ await loadMyOffer(t.id);trackEvent('offer_sent',{amount,service_kind:serviceKind(t)},t.id);state.workerTaskTab='proposals';state.notice=serviceKind(t)==='daily'?'Propuesta enviada.':'Cotización enviada.';state.error='';render();
+ }catch(err){if(note?.isConnected){note.textContent='No pudimos enviar la propuesta. '+friendlyError(err?.message||err);note.setAttribute('role','alert')}}
+ finally{state.offerBusy=false;if(btn?.isConnected){btn.disabled=false;btn.textContent=serviceKind(t)==='daily'?'Enviar otra oferta':'Enviar cotización'}}
 }
+
 async function acceptOffer(offerId,workerId){return runOnce("accept:"+offerId,async()=>{
 const tid=state.selectedTask.id;const {data,error}=await sb.rpc('accept_task_offer',{p_offer_id:offerId});
 if(error)return setMsg("error",error.message);state.selectedTask=Array.isArray(data)?data[0]:data;await trackEvent("offer_accepted",{},tid);state.notice="Trabajador seleccionado. Completa el pago para habilitar el trabajo.";state.clientTaskFilter="active";await Promise.all([loadOffers(tid),loadTaskPayment(tid)]);render();setTimeout(()=>openProfileSheet("Pago requerido","El trabajador ya fue elegido. Para proteger a ambas partes, el trabajo no puede comenzar hasta confirmar el pago.",`<div class="payment-gate-sheet">${iconSvg("shield")}<p>Tu pago queda asociado a esta tarea. Al confirmarse, el trabajador podrá marcar “Voy en camino”.</p><button class="btn primary" onclick="closeProfileSheet();startTaskCheckout('${tid}')">Pagar ahora</button><button class="btn ghost" onclick="closeProfileSheet()">Pagar después</button></div>`),120)
@@ -5465,14 +5473,15 @@ sb.auth.onAuthStateChange((_event,session)=>{
 window.DOHoyBuild=DOHOY_VERSION;
 const DOHOY_VAPID_PUBLIC="BIqp0MxIqy8rJPGj8mCRF-P_FwaMWgRMKSR_x6AazRKylHNhyT3NEPjNODKzvsSyIpt6OE3BUQXEz8-OkV-k14E";
 // DOHOY 4.4.0 — pago obligatorio antes del trabajo, rendimiento, layout móvil y barras sin solaparse.
-const DEFAULT_FILTERS={query:'',category:'',minPrice:0,maxDistance:null,todayOnly:false,vehicleOnly:false,notifyMatching:true};
+const DEFAULT_FILTERS={query:'',category:'',minPrice:0,maxDistance:null,todayOnly:false,vehicleOnly:false,notifyMatching:true,serviceKind:''};
 function workerFilterState(){if(!state.workerFilters)state.workerFilters={...DEFAULT_FILTERS};return state.workerFilters}
 function searchStorageKey(){return 'dohoy_search_'+(state.user?.id||'guest')}
 async function loadSearchPreferences(){
  if(state.searchPreferencesLoadedFor===state.user.id)return;state.searchPreferencesLoadedFor=state.user.id;
  const saved=localStorage.getItem(searchStorageKey());try{state.workerFilters={...DEFAULT_FILTERS,...JSON.parse(saved||'{}')}}catch{state.workerFilters={...DEFAULT_FILTERS}}
  const {data,error}=await sb.from('worker_preferences').select('*').eq('user_id',state.user.id).maybeSingle();
- if(!error&&data){state.workerFilters={...state.workerFilters,minPrice:Number(data.min_price||0),maxDistance:data.max_distance_km==null?null:Number(data.max_distance_km),todayOnly:!!data.today_only,vehicleOnly:!!data.requires_license_only,category:data.categories?.[0]||'',notifyMatching:!!data.notify_matching,query:data.search_text??state.workerFilters.query};state.savedSearchOrigin=data.origin_latitude==null?state.savedSearchOrigin:{latitude:data.origin_latitude,longitude:data.origin_longitude}}
+ state.workerServiceKinds=Object.keys(SERVICE_TYPES);
+ if(!error&&data){state.workerServiceKinds=data.service_kinds?.length?data.service_kinds:Object.keys(SERVICE_TYPES);state.workerFilters={...state.workerFilters,minPrice:Number(data.min_price||0),maxDistance:data.max_distance_km==null?null:Number(data.max_distance_km),todayOnly:!!data.today_only,vehicleOnly:!!data.requires_license_only,category:data.categories?.[0]||'',notifyMatching:!!data.notify_matching,query:data.search_text??state.workerFilters.query,serviceKind:data.service_kind||state.workerFilters.serviceKind||''};state.savedSearchOrigin=data.origin_latitude==null?state.savedSearchOrigin:{latitude:data.origin_latitude,longitude:data.origin_longitude}}
  if(saved){try{const o=JSON.parse(saved);if(o.origin)state.savedSearchOrigin=o.origin}catch{}}
 }
 function taskIsToday(t){const now=new Date(),d=new Date(t.scheduled_for||t.created_at||Date.now());return d.getFullYear()===now.getFullYear()&&d.getMonth()===now.getMonth()&&d.getDate()===now.getDate()}
@@ -5480,9 +5489,11 @@ function distanceForFilter(t){const origin=state.workerLocation||state.savedSear
 function filteredWorkerTasks(tasks=state.tasks,filters=workerFilterState()){
  const fold=v=>String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('es-MX');const q=fold(filters.query.trim());
  return sortTasksByDistance((tasks||[]).filter(t=>{
+  if(!(state.workerServiceKinds||Object.keys(SERVICE_TYPES)).includes(serviceKind(t)))return false;
+  if(filters.serviceKind&&serviceKind(t)!==filters.serviceKind)return false;
   if(q&&!fold(`${t.title||''} ${t.description||''} ${baseCategory(t.category)}`).includes(q))return false;
   if(filters.category&&baseCategory(t.category)!==filters.category)return false;
-  if(Number(t.offered_price)<Number(filters.minPrice||0))return false;
+  if(!(serviceKind(t)==='project'&&Number(t.offered_price)===0)&&Number(t.offered_price)<Number(filters.minPrice||0))return false;
   if(filters.todayOnly&&!taskIsToday(t))return false;
   if(filters.vehicleOnly&&!(baseCategory(t.category)==='Vehículo'||t.requires_driver_license))return false;
   const distance=distanceForFilter(t);if(filters.maxDistance!=null&&(distance==null||distance>Number(filters.maxDistance)))return false;
@@ -5557,7 +5568,7 @@ function toggleResultsFilters(){document.getElementById("workerResultsFilters")?
 async function saveSearchPreferences(){
  const f=workerFilterState(),origin=state.workerLocation||state.savedSearchOrigin;
  const note=document.getElementById('searchSaveNote');if(f.maxDistance!=null&&!origin){if(note)note.textContent='Activa tu ubicación antes de guardar una distancia máxima.';return}
- const payload={user_id:state.user.id,min_price:f.minPrice,max_distance_km:f.maxDistance,today_only:f.todayOnly,requires_license_only:f.vehicleOnly,categories:f.category?[f.category]:[],notify_matching:f.notifyMatching,updated_at:new Date().toISOString()};
+ const payload={user_id:state.user.id,min_price:f.minPrice,max_distance_km:f.maxDistance,today_only:f.todayOnly,requires_license_only:f.vehicleOnly,categories:f.category?[f.category]:[],notify_matching:f.notifyMatching,service_kind:f.serviceKind||'',service_kinds:state.workerServiceKinds||Object.keys(SERVICE_TYPES),updated_at:new Date().toISOString()};
  if(state.searchBackendReady){payload.search_text=f.query;payload.origin_latitude=origin?.latitude??null;payload.origin_longitude=origin?.longitude??null}
  const {error}=await sb.from('worker_preferences').upsert(payload,{onConflict:'user_id'});if(error){if(note)note.textContent='No pudimos guardar: '+error.message;return}
  state.savedSearchOrigin=origin||null;localStorage.setItem(searchStorageKey(),JSON.stringify({...f,origin:state.savedSearchOrigin}));if(note)note.textContent=state.searchBackendReady?'Búsqueda guardada. Recibirás avisos cuando coincidan tus preferencias.':'Búsqueda guardada. Los avisos exactos por distancia y texto requieren activar la actualización del servidor.'
