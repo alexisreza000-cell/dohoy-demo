@@ -1,0 +1,19 @@
+const {test}=require('node:test');const assert=require('node:assert/strict');const vm=require('node:vm'),fs=require('node:fs');
+const source=fs.readFileSync('supabase/functions/dohoy-stripe-webhook/index.ts','utf8').replace(/^import .*;\n/gm,'').replace(/:(unknown|any)\b/g,'');
+function fixture(){
+ const payment={id:'payment',task_id:'task',worker_id:'worker',client_id:'client',currency:'mxn',amount_total:100,stripe_livemode:true,payment_status:'processing',stripe_checkout_session_id:'cs_payment',stripe_payment_intent_id:'pi_payment',metadata:{checkout_version:2}};
+ const pi={id:'pi_payment',livemode:true,metadata:{payment_id:'payment',task_id:'task'},currency:'mxn',amount:10000,amount_received:0,status:'requires_payment_method',last_payment_error:{code:'card_declined'}};
+ const session={id:'cs_payment',livemode:true,metadata:{payment_id:'payment',task_id:'task'},currency:'mxn',amount_total:10000,payment_intent:'pi_payment',status:'open'};
+ const notifications=[];let handler;
+ class Query{constructor(table){this.table=table;this.filters=[];this.op='read'}select(){return this}eq(k,v){this.filters.push(r=>r[k]===v);return this}update(p){this.op='update';this.payload=p;return this}insert(p){this.op='insert';this.payload=p;return this}async run(single=false){if(this.table==='notifications'){notifications.push(this.payload);return {data:this.payload,error:null}}if(this.filters.some(f=>!f(payment)))return {data:null,error:null};if(this.op==='update')Object.assign(payment,this.payload);return {data:single?structuredClone(payment):[structuredClone(payment)],error:null}}single(){return this.run(true)}maybeSingle(){return this.run(true)}then(a,b){return this.run().then(a,b)}}
+ class Stripe{static createSubtleCryptoProvider(){return {}}constructor(){this.webhooks={constructEventAsync:async raw=>JSON.parse(raw)}}}
+ const stripe=async path=>path.startsWith('/v1/checkout/')?structuredClone(session):structuredClone(pi);
+ vm.runInNewContext(source,{Response,Request,Date,console:{error(){},warn(){}},Deno:{env:{get:()=> 'fake'},serve:h=>handler=h},Stripe,createClient:()=>({from:t=>new Query(t)}),stripeRequestFor:()=>stripe,reverseForRefund:async()=>{}});
+ return {payment,pi,session,notifications,call:async(type,signature=true)=>{
+  const r=await handler(new Request('https://example.test',{method:'POST',headers:signature?{'stripe-signature':'fake'}:{},body:JSON.stringify({id:'evt_'+type,livemode:true,type,data:{object:type.startsWith('checkout')?session:pi}})}));return {status:r.status,body:await r.json()};
+ }};
+}
+test('declined Checkout card retains active payment reservation',async()=>{const f=fixture();assert.equal((await f.call('payment_intent.payment_failed')).status,200);assert.equal(f.payment.payment_status,'processing');assert.equal(f.payment.failure_code,'card_declined')});
+test('expiration releases reservation even if intent requires another card',async()=>{const f=fixture();f.session.status='expired';assert.equal((await f.call('checkout.session.expired')).status,200);assert.equal(f.payment.payment_status,'cancelled')});
+test('verified success and replay do not duplicate payment notifications',async()=>{const f=fixture();Object.assign(f.pi,{status:'succeeded',amount_received:10000,latest_charge:{paid:true,captured:true,livemode:true,amount_refunded:0}});assert.equal((await f.call('payment_intent.succeeded')).status,200);assert.equal(f.payment.payment_status,'paid');assert.equal((await f.call('payment_intent.succeeded')).status,200);assert.equal(f.notifications.length,1)});
+test('missing signature and mismatched session cannot update payment',async()=>{const f=fixture();assert.equal((await f.call('checkout.session.completed',false)).status,400);f.session.amount_total=20000;assert.equal((await f.call('checkout.session.completed')).status,500);assert.equal(f.payment.payment_status,'processing')});

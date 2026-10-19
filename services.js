@@ -9,7 +9,7 @@ function serviceKind(t){return SERVICE_TYPES[t?.service_kind]?t.service_kind:'da
 function publishServiceKind(){return SERVICE_TYPES[document.getElementById('taskServiceKind')?.value]?document.getElementById('taskServiceKind').value:(SERVICE_TYPES[state.publishServiceKind]?state.publishServiceKind:'daily')}
 function serviceCategories(kind){return SERVICE_TYPES[kind]?.categories||SERVICE_TYPES.daily.categories}
 function serviceCategoryIcon(name){return ({Albañilería:'Hogar',Pintura:'Hogar',Plomería:'tools',Electricidad:'bolt',Carpintería:'tools',Reparaciones:'tools',Instalaciones:'tools',Limpieza:'Hogar',Jardinería:'leaf',Mantenimiento:'tools'})[name]||name}
-function taskMinimumPrice(t){return serviceKind(t)==='daily'&&Number(t?.pricing_rule_version??1)>0?100:0.01}
+function taskMinimumPrice(t){return serviceKind(t)==='daily'&&Number(t?.pricing_rule_version??1)>0?100:10}
 function taskPriceText(t){
  const kind=serviceKind(t),amount=Number(t?.offered_price||0);
  if(kind==='project'&&t?.status==='open')return amount>0?`${money(amount)} estimado`:'Por cotizar';
@@ -48,7 +48,7 @@ function changePublishService(kind){
 }
 function configureServicePublication(){
  const kind=publishServiceKind(),s=SERVICE_TYPES[kind],price=document.getElementById('taskPriceInput');if(!price)return;
- price.min=kind==='daily'?'100':kind==='project'?'0':'0.01';price.step='0.01';price.required=kind!=='project';price.setCustomValidity('');price.placeholder=kind==='daily'?'Desde 100':kind==='project'?'Opcional':'Por visita';
+ price.min=kind==='daily'?'100':kind==='project'?'0':'10';price.step='0.01';price.required=kind!=='project';price.setCustomValidity('');price.placeholder=kind==='daily'?'Desde 100':kind==='project'?'Opcional':'Desde 10 por visita';
  document.getElementById('serviceBudgetTitle').textContent=kind==='project'?'Recibe cotizaciones':kind==='recurring'?'¿Cuánto ofrecerás por visita?':'¿Cuánto quieres ofrecer?';
  document.getElementById('serviceBudgetCopy').textContent=kind==='project'?'Describe el alcance y agrega fotos. Cada trabajador propondrá su precio, materiales y etapas.':kind==='recurring'?'Este monto cubre una visita. Acuerda lo que incluye y paga cada visita de forma independiente.':'El mínimo es $100 por el servicio. El costo de las compras o materiales se acuerda aparte.';
  document.getElementById('servicePriceLabel').textContent=kind==='project'?'Presupuesto estimado (opcional)':kind==='recurring'?'Precio por visita':'Precio del servicio';
@@ -66,11 +66,20 @@ function restoreNextVisitDraft(){
  for(const [name,value] of Object.entries(d))if(form.elements[name]&&value!=null)form.elements[name].value=String(value);
  form.elements.license.checked=!!d.license;form.elements.tracking_requested.checked=!!d.tracking_requested;configureServicePublication();
 }
+function nextServiceVisitDate(t,now=new Date()){
+ let date=new Date(t.scheduled_for||now);if(!Number.isFinite(date.getTime()))date=new Date(now);
+ if(t.recurrence_frequency==='monthly'){
+  const day=date.getDate();date.setDate(1);date.setMonth(date.getMonth()+1);
+  date.setDate(Math.min(day,new Date(date.getFullYear(),date.getMonth()+1,0).getDate()));
+ }else date.setDate(date.getDate()+({daily:1,weekly:7,biweekly:15}[t.recurrence_frequency]||7));
+ if(date<=now){const hours=date.getHours(),minutes=date.getMinutes();date=new Date(now);date.setDate(date.getDate()+1);date.setHours(hours,minutes,0,0)}
+ return date;
+}
 function planNextServiceVisit(){
  const t=state.selectedTask;if(!t||serviceKind(t)!=='recurring'||t.status!=='completed'||t.client_id!==state.user?.id)return;
  state.professionRequest=null;
- const date=new Date(t.scheduled_for||Date.now());if(t.recurrence_frequency==='monthly')date.setMonth(date.getMonth()+1);else date.setDate(date.getDate()+({daily:1,weekly:7,biweekly:15}[t.recurrence_frequency]||7));if(date<new Date())date.setTime(Date.now()+86400000);
- state.publishServiceKind='recurring';state.publishPrefillCategory=baseCategory(t.category);state.nextVisitDraft={title:t.title,description:t.description,location:t.location_label,latitude:t.latitude,longitude:t.longitude,price:t.offered_price,task_date:localDateValue(date.toISOString()),task_time:localTimeValue(t.scheduled_for),recurrence_frequency:t.recurrence_frequency,recurrence_parent_id:t.recurrence_parent_id||t.id,license:t.requires_driver_license,tracking_requested:t.tracking_requested};go('createTask');
+ const date=nextServiceVisitDate(t);
+ state.publishServiceKind='recurring';state.publishPrefillCategory=baseCategory(t.category);state.nextVisitDraft={title:t.title,description:t.description,location:t.location_label,latitude:t.latitude,longitude:t.longitude,price:t.offered_price,task_date:localDateValue(date.toISOString()),task_time:localTimeValue(date.toISOString()),recurrence_frequency:t.recurrence_frequency,recurrence_parent_id:t.recurrence_parent_id||t.id,license:t.requires_driver_license,tracking_requested:t.tracking_requested};go('createTask');
 }
 function quoteDetailsHtml(o){if(!o||![o.quote_scope,o.quote_materials,o.quote_timeline,o.quote_stages].some(Boolean))return '';return `<dl class="quote-details-v57">${[['Alcance',o.quote_scope],['Materiales',o.quote_materials],['Tiempo estimado',o.quote_timeline],['Etapas',o.quote_stages]].filter(([,v])=>v).map(([name,value])=>`<div><dt>${name}</dt><dd>${escapeHtml(value)}</dd></div>`).join('')}</dl>`}
 function serviceAgreementHtml(t,offer){
