@@ -7,7 +7,7 @@ const main=[...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)].map(m=>m[
 function app(){
  const dom=new JSDOM('<div id="root"></div>',{url:'https://www.dohoy.com.mx',runScripts:'outside-only'});
  const w=dom.window;w.supabase={createClient:()=>({rpc:async()=>({data:null,error:null})})};w.matchMedia=()=>({matches:false,addEventListener(){}});w.scrollTo=()=>{};w.fetch=async()=>{throw Error('offline')};
- w.eval(fs.readFileSync('services.js','utf8')+'\n'+fs.readFileSync('professions.js','utf8')+'\n'+main+'\nwindow.qa={state,SERVICE_TYPES,createTask,publishServiceKind,changePublishService,paymentActionHtml,taskMinimumPrice,nextServiceVisitDate,serviceEditFields};');
+ w.eval(fs.readFileSync('legal-documents.js','utf8')+'\n'+fs.readFileSync('legal.js','utf8')+'\n'+fs.readFileSync('services.js','utf8')+'\n'+fs.readFileSync('professions.js','utf8')+'\n'+main+'\nwindow.qa={state,SERVICE_TYPES,createTask,publishServiceKind,changePublishService,paymentActionHtml,taskMinimumPrice,nextServiceVisitDate,serviceEditFields};');
  w.qa.state.user={id:'client'};w.qa.state.profile={id:'client',full_name:'Cliente',is_admin:false};w.qa.state.splash=false;return {w,qa:w.qa};
 }
 test('three publication modes keep their own categories, fields and price rules',()=>{
@@ -50,5 +50,5 @@ test('refunded and completed tasks never render a new pay button; read failure b
 });
 test('all inline and external scripts parse',()=>{
  for(const match of html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi))new vm.Script(match[1]);
- for(const f of ['services.js','professions.js','sw.js'])new vm.Script(fs.readFileSync(f,'utf8'));
+ for(const f of ['services.js','professions.js','sw.js','legal.js','legal-documents.js'])new vm.Script(fs.readFileSync(f,'utf8'));
 });

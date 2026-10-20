@@ -5,7 +5,7 @@ const {webcrypto}=require('node:crypto');
 const source=fs.readFileSync('supabase/functions/dohoy-create-checkout/index.ts','utf8').replace(/^import .*;\n/gm,'');
 const taskId='11111111-1111-4111-8111-111111111111';
 function fixture(options={}){
- const db={tasks:[{id:taskId,title:'Servicio',client_id:'client',worker_id:'worker',status:'assigned',offered_price:100}],profiles:[{id:'client',is_suspended:false},{id:'worker',is_suspended:false,stripe_connect_live_account_id:'acct_worker'}],task_offers:[{task_id:taskId,worker_id:'worker',status:'accepted',amount:100}],task_payments:[]};
+ const db={tasks:[{id:taskId,title:'Servicio',client_id:'client',worker_id:'worker',status:'assigned',offered_price:100}],profiles:[{id:'client',is_suspended:false},{id:'worker',is_suspended:false,stripe_connect_live_account_id:'acct_worker'}],task_offers:[{task_id:taskId,worker_id:'worker',status:'accepted',amount:100}],task_payments:[],legal_releases:[{id:'legal-v1',status:'published',content_sha256:'snapshot'}],legal_acceptances:[{release_id:'legal-v1',user_id:'client',audience:'client',content_sha256:'snapshot'},{release_id:'legal-v1',user_id:'worker',audience:'worker',content_sha256:'snapshot'}]};
  const state={db,created:[],sessions:new Map(),createCalls:[],failAfterCreate:false,failSave:false,capability:'active',accountOwner:'worker',user:'client',queryFailure:false};
  Object.assign(state,options);
  class Query{
@@ -95,4 +95,14 @@ test('ambiguous old reservation and expired idempotency window never create repl
 test('offer read failure cannot fall back to a potentially wrong price, and tiny amounts are blocked',async()=>{
  const failed=fixture({queryFailure:true});assert.equal((await failed.call()).status,503);assert.equal(failed.created.length,0);
  const tiny=fixture();tiny.db.task_offers[0].amount=0.01;assert.equal((await tiny.call()).status,409);assert.equal(tiny.db.task_payments.length,0);
+});
+
+test('live collection requires a published release and acceptance by both parties for that exact snapshot',async()=>{
+ for(const missing of ['release','client','worker','hash']){
+  const f=fixture();if(missing==='release')f.db.legal_releases=[];
+  if(missing==='client')f.db.legal_acceptances=f.db.legal_acceptances.filter(a=>a.audience!=='client');
+  if(missing==='worker')f.db.legal_acceptances=f.db.legal_acceptances.filter(a=>a.audience!=='worker');
+  if(missing==='hash')f.db.legal_acceptances[0].content_sha256='old';
+  assert.equal((await f.call()).status,409);assert.equal(f.created.length,0);assert.equal(f.db.task_payments.length,0);
+ }
 });

@@ -60,6 +60,13 @@ Deno.serve(async req=>{
   const profiles=await one(admin.from('profiles').select('id,is_suspended,stripe_connect_account_id,stripe_connect_live_account_id').in('id',[task.client_id,task.worker_id]));
   const payer=profiles.find(p=>p.id===task.client_id),recipient=profiles.find(p=>p.id===task.worker_id);
   if(!payer||!recipient||payer.is_suspended||recipient.is_suspended)fail('Una de las cuentas requiere revisión.',403);
+  if(live){
+   const release=await one(admin.from('legal_releases').select('id,content_sha256').eq('status','published').limit(1).maybeSingle());
+   if(!release)fail('Estamos completando las condiciones de contratación de DOHOY. Consulta el Centro legal antes del pago real.');
+   const acceptances=await one(admin.from('legal_acceptances').select('user_id,audience,content_sha256').eq('release_id',release.id).in('user_id',[task.client_id,task.worker_id]));
+   if(!acceptances.some(a=>a.user_id===task.client_id&&a.audience==='client'&&a.content_sha256===release.content_sha256))fail('Revisa y acepta las condiciones vigentes en el Centro legal antes de pagar.');
+   if(!acceptances.some(a=>a.user_id===task.worker_id&&a.audience==='worker'&&a.content_sha256===release.content_sha256))fail('El trabajador debe revisar y aceptar sus condiciones vigentes en el Centro legal antes del pago.');
+  }
   const otherMode=await one(admin.from('task_payments').select('id').eq('task_id',task.id).neq('stripe_livemode',live).limit(1));
   if(otherMode.length)fail('Este trabajo pertenece a otro entorno. Crea una tarea nueva.');
   let payment=await one(admin.from('task_payments').select('*').eq('task_id',task.id).eq('stripe_livemode',live).order('created_at',{ascending:false}).limit(1).maybeSingle());
