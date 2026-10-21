@@ -296,7 +296,7 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;background:lin
 /* Headers / hero */
 .home-hero,.hero,.profile-hero,.mode-hero,.account-hero,.safety-hero{background:linear-gradient(135deg,#0B3D91 0%,#165DFF 62%,#FF7A00 145%)!important;box-shadow:var(--shadow-strong)!important;border:1px solid rgba(255,255,255,.2)!important}
 .home-hero:after,.hero:after,.profile-hero:after,.mode-hero:after,.account-hero:after{content:"";position:absolute;right:-42px;top:-48px;width:150px;height:150px;border-radius:50%;background:rgba(255,255,255,.10);pointer-events:none}
-.topbar,.account-top{background:rgba(255,255,255,.76);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(213,225,242,.9);box-shadow:0 8px 26px rgba(15,61,145,.07)}
+.topbar{background:rgba(255,255,255,.76);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(213,225,242,.9);box-shadow:0 8px 26px rgba(15,61,145,.07)}
 
 /* Cards */
 .card,.task,.detail-card,.offer-person-card,.selected-worker-card,.rating-card,.completion-card,.completion-proof,.important-card,.recent-review,.settings-section,.client-profile-card,.client-rating-box,.timeline,.filter-card,.worker-search-card,.map-card,.empty,.chat-card,.notification-card,.admin-card{
@@ -1536,10 +1536,6 @@ html[data-theme="dark"] .settings-page,
 html[data-theme="dark"] .earnings-page{
   background:#0b1627!important;
   color:#edf4ff!important;
-}
-html[data-theme="dark"] .account-v4 .account-top{
-  background:#14263d!important;
-  border-color:#324962!important;
 }
 html[data-theme="dark"] .account-v4 .account-top h1,
 html[data-theme="dark"] .account-v4 .account-profile-v4 h2,
@@ -3153,7 +3149,6 @@ html[data-theme="light"] .beta-note{color:#626f80!important}
 html[data-theme="dark"] .beta-note{color:#a7b9d0!important}
 /* Legal information uses light surfaces and dark text in either app theme. */
 .app>.settings-page.legal-page{background:#f7faff!important;color:#111827!important;color-scheme:light}
-.app .legal-page .account-top{background:#eef4ff!important;border-color:#d9e5f5!important}
 .app .legal-page .account-top h1,.app .legal-page .settings-title,.app .legal-page .legal-copy h3{color:#111827!important}
 .app .legal-page .legal-copy{background:#fff!important;border:1px solid #d9e5f5;color:#1f2937!important}
 .app .legal-page .legal-copy p{color:#1f2937!important}
@@ -3161,7 +3156,7 @@ html[data-theme="dark"] .beta-note{color:#a7b9d0!important}
 .app .legal-page .icon{background:#fff!important;color:#0b3d91!important;border-color:#d9e5f5!important}
 .app .legal-page a:focus-visible,.app .legal-page .icon:focus-visible{outline:3px solid #1467e8;outline-offset:3px}
 [hidden]{display:none!important}
-.settings-page.help-page .account-top{border:0;background:transparent;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+.account-top{border:0;background:transparent;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
 </style>
 <link rel="stylesheet" href="./services.css?v=5.9.0">
 <link rel="stylesheet" href="./professions.css?v=5.9.0">
