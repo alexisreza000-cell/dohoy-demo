@@ -3161,6 +3161,7 @@ html[data-theme="dark"] .beta-note{color:#a7b9d0!important}
 .app .legal-page .icon{background:#fff!important;color:#0b3d91!important;border-color:#d9e5f5!important}
 .app .legal-page a:focus-visible,.app .legal-page .icon:focus-visible{outline:3px solid #1467e8;outline-offset:3px}
 [hidden]{display:none!important}
+.settings-page.help-page .account-top{border:0;background:transparent;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
 </style>
 <link rel="stylesheet" href="./services.css?v=5.9.0">
 <link rel="stylesheet" href="./professions.css?v=5.9.0">
@@ -4950,7 +4951,7 @@ function notificationsScreen(){
 }
 function notificationToggle(title,sub,key){return `<div class="toggle-row"><div><b>${escapeHtml(title)}</b><small>${escapeHtml(sub)}</small></div><label class="switch"><input type="checkbox" aria-label="${escapeAttr(title)}" ${notificationPref(key)?"checked":""} onchange="toggleNotif('${key}',this)"><span></span></label></div>`}
 function helpScreen(){
- return shell(`<section class="settings-page">${settingsHeader("Ayuda")}
+ return shell(`<section class="settings-page help-page">${settingsHeader("Ayuda")}
  <section class="help-contact" aria-labelledby="helpContactTitle"><h2 id="helpContactTitle">Correo de soporte</h2><p>Escríbenos si necesitas ayuda con DOHOY.</p><a href="mailto:soporte@dohoy.com.mx">soporte@dohoy.com.mx</a><p class="help-response-time">Tiempo estimado de respuesta: 24 horas.</p></section>
  <button class="btn orange" style="margin:16px 0" onclick="openSupportCenter()">Abrir soporte y disputas</button><button class="btn ghost" onclick="openOnboarding()">Ver cómo funciona DOHOY</button><h2 class="settings-title">¿Cómo podemos ayudarte?</h2><div class="help-faq">
  <details><summary>¿Cómo funciona DOHOY?</summary><p>Una persona publica una tarea, los trabajadores disponibles envían propuestas y el cliente elige con quién realizarla.</p></details>
