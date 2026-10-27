@@ -4169,7 +4169,7 @@ function workCenterHtml(t,isOwner){
  if(t.completion_requested_at){current=3;title=isOwner?"Revisa el trabajo":"Esperando confirmación";copy=isOwner?"Revisa la evidencia y confirma que quedó terminado.":"Ya avisaste que terminaste. Falta la confirmación del cliente."}
  if(t.status==="completed"){current=4;title="Trabajo terminado";copy="El servicio quedó cerrado."}
  const steps=t.status==="completed"?["Confirmado","En camino","Trabajando","Terminado"]:["Confirmado","En camino","Trabajando","Confirmación"];
- return `<section class="service-center-v50"><div class="service-state-v50"><small>ESTADO DEL SERVICIO</small><h2>${escapeHtml(title)}</h2><p>${escapeHtml(copy)}</p></div><div class="service-track-v50">${steps.map((x,i)=>`<span class="${i<current?"done":i===Math.min(current,3)?"current":""}"><i>${i<current?"✓":i+1}</i><b>${x}</b></span>`).join("")}</div><div class="service-actions-v50">${canChat?`<button onclick="openChat('${t.id}')">${iconSvg("chat")} Mensaje</button>`:""}<button onclick="openSafetyCenter()">${iconSvg("shield")} Ayuda</button>${isOwner&&!paid&&t.status==="assigned"?`<button class="primary" onclick="startTaskCheckout('${t.id}')">${iconSvg("payment")} Pagar</button>`:""}${!isOwner&&t.worker_id===state.user.id&&t.status==="assigned"&&paid&&!t.en_route_at?`<button class="primary" onclick="markTaskEnRoute('${t.id}')">${iconSvg("route")} Voy en camino</button>`:""}</div></section>`
+ return `<section class="service-center-v50"><div class="service-state-v50"><small>ESTADO DEL SERVICIO</small><h2>${escapeHtml(title)}</h2><p>${escapeHtml(copy)}</p></div><div class="service-track-v50">${steps.map((x,i)=>`<span class="${i<current?"done":i===Math.min(current,3)?"current":""}"><i>${i<current?"✓":i+1}</i><b>${x}</b></span>`).join("")}</div><div class="service-actions-v50">${canChat?`<button onclick="openChat('${t.id}')">${iconSvg("chat")} Mensaje</button>`:""}<button onclick="openSafetyCenter()">${iconSvg("shield")} Ayuda</button>${isOwner&&!paid&&t.status==="assigned"?(state.legalFetchedAt&&!state.legalRelease&&state.paymentLive!==false?`<button class="primary" onclick="go('legalCenter')">${iconSvg("document")} Revisar requisitos de pago</button>`:`<button class="primary" onclick="startTaskCheckout('${t.id}')">${iconSvg("payment")} Pagar</button>`):""}${!isOwner&&t.worker_id===state.user.id&&t.status==="assigned"&&paid&&!t.en_route_at?`<button class="primary" onclick="markTaskEnRoute('${t.id}')">${iconSvg("route")} Voy en camino</button>`:""}</div></section>`
 }
 
 
@@ -4448,7 +4448,8 @@ async function startTaskCheckout(taskId){
    state.checkoutBusy=false;
    state.error="No pudimos abrir Stripe: "+String(err?.message||err).replaceAll("_"," ");
    const live=document.getElementById("checkoutInlineError");
-   if(live){live.textContent=state.error;live.hidden=false}
+   if(live){live.textContent=state.error;live.hidden=false;live.scrollIntoView({block:"center",behavior:"smooth"})}
+   else openProfileSheet("No se pudo iniciar el pago",state.error,`<button class="btn primary" onclick="closeProfileSheet();go(\'legalCenter\')">Ver Centro legal</button><button class="btn ghost" onclick="closeProfileSheet()">Volver a la tarea</button>`);
    if(btn){btn.disabled=false;btn.textContent="REINTENTAR PAGO";btn.classList.remove("is-loading")}
  }
 }
